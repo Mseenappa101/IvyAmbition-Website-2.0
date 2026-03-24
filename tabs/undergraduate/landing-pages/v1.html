@@ -3,19 +3,904 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Undergraduate Admissions | IvyAmbition</title>
-  <link rel="stylesheet" href="../../../styles.css" />
+  <title>Get Your Child Into Their Dream School | IvyAmbition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy-dark: #060d17;
+      --navy-mid: #1a2f47;
+      --gold: #c9a84c;
+      --gold-light: #e2c97e;
+      --white: #ffffff;
+      --cream: #f8f5ef;
+      --text-muted: #6b7280;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--navy-dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(6,13,23,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #060d17 0%, #0d1b2a 50%, #1a2f47 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 680px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+    .hero-cta-wrap {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 18px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+    .hero-proof {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 56px;
+      flex-wrap: wrap;
+    }
+    .proof-item { text-align: center; }
+    .proof-num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+    }
+    .proof-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .proof-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+      align-self: stretch;
+    }
+
+    /* ── TICKER ── */
+    .ticker-section {
+      background: rgba(201,168,76,0.06);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 28px 0;
+      overflow: hidden;
+    }
+    .ticker-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 40px;
+      white-space: nowrap;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+    .ticker-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section { padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .container-sm { max-width: 760px; margin: 0 auto; }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+
+    /* ── PATHOS ── */
+    .pathos {
+      background: linear-gradient(160deg, #060d17 0%, #0d1b2a 100%);
+      padding: 100px 24px;
+    }
+    .pathos-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .pathos-video-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0a1628;
+      border: 1px solid rgba(201,168,76,0.2);
+      aspect-ratio: 9/16;
+      max-width: 340px;
+      margin: 0 auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    }
+    .pathos-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pathos-text .section-eyebrow { display: block; }
+    .pathos-text .section-headline { color: var(--white); }
+    .pathos-body {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+    .pathos-body strong { color: var(--white); font-weight: 600; }
+    .pathos-quote {
+      border-left: 3px solid var(--gold);
+      padding: 16px 20px;
+      background: rgba(201,168,76,0.06);
+      border-radius: 0 8px 8px 0;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      margin: 28px 0;
+    }
+
+    /* ── PAIN ── */
+    .pain { background: var(--cream); padding: 100px 24px; }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .pain-card {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+    .pain-icon { font-size: 28px; margin-bottom: 14px; }
+    .pain-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .pain-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── WHAT WE DO ── */
+    .what-we-do {
+      background: linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);
+      padding: 100px 24px;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 56px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .step {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      position: relative;
+      padding-bottom: 40px;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-line {
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(201,168,76,0.3), rgba(201,168,76,0.03));
+    }
+    .step:last-child .step-line { display: none; }
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #b8943e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-content { padding-top: 8px; }
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .step-body { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+    /* ── EMAIL GATE ── */
+    .gate-section {
+      background: linear-gradient(160deg, #0d1b2a, #060d17);
+      padding: 100px 24px;
+    }
+    .gate-box { max-width: 580px; margin: 0 auto; text-align: center; }
+    .gate-form { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+    .gate-input {
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 15px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .gate-input::placeholder { color: rgba(255,255,255,0.35); }
+    .gate-input:focus { border-color: rgba(201,168,76,0.5); }
+    .gate-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .gate-btn:hover { background: var(--gold-light); }
+    .gate-privacy { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+
+    /* ── CALENDLY ── */
+    #calendly-section {
+      display: none;
+      background: #060d17;
+      padding: 80px 24px;
+    }
+    #calendly-section.visible { display: block; }
+    .calendly-wrap { max-width: 860px; margin: 0 auto; text-align: center; }
+    .calendly-embed {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 36px;
+      background: white;
+    }
+
+    /* ── INTAKE ── */
+    #intake-section {
+      display: none;
+      background: linear-gradient(160deg, #0d1b2a, #060d17);
+      padding: 80px 24px;
+    }
+    #intake-section.visible { display: block; }
+    .intake-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+    .intake-form { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; text-align: left; }
+    .intake-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .intake-input, .intake-select, .intake-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 15px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .intake-input::placeholder, .intake-textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .intake-input:focus, .intake-select:focus, .intake-textarea:focus { border-color: rgba(201,168,76,0.5); }
+    .intake-select option { background: #0d1b2a; color: var(--white); }
+    .intake-textarea { min-height: 100px; resize: vertical; }
+    .intake-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .intake-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .intake-submit:hover { background: var(--gold-light); }
+
+    /* ── THANK YOU ── */
+    #thankyou-section {
+      display: none;
+      background: linear-gradient(160deg, #060d17, #0d1b2a);
+      padding: 100px 24px;
+      text-align: center;
+    }
+    #thankyou-section.visible { display: block; }
+    .thankyou-wrap { max-width: 680px; margin: 0 auto; }
+    .thankyou-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 28px;
+    }
+    .thankyou-video-wrap {
+      max-width: 360px;
+      margin: 40px auto 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.2);
+      aspect-ratio: 9/16;
+      background: #0a1628;
+    }
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #0d1b2a, #1a2f47);
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      gap: 12px;
+      padding: 24px;
+      text-align: center;
+      min-height: 400px;
+    }
+    .video-placeholder-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #030810;
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-note { font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 12px; }
+    .footer-legal { display: flex; gap: 20px; justify-content: center; margin-top: 12px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.2); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .pathos-inner { grid-template-columns: 1fr; gap: 48px; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .intake-row { grid-template-columns: 1fr; }
+      .hero-proof { gap: 24px; }
+      .proof-divider { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="../../../index.html" class="logo">Ivy<span>Ambition</span></a>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../../../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <a href="#book" class="nav-cta" onclick="scrollToGate(event)">Book a Free Strategy Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Undergraduate Admissions Consulting</div>
+    <h1>Your Child Is Smart Enough.<br>The Question Is Whether<br>Their Application Will <em>Prove It.</em></h1>
+    <p class="hero-sub">Elite universities don't reject students. They reject applications. Every year, thousands of qualified students get turned away from their dream schools — not because they weren't good enough, but because no one taught them how to compete at this level. We fix that.</p>
+    <div class="hero-cta-wrap">
+      <a href="#book" class="btn-gold" onclick="scrollToGate(event)">Book a Free Strategy Call →</a>
+      <a href="#what-we-do" class="btn-ghost">See How It Works</a>
     </div>
-  </nav>
-  <section style="padding:160px 0;text-align:center;background:#0d1b2a;">
-    <h1 style="color:white;font-family:Georgia,serif;">Undergraduate Admissions</h1>
-    <p style="color:rgba(255,255,255,0.6);">Landing page coming soon.</p>
-    <a href="../../../index.html" style="color:#c9a84c;">← Back to Home</a>
-  </section>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <span class="proof-num">T-6</span>
+        <span class="proof-label">Counselors from Columbia Law</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <span class="proof-num">1-on-1</span>
+        <span class="proof-label">Dedicated senior counselor</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <span class="proof-num">100%</span>
+        <span class="proof-label">Personalized strategy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section">
+  <div class="ticker-label">We help your child get into schools like</div>
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- PATHOS -->
+<section class="pathos">
+  <div class="pathos-inner">
+    <div>
+      <div class="pathos-video-wrap">
+        <video src="../../../assets/videos/0313.mov" autoplay muted loop playsinline></video>
+      </div>
+    </div>
+    <div class="pathos-text">
+      <span class="section-eyebrow">A Message to Every Parent Reading This</span>
+      <h2 class="section-headline">That Moment When Your Child Tells You Where They Want to Go</h2>
+      <p class="pathos-body">That's me. Eight years old on Columbia University's campus, looking up at the buildings, not fully understanding what it all meant — but <strong>knowing, in some deep way, that this was where I was supposed to be.</strong></p>
+      <p class="pathos-body">Years later, I got there. Not easily. Not without struggle. I started my law school journey at Brooklyn Law School, ranked in the top 5% of my class, and earned my way into Columbia Law on a transfer — receiving offers from a majority of the T-14. My co-founder made the same journey through Georgetown.</p>
+      <div class="pathos-quote">"Every parent who has ever watched their child dream of a school they weren't sure they could reach — this was built for you."</div>
+      <p class="pathos-body">The admissions process has never been harder. Acceptance rates at elite schools have been cut in half over the last two decades. The students who get in aren't necessarily smarter — they're <strong>better prepared, better positioned, and better guided.</strong></p>
+      <p class="pathos-body">IvyAmbition exists so that your child has the same advantage that most families only get by paying $15,000 to a big consulting firm — at a fraction of the cost, from people who have actually done it.</p>
+      <a href="#book" class="btn-gold" style="display:inline-block;margin-top:8px;" onclick="scrollToGate(event)">Give Your Child That Advantage →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="container">
+    <div style="text-align:center;">
+      <span class="section-eyebrow" style="color:var(--navy);opacity:0.5;">The Reality</span>
+      <h2 class="section-headline" style="color:var(--navy);max-width:640px;margin:0 auto 16px;">The Game Is Harder Than It's Ever Been — And Most Students Are Playing It Blind</h2>
+      <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:600px;margin:0 auto;">Here's what's working against your child right now — and why doing it alone puts them at a serious disadvantage.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <div class="pain-title">Acceptance rates have collapsed</div>
+        <div class="pain-body">Harvard's acceptance rate has dropped below 4%. Columbia, Penn, and Duke aren't far behind. A 4.0 GPA and 1550 SAT no longer guarantee admission anywhere on a student's reach list.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🎭</div>
+        <div class="pain-title">The essay is make or break</div>
+        <div class="pain-body">Admissions officers read thousands of applications from students with identical stats. The personal statement is often the only thing that creates a human impression — and most students write forgettable ones.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💸</div>
+        <div class="pain-title">Wrong school list = wrong outcome</div>
+        <div class="pain-body">Most students apply to too many reaches and too few real targets. Without a strategic list built on real admissions data, students end up with poor options or massive debt at a school that wasn't worth it.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⏰</div>
+        <div class="pain-title">The window is shorter than you think</div>
+        <div class="pain-body">Extracurricular positioning, course selection, and narrative development need to start years before applications open. By senior year, most of the strategic work that matters is already done — or missed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-we-do" id="what-we-do">
+  <div class="container">
+    <div style="text-align:center;">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-headline" style="max-width:600px;margin:0 auto 16px;">A Complete Admissions Partnership — From First Strategy Session to Final Decision</h2>
+      <p class="section-sub" style="max-width:580px;margin:0 auto;">We don't give you a checklist. We build your child's entire application strategy from the ground up — and stay with you until it's done.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Free Strategy Call</div>
+          <div class="step-body">We start with a 30-minute call to understand your child's profile, goals, and timeline. No sales pitch — we'll tell you honestly what's realistic and exactly how we'd approach their application. If it's not the right fit, we'll say so.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Full Profile Diagnostic</div>
+          <div class="step-body">We audit everything — GPA, test scores, extracurriculars, course load, intended major, geographic preferences. Then we build the strategic narrative that will tie the entire application together.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">School List Strategy</div>
+          <div class="step-body">We build a personalized reach/match/safety list based on real admissions data — not US News rankings. We identify which schools your child is genuinely competitive at, where the merit aid opportunities are, and where the ROI makes sense.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Essay Development — Start to Finish</div>
+          <div class="step-body">We work through the personal statement, activity descriptions, and every supplemental essay together. Not templates. Not AI-generated drafts. Real editorial sessions to find the story only your child can tell — and make sure it lands.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Submit, Decide, Win</div>
+          <div class="step-body">We review every application before it goes out. After decisions, we help you evaluate offers, understand financial aid packages, negotiate merit aid, and make the right choice — not just the exciting one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL GATE -->
+<section class="gate-section" id="book">
+  <div class="gate-box">
+    <span class="section-eyebrow">Book Your Free Strategy Call</span>
+    <h2 class="section-headline" style="color:var(--white);">30 Minutes. Zero Pressure.<br>A Clear Plan for Your Child's Application.</h2>
+    <p class="section-sub" style="margin-top:16px;">Enter your email to access our calendar and book a time that works for you. The call is completely free — we'll review your child's profile and tell you exactly what we'd do.</p>
+    <div class="gate-form" id="gateForm">
+      <input type="email" class="gate-input" id="gateEmail" placeholder="Enter your email address" required />
+      <input type="text" class="gate-input" id="gateName" placeholder="Your name" required />
+      <button class="gate-btn" onclick="handleGateSubmit()">Access the Calendar →</button>
+      <p class="gate-privacy">🔒 We never share your information. No spam, ever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDLY -->
+<section id="calendly-section">
+  <div class="calendly-wrap">
+    <span class="section-eyebrow">Select Your Time</span>
+    <h2 class="section-headline" style="color:var(--white);">Pick a Time That Works for You</h2>
+    <p class="section-sub" style="margin-top:12px;">Choose any available slot below. After you book, we'll send you a confirmation and a short intake form to make the most of your session.</p>
+    <div class="calendly-embed">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/ivyambition/strategy-call?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:280px;height:700px;"></div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <p style="color:rgba(255,255,255,0.45);font-size:14px;margin-bottom:16px;">Already selected your time? Click below to continue.</p>
+      <button class="btn-gold" onclick="showIntake()">I've Booked My Call — Continue →</button>
+    </div>
+  </div>
+</section>
+
+<!-- INTAKE -->
+<section id="intake-section">
+  <div class="intake-wrap">
+    <span class="section-eyebrow">Almost Done</span>
+    <h2 class="section-headline" style="color:var(--white);">Tell Us a Little About Your Child</h2>
+    <p class="section-sub" style="margin-top:12px;">This takes 2 minutes and helps us come prepared so we can give you a real, specific plan — not a generic overview — on your strategy call.</p>
+    <div class="intake-form" id="intakeForm">
+      <div class="intake-row">
+        <div>
+          <label class="intake-label">Student's First Name</label>
+          <input type="text" class="intake-input" placeholder="First name" />
+        </div>
+        <div>
+          <label class="intake-label">Current Grade</label>
+          <select class="intake-select">
+            <option value="">Select grade</option>
+            <option>9th Grade</option>
+            <option>10th Grade</option>
+            <option>11th Grade</option>
+            <option>12th Grade</option>
+            <option>Gap Year</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="intake-label">Unweighted GPA (approximate)</label>
+        <select class="intake-select">
+          <option value="">Select GPA range</option>
+          <option>3.9 – 4.0</option>
+          <option>3.7 – 3.89</option>
+          <option>3.5 – 3.69</option>
+          <option>3.0 – 3.49</option>
+          <option>Below 3.0</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div>
+        <label class="intake-label">SAT / ACT Score (if taken)</label>
+        <input type="text" class="intake-input" placeholder="e.g. SAT 1480 or ACT 33 — leave blank if not yet taken" />
+      </div>
+      <div>
+        <label class="intake-label">Top 3 Dream Schools</label>
+        <input type="text" class="intake-input" placeholder="e.g. Columbia, Penn, Northwestern" />
+      </div>
+      <div>
+        <label class="intake-label">Intended Major / Area of Interest</label>
+        <input type="text" class="intake-input" placeholder="e.g. Pre-law, Economics, Computer Science" />
+      </div>
+      <div>
+        <label class="intake-label">What's your biggest concern about the application process?</label>
+        <textarea class="intake-textarea" placeholder="Be as specific as you'd like — this helps us come prepared"></textarea>
+      </div>
+      <button class="intake-submit" onclick="handleIntakeSubmit()">Submit & See Confirmation →</button>
+    </div>
+  </div>
+</section>
+
+<!-- THANK YOU -->
+<section id="thankyou-section">
+  <div class="thankyou-wrap">
+    <div class="thankyou-icon">🎓</div>
+    <span class="section-eyebrow">You're All Set</span>
+    <h2 class="section-headline" style="color:var(--white);margin-bottom:16px;">Your Strategy Call Is Confirmed.</h2>
+    <p class="section-sub">Check your email for the calendar confirmation. We'll see you on the call — come with questions, and we'll come with a plan.</p>
+    <div class="thankyou-video-wrap">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">▶</div>
+        <p>A quick message from Michael</p>
+        <p style="font-size:12px;opacity:0.5;">(Video coming soon)</p>
+      </div>
+    </div>
+    <div style="margin-top:48px;padding:28px 32px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:14px;">
+      <p style="font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;">While you wait — here are a few things you can do to prepare for our call:</p>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;text-align:left;">
+        <div style="display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,0.65);"><span style="color:var(--gold);">→</span><span>Pull together your child's current GPA, any test scores, and a rough list of extracurriculars</span></div>
+        <div style="display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,0.65);"><span style="color:var(--gold);">→</span><span>Write down the 3–5 schools you're most excited about — and the ones you're unsure about</span></div>
+        <div style="display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,0.65);"><span style="color:var(--gold);">→</span><span>Think about your biggest question or concern — that's where we'll start the call</span></div>
+      </div>
+    </div>
+    <p style="margin-top:40px;font-size:14px;color:rgba(255,255,255,0.3);">Questions before the call? Email us at <a href="mailto:hello@ivyambition.com" style="color:var(--gold);">hello@ivyambition.com</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <a href="../../../index.html" class="footer-logo">Ivy<span>Ambition</span></a>
+  <p class="footer-note">Elite undergraduate admissions consulting. © 2025 IvyAmbition. All rights reserved.</p>
+  <div class="footer-legal">
+    <a href="../../../legal/privacy-policy.html">Privacy Policy</a>
+    <a href="../../../legal/terms-of-service.html">Terms of Service</a>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+  const schools = ['Columbia University','Stanford University','MIT','University of Pennsylvania','Brown University','Dartmouth College','Cornell University','Northwestern University','Duke University','Georgetown University','Vanderbilt University','UChicago'];
+  const track = document.getElementById('ticker');
+  [...schools,...schools].forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'ticker-item';
+    item.innerHTML = `<span class="ticker-dot"></span>${s}`;
+    track.appendChild(item);
+  });
+
+  function scrollToGate(e) {
+    e.preventDefault();
+    document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleGateSubmit() {
+    const email = document.getElementById('gateEmail').value.trim();
+    const name = document.getElementById('gateName').value.trim();
+    if (!email || !name) { alert('Please enter your name and email to continue.'); return; }
+    if (!/\S+@\S+\.\S+/.test(email)) { alert('Please enter a valid email address.'); return; }
+    document.getElementById('gateForm').style.display = 'none';
+    document.querySelector('.gate-box p.section-sub').textContent = 'Perfect — scroll down to select your time.';
+    const cal = document.getElementById('calendly-section');
+    cal.classList.add('visible');
+    setTimeout(() => cal.scrollIntoView({ behavior: 'smooth' }), 300);
+  }
+
+  function showIntake() {
+    const intake = document.getElementById('intake-section');
+    intake.classList.add('visible');
+    setTimeout(() => intake.scrollIntoView({ behavior: 'smooth' }), 200);
+  }
+
+  function handleIntakeSubmit() {
+    document.getElementById('intake-section').classList.remove('visible');
+    const ty = document.getElementById('thankyou-section');
+    ty.classList.add('visible');
+    setTimeout(() => ty.scrollIntoView({ behavior: 'smooth' }), 200);
+  }
+
+  window.addEventListener('message', function(e) {
+    if (e.data.event && e.data.event === 'calendly.event_scheduled') { showIntake(); }
+  });
+</script>
+
 </body>
 </html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law School Transfer Predictor | IvyAmbition</title>
+  <meta name="description" content="Enter your 1L GPA and current school to see your transfer admission probability at 35+ law schools. Backed by real admissions data." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .row-likely   { background:#d4edda!important; }
+    .row-target   { background:#fff3cd!important; }
+    .row-reach    { background:#ffe0b2!important; }
+    .row-longshot { background:#ffcdd2!important; }
+    .badge-likely   { background:#198754;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .badge-target   { background:#ffc107;color:#333;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .badge-reach    { background:#fd7e14;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .badge-longshot { background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .insight-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px; }
+    @media(max-width:600px){ .insight-grid { grid-template-columns:repeat(2,1fr); } }
+    .insight-box { background:#1a2d42;border-radius:10px;padding:16px 12px;text-align:center; }
+    .insight-box .ib-num { font-size:26px;font-weight:700;color:#c9a84c; }
+    .insight-box .ib-lbl { font-size:11px;color:rgba(255,255,255,.65);margin-top:4px; }
+    .insight-box.ib-likely .ib-num { color:#6fcf97; }
+    .insight-box.ib-target .ib-num { color:#f2c94c; }
+    .insight-box.ib-reach  .ib-num { color:#f2994a; }
+    .insight-box.ib-long   .ib-num { color:#eb5757; }
+    .stat-good { color:#198754;font-weight:600; }
+    .stat-bad  { color:#dc3545;font-weight:600; }
+    .default-msg { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;color:#6c757d; }
+    .rank-chip { display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .45rem;border-radius:3px;background:#f1f5f9;color:#334155; }
+    .tf-badge { display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .5rem;border-radius:20px;background:#d1fae5;color:#065f46; }
+    .tf-badge.tf-low { background:#fee2e2;color:#991b1b; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+      <li><a href="../../pages/law-school/">Law School</a></li>
+      <li><a href="../../pages/transfer/">Transfer</a></li>
+      <li><a href="../../pages/transfer/#tools">Free Tools</a></li>
+      <li><a href="../../pages/transfer/#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../../pages/undergraduate/">Undergrad</a>
+    <a href="../../pages/law-school/">Law School</a>
+    <a href="../../pages/transfer/">Transfer</a>
+    <a href="../../pages/transfer/tools.html">Free Tools</a>
+    <a href="../../pages/transfer/#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<section class="tool-hero">
+  <div class="container tool-hero-content">
+    <div class="tool-breadcrumb"><a href="../../pages/transfer/">Transfer</a> &rsaquo; <a href="../../pages/transfer/tools.html">Free Tools</a> &rsaquo; Transfer Predictor</div>
+    <p class="tool-eyebrow">Free Tool &middot; Law School Transfer</p>
+    <h1>Law School Transfer Predictor</h1>
+    <p class="tool-hero-sub">Enter your 1L GPA, current school, and class rank to see your transfer admission probability at 35+ law schools — from T14 to T50 targets.</p>
+  </div>
+</section>
+
+<div class="tool-body">
+  <div class="container">
+    <div class="tool-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="filter-sidebar">
+        <div class="calc-card">
+          <h3 style="font-family:'Playfair Display',serif;margin:0 0 1.25rem">Your 1L Profile</h3>
+
+          <div class="calc-row">
+            <label class="calc-label">Current Law School</label>
+            <select id="currentSchool" class="calc-field filter-select">
+              <option value="">— Select your school —</option>
+            </select>
+          </div>
+
+          <div class="calc-row">
+            <label class="calc-label">1L GPA (Fall Semester)</label>
+            <input type="number" id="gpaInput" class="calc-field" min="2.0" max="4.5" step="0.01" placeholder="e.g. 3.72" />
+            <small style="color:#94a3b8;font-size:.75rem">Fall grades only — before spring grades available</small>
+          </div>
+
+          <div class="calc-row">
+            <label class="calc-label">Estimated Class Rank</label>
+            <select id="classRank" class="calc-field filter-select">
+              <option value="1">Top 1%</option>
+              <option value="3">Top 3%</option>
+              <option value="5">Top 5%</option>
+              <option value="10" selected>Top 10%</option>
+              <option value="15">Top 15%</option>
+              <option value="20">Top 20%</option>
+              <option value="25">Top 25%</option>
+              <option value="33">Top 33%</option>
+              <option value="50">Top 50%</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom:1.25rem">
+            <label class="calc-label" style="display:block;margin-bottom:.5rem">Filter Target Tier</label>
+            <div class="filter-pills" id="tierFilter">
+              <button class="filter-pill active" data-val="all" onclick="setTier('all',this)">All</button>
+              <button class="filter-pill" data-val="T14" onclick="setTier('T14',this)">T14</button>
+              <button class="filter-pill" data-val="T15-30" onclick="setTier('T15-30',this)">T15–30</button>
+              <button class="filter-pill" data-val="T31-50" onclick="setTier('T31-50',this)">T31–50</button>
+              <button class="filter-pill" data-val="T51-100" onclick="setTier('T51-100',this)">T51–100</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1.25rem">
+            <label class="calc-label" style="display:block;margin-bottom:.5rem">Sort By</label>
+            <select id="sortBy" class="filter-select" style="width:100%">
+              <option value="prob">Probability (High to Low)</option>
+              <option value="rank">USNWR Rank</option>
+              <option value="biglaw">BigLaw Rate</option>
+              <option value="alpha">A → Z</option>
+            </select>
+          </div>
+
+          <button class="calc-submit" onclick="runPredictor()">Predict My Chances &rarr;</button>
+        </div>
+
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:1rem;margin-top:1rem;font-size:.8rem;color:#92400e;line-height:1.6">
+          <strong>How It Works</strong><br>
+          Probability is calculated using: your GPA vs. the school's median transfer-admit GPA, your class rank vs. school's threshold, and the school's historical transfer acceptance rate. Based on 2023–24 cycle data.
+        </div>
+      </aside>
+
+      <!-- RESULTS -->
+      <div class="results-area">
+        <div id="defaultMsg" class="default-msg">
+          <div style="font-size:3rem;margin-bottom:1rem">📊</div>
+          <h3 style="margin-bottom:.5rem;color:#0d1b2a">Enter Your Profile</h3>
+          <p>Fill in your GPA, current school, and class rank on the left to see your transfer probabilities across 35+ law schools.</p>
+        </div>
+
+        <div id="resultsSection" style="display:none">
+          <div class="insight-grid" id="insightGrid"></div>
+          <div class="matrix-table-wrap">
+            <table class="matrix-table" id="resultsTable">
+              <thead>
+                <tr>
+                  <th>School</th>
+                  <th>Rank</th>
+                  <th>GPA vs. Threshold</th>
+                  <th>Transfer-Friendly</th>
+                  <th>Probability</th>
+                  <th>Label</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+          <p style="font-size:.78rem;color:#94a3b8;margin-top:.75rem">Estimates based on historical data; actual decisions depend on many factors. Probabilities are guidance only, not guarantees.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="./transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="./gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="./transfer-vs-stay.html">Transfer vs. Stay</a></li>
+        <li><a href="./transfer-stats.html">Transfer Stats</a></li>
+        <li><a href="./transfer-policies.html">Transfer Policies</a></li>
+        <li><a href="./transfer-employment.html">Employment Outcomes</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>1L Resources</h5><ul>
+        <li><a href="./course-outlines.html">Course Outlines</a></li>
+        <li><a href="./attack-sheets.html">Attack Sheets</a></li>
+        <li><a href="./deans-certification.html">Dean's Certification</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Programs</h5><ul>
+        <li><a href="../../pages/transfer/">Transfer Admissions</a></li>
+        <li><a href="../../pages/law-school/">Law School</a></li>
+        <li><a href="../../pages/undergraduate/">Undergraduate</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition. All rights reserved.</p></div></div>
+</footer>
+
+<script src="../../data/transfer-data.js"></script>
+<script>
+// ── Populate current school select ──
+(function(){
+  const sel = document.getElementById('currentSchool');
+  const sorted = [...TRANSFER_SCHOOLS].sort((a,b)=>a.name.localeCompare(b.name));
+  sorted.forEach(s=>{
+    const o = document.createElement('option');
+    o.value = s.id;
+    o.textContent = `${s.name} (#${s.usnwrRank})`;
+    sel.appendChild(o);
+  });
+})();
+
+let activeTier = 'all';
+function setTier(val, btn){
+  activeTier = val;
+  document.querySelectorAll('#tierFilter .filter-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function calcProb(school, userGPA, userRank){
+  // Score based on: GPA position vs. school threshold, class rank vs. threshold, base acceptance rate
+  const gpaThresh = school.minGPAForSuccess;
+  const rankThresh = school.recommendedClassRank; // top X% needed
+
+  // GPA score: 0-5
+  let gpaScore;
+  if(userGPA >= gpaThresh + 0.15) gpaScore = 5;
+  else if(userGPA >= gpaThresh + 0.05) gpaScore = 4;
+  else if(userGPA >= gpaThresh) gpaScore = 3;
+  else if(userGPA >= gpaThresh - 0.10) gpaScore = 2;
+  else if(userGPA >= gpaThresh - 0.20) gpaScore = 1;
+  else gpaScore = 0;
+
+  // Rank score: 0-5
+  const userRankNum = parseInt(document.getElementById('classRank').value);
+  let rankScore;
+  if(userRankNum <= rankThresh * 0.4) rankScore = 5;
+  else if(userRankNum <= rankThresh * 0.7) rankScore = 4;
+  else if(userRankNum <= rankThresh) rankScore = 3;
+  else if(userRankNum <= rankThresh * 1.5) rankScore = 2;
+  else if(userRankNum <= rankThresh * 2.0) rankScore = 1;
+  else rankScore = 0;
+
+  // Composite score 0-10
+  const composite = gpaScore * 0.55 + rankScore * 0.45;
+
+  // Map to probability considering base acceptance rate
+  const baseRate = school.acceptRate / 100;
+  let rawProb = composite / 10;
+
+  // Adjust by base rate: schools with low base rate compress the top probability
+  const adjusted = rawProb * 0.6 + baseRate * 0.4;
+
+  // Clamp 0-0.92
+  return Math.min(0.92, Math.max(0.01, adjusted));
+}
+
+function getLabel(prob){
+  if(prob >= 0.60) return { label:'Likely', cls:'likely', badgeCls:'badge-likely' };
+  if(prob >= 0.35) return { label:'Target', cls:'target', badgeCls:'badge-target' };
+  if(prob >= 0.12) return { label:'Reach', cls:'reach', badgeCls:'badge-reach' };
+  return { label:'Long Shot', cls:'longshot', badgeCls:'badge-longshot' };
+}
+
+function runPredictor(){
+  const gpa = parseFloat(document.getElementById('gpaInput').value);
+  const schoolId = document.getElementById('currentSchool').value;
+  const sortBy = document.getElementById('sortBy').value;
+
+  if(!gpa || gpa < 1.5 || gpa > 4.5){ alert('Please enter a valid GPA (1.5 – 4.5)'); return; }
+  if(!schoolId){ alert('Please select your current law school'); return; }
+
+  const currentSchool = TRANSFER_SCHOOLS.find(s=>s.id===schoolId);
+
+  // Filter schools (exclude current school)
+  let schools = TRANSFER_SCHOOLS.filter(s=>{
+    if(s.id === schoolId) return false;
+    if(activeTier !== 'all' && s.tier !== activeTier) return false;
+    return true;
+  });
+
+  // Calculate probabilities
+  const results = schools.map(s=>({ school:s, prob:calcProb(s, gpa, parseInt(document.getElementById('classRank').value)) }));
+
+  // Sort
+  if(sortBy==='prob') results.sort((a,b)=>b.prob-a.prob);
+  else if(sortBy==='rank') results.sort((a,b)=>a.school.usnwrRank-b.school.usnwrRank);
+  else if(sortBy==='biglaw') results.sort((a,b)=>b.school.biglawRate-a.school.biglawRate);
+  else results.sort((a,b)=>a.school.name.localeCompare(b.school.name));
+
+  // Count by label
+  const counts = { likely:0, target:0, reach:0, longshot:0 };
+  results.forEach(r=>{
+    const l = getLabel(r.prob).cls;
+    counts[l]++;
+  });
+
+  // Render insight grid
+  document.getElementById('insightGrid').innerHTML = `
+    <div class="insight-box ib-likely"><div class="ib-num">${counts.likely}</div><div class="ib-lbl">Likely</div></div>
+    <div class="insight-box ib-target"><div class="ib-num">${counts.target}</div><div class="ib-lbl">Target</div></div>
+    <div class="insight-box ib-reach"><div class="ib-num">${counts.reach}</div><div class="ib-lbl">Reach</div></div>
+    <div class="insight-box ib-long"><div class="ib-num">${counts.longshot}</div><div class="ib-lbl">Long Shot</div></div>
+  `;
+
+  // Render table
+  const tbody = document.getElementById('resultsBody');
+  tbody.innerHTML = results.map(r=>{
+    const s = r.school;
+    const { label, cls, badgeCls } = getLabel(r.prob);
+    const gpaThresh = s.minGPAForSuccess;
+    const gpaStatus = gpa >= gpaThresh ? `<span class="stat-good">+${(gpa-gpaThresh).toFixed(2)} above</span>` : `<span class="stat-bad">${(gpa-gpaThresh).toFixed(2)} below</span>`;
+    const tfBadge = s.transferFriendly
+      ? `<span class="tf-badge">Transfer-Friendly</span>`
+      : `<span class="tf-badge tf-low">Selective</span>`;
+    return `
+      <tr class="row-${cls}">
+        <td><strong>${s.name}</strong><div style="font-size:.75rem;color:#64748b;margin-top:.1rem">${s.state} &middot; BigLaw: ${s.biglawRate}%</div></td>
+        <td><span class="rank-chip">#${s.usnwrRank}</span></td>
+        <td>${gpaStatus}<div style="font-size:.73rem;color:#64748b">Threshold: ${gpaThresh.toFixed(2)}</div></td>
+        <td>${tfBadge}</td>
+        <td style="font-weight:700;font-size:1.05rem">${Math.round(r.prob*100)}%</td>
+        <td><span class="${badgeCls}">${label}</span></td>
+      </tr>`;
+  }).join('');
+
+  document.getElementById('defaultMsg').style.display='none';
+  document.getElementById('resultsSection').style.display='block';
+}
+
+// Nav
+document.getElementById('hamburger').addEventListener('click',()=>{ document.getElementById('mobileMenu').classList.toggle('open'); });
+window.addEventListener('scroll',()=>{ document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY>40); });
+</script>
+</body>
+</html>

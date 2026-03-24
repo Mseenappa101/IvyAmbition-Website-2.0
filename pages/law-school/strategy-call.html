@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Free Strategy Call | IvyAmbition</title>
+  <meta name="description" content="Book a free 45-minute college admissions strategy session with a Columbia graduate and Ivy League-trained advisor." />
+  <!-- META PIXEL CODE — INSERT HERE -->
+  <!-- GOOGLE ANALYTICS — INSERT HERE -->
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── STRATEGY-CALL LANDING PAGE ── */
+    body { background: var(--navy); }
+
+    /* ── HERO ── */
+    .sc-hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      overflow: hidden;
+      padding: 100px 24px 80px;
+    }
+    .sc-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 80%, rgba(36,59,85,0.7) 0%, transparent 50%),
+        linear-gradient(135deg, #0d1b2a 0%, #1a2f47 50%, #0d1b2a 100%);
+    }
+    .sc-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      text-align: center;
+    }
+
+    /* Headline */
+    .sc-hero-content h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      color: var(--white);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+    .sc-hero-content h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* Subheadline */
+    .sc-hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.75);
+      max-width: 640px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    /* ── CREDENTIAL BAR ── */
+    .sc-creds {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+    .sc-cred-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .sc-cred-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .sc-cred-name {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .sc-cred-detail {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .sc-what {
+      padding: 64px 24px;
+      background: var(--cream);
+    }
+    .sc-what-inner {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .sc-what h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 36px;
+      line-height: 1.2;
+    }
+    .sc-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .sc-bullets li {
+      font-size: 16px;
+      color: var(--text);
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .sc-bullets li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    /* ── EMAIL OPT-IN (inline in hero) ── */
+    .sc-email-inline {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── SCHOOL TICKER ── */
+    .sc-ticker {
+      background: #ffffff;
+      padding: 36px 0 32px;
+      overflow: hidden;
+    }
+    .sc-ticker-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 16px;
+    }
+    .sc-ticker-track {
+      position: relative;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .sc-ticker-scroll {
+      display: flex;
+      width: max-content;
+      animation: scTickerScroll 40s linear infinite;
+    }
+    .sc-ticker-list {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-shrink: 0;
+      padding: 0 24px;
+    }
+    .sc-ticker-item {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .sc-ticker-item img {
+      height: 36px;
+      width: auto;
+      flex-shrink: 0;
+    }
+    @keyframes scTickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── ORIGIN STORY + VIDEO ── */
+    .sc-origin {
+      padding: 100px 24px;
+      background: linear-gradient(180deg, #0a1628 0%, #101e30 100%);
+      border-top: 2px solid var(--gold);
+      text-align: center;
+    }
+    .sc-origin-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .sc-origin h2 {
+      font-size: clamp(26px, 4vw, 42px);
+      color: var(--gold);
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+    .sc-origin-body {
+      font-size: 17px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+    .sc-origin-body em {
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+    }
+    .sc-origin-watch {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+    .sc-origin-video {
+      width: 100%;
+      max-width: 900px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 2px solid #B8860B;
+    }
+    .sc-origin-caption {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.4);
+      margin-top: 16px;
+    }
+
+    /* ── CREDENTIAL BAR SECTION ── */
+    .sc-creds-section {
+      background: var(--navy);
+      padding: 64px 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sc-form {
+      display: flex;
+      gap: 12px;
+    }
+    .sc-form input[type="email"] {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .sc-form input[type="email"]::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+    .sc-form input[type="email"]:focus {
+      border-color: var(--gold);
+    }
+    .sc-form-btn {
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .sc-form-btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-1px);
+    }
+    .sc-form-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .sc-form-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 14px;
+    }
+    .sc-form-error {
+      font-size: 13px;
+      color: #e74c3c;
+      margin-top: 10px;
+      display: none;
+    }
+    .sc-form-success {
+      display: none;
+      text-align: center;
+      padding: 24px 0;
+    }
+    .sc-form-success .sc-check-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.15);
+      border: 2px solid var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .sc-form-success p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    /* ── CALENDLY SECTION (hidden until email submit) ── */
+    .sc-calendly {
+      padding: 60px 0;
+      background: var(--white);
+      display: none;
+    }
+    .sc-calendly.sc-revealed {
+      display: block;
+      animation: scFadeIn 0.6s ease;
+    }
+    @keyframes scFadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .sc-calendly-inner {
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .sc-calendly-inner h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      color: var(--navy);
+      margin-bottom: 40px;
+      line-height: 1.2;
+    }
+    .sc-calendly-embed {
+      min-height: 700px;
+      height: 700px;
+      width: 100%;
+    }
+    .sc-calendly-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 32px;
+      line-height: 1.6;
+    }
+
+    /* ── EYEBROW ── */
+    .sc-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .sc-testimonials {
+      padding: 64px 24px;
+      background: var(--gold-pale);
+    }
+    .sc-testimonials-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .sc-testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .sc-testimonial-card .stars {
+      color: var(--gold);
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+    .sc-testimonial-card blockquote {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .sc-testimonial-card cite {
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ── DOUBT REMOVERS ── */
+    .sc-doubt-removers {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .sc-doubt-removers li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
+    .sc-social-proof-count {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-top: 16px;
+    }
+
+    /* ── TWO TYPES ── */
+    .sc-types {
+      padding: 100px 24px;
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sc-types-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .sc-types h2 {
+      font-size: clamp(26px, 4vw, 42px);
+      color: var(--white);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .sc-types-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 48px;
+    }
+    .sc-types-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .sc-type-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.25);
+    }
+    .sc-type-header {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 20px 24px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .sc-type-body {
+      background: rgba(255,255,255,0.04);
+      padding: 28px 24px;
+    }
+    .sc-type-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 10px;
+    }
+    .sc-type-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .sc-type-list li {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+    }
+    .sc-type-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: rgba(255,255,255,0.3);
+    }
+    .sc-type-arrow {
+      text-align: center;
+      font-size: 24px;
+      color: var(--gold);
+      margin: 8px 0 16px;
+    }
+    .sc-type-result {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1.6;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding-top: 16px;
+    }
+    .sc-types-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+    .sc-types-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 40px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid var(--gold);
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .sc-types-cta-btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.25);
+    }
+    @media (max-width: 768px) {
+      .sc-types-grid { grid-template-columns: 1fr; }
+      .sc-types { padding: 72px 20px; }
+    }
+
+    /* ── FAQ ── */
+    .sc-faq {
+      padding: 80px 24px;
+      background: var(--cream);
+    }
+    .sc-faq-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .sc-faq h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.2;
+    }
+    .sc-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .sc-faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .sc-faq-q {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .sc-faq-a {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── FINAL CTA ── */
+    .sc-final-cta {
+      text-align: center;
+      padding: 100px 24px;
+      background: linear-gradient(145deg, #0f1520 0%, #151d2a 35%, #1a2232 70%, #151d2a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .sc-final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .sc-final-cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .sc-final-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px 48px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+      text-decoration: none;
+    }
+    .sc-final-cta-btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.25);
+    }
+    .sc-final-cta-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* ── DISCLAIMER ── */
+    .sc-disclaimer {
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(0,0,0,0.4);
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 16px 24px 0;
+      line-height: 1.5;
+    }
+    .sc-disclaimer-dark {
+      color: rgba(255,255,255,0.3);
+    }
+    .sc-consent {
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .sc-consent a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: underline;
+    }
+
+    /* ── FOOTER ── */
+    .sc-footer {
+      border-top: 1px solid var(--gold);
+      background: #060d17;
+      padding: 40px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 100%;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.8;
+    }
+    .sc-footer a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .sc-footer a:hover {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .sc-footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .sc-hero { padding: 72px 20px 60px; }
+      .sc-creds { grid-template-columns: 1fr; }
+      .sc-what { padding: 48px 20px; }
+      .sc-email { padding: 60px 20px; }
+      .sc-form { flex-direction: column; }
+      .sc-form-btn { width: 100%; padding: 16px; }
+      .sc-calendly { padding: 40px 0; }
+      .sc-calendly-embed { min-height: 900px; height: 900px; }
+      .sc-testimonials-inner { grid-template-columns: 1fr; }
+      .sc-faq { padding: 60px 20px; }
+      .sc-final-cta { padding: 72px 20px; }
+      .sc-final-cta-btn { width: 100%; padding: 18px 32px; font-size: 16px; }
+      .sc-footer { flex-direction: column; gap: 20px; text-align: center; align-items: center; }
+      .sc-footer-links { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — HERO: HEADLINE + SUBHEADLINE
+       ═══════════════════════════════════════════ -->
+  <section class="sc-hero">
+    <div class="sc-hero-bg"></div>
+    <div class="sc-hero-content">
+      <span class="sc-eyebrow">FREE 45-MINUTE SESSION — LIMITED SPOTS THIS CYCLE</span>
+      <h1>How to Get Your Child Into a Top 25 University —<br /><em>Even If Their Numbers Aren't Perfect</em></h1>
+      <p class="sc-hero-sub">Get a personalized 45-minute college admissions strategy session with a current Columbia graduate and Ivy League-trained advisor — who went through this process recently enough to know exactly what is working right now.</p>
+
+      <!-- EMAIL OPT-IN (above the fold) -->
+      <div class="sc-email-inline" id="sc-email-section">
+        <form id="sc-email-form" class="sc-form" novalidate>
+          <input type="email" id="sc-email-input" placeholder="Your best email address" required autocomplete="email" />
+          <button type="submit" class="sc-form-btn" id="sc-form-btn">Get My Child's Free Strategy Session →</button>
+        </form>
+        <p class="sc-form-error" id="sc-form-error">Please enter a valid email address.</p>
+        <ul class="sc-doubt-removers">
+          <li>✓ Free. No credit card. No obligation.</li>
+          <li>✓ We send one email per week. Unsubscribe anytime.</li>
+          <li>✓ If we are not the right fit, we will tell you on the call.</li>
+        </ul>
+        <p class="sc-social-proof-count">Joined by 3,200+ families this admissions cycle.</p>
+        <p class="sc-consent">By submitting your email you agree to receive communications from IvyAmbition. We respect your privacy. <a href="../../legal/privacy-policy.html">Privacy Policy</a>.</p>
+
+        <!-- Success state (replaces form) -->
+        <div class="sc-form-success" id="sc-form-success">
+          <div class="sc-check-icon">✓</div>
+          <p><strong>You're in. Now pick your time below.</strong></p>
+          <p>Your strategy session is 45 minutes. We block off a limited number of spots each week — pick a time that works for you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCHOOL TICKER
+       ═══════════════════════════════════════════ -->
+  <section class="sc-ticker">
+    <div class="sc-ticker-label">Our Students Have Been Accepted To</div>
+    <div class="sc-ticker-track">
+      <div class="sc-ticker-scroll">
+        <div class="sc-ticker-list">
+          <div class="sc-ticker-item"><img src="../../assets/logos/harvard.svg" alt="Harvard" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/yale.svg" alt="Yale" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/columbia.svg" alt="Columbia" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/nyu.svg" alt="NYU" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/uchicago.svg" alt="Chicago" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/penn.svg" alt="Penn" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/michigan.svg" alt="Michigan" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/duke.svg" alt="Duke" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/georgetown.svg" alt="Georgetown" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/northwestern.svg" alt="Northwestern" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/cornell.svg" alt="Cornell" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/vanderbilt.svg" alt="Vanderbilt" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/ucla.svg" alt="UCLA" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/usc.svg" alt="USC" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/bu.svg" alt="Boston University" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/fordham.svg" alt="Fordham" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/notredame.svg" alt="Notre Dame" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/washu.svg" alt="Washington University" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/emory.svg" alt="Emory" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/gwu.svg" alt="George Washington" /></div>
+        </div>
+        <div class="sc-ticker-list">
+          <div class="sc-ticker-item"><img src="../../assets/logos/harvard.svg" alt="Harvard" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/yale.svg" alt="Yale" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/columbia.svg" alt="Columbia" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/nyu.svg" alt="NYU" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/uchicago.svg" alt="Chicago" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/penn.svg" alt="Penn" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/michigan.svg" alt="Michigan" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/duke.svg" alt="Duke" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/georgetown.svg" alt="Georgetown" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/northwestern.svg" alt="Northwestern" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/cornell.svg" alt="Cornell" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/vanderbilt.svg" alt="Vanderbilt" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/ucla.svg" alt="UCLA" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/usc.svg" alt="USC" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/bu.svg" alt="Boston University" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/fordham.svg" alt="Fordham" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/notredame.svg" alt="Notre Dame" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/washu.svg" alt="Washington University" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/emory.svg" alt="Emory" /></div>
+          <div class="sc-ticker-item"><img src="../../assets/logos/gwu.svg" alt="George Washington" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ORIGIN STORY + VIDEO
+       ═══════════════════════════════════════════ -->
+  <section class="sc-origin">
+    <div class="sc-origin-inner">
+      <h2>This Is What It Looks Like When a Dream<br />Becomes Real.</h2>
+
+      <p class="sc-origin-body">When Michael was 8 years old, he pointed a camera at himself and said:<br /><br /><em>"Dad — this is a video for you. At Columbia University."</em><br /><br />He didn't know what a GPA was. He didn't know what the SAT was. He just knew where he wanted to go.<br /><br />Fifteen years later, he's there.<br /><br />Your child has a school like that. A place they have been imagining since before they knew what an application even was. We know exactly what it takes to get them there — because we just did it ourselves.</p>
+
+      <p class="sc-origin-watch">Watch the original video below — recorded over 15 years ago.</p>
+
+      <video id="columbia-video" class="sc-origin-video" playsinline muted controls loop>
+        <source src="/assets/videos/0313.mov" type="video/mp4">
+      </video>
+
+      <p class="sc-origin-caption">Michael, age 8. Filmed on location at Columbia University.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CREDENTIAL BAR (below the fold)
+       ═══════════════════════════════════════════ -->
+  <section class="sc-creds-section">
+    <div class="sc-creds">
+      <div class="sc-cred-card">
+        <div class="sc-cred-badge">Columbia Law School</div>
+        <div class="sc-cred-name">Michael Seenappa</div>
+        <div class="sc-cred-detail">Current 2L</div>
+      </div>
+      <div class="sc-cred-card">
+        <div class="sc-cred-badge">Columbia Law School</div>
+        <div class="sc-cred-name">Constantine Trubitski</div>
+        <div class="sc-cred-detail">Current 2L</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4 — WHAT YOU GET ON THE CALL
+       ═══════════════════════════════════════════ -->
+  <section class="sc-what">
+    <div class="sc-what-inner">
+      <h2>What You Get on the Call</h2>
+      <ul class="sc-bullets">
+        <li><strong>An honest profile assessment</strong> — We evaluate your child's GPA, test scores, extracurriculars, and story and tell you exactly where they stand, which schools are realistic, and which ones they are underselling themselves on. Most consultants charge $400 for this alone.</li>
+        <li><strong>A customized college list</strong> — Not a copy of the US News rankings. A real list built around your child's numbers, interests, career goals, geographic preferences, and scholarship probability — because getting into a top school with full aid and getting in with $200K in debt are very different outcomes.</li>
+        <li><strong>Their personal statement angle</strong> — We identify the one story from your child's background that actually stops an admissions officer mid-read. Most students write what sounds impressive. We help them write what is true and unforgettable.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4B — TESTIMONIALS
+       ═══════════════════════════════════════════ -->
+  <section class="sc-testimonials">
+    <div class="sc-testimonials-inner">
+      <div class="sc-testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"My daughter got into Georgetown, Vanderbilt, and USC after one strategy session. The essay angle they found was something we never would have thought of on our own."</blockquote>
+        <cite>— Patricia M., Parent — Georgetown '28</cite>
+      </div>
+      <div class="sc-testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"My son's GPA wasn't perfect but his story was. IvyAmbition helped him frame it in a way that got him into his dream school with a merit scholarship."</blockquote>
+        <cite>— David K., Parent — Tulane '27</cite>
+      </div>
+    </div>
+    <p class="sc-disclaimer">Results shown are not typical. Individual outcomes vary based on academic profile, school selection, application effort, and other factors. IvyAmbition does not guarantee admission to any institution.</p>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CALENDLY (hidden until email submit)
+       ═══════════════════════════════════════════ -->
+  <section class="sc-calendly" id="sc-calendly-section">
+    <div class="sc-calendly-inner">
+      <h2>You're in. Now pick your time below.</h2>
+
+      <!-- Calendly inline widget -->
+      <div class="calendly-inline-widget sc-calendly-embed"
+           data-url="https://calendly.com/d/ctmv-k59-8g6/ivyambition-free-consultation-with-founders"
+           data-hide-event-type-details="1"
+           data-hide-gdpr-banner="1"
+           style="min-width:280px;width:100%;"></div>
+
+      <p class="sc-calendly-note">Can't find a time that works? Reply to your confirmation email and we will figure it out.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TWO TYPES OF STUDENTS
+       ═══════════════════════════════════════════ -->
+  <section class="sc-types">
+    <div class="sc-types-inner">
+      <h2>We Work With 2 Types of Families</h2>
+      <p class="sc-types-sub">Which one is yours?</p>
+
+      <div class="sc-types-grid">
+        <!-- Card 1 -->
+        <div class="sc-type-card">
+          <div class="sc-type-header">Type 1: Strong Student, No Differentiated Story</div>
+          <div class="sc-type-body">
+            <div class="sc-type-label">Attributes</div>
+            <ul class="sc-type-list">
+              <li>3.8+ GPA</li>
+              <li>Strong SAT/ACT scores</li>
+              <li>Good extracurriculars and activities</li>
+              <li>Hardworking and motivated</li>
+            </ul>
+
+            <div class="sc-type-label">Problem</div>
+            <ul class="sc-type-list">
+              <li>Applies to the same schools as every other competitive student</li>
+              <li>Personal statement sounds like thousands of others</li>
+              <li>No narrative that sets them apart from equally qualified applicants</li>
+              <li>Gets waitlisted or rejected at schools they should have gotten into</li>
+            </ul>
+
+            <div class="sc-type-arrow">&#8595;</div>
+
+            <p class="sc-type-result">"Get into the top school that matches your child's actual ceiling — not just the safe picks everyone else applied to."</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="sc-type-card">
+          <div class="sc-type-header">Type 2: Numbers Are Not Perfect — But the Story Is</div>
+          <div class="sc-type-body">
+            <div class="sc-type-label">Attributes</div>
+            <ul class="sc-type-list">
+              <li>3.3–3.7 GPA or below-average test scores</li>
+              <li>Significant life experience or unique background</li>
+              <li>Passionate, driven, and self-motivated</li>
+              <li>Knows their transcript does not tell the full story</li>
+            </ul>
+
+            <div class="sc-type-label">Problem</div>
+            <ul class="sc-type-list">
+              <li>Does not know how to position their story over their stats</li>
+              <li>Undersells themselves on every application</li>
+              <li>Applies to schools well below their actual reach</li>
+              <li>Gets rejected from schools that would have loved them with better positioning</li>
+            </ul>
+
+            <div class="sc-type-arrow">&#8595;</div>
+
+            <p class="sc-type-result">"Get into a school one or two tiers above where you thought their numbers would take them."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-types-cta">
+        <a href="#sc-email-section" class="sc-types-cta-btn">Find Out Which Type Your Child Is &#8594;</a>
+      </div>
+      <p class="sc-disclaimer sc-disclaimer-dark" style="margin-top:32px;">Results shown are not typical. Individual outcomes vary based on academic profile, school selection, application effort, and other factors. IvyAmbition does not guarantee admission to any institution.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 7 — FAQ
+       ═══════════════════════════════════════════ -->
+  <section class="sc-faq">
+    <div class="sc-faq-inner">
+      <h2>Frequently Asked Questions</h2>
+      <div class="sc-faq-list">
+        <div class="sc-faq-item">
+          <div class="sc-faq-q">"Is this actually free?"</div>
+          <div class="sc-faq-a">Yes. No catch, no hidden pitch mid-call. We give every family a real strategy session because the ones who find it valuable will want to work with us further — and we would rather earn that than pressure you into it.</div>
+        </div>
+        <div class="sc-faq-item">
+          <div class="sc-faq-q">"My child is only a sophomore. Is it too early?"</div>
+          <div class="sc-faq-a">It is actually the perfect time. Families who start with a strategy session in 9th or 10th grade almost always outperform the ones who scramble junior year. We will tell you exactly what to build between now and application season.</div>
+        </div>
+        <div class="sc-faq-item">
+          <div class="sc-faq-q">"What if my child's GPA or test scores are not strong enough for top schools?"</div>
+          <div class="sc-faq-a">Tell us on the call. Most families underestimate how competitive their child actually is — especially at schools that heavily weight story, character, and extracurriculars over raw numbers. And if there are real gaps, we will tell you exactly what moves the needle before they apply.</div>
+        </div>
+        <div class="sc-faq-item">
+          <div class="sc-faq-q">"Do you guarantee admission?"</div>
+          <div class="sc-faq-a">No. Anyone who does is lying to you. What we guarantee is that your child's application will be the strongest possible version of itself, built on a sound strategy. The results speak for themselves.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 8 — FINAL CTA
+       ═══════════════════════════════════════════ -->
+  <section class="sc-final-cta">
+    <div class="sc-final-cta-inner">
+      <a href="#sc-email-section" class="sc-final-cta-btn">Get My Child's Free Strategy Session →</a>
+      <p class="sc-final-cta-note">Limited spots available. Sessions fill up fast during peak admissions season.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="sc-footer">
+    <div>
+      <div>&copy; 2025 IvyAmbition. All Rights Reserved.</div>
+      <div>IvyAmbition LLC | New York, NY</div>
+      <div>Contact: coachmike@ivyambition.com</div>
+    </div>
+    <div class="sc-footer-links">
+      <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+      <a href="../../legal/terms-of-service.html">Terms of Service</a>
+      <a href="../../legal/disclaimer.html">Disclaimer</a>
+    </div>
+  </footer>
+
+
+  <!-- Calendly embed script -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <script>
+    (function () {
+      /* ── STEP 1: Email capture ── */
+      var form = document.getElementById('sc-email-form');
+      var input = document.getElementById('sc-email-input');
+      var btn = document.getElementById('sc-form-btn');
+      var errorEl = document.getElementById('sc-form-error');
+      var successEl = document.getElementById('sc-form-success');
+      var doubtEl = form.parentElement.querySelector('.sc-doubt-removers');
+      var proofEl = form.parentElement.querySelector('.sc-social-proof-count');
+      var consentEl = form.parentElement.querySelector('.sc-consent');
+
+      /* ── STEP 2: Calendly ── */
+      var calendlySection = document.getElementById('sc-calendly-section');
+
+      /* STEP 1 — Email submission */
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+
+        var email = input.value.trim();
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          errorEl.textContent = 'Please enter a valid email address.';
+          errorEl.style.display = 'block';
+          input.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+
+        try {
+          console.log('[IvyAmbition] Submitting email:', email);
+
+          var response = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+
+          var data = await response.json();
+          console.log('[IvyAmbition] API response status:', response.status);
+          console.log('[IvyAmbition] API response data:', data);
+
+          if (!data.success) {
+            console.error('[IvyAmbition] Subscribe error:', data);
+            throw new Error('Subscribe failed: ' + JSON.stringify(data));
+          }
+
+          console.log('[IvyAmbition] Subscription successful');
+
+          // Store email for intake page
+          try { sessionStorage.setItem('ia_email', email); } catch (e) {}
+
+          // Hide form and supporting elements
+          form.style.display = 'none';
+          doubtEl.style.display = 'none';
+          proofEl.style.display = 'none';
+          if (consentEl) consentEl.style.display = 'none';
+
+          // Show success message
+          successEl.style.display = 'block';
+
+          // Reveal Calendly section and force re-init the widget
+          calendlySection.classList.add('sc-revealed');
+          if (typeof Calendly !== 'undefined' && Calendly.initInlineWidgets) {
+            Calendly.initInlineWidgets();
+          }
+          setTimeout(function () {
+            // Re-init again after a short delay in case script was still loading
+            if (typeof Calendly !== 'undefined' && Calendly.initInlineWidgets) {
+              Calendly.initInlineWidgets();
+            }
+            calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 500);
+
+        } catch (err) {
+          console.error('[IvyAmbition] Email submission failed:', err);
+          btn.disabled = false;
+          btn.textContent = 'Get My Child\u2019s Free Strategy Session \u2192';
+          errorEl.textContent = 'Something went wrong. Please try again.';
+          errorEl.style.display = 'block';
+        }
+      });
+
+      /* STEP 2 — Listen for Calendly event_scheduled, then redirect to intake */
+      window.addEventListener('message', function (e) {
+        if (e.origin === 'https://calendly.com' &&
+            e.data && e.data.event === 'calendly.event_scheduled') {
+          console.log('[IvyAmbition] Calendly event scheduled, redirecting to intake...');
+          window.location.href = './intake.html';
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    const video = document.getElementById('columbia-video');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(video);
+  </script>
+
+</body>
+</html>

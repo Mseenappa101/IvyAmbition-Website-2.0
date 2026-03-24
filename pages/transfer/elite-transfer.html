@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Transfer Program | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .vs-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px 32px 28px;
+      position: relative;
+    }
+    .vs-card-number {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-family: var(--font-serif);
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.1);
+      line-height: 1;
+    }
+    .vs-card-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .vs-card-body {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .vs-card-kicker {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+      font-style: italic;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .why-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .why-card-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .why-card-body {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .process-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .process-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #b8943e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: #0a1628;
+    }
+    .process-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .process-body {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    .process-line {
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.4), rgba(201,168,76,0.15));
+      z-index: 0;
+    }
+    .wf-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+    .wf-icon {
+      color: var(--gold);
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .wf-not {
+      color: rgba(255,255,255,0.4);
+    }
+    .wf-not .wf-icon {
+      color: rgba(255,255,255,0.3);
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+    .faq-q {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .math-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .math-item:last-child { border-bottom: none; }
+    .math-name { font-size: 15px; color: rgba(255,255,255,0.7); }
+    .math-price { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.5); }
+    @media (max-width: 1024px) {
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+      .process-line { display: none; }
+    }
+    @media (max-width: 768px) {
+      .process-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pages/law-school/">Law School</a></li>
+        <li><a href="../../pages/law-school/services.html">Services</a></li>
+        <li><a href="../../pages/law-school/free-tools.html">Free Tools</a></li>
+        <li><a href="./">Transfer</a></li>
+        <li><a href="https://calendly.com/ivyambition/transfer-strategy-call" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="../../pages/law-school/">Law School</a>
+      <a href="../../pages/law-school/services.html">Services</a>
+      <a href="../../pages/law-school/free-tools.html">Free Tools</a>
+      <a href="./">Transfer</a>
+      <a href="https://calendly.com/ivyambition/transfer-strategy-call" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="padding:140px 0 80px;background:linear-gradient(160deg,#060d17 0%,#0d1b2a 40%,#1a2f47 100%);text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 65%);pointer-events:none;"></div>
+    <div class="container" style="position:relative;max-width:800px;">
+      <span style="display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,0.12);padding:7px 18px;border-radius:100px;margin-bottom:24px;">Limited Spots &mdash; Current Transfer Cycle</span>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:20px;">Transfer Into a T-14.<br>We'll Make Sure You Get There.</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:640px;margin:0 auto 36px;line-height:1.8;">The most comprehensive transfer admissions program available anywhere. A dedicated T-14 coach, AI-powered application tools, and end-to-end support from your first strategy session through decision day &mdash; built for the 1L who refuses to leave anything to chance.</p>
+      <a href="https://calendly.com/ivyambition/transfer-strategy-call" target="_blank" class="btn btn-gold" style="padding:20px 56px;font-size:1.15rem;">Apply to the Elite Transfer Program &rarr;</a>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;">15-minute strategy call. No cost. No pressure. We'll assess your candidacy and determine if this program is the right fit.</p>
+    </div>
+  </section>
+
+  <!-- PAIN SECTION -->
+  <section style="background:var(--cream);padding:80px 0;">
+    <div class="container" style="max-width:760px;">
+      <div style="text-align:center;margin-bottom:40px;">
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--navy);margin-bottom:16px;">Transfer Admissions Is the Highest-Stakes, Shortest-Window Process in Law School</h2>
+      </div>
+      <div style="font-size:1rem;color:var(--text-muted);line-height:1.9;">
+        <p style="margin-bottom:16px;">You have one shot. The transfer window opens and closes in weeks &mdash; not months. Your 1L grades just came in and suddenly you're facing the biggest decision of your law school career with almost no time to execute.</p>
+        <p style="margin-bottom:16px;">And the process is nothing like initial admissions. Different essays. Different evaluation criteria. Different financial aid landscape. Different timeline. Every piece of advice you got as a 0L is either irrelevant or actively harmful when applied to transfers.</p>
+        <p style="margin-bottom:16px;">The 1Ls who successfully transfer into T-14 schools don't figure it out alone. They have someone who's done it before, who knows what transfer committees actually look for, and who can execute alongside them at the speed the transfer window demands.</p>
+        <p style="font-weight:600;color:var(--navy);">That's what the Elite Transfer Program is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STACK -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:800px;">
+      <div style="text-align:center;margin-bottom:56px;">
+        <span class="section-label" style="color:var(--gold);">What's Included</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">Here's Everything That's Included</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+
+        <div class="vs-card">
+          <div class="vs-card-title">Dedicated Transfer Coach</div>
+          <div class="vs-card-body">You're paired with a current T-14 law student who understands the transfer process from the inside. Not a former admissions officer from 2012. Not a junior consultant reading from a script. Someone who has actually navigated transfer admissions at the highest level &mdash; and who works with you directly on every piece of your application.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Transfer Strategy &amp; Candidacy Assessment</div>
+          <div class="vs-card-body">We start with a full diagnostic &mdash; your 1L grades, class rank, current school, career goals, and financial situation. Then we build the strategic plan: which schools to target, how to position your narrative, and exactly how to execute on the compressed timeline.</div>
+          <div class="vs-card-kicker">Strategy sessions alone cost $300. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">School List Development</div>
+          <div class="vs-card-body">We build your transfer list from data, not rankings. Your GPA relative to each school's transfer medians, historical acceptance volumes, employment outcomes for transfers specifically, and the financial reality at each target. Every school on your list will be there for a strategic reason.</div>
+          <div class="vs-card-kicker">School list sessions cost $175. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Transfer Personal Statement Development</div>
+          <div class="vs-card-body">The "why transfer" essay is the make-or-break piece of your application. We work together through multiple drafts to find the angle that's compelling without being critical of your current school, demonstrates growth, and makes the case that you belong. This isn't a review &mdash; it's full development from concept to final draft.</div>
+          <div class="vs-card-kicker">Personal statement deep dive costs $500. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Every "Why X School" Essay</div>
+          <div class="vs-card-body">Transfer supplementals require a different approach &mdash; you need to show you've outgrown your current school's resources and that the target school offers something specific you can't access. We write every one, tailored to each school on your list.</div>
+          <div class="vs-card-kicker">"Why X" reviews cost $200 per batch. All of yours are included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Dean's Letter of Recommendation Strategy</div>
+          <div class="vs-card-body">We help you navigate one of the most sensitive parts of the transfer process &mdash; approaching your dean for a letter while maintaining your standing at your current school. Strategy, framing, and timing.</div>
+          <div class="vs-card-kicker">Dean's LOR strategy costs $175. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">1L Resume Optimization</div>
+          <div class="vs-card-body">Your resume is reframed to highlight your 1L accomplishments in the way transfer committees evaluate them. We position you as someone who's thriving at your current school &mdash; not fleeing it.</div>
+          <div class="vs-card-kicker">Resume review costs $150. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Full Application Review</div>
+          <div class="vs-card-body">Before you submit to any school, we review the complete package &mdash; every essay, every form, every supplemental. Nothing goes out with a weakness we could have caught.</div>
+          <div class="vs-card-kicker">Full application review costs $750. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Transfer Interview Preparation</div>
+          <div class="vs-card-body">Mock interviews simulating the exact format at your target schools. Transfer interviews ask different questions &mdash; "why are you leaving?" is the one that trips up most applicants. We make sure your answer is honest, compelling, and rehearsed.</div>
+          <div class="vs-card-kicker">Interview prep costs $250. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Scholarship &amp; Financial Aid Strategy</div>
+          <div class="vs-card-body">Transferring often means losing your current scholarship. We run the financial analysis, help you negotiate aid at your new school, and craft financial aid appeals. This isn't an afterthought &mdash; the financial decision is as important as the admissions decision.</div>
+          <div class="vs-card-kicker">Financial aid consulting costs $300. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Waitlist Strategy</div>
+          <div class="vs-card-body">If you're waitlisted anywhere, we execute immediately &mdash; Letter of Continued Interest, additional materials, communication cadence. Transfer waitlists move fast and unpredictably. We're ready.</div>
+          <div class="vs-card-kicker">Waitlist strategy costs $300. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Unlimited Messaging</div>
+          <div class="vs-card-body">The transfer window moves too fast to wait for scheduled calls. Message your coach directly &mdash; questions, draft reviews, quick decisions &mdash; and get a response within 24 hours. Your coach is always a message away.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">IvyAmbition Application Platform (AI-Powered)</div>
+          <div class="vs-card-body">Full access to our proprietary software built specifically for law school applicants. The AI tools analyze your transfer essays, organize your deadlines, manage school-specific requirements, and keep your entire application on track during the compressed transfer timeline. Your coach works with you directly inside the platform.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- THE MATH -->
+  <section style="background:#060d17;padding:80px 0;">
+    <div class="container" style="max-width:720px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">The Math</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">If You Purchased These Services Individually</h2>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px 36px;margin-bottom:32px;">
+        <div class="math-item">
+          <span class="math-name">Transfer Strategy Session</span>
+          <span class="math-price">$300</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">School List Strategy</span>
+          <span class="math-price">$175</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Personal Statement Deep Dive</span>
+          <span class="math-price">$500</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">"Why X" Essays (2 batches avg)</span>
+          <span class="math-price">$400</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Dean's LOR Strategy</span>
+          <span class="math-price">$175</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Resume Review</span>
+          <span class="math-price">$150</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Full Application Review</span>
+          <span class="math-price">$750</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Interview Prep</span>
+          <span class="math-price">$250</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Financial Aid Consulting</span>
+          <span class="math-price">$300</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Waitlist Strategy</span>
+          <span class="math-price">$300</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0 0;border-top:2px solid rgba(201,168,76,0.2);margin-top:8px;">
+          <span style="font-size:16px;font-weight:600;color:var(--white);">&Agrave; la carte total</span>
+          <span style="font-family:var(--font-serif);font-size:22px;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:line-through;">$3,300+</span>
+        </div>
+      </div>
+
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);text-align:center;line-height:1.7;margin-bottom:32px;">And you'd STILL be missing unlimited messaging, the AI platform, deadline management, and a dedicated coach.</p>
+
+      <div style="text-align:center;background:linear-gradient(145deg,rgba(201,168,76,0.1) 0%,rgba(201,168,76,0.03) 100%);border:1.5px solid rgba(201,168,76,0.25);border-radius:20px;padding:48px 40px;">
+        <p style="font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:6px;">The Elite Transfer Program</p>
+        <div style="font-family:var(--font-serif);font-size:56px;font-weight:700;color:var(--gold);margin-bottom:8px;">$5,000</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 24px;line-height:1.7;">For context: the big admissions firms charge $8,000&ndash;$15,000 for initial admissions &mdash; and they don't even specialize in transfers. There is nothing else like this program on the market.</p>
+        <a href="https://calendly.com/ivyambition/transfer-strategy-call" target="_blank" class="btn btn-gold" style="padding:18px 48px;font-size:1.05rem;">Book a Free Strategy Call &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section style="background:var(--cream);padding:80px 0;">
+    <div class="container" style="max-width:800px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label">Why This Program Exists</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--navy);">Why This Is Different From Every Other Consulting Service</h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">Transfer admissions is an underserved niche.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">Most consultants treat it as an afterthought &mdash; a minor variation on initial admissions. It's not. It's a fundamentally different process with a fundamentally different timeline, and the stakes are arguably higher because you're making this decision with real law school data about your performance.</div>
+        </div>
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">We built this because nobody else did.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">We're current T-14 students who understand transfers from the inside. We know what committees look for, which schools are genuinely transfer-friendly, and how to execute on a timeline that doesn't forgive hesitation.</div>
+        </div>
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">You work with us directly.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">No handoff. No junior associate. Your coach is a T-14 student who reviews every essay, answers every message, and is invested in your outcome because our reputation depends on it.</div>
+        </div>
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">We keep our roster tiny.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">The transfer window is compressed, which means each client needs intensive attention during a short period. We take very few clients per cycle so we can give each one everything they need, when they need it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:720px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">Fit Check</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">This Program Is Built For You If...</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:48px;">
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>Your 1L grades put you in contention for T-14 schools and you want to maximize your shot</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You're at a school ranked 20&ndash;100 and know you can perform at a higher level</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>The transfer window terrifies you because it's so short and the stakes are so high</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You want someone who specializes in transfers &mdash; not someone who treats them as a sidebar to initial admissions</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You understand that the difference between your current school and a T-14 is measured in hundreds of thousands of dollars in career earnings</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You refuse to submit a transfer application without every piece being reviewed by an expert</span>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-serif);font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:20px;">This Probably Isn't For You If...</h3>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="wf-item wf-not">
+          <span class="wf-icon">&#10007;</span>
+          <span>You haven't finished 1L yet and don't have grades (come back when you do &mdash; and use our <a href="./tools.html" style="color:var(--gold);">free tools</a> in the meantime)</span>
+        </div>
+        <div class="wf-item wf-not">
+          <span class="wf-icon">&#10007;</span>
+          <span>You're not willing to execute quickly (the transfer timeline demands urgency)</span>
+        </div>
+        <div class="wf-item wf-not">
+          <span class="wf-icon">&#10007;</span>
+          <span>You want someone to write your essays for you (we won't, and you shouldn't want us to)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROCESS -->
+  <section style="background:#060d17;padding:80px 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+    <div class="container" style="max-width:960px;">
+      <div style="text-align:center;margin-bottom:56px;">
+        <span class="section-label" style="color:var(--gold);">How It Works</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">The Process</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-line"></div>
+
+        <div class="process-step">
+          <div class="process-num">1</div>
+          <div class="process-title">Apply &amp; Strategy Call</div>
+          <div class="process-body">We assess your candidacy &mdash; your grades, your rank, your current school, your targets. We'll be honest about your chances. If the program is the right fit, we move forward. If not, we'll tell you and recommend the right level of support.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">2</div>
+          <div class="process-title">Full Diagnostic &amp; Game Plan</div>
+          <div class="process-body">We build your complete transfer strategy &mdash; target schools, application timeline, essay roadmap, financial analysis. Every decision is mapped before you start writing.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">3</div>
+          <div class="process-title">Execute at Transfer Speed</div>
+          <div class="process-body">Personal statement development, "Why X" essays, resume, dean's LOR strategy, application review &mdash; all happening in parallel on the compressed timeline. Your coach is with you every day.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">4</div>
+          <div class="process-title">Review &amp; Submit</div>
+          <div class="process-body">Every application is reviewed in full before it goes out. Nothing gets submitted until your coach has signed off on every piece.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">5</div>
+          <div class="process-title">Post-Submission</div>
+          <div class="process-body">Waitlisted? We strategize immediately. Accepted? We help with financial aid negotiation and the decision between offers. The relationship doesn't end at "submit."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:760px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">FAQ</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">Common Questions</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <div class="faq-item">
+          <div class="faq-q">"How many clients do you take per transfer cycle?"</div>
+          <div class="faq-a">Very few. The transfer window is short and each client needs intensive, daily-level attention. Once we're full, we close enrollment immediately. This isn't a marketing tactic &mdash; it's a genuine constraint.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"What if my grades aren't strong enough to transfer?"</div>
+          <div class="faq-a">We'll tell you on the strategy call. We have no interest in taking your money if the outcomes aren't realistic. We'd rather direct you to the right level of support &mdash; a single strategy session, a workshop, or just the free tools &mdash; than overpromise.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"Is $5,000 worth it?"</div>
+          <div class="faq-a">The average difference in starting salary between a T-50 school and a T-14 school is roughly $80,000&ndash;$100,000 per year. Over a 10-year career, that's potentially $500,000&ndash;$1,000,000 in additional earnings. If this program helps you make that leap, the ROI on $5,000 isn't even close. And compared to the $8,000&ndash;$15,000 the big firms charge for less specialized service, this is the best value in transfer admissions.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"What if I get waitlisted?"</div>
+          <div class="faq-a">Waitlist strategy is included in the program. Transfer waitlists move fast &mdash; often in late July and August with almost no notice. We execute immediately with a Letter of Continued Interest, additional materials, and a communication plan.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"Can I just buy individual services instead?"</div>
+          <div class="faq-a">Absolutely. We offer everything from $150 resume reviews to $750 full application reviews. But the math favors the full program for anyone applying to multiple schools &mdash; and the unlimited messaging and AI platform aren't available &agrave; la carte. <a href="./services.html" style="color:var(--gold);">Check our transfer services page</a> to see all options.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"How is this different from the Full Transfer Application Review ($750)?"</div>
+          <div class="faq-a">The $750 review is a one-time audit of your completed application. The Elite Transfer Program is an end-to-end partnership from strategy through submission and post-decision &mdash; with a dedicated coach, unlimited messaging, and AI tools. It's the difference between getting feedback and having a team.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#060d17;padding:80px 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;bottom:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+    <div class="container" style="position:relative;max-width:680px;text-align:center;">
+      <h2 style="font-family:var(--font-serif);font-size:clamp(1.6rem,4vw,2.4rem);color:var(--white);margin-bottom:16px;line-height:1.2;">One Transfer Window. One Shot at Each School.<br>No Room for Error.</h2>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.6);max-width:600px;margin:0 auto 32px;line-height:1.8;">Transfer admissions doesn't give you time to figure it out as you go. The window is weeks, the competition is fierce, and every piece of your application needs to be flawless on the first attempt. The Elite Transfer Program makes sure it is.</p>
+      <a href="https://calendly.com/ivyambition/transfer-strategy-call" target="_blank" class="btn btn-gold" style="padding:20px 56px;font-size:1.15rem;">Apply to the Elite Transfer Program &rarr;</a>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;font-style:italic;">Limited spots. Once we're full, enrollment closes for the cycle.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Transfer Services</h5>
+          <ul>
+            <li><a href="./services.html">All Transfer Services</a></li>
+            <li><a href="./elite-transfer.html">Elite Transfer Program</a></li>
+            <li><a href="./toolkit.html">$9 Transfer Toolkit</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../../pages/law-school/">Law School</a></li>
+            <li><a href="./">Law School Transfer</a></li>
+            <li><a href="../../pages/law-school/free-tools.html">Free Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="https://calendly.com/ivyambition/transfer-strategy-call" target="_blank">Book a Call</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

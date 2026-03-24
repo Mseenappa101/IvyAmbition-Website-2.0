@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Admissions Decoded | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .guide-hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a2f47 100%);
+      padding: 80px 0 60px;
+      border-bottom: 3px solid #c9a84c;
+    }
+    .guide-hero-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .guide-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.5); font-size: 13px; margin-bottom: 24px; text-decoration: none; transition: color .2s; }
+    .guide-back:hover { color: #c9a84c; }
+    .guide-badge { display: inline-block; background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.4); border-radius: 100px; padding: 5px 14px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #c9a84c; margin-bottom: 16px; }
+    .guide-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; margin-bottom: 12px; }
+    .guide-tagline { font-size: 1.05rem; color: rgba(255,255,255,.7); line-height: 1.7; margin-bottom: 28px; }
+    .guide-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+    .guide-meta-item { font-size: 13px; color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 6px; }
+
+    .guide-body { max-width: 800px; margin: 0 auto; padding: 60px 24px 80px; }
+    .guide-toc { background: #f8f7f4; border: 1.5px solid #e2e6ec; border-radius: 14px; padding: 28px 32px; margin-bottom: 56px; }
+    .guide-toc h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #0d1b2a; margin-bottom: 16px; }
+    .guide-toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .guide-toc li { font-size: 14px; color: #0d1b2a; }
+    .guide-toc li a { color: #0d1b2a; text-decoration: none; font-weight: 500; }
+    .guide-toc li a:hover { color: #c9a84c; }
+
+    .guide-section { margin-bottom: 64px; scroll-margin-top: 80px; }
+    .section-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #c9a84c; margin-bottom: 8px; }
+    .guide-section h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #0d1b2a; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 2px solid #e2e6ec; }
+    .guide-section p { font-size: 15px; color: #3a4455; line-height: 1.8; margin-bottom: 16px; }
+    .guide-section h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #0d1b2a; margin: 28px 0 10px; }
+    .guide-section ul, .guide-section ol { padding-left: 22px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .guide-section li { font-size: 15px; color: #3a4455; line-height: 1.7; }
+
+    .callout { background: #fdf6e4; border-left: 4px solid #c9a84c; border-radius: 0 10px 10px 0; padding: 18px 22px; margin: 24px 0; }
+    .callout p { margin: 0; font-size: 14px; color: #5a4000; font-style: italic; line-height: 1.7; }
+
+    .timeline-row { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+    .timeline-period { background: #0d1b2a; color: #c9a84c; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .timeline-content { font-size: 14px; color: #3a4455; line-height: 1.7; }
+    .timeline-content strong { display: block; color: #0d1b2a; margin-bottom: 4px; font-size: 15px; }
+
+    .guide-divider { height: 1px; background: #e2e6ec; margin: 48px 0; }
+    .guide-cta { background: linear-gradient(135deg, #0d1b2a, #1a2f47); border-radius: 16px; padding: 40px; text-align: center; margin-top: 48px; }
+    .guide-cta h3 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.5rem; margin-bottom: 10px; }
+    .guide-cta p { color: rgba(255,255,255,.65); font-size: 14px; margin-bottom: 24px; }
+    .guide-cta .btn-gold { background: #c9a84c; color: #0d1b2a; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: .95rem; display: inline-block; text-decoration: none; }
+    .guide-cta .btn-gold:hover { background: #e8c97a; }
+
+    @media(max-width:600px) {
+      .guide-toc { padding: 20px; }
+      .guide-section h2 { font-size: 1.4rem; }
+      .timeline-row { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Undergrad</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="guide-hero">
+    <div class="guide-hero-inner">
+      <a href="../../index.html" class="guide-back">← Back to Undergraduate Admissions</a>
+      <div class="guide-badge">🎓 Elite Admissions Decoded</div>
+      <h1>Elite Admissions Decoded</h1>
+      <p class="guide-tagline">The step-by-step system for getting into elite colleges — built by Columbia students who cracked the code.</p>
+      <div class="guide-meta">
+        <span class="guide-meta-item">📋 5 Frameworks</span>
+        <span class="guide-meta-item">🎓 Undergraduate Admissions</span>
+        <span class="guide-meta-item">✍️ By IvyAmbition Founders</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide-body">
+
+    <div class="guide-toc">
+      <h3>What's Inside</h3>
+      <ol>
+        <li><a href="#timeline">The Application Timeline Blueprint</a></li>
+        <li><a href="#activities">The Activities List Optimization Guide</a></li>
+        <li><a href="#college-list">The College List Strategy Framework</a></li>
+        <li><a href="#personal-statement">The Personal Statement Starter Kit</a></li>
+        <li><a href="#parents">The Parent Guide</a></li>
+      </ol>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="guide-section" id="timeline">
+      <p class="section-num">Section 1</p>
+      <h2>The Application Timeline Blueprint</h2>
+      <p>Most students begin thinking seriously about college admissions in junior year — by which point they've already missed two years of positioning. The students who get into elite schools start building their profiles in 9th or 10th grade. Here's the exact roadmap.</p>
+
+      <h3>Sophomore Year (10th Grade)</h3>
+      <div class="timeline-row"><span class="timeline-period">Fall</span><div class="timeline-content"><strong>Choose depth over breadth.</strong> Identify 2–3 activities you'll commit to long-term and begin building leadership within them. Colleges want trajectory, not a list of clubs you joined once.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Spring</span><div class="timeline-content"><strong>Take your first standardized test if ready.</strong> PSAT in the fall gives you a baseline. If you score above 1350 SAT-equivalent, start prep. Otherwise, focus on academics — a 4.0 is worth more than a mediocre test score.</div></div>
+
+      <h3>Junior Year (11th Grade) — The Most Important Year</h3>
+      <div class="timeline-row"><span class="timeline-period">Fall</span><div class="timeline-content"><strong>Maximize your GPA — this is the transcript colleges see first.</strong> Take the most rigorous courses available (AP, IB, honors) without overextending. Cement leadership in your primary activities.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Winter</span><div class="timeline-content"><strong>Take the SAT or ACT in March or April.</strong> Give yourself time to retake in May or June if needed. Aim for at least one strong score before summer.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Spring</span><div class="timeline-content"><strong>Begin college research.</strong> Build a preliminary school list. Identify schools you're genuinely interested in for campus visits. Start thinking about who might write your letters of recommendation.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Summer</span><div class="timeline-content"><strong>Draft your personal statement.</strong> This is the most important writing project of your senior fall. Starting it in June means you have 3 months to get it right. Identify your core essay topic, outline it, and write a full first draft before school starts.</div></div>
+
+      <h3>Senior Year (12th Grade)</h3>
+      <div class="timeline-row"><span class="timeline-period">August</span><div class="timeline-content"><strong>Finalize your school list.</strong> 10–14 schools is the sweet spot. Any more and quality suffers. Begin supplemental essay research for your top choices.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Sept–Oct</span><div class="timeline-content"><strong>Write supplementals and secure recommendations.</strong> Ask recommenders by September 1 — teachers need time. Brief them on what you want them to emphasize.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Nov 1</span><div class="timeline-content"><strong>Early Decision / Early Action deadlines.</strong> Submit your strongest application ED to your top choice if you're confident it's the right fit.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Jan 1</span><div class="timeline-content"><strong>Regular Decision deadline for most schools.</strong> All applications should be submitted. Follow up with any missing materials.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Mar–May</span><div class="timeline-content"><strong>Decisions arrive. Compare financial aid packages.</strong> Don't accept the first offer — negotiate. May 1 is National Decision Day.</div></div>
+
+      <div class="callout"><p>"The students who get in early didn't get lucky. They built a profile over four years that made them impossible to reject. Admissions isn't something you do — it's something you become."</p></div>
+    </div>
+
+    <div class="guide-divider"></div>
+
+    <!-- SECTION 2 -->
+    <div class="guide-section" id="activities">
+      <p class="section-num">Section 2</p>
+      <h2>The Activities List Optimization Guide</h2>
+      <p>The Common App gives you 10 activity slots and 150 characters per description. Most students waste this space by writing what the activity is instead of what they did. Here's how to turn a generic list into a compelling narrative.</p>
+
+      <h3>The Spike vs. Breadth Debate</h3>
+      <p>Elite colleges do not reward students who did everything. They reward students who went deep. A student who founded a nonprofit, ran it for three years, and grew it to 200 members is more compelling than a student who was in 12 clubs.</p>
+      <p>Aim for: <strong>1–2 primary "spike" activities</strong> that show depth, leadership, and impact. Fill the remaining slots with complementary activities that support your narrative.</p>
+
+      <h3>How to Write a 150-Character Description That Actually Works</h3>
+      <ul>
+        <li><strong>Start with an action verb in past tense.</strong> Founded, Led, Directed, Trained — not "I was responsible for" or "Helped with."</li>
+        <li><strong>Include at least one number.</strong> Members, events organized, hours volunteered, money raised, placements won.</li>
+        <li><strong>Show your specific role,</strong> not the club's general purpose. "Led 15-member team" beats "Club that helps students."</li>
+        <li><strong>Use every character.</strong> 140+ is the target. Unused space is unused opportunity.</li>
+      </ul>
+
+      <h3>Before & After</h3>
+      <div class="callout"><p><strong>Before:</strong> "Member of debate team where we practice argumentation and compete in tournaments statewide."<br/><br/><strong>After:</strong> "Co-captain; coached 8 novice debaters; team ranked 3rd statewide; won best speaker at regional tournament."</p></div>
+
+      <h3>The 10-Slot Strategy</h3>
+      <ul>
+        <li><strong>Slots 1–2:</strong> Your primary spike activities — most impressive, most leadership, most impact</li>
+        <li><strong>Slots 3–5:</strong> Supporting activities that reinforce your theme or narrative</li>
+        <li><strong>Slots 6–8:</strong> Breadth activities — different domains that show you're well-rounded</li>
+        <li><strong>Slots 9–10:</strong> Employment, family obligations, or significant personal commitments</li>
+      </ul>
+
+      <h3>The Activities That Impress Most</h3>
+      <p>In rough order of impact at elite colleges: founding/leading something original, sustained long-term commitment with visible results, state/national recognition, activities with documented community impact, and summer programs at universities (especially if selective).</p>
+    </div>
+
+    <div class="guide-divider"></div>
+
+    <!-- SECTION 3 -->
+    <div class="guide-section" id="college-list">
+      <p class="section-num">Section 3</p>
+      <h2>The College List Strategy Framework</h2>
+      <p>A great college list isn't just a ranked list of schools you like. It's a strategic portfolio calibrated to your profile, your goals, and your financial situation. Here's how to build one.</p>
+
+      <h3>The Three Tiers</h3>
+      <div class="timeline-row"><span class="timeline-period">Reach</span><div class="timeline-content"><strong>3–5 schools where your stats are below the 50th percentile of admitted students</strong> but your profile, essays, and context make you competitive. These are genuine reaches — not long shots you submit for fun.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Target</span><div class="timeline-content"><strong>4–6 schools where your stats fall squarely within the middle 50% of admitted students.</strong> You should expect to get into your target schools. If you apply to six and get rejected from all six, your targets weren't actually targets.</div></div>
+      <div class="timeline-row"><span class="timeline-period">Safety</span><div class="timeline-content"><strong>2–3 schools where you would be happy to attend and are virtually certain of admission.</strong> A safety is not a school you'd hate. It's a school you'd be proud to attend if everything else fell through.</div></div>
+
+      <h3>Factors Beyond Rankings</h3>
+      <p>Rankings are a starting point, not a destination. Before finalizing your list, research each school on:</p>
+      <ul>
+        <li><strong>Graduation rates and academic outcomes</strong> in your intended major</li>
+        <li><strong>Post-graduation employment data</strong> — where do graduates actually work?</li>
+        <li><strong>Net price</strong> — what will you actually pay after financial aid?</li>
+        <li><strong>Culture and campus fit</strong> — will you thrive there?</li>
+        <li><strong>Location</strong> — proximity to internship markets and industries you want</li>
+      </ul>
+
+      <h3>The Financial Aid Layer</h3>
+      <p>At highly selective schools (acceptance rate under 15%), financial aid is typically need-based. At schools ranked 20–80, significant merit aid is available for students who exceed average stats. Building a list that includes a few schools where you'd be a competitive merit candidate can dramatically change what you actually pay.</p>
+
+      <div class="callout"><p>Rule of thumb: Never submit to a school you'd be ashamed to attend. Every school on your list should be one you'd be proud to call your college.</p></div>
+    </div>
+
+    <div class="guide-divider"></div>
+
+    <!-- SECTION 4 -->
+    <div class="guide-section" id="personal-statement">
+      <p class="section-num">Section 4</p>
+      <h2>The Personal Statement Starter Kit</h2>
+      <p>The personal statement is the one place in the application where you speak directly to an admissions reader as a full human being. Most students either play it too safe (writing about achievements already listed elsewhere) or try too hard (overwriting in a way that reads as performative). Here's the framework we use with our own students.</p>
+
+      <h3>The Core Question: What Can't They See Anywhere Else?</h3>
+      <p>Your personal statement should reveal something about who you are that no other part of the application communicates. If you're writing about winning the state championship, you're wasting the essay — the reader already saw that in your activities. Write about what the championship meant, cost, changed in you, or taught you.</p>
+
+      <h3>Brainstorming Exercise: The 5-10-5</h3>
+      <ol>
+        <li>Write down 5 experiences that shaped who you are (include small ones — a conversation, a failure, a moment of realization)</li>
+        <li>For each, write 10 sentences about what it meant, what you were thinking, what it cost you, what it changed</li>
+        <li>From all of that material, identify 5 words that describe who you are as a result</li>
+      </ol>
+      <p>The essay topic that emerges from this process will be more original and more compelling than any topic you try to engineer from the outside in.</p>
+
+      <h3>The Three Structures That Work</h3>
+      <ul>
+        <li><strong>The In Media Res:</strong> Open in the middle of a scene. Let the reader feel they've been dropped into your life. Then pull back and explain context, insight, meaning.</li>
+        <li><strong>The Through-Line:</strong> Trace how one recurring theme, object, habit, or question runs through your life. Not a listicle — one thread, many moments.</li>
+        <li><strong>The Honest Reckoning:</strong> Write about something you got wrong, misunderstood, or had to unlearn. The willingness to be vulnerable and reflective is rare and impressive.</li>
+      </ul>
+
+      <h3>What to Avoid</h3>
+      <ul>
+        <li>Opening with a quote from someone else — it signals you don't trust your own words</li>
+        <li>Essays about mission trips or volunteering abroad that center your experience over the community served</li>
+        <li>Describing what you did rather than what it meant</li>
+        <li>Trying to sound like what you think a college student should sound like — authenticity beats polish</li>
+      </ul>
+
+      <div class="callout"><p>The best essays we've read at IvyAmbition are specific, honest, and slightly uncomfortable to write. If it feels a little vulnerable, that's usually a good sign.</p></div>
+    </div>
+
+    <div class="guide-divider"></div>
+
+    <!-- SECTION 5 -->
+    <div class="guide-section" id="parents">
+      <p class="section-num">Section 5</p>
+      <h2>The Parent Guide</h2>
+      <p>Parents want to help. The problem is that certain kinds of help — well-intentioned as they are — actively hurt applications. Here's an honest guide to what works and what backfires.</p>
+
+      <h3>What Actually Helps</h3>
+      <ul>
+        <li><strong>Creating the conditions for focus:</strong> Protecting time, reducing family obligations during crunch periods, providing a quiet space to work</li>
+        <li><strong>Being a sounding board, not an editor:</strong> Ask questions about the essay rather than rewriting it. "What do you want the reader to feel?" beats "let me fix this paragraph."</li>
+        <li><strong>Handling logistics:</strong> Deadlines, application fee payments, financial aid forms — freeing your student from administrative burden is high-value support</li>
+        <li><strong>Providing emotional stability:</strong> The process is stressful. Your composure and belief in your student matters more than any tactical advice you can give</li>
+      </ul>
+
+      <h3>What Silently Backfires</h3>
+      <ul>
+        <li><strong>Writing or substantially editing essays:</strong> Admissions officers read thousands of essays. They can tell when an essay was written by an adult. An essay that sounds like a 45-year-old describing a teenager's experience is immediately suspicious.</li>
+        <li><strong>Pushing for a school the student doesn't want:</strong> Students perform better, write better essays, and get better results when they're applying to schools they actually want to attend</li>
+        <li><strong>Contacting the admissions office on your student's behalf:</strong> This is a significant red flag. The application is the student's</li>
+        <li><strong>Treating rejections as failures:</strong> Elite admissions is legitimately random at the margin. A rejection from Harvard says nothing meaningful about your student's worth or future</li>
+      </ul>
+
+      <h3>The Handoff</h3>
+      <p>The most powerful thing a parent can do is establish clear ownership early: this is your student's application, your student's decision, your student's future. Your role is to support — not to manage. Students who feel that ownership produce better applications and handle the process with more resilience.</p>
+
+      <div class="callout"><p>The families that navigate this process best are the ones where the parent's job is to believe in their kid and stay calm — not to optimize every decision. Trust the process and trust your student.</p></div>
+    </div>
+
+    <div class="guide-cta">
+      <h3>Ready for One-on-One Support?</h3>
+      <p>This guide gives you the framework. Working with an IvyAmbition counselor gives you the execution — personalized to your exact profile, schools, and timeline.</p>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="btn-gold">Book a Free Strategy Call →</a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite admissions consulting by Columbia Law students.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

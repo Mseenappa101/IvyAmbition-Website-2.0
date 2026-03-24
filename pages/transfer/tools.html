@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Law School Transfer Tools | IvyAmbition</title>
+  <meta name="description" content="9 free tools for law school transfer applicants: transfer predictor, GPA calculator, course outlines, attack sheets, transfer stats, and more." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .hub-hero { background:linear-gradient(135deg,#0d1b2a 0%,#1a2e47 100%);padding:5rem 0 4rem;text-align:center;color:#fff; }
+    .hub-hero h1 { font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:0 0 1rem;color:#fff; }
+    @media(max-width:640px){ .hub-hero h1 { font-size:1.8rem; } }
+    .hub-hero p { font-size:1.1rem;color:#94a3b8;max-width:560px;margin:0 auto 1.5rem;line-height:1.7; }
+    .hub-eyebrow { font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#c9a84c;margin-bottom:.75rem; }
+    .hub-stats { display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-top:2rem; }
+    .hub-stat { text-align:center; }
+    .hub-stat-num { font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#c9a84c;display:block; }
+    .hub-stat-label { font-size:.78rem;color:#94a3b8; }
+
+    .tools-section { padding:4rem 0; }
+    .tools-section-heading { text-align:center;margin-bottom:.5rem; }
+    .tools-section-heading h2 { font-family:'Playfair Display',serif;font-size:1.75rem;color:#0d1b2a;margin:0; }
+    .tools-section-sub { text-align:center;font-size:.95rem;color:#64748b;margin:0 0 2.5rem;max-width:560px;margin-left:auto;margin-right:auto; }
+
+    .tools-category { margin-bottom:3rem; }
+    .category-label { font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#c9a84c;margin-bottom:1rem;border-bottom:2px solid #f1f5f9;padding-bottom:.5rem; }
+
+    .tool-cards-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem; }
+
+    .tool-card-hub { background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.4rem 1.5rem;transition:box-shadow .2s,border-color .2s;display:flex;flex-direction:column;gap:.75rem; }
+    .tool-card-hub:hover { box-shadow:0 6px 24px rgba(13,27,42,.08);border-color:#c9a84c; }
+    .tool-card-hub-top { display:flex;align-items:flex-start;gap:.85rem; }
+    .tool-card-icon { width:2.75rem;height:2.75rem;border-radius:10px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0; }
+    .tool-card-meta { flex:1; }
+    .tool-card-title { font-family:'Playfair Display',serif;font-size:1rem;color:#0d1b2a;font-weight:700;margin:0 0 .25rem; }
+    .tool-card-desc { font-size:.83rem;color:#64748b;line-height:1.6;margin:0; }
+    .tool-card-tags { display:flex;gap:.4rem;flex-wrap:wrap; }
+    .tool-tag { font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:10px;background:#f1f5f9;color:#64748b; }
+    .tool-tag-gold { background:#fef3c7;color:#92400e; }
+    .tool-card-cta { display:inline-flex;align-items:center;gap:.3rem;font-size:.82rem;font-weight:700;color:#0d1b2a;text-decoration:none;margin-top:auto; }
+    .tool-card-cta:hover { color:#c9a84c; }
+    .tool-card-cta::after { content:'→'; }
+
+    .consult-cta { background:linear-gradient(135deg,#0d1b2a 0%,#1a2e47 100%);border-radius:16px;padding:3rem 2rem;text-align:center;margin:2rem 0; }
+    .consult-cta h2 { font-family:'Playfair Display',serif;font-size:1.75rem;color:#fff;margin:0 0 .75rem; }
+    .consult-cta p { font-size:.95rem;color:#94a3b8;margin:0 0 1.5rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7; }
+    .consult-btn { display:inline-block;padding:.85rem 2rem;background:#c9a84c;color:#0d1b2a;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;transition:background .15s; }
+    .consult-btn:hover { background:#d4b572; }
+
+    .how-it-works { background:#f8fafc;border-radius:16px;padding:2.5rem;margin:2rem 0; }
+    .how-it-works h3 { font-family:'Playfair Display',serif;color:#0d1b2a;font-size:1.25rem;margin:0 0 1.5rem;text-align:center; }
+    .steps-row { display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem; }
+    @media(max-width:768px){ .steps-row { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:480px){ .steps-row { grid-template-columns:1fr; } }
+    .step-box { text-align:center; }
+    .step-num { width:2.25rem;height:2.25rem;border-radius:50%;background:#0d1b2a;color:#c9a84c;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem; }
+    .step-title { font-weight:700;font-size:.9rem;color:#0d1b2a;margin-bottom:.35rem; }
+    .step-desc { font-size:.81rem;color:#64748b;line-height:1.6; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+      <li><a href="../../pages/law-school/">Law School</a></li>
+      <li><a href="./">Transfer</a></li>
+      <li><a href="./tools.html">Free Tools</a></li>
+      <li><a href="./#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../../pages/undergraduate/">Undergrad</a><a href="../../pages/law-school/">Law School</a><a href="./">Transfer</a><a href="./tools.html">Free Tools</a><a href="./#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hub-hero">
+  <div class="container">
+    <p class="hub-eyebrow">IvyAmbition Free Resources</p>
+    <h1>9 Free Law School Transfer Tools</h1>
+    <p>Everything you need to plan and execute a successful law school transfer — from predicting your odds to acing your 1L exams.</p>
+    <div class="hub-stats">
+      <div class="hub-stat"><span class="hub-stat-num">9</span><span class="hub-stat-label">Free Tools</span></div>
+      <div class="hub-stat"><span class="hub-stat-num">35+</span><span class="hub-stat-label">Schools in Database</span></div>
+      <div class="hub-stat"><span class="hub-stat-num">6</span><span class="hub-stat-label">1L Course Resources</span></div>
+      <div class="hub-stat"><span class="hub-stat-num">100%</span><span class="hub-stat-label">Free, No Sign-Up</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="tools-section">
+  <div class="container">
+
+    <div class="tools-section-heading">
+      <h2>Transfer Decision Tools</h2>
+    </div>
+    <p class="tools-section-sub">Use these tools to assess your transfer odds, project your GPA and class rank, and decide whether transferring is the right move.</p>
+
+    <!-- Category 1: Decision Tools -->
+    <div class="tools-category">
+      <div class="category-label">Admissions &amp; Decision</div>
+      <div class="tool-cards-grid">
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">🎯</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">Transfer Predictor</h3>
+              <p class="tool-card-desc">Enter your 1L GPA and current school, and see your estimated transfer probability at 35+ law schools — color-coded by Likely, Target, Reach, and Long Shot.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag tool-tag-gold">Most Popular</span>
+            <span class="tool-tag">Probability Engine</span>
+            <span class="tool-tag">35+ Schools</span>
+          </div>
+          <a href="../../tools/transfer/transfer-predictor.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">📊</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">GPA Calculator &amp; Class Rank Projector</h3>
+              <p class="tool-card-desc">Calculate your 1L GPA, estimate your class rank percentile based on your school's grading curve, and compare against transfer thresholds at top schools.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">Normal Curve Model</span>
+            <span class="tool-tag">40+ School Curves</span>
+          </div>
+          <a href="../../tools/transfer/gpa-calculator.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">⚖️</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">Transfer vs. Stay Calculator</h3>
+              <p class="tool-card-desc">12-question decision framework covering career goals, finances, rankings, geography, and wellbeing — generates a personalized Transfer, Stay, or Consider recommendation.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">5-Dimension Scoring</span>
+            <span class="tool-tag">Career Weighted</span>
+          </div>
+          <a href="../../tools/transfer/transfer-vs-stay.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Category 2: Database Tools -->
+    <div class="tools-category">
+      <div class="category-label">School Data &amp; Policies</div>
+      <div class="tool-cards-grid">
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">📈</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">Transfer Acceptance Stats</h3>
+              <p class="tool-card-desc">Filterable database of transfer acceptance rates, applicant volumes, admitted counts, and minimum GPA thresholds for top law schools — based on ABA 509 data.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">ABA 509 Data</span>
+            <span class="tool-tag">Filterable</span>
+          </div>
+          <a href="../../tools/transfer/transfer-stats.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">💼</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">Transfer Employment Outcomes</h3>
+              <p class="tool-card-desc">BigLaw placement rates, clerkship rates, OCI access, and career outcomes for transfer students at top schools — see what your career looks like post-transfer.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">BigLaw Data</span>
+            <span class="tool-tag">OCI Access</span>
+          </div>
+          <a href="../../tools/transfer/transfer-employment.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">📋</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">Transfer Policies Database</h3>
+              <p class="tool-card-desc">School-by-school comparison of every application requirement — dean's certifications, number of LORs, essays, LSAT submission, deadlines, and school-specific notes.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">All Requirements</span>
+            <span class="tool-tag">Deadline Tracker</span>
+          </div>
+          <a href="../../tools/transfer/transfer-policies.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">✉️</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">Dean's Certification Template</h3>
+              <p class="tool-card-desc">Generate a professional request letter for your law school's dean. Fill in your details and instantly produce a formal letter, email format, and follow-up template.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">Auto-Generate</span>
+            <span class="tool-tag">Copy to Clipboard</span>
+          </div>
+          <a href="../../tools/transfer/deans-certification.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Category 3: 1L Resources -->
+    <div class="tools-category">
+      <div class="category-label">1L Exam Resources</div>
+      <div class="tool-cards-grid">
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">📝</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">1L Course Outline Templates</h3>
+              <p class="tool-card-desc">Professionally structured outline frameworks for all 6 1L courses: Contracts, Torts, Civil Procedure, Criminal Law, Constitutional Law, and Property. Collapsible sections, printable.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag">6 Courses</span>
+            <span class="tool-tag">Printable PDF</span>
+          </div>
+          <a href="../../tools/transfer/course-outlines.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+        <div class="tool-card-hub">
+          <div class="tool-card-hub-top">
+            <div class="tool-card-icon">⚡</div>
+            <div class="tool-card-meta">
+              <h3 class="tool-card-title">1L Attack Sheets</h3>
+              <p class="tool-card-desc">Step-by-step issue-spotting frameworks for all 6 1L courses. Walk through every fact pattern systematically with black-letter rules, trigger facts, and analysis guides.</p>
+            </div>
+          </div>
+          <div class="tool-card-tags">
+            <span class="tool-tag tool-tag-gold">Exam Prep</span>
+            <span class="tool-tag">Issue Spotting</span>
+            <span class="tool-tag">6 Courses</span>
+          </div>
+          <a href="../../tools/transfer/attack-sheets.html" class="tool-card-cta">Open Tool</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-it-works">
+      <h3>How to Use These Tools Effectively</h3>
+      <div class="steps-row">
+        <div class="step-box">
+          <div class="step-num">1</div>
+          <div class="step-title">Check Your Odds</div>
+          <div class="step-desc">Start with the Transfer Predictor and GPA Calculator to understand where you stand relative to transfer thresholds.</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">2</div>
+          <div class="step-title">Research Target Schools</div>
+          <div class="step-desc">Use the Stats Database and Policies Database to build your school list and understand each school's specific requirements.</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">3</div>
+          <div class="step-title">Ace Your 1L Exams</div>
+          <div class="step-desc">Use the Course Outlines and Attack Sheets to build strong outlines and maximize your GPA — the most important transfer factor.</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">4</div>
+          <div class="step-title">Apply Strategically</div>
+          <div class="step-desc">Use the Dean's Cert template and policies database to submit polished applications to your target schools before their deadlines.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Strip -->
+    <div class="consult-cta">
+      <h2>Want Expert Help with Your Transfer Strategy?</h2>
+      <p>Our consultants have helped transfers gain admission to Yale, Harvard, Columbia, and other T14 schools. Get a personalized application strategy, essay review, and school list.</p>
+      <a href="./#book-call" class="consult-btn">Book a Free Strategy Call →</a>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="../../tools/transfer/transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="../../tools/transfer/gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="../../tools/transfer/transfer-vs-stay.html">Transfer vs. Stay</a></li>
+        <li><a href="../../tools/transfer/transfer-stats.html">Transfer Stats</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>More Tools</h5><ul>
+        <li><a href="../../tools/transfer/transfer-employment.html">Employment Outcomes</a></li>
+        <li><a href="../../tools/transfer/transfer-policies.html">Transfer Policies</a></li>
+        <li><a href="../../tools/transfer/deans-certification.html">Dean's Cert Template</a></li>
+        <li><a href="../../tools/transfer/course-outlines.html">Course Outlines</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>IvyAmbition</h5><ul>
+        <li><a href="./">Transfer Consulting</a></li>
+        <li><a href="../../pages/law-school/">Law School Admissions</a></li>
+        <li><a href="../../pages/undergraduate/">Undergraduate</a></li>
+        <li><a href="./#book-call">Book a Call</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition.</p></div></div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>

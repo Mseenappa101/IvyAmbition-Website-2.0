@@ -1,0 +1,8 @@
+.vercel
+
+# Internal planning docs — never deploy these
+_internal/
+
+# Large video files tracked via git (consider LFS later)
+assets/videos/*.mp4
+assets/videos/*.mov

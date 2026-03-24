@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1L GPA Calculator & Class Rank Projector | IvyAmbition</title>
+  <meta name="description" content="Calculate your 1L GPA and estimate your class rank based on your school's grading curve. Know exactly where you stand for transfer admissions." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .course-row { display:grid;grid-template-columns:1fr 100px 100px 32px;gap:.5rem;align-items:center;margin-bottom:.5rem; }
+    .course-row input, .course-row select { padding:.45rem .6rem;border:1px solid #e2e8f0;border-radius:6px;font-size:.85rem; }
+    .remove-btn { background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1.1rem;padding:0; }
+    .remove-btn:hover { color:#ef4444; }
+    .add-course-btn { background:#f1f5f9;border:1px dashed #cbd5e1;border-radius:8px;width:100%;padding:.5rem;font-size:.85rem;color:#64748b;cursor:pointer;margin-top:.25rem; }
+    .add-course-btn:hover { background:#e2e8f0; }
+    .gpa-display { font-size:3rem;font-weight:700;color:#c9a84c;text-align:center;line-height:1; }
+    .gpa-display-sub { font-size:.8rem;color:#94a3b8;text-align:center;margin-top:.25rem; }
+    .rank-display { text-align:center; }
+    .rank-percentile { font-size:2rem;font-weight:700;color:#0d1b2a; }
+    .rank-label { font-size:.85rem;color:#64748b;margin-top:.25rem; }
+    .rank-bar-wrap { margin:1rem 0; }
+    .rank-bar { height:12px;background:#f1f5f9;border-radius:6px;overflow:hidden;position:relative; }
+    .rank-fill { height:100%;border-radius:6px;transition:width .6s; }
+    .rank-marker-line { position:absolute;top:-4px;height:20px;width:2px;background:#0d1b2a; }
+    .transfer-threshold-indicator { padding:.75rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600;margin-top:1rem; }
+    .threshold-good { background:#d1fae5;color:#065f46; }
+    .threshold-warn { background:#fef9c3;color:#92400e; }
+    .threshold-bad  { background:#fee2e2;color:#991b1b; }
+    .grade-map { display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin-top:.5rem; }
+    .grade-chip { background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:.3rem .4rem;text-align:center;font-size:.75rem; }
+    .grade-chip .gc-letter { font-weight:700;color:#0d1b2a;font-size:.9rem; }
+    .grade-chip .gc-pts { color:#64748b; }
+    .hp-note { background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:1rem;font-size:.85rem;color:#1e40af;margin-top:1rem; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+      <li><a href="../../pages/law-school/">Law School</a></li>
+      <li><a href="../../pages/transfer/">Transfer</a></li>
+      <li><a href="../../pages/transfer/#tools">Free Tools</a></li>
+      <li><a href="../../pages/transfer/#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../../pages/undergraduate/">Undergrad</a><a href="../../pages/law-school/">Law School</a><a href="../../pages/transfer/">Transfer</a><a href="transfer-tools.html">Free Tools</a><a href="../../pages/transfer/#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<section class="tool-hero">
+  <div class="container tool-hero-content">
+    <div class="tool-breadcrumb"><a href="../../pages/transfer/">Transfer</a> &rsaquo; <a href="transfer-tools.html">Free Tools</a> &rsaquo; GPA Calculator</div>
+    <p class="tool-eyebrow">Free Tool &middot; Law School Transfer</p>
+    <h1>1L GPA Calculator &amp; Class Rank Projector</h1>
+    <p class="tool-hero-sub">Enter your 1L grades and your school to calculate your GPA and project your class rank percentile — the most important number in your transfer application.</p>
+  </div>
+</section>
+
+<div class="tool-body">
+  <div class="container">
+    <div class="tool-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="filter-sidebar">
+        <div class="calc-card">
+          <h3 style="font-family:'Playfair Display',serif;margin:0 0 1.25rem">Your School & Grades</h3>
+
+          <div class="calc-row">
+            <label class="calc-label">Current Law School</label>
+            <select id="schoolSelect" class="calc-field filter-select" onchange="schoolChanged()">
+              <option value="">— Select your school —</option>
+            </select>
+          </div>
+
+          <div id="hpNote" class="hp-note" style="display:none">
+            <strong>Honors/Pass/Low Pass System</strong><br>
+            Your school uses the H/P/LP grading system. Class rank is typically not published. Use the rank estimator below — roughly the top 30% of students earn Honors. Track the percentage of Honors grades across your courses.
+          </div>
+
+          <div id="gpaSection">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin:1rem 0 .5rem">
+              <label class="calc-label" style="margin:0">1L Courses &amp; Grades</label>
+              <span style="font-size:.72rem;color:#94a3b8">Credits · Grade · Weight</span>
+            </div>
+
+            <div id="courseList"></div>
+            <button class="add-course-btn" onclick="addCourse()">+ Add Course</button>
+
+            <div class="calc-row" style="margin-top:1rem">
+              <label class="calc-label">Semester</label>
+              <select id="semesterSelect" class="calc-field filter-select">
+                <option value="fall">Fall Only</option>
+                <option value="both">Fall + Spring (Full 1L)</option>
+              </select>
+            </div>
+
+            <button class="calc-submit" onclick="calculateGPA()" style="margin-top:1rem">Calculate GPA &amp; Rank &rarr;</button>
+          </div>
+        </div>
+
+        <div class="calc-card" style="margin-top:1rem">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1rem;margin:0 0 .75rem">Grade Point Values</h4>
+          <div class="grade-map">
+            <div class="grade-chip"><div class="gc-letter">A+</div><div class="gc-pts">4.33</div></div>
+            <div class="grade-chip"><div class="gc-letter">A</div><div class="gc-pts">4.00</div></div>
+            <div class="grade-chip"><div class="gc-letter">A−</div><div class="gc-pts">3.67</div></div>
+            <div class="grade-chip"><div class="gc-letter">B+</div><div class="gc-pts">3.33</div></div>
+            <div class="grade-chip"><div class="gc-letter">B</div><div class="gc-pts">3.00</div></div>
+            <div class="grade-chip"><div class="gc-letter">B−</div><div class="gc-pts">2.67</div></div>
+            <div class="grade-chip"><div class="gc-letter">C+</div><div class="gc-pts">2.33</div></div>
+            <div class="grade-chip"><div class="gc-letter">C</div><div class="gc-pts">2.00</div></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RESULTS -->
+      <div class="results-area">
+        <div id="defaultMsg" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;text-align:center;color:#6c757d">
+          <div style="font-size:3rem;margin-bottom:1rem">📐</div>
+          <h3 style="color:#0d1b2a;margin-bottom:.5rem">Enter Your Grades</h3>
+          <p>Select your school, enter your 1L grades, and we'll calculate your GPA and estimate your class rank.</p>
+        </div>
+
+        <div id="resultsSection" style="display:none">
+          <!-- GPA Display -->
+          <div class="result-panel" style="margin-bottom:1.5rem">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.5rem">
+              <div class="result-metric" style="text-align:center">
+                <div class="gpa-display" id="gpaValue">—</div>
+                <div class="gpa-display-sub">Your Cumulative GPA</div>
+              </div>
+              <div class="result-metric" style="text-align:center">
+                <div class="gpa-display" id="schoolMedian" style="color:#64748b">—</div>
+                <div class="gpa-display-sub">School Median GPA</div>
+              </div>
+              <div class="result-metric" style="text-align:center">
+                <div class="gpa-display" id="gpaDiff" style="font-size:2rem">—</div>
+                <div class="gpa-display-sub">vs. School Median</div>
+              </div>
+            </div>
+
+            <!-- Rank visualization -->
+            <div id="rankSection">
+              <h4 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.75rem">Estimated Class Rank</h4>
+              <div class="rank-bar-wrap">
+                <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#94a3b8;margin-bottom:.3rem">
+                  <span>Top 1%</span><span>Top 10%</span><span>Top 25%</span><span>Top 50%</span><span>Bottom</span>
+                </div>
+                <div class="rank-bar">
+                  <div class="rank-fill" id="rankFill" style="width:50%;background:#c9a84c"></div>
+                </div>
+              </div>
+              <div class="rank-display">
+                <div class="rank-percentile" id="rankPct">—</div>
+                <div class="rank-label" id="rankLabel">Estimated percentile rank at your school</div>
+              </div>
+
+              <div class="transfer-threshold-indicator" id="thresholdIndicator"></div>
+            </div>
+
+            <!-- School breakdown -->
+            <div id="schoolBreakdown" style="margin-top:1.5rem">
+              <h4 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.75rem">Transfer Implications</h4>
+              <div id="transferImplications"></div>
+            </div>
+
+            <!-- Course grade list -->
+            <div style="margin-top:1.5rem">
+              <h4 style="font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.75rem">Your Grade Summary</h4>
+              <div class="matrix-table-wrap">
+                <table class="matrix-table" id="gradeTable">
+                  <thead><tr><th>Course</th><th>Credits</th><th>Grade</th><th>Grade Points</th><th>Quality Points</th></tr></thead>
+                  <tbody id="gradeTableBody"></tbody>
+                  <tfoot id="gradeTableFoot"></tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="./gpa-calculator.html">GPA Calculator</a></li>
+        <li><a href="transfer-vs-stay.html">Transfer vs. Stay</a></li>
+        <li><a href="transfer-stats.html">Transfer Stats</a></li>
+        <li><a href="transfer-policies.html">Transfer Policies</a></li>
+        <li><a href="transfer-employment.html">Employment Outcomes</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Programs</h5><ul>
+        <li><a href="../../pages/transfer/">Transfer Admissions</a></li>
+        <li><a href="../../pages/law-school/">Law School</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition.</p></div></div>
+</footer>
+
+<script src="../../data/transfer-data.js"></script>
+<script>
+const GRADE_VALUES = { 'A+':4.33,'A':4.0,'A-':3.67,'B+':3.33,'B':3.0,'B-':2.67,'C+':2.33,'C':2.0,'C-':1.67,'D+':1.33,'D':1.0,'F':0 };
+const DEFAULT_COURSES = [
+  'Contracts','Torts','Civil Procedure','Criminal Law','Property','Constitutional Law','Legal Research & Writing'
+];
+
+let courseCount = 0;
+
+// Populate school select
+(function(){
+  const sel = document.getElementById('schoolSelect');
+  const sorted = [...SCHOOL_CURVES].sort((a,b)=>a.name.localeCompare(b.name));
+  sorted.forEach(s=>{
+    const o=document.createElement('option'); o.value=s.id; o.textContent=s.name; sel.appendChild(o);
+  });
+  // Default courses
+  DEFAULT_COURSES.forEach(c=>addCourse(c));
+})();
+
+function schoolChanged(){
+  const id = document.getElementById('schoolSelect').value;
+  const curve = SCHOOL_CURVES.find(s=>s.id===id);
+  if(!curve) return;
+  if(curve.system==='HP'){
+    document.getElementById('hpNote').style.display='block';
+    document.getElementById('gpaSection').querySelectorAll('input,select,button:not(#hamburger)').forEach(el=>el.disabled=true);
+  } else {
+    document.getElementById('hpNote').style.display='none';
+    document.getElementById('gpaSection').querySelectorAll('input,select,button').forEach(el=>el.disabled=false);
+  }
+}
+
+function addCourse(name=''){
+  courseCount++;
+  const id = 'course_'+courseCount;
+  const div = document.createElement('div');
+  div.className = 'course-row';
+  div.id = id;
+  div.innerHTML = `
+    <input type="text" class="course-name" placeholder="Course name" value="${name}" />
+    <input type="number" class="course-credits" placeholder="Credits" value="3" min="1" max="6" step=".5" />
+    <select class="course-grade">
+      <option value="">Grade</option>
+      ${Object.keys(GRADE_VALUES).map(g=>`<option value="${g}">${g}</option>`).join('')}
+    </select>
+    <button class="remove-btn" onclick="document.getElementById('${id}').remove()">✕</button>
+  `;
+  document.getElementById('courseList').appendChild(div);
+}
+
+function calculateGPA(){
+  const schoolId = document.getElementById('schoolSelect').value;
+  if(!schoolId){ alert('Please select your school first.'); return; }
+
+  const rows = document.querySelectorAll('.course-row');
+  const courses = [];
+  let totalCredits=0, totalQP=0;
+
+  rows.forEach(row=>{
+    const name = row.querySelector('.course-name').value || 'Unknown';
+    const credits = parseFloat(row.querySelector('.course-credits').value)||3;
+    const grade = row.querySelector('.course-grade').value;
+    if(!grade) return;
+    const pts = GRADE_VALUES[grade]||0;
+    const qp = pts * credits;
+    courses.push({name,credits,grade,pts,qp});
+    totalCredits += credits;
+    totalQP += qp;
+  });
+
+  if(courses.length===0){ alert('Please enter at least one grade.'); return; }
+
+  const gpa = totalQP / totalCredits;
+  const curve = SCHOOL_CURVES.find(s=>s.id===schoolId);
+
+  // Estimate class rank
+  const median = curve.medianGPA;
+  const top10 = curve.top10pct;
+  let rankPct, rankFillWidth, rankColor;
+
+  if(median && top10){
+    const sd = (top10 - median) / 1.282; // approximate SD
+    const z = (gpa - median) / sd;
+    // z-score to percentile (using normal CDF approximation)
+    const percentileAboveMedian = Math.round(50 + normalCDF(z) * 50);
+    // Convert to "top X%" rank
+    rankPct = Math.max(1, Math.round(100 - percentileAboveMedian));
+    rankFillWidth = Math.max(2, Math.min(98, 100 - rankPct));
+    rankColor = rankPct <= 5 ? '#10b981' : rankPct <= 15 ? '#c9a84c' : rankPct <= 30 ? '#f59e0b' : '#ef4444';
+  } else {
+    rankPct = null;
+  }
+
+  // Render GPA display
+  document.getElementById('gpaValue').textContent = gpa.toFixed(3);
+  document.getElementById('schoolMedian').textContent = median ? median.toFixed(2) : 'N/A';
+  const diff = median ? (gpa - median) : null;
+  const diffEl = document.getElementById('gpaDiff');
+  if(diff !== null){
+    diffEl.textContent = (diff>=0?'+':'')+diff.toFixed(3);
+    diffEl.style.color = diff >= 0 ? '#059669' : '#dc2626';
+  } else {
+    diffEl.textContent = 'N/A';
+  }
+
+  // Rank
+  if(rankPct !== null){
+    document.getElementById('rankFill').style.width = rankFillWidth+'%';
+    document.getElementById('rankFill').style.background = rankColor;
+    document.getElementById('rankPct').textContent = `Top ${rankPct}%`;
+    document.getElementById('rankPct').style.color = rankColor;
+
+    // Threshold indicator
+    let tClass, tText;
+    if(rankPct <= 10){ tClass='threshold-good'; tText='✓ Strong transfer candidate — Top 10% opens T14 doors at most schools.'; }
+    else if(rankPct <= 20){ tClass='threshold-warn'; tText='⚡ Competitive — Top 15–20% qualifies for Georgetown and T25 transfers. T14 top-5 will be a reach.'; }
+    else{ tClass='threshold-bad'; tText='⚠ Below typical transfer threshold for most T14 schools. Focus on T25–T50 and continue strong spring performance.'; }
+    document.getElementById('thresholdIndicator').className = 'transfer-threshold-indicator '+tClass;
+    document.getElementById('thresholdIndicator').textContent = tText;
+  }
+
+  // Transfer implications table
+  const t14Schools = TRANSFER_SCHOOLS.filter(s=>s.tier==='T14').slice(0,6);
+  document.getElementById('transferImplications').innerHTML = `
+    <div style="overflow-x:auto">
+    <table class="matrix-table">
+      <thead><tr><th>School</th><th>Rank</th><th>Min GPA Needed</th><th>Your Status</th></tr></thead>
+      <tbody>
+        ${t14Schools.map(s=>{
+          const ok = gpa >= s.minGPAForSuccess;
+          return `<tr>
+            <td>${s.name}</td>
+            <td>#${s.usnwrRank}</td>
+            <td>${s.minGPAForSuccess.toFixed(2)}</td>
+            <td>${ok ? '<span style="color:#059669;font-weight:700">✓ Meets threshold</span>' : '<span style="color:#dc2626;font-weight:700">✗ Below threshold</span>'}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+    </div>
+  `;
+
+  // Grade table
+  document.getElementById('gradeTableBody').innerHTML = courses.map(c=>`
+    <tr>
+      <td>${c.name}</td>
+      <td>${c.credits}</td>
+      <td><strong>${c.grade}</strong></td>
+      <td>${c.pts.toFixed(2)}</td>
+      <td>${c.qp.toFixed(2)}</td>
+    </tr>`).join('');
+  document.getElementById('gradeTableFoot').innerHTML = `
+    <tr style="background:#f8fafc;font-weight:700">
+      <td>Total</td>
+      <td>${totalCredits.toFixed(1)}</td>
+      <td></td>
+      <td></td>
+      <td>${totalQP.toFixed(2)}</td>
+    </tr>
+    <tr style="background:#0d1b2a;color:#c9a84c;font-weight:700">
+      <td colspan="4">Cumulative GPA</td>
+      <td>${gpa.toFixed(3)}</td>
+    </tr>`;
+
+  document.getElementById('defaultMsg').style.display='none';
+  document.getElementById('resultsSection').style.display='block';
+}
+
+function normalCDF(z){
+  // Approximation
+  const t = 1/(1+0.2316419*Math.abs(z));
+  const d = 0.3989423*Math.exp(-z*z/2);
+  const p = d*t*(0.3193815+t*(-0.3565638+t*(1.7814779+t*(-1.8212560+t*1.3302744))));
+  return z>=0 ? 1-p : p;
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>

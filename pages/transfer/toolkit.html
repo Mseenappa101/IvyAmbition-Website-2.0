@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Complete Transfer Admissions Toolkit | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Landing-page-only overrides ── */
+    .lp-nav { background:#060d17;border-bottom:1px solid rgba(255,255,255,0.06); }
+    .lp-nav .nav-inner { justify-content:space-between; }
+    .lp-nav .nav-links,
+    .lp-nav .hamburger { display:none; }
+    .lp-nav .nav-cta-solo { display:inline-flex; }
+
+    .lp-hero { padding:130px 0 80px;background:linear-gradient(160deg,#060d17 0%,#0d1b2a 40%,#1a2f47 100%);text-align:center;position:relative;overflow:hidden; }
+    .lp-hero::before { content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 65%);pointer-events:none; }
+
+    .lp-badge { display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,0.12);padding:7px 18px;border-radius:100px;margin-bottom:24px; }
+    .lp-h1 { font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto; }
+    .lp-sub { font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:640px;margin:0 auto 36px;line-height:1.8; }
+
+    .lp-price-row { display:inline-flex;align-items:center;gap:16px;margin-bottom:10px; }
+    .lp-price-old { font-family:var(--font-serif);font-size:20px;color:rgba(255,255,255,0.35);text-decoration:line-through; }
+    .lp-price { font-family:var(--font-serif);font-size:52px;font-weight:700;color:var(--gold); }
+    .lp-price-note { font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:32px; }
+
+    .lp-cta { display:inline-block;padding:20px 56px;font-size:1.15rem;letter-spacing:0.02em;font-weight:600;border-radius:var(--radius);background:linear-gradient(135deg,var(--gold),#b8943e);color:#0a1628;text-decoration:none;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 24px rgba(201,168,76,0.3); }
+    .lp-cta:hover { transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.4); }
+    .lp-cta-sub { font-size:12px;color:rgba(255,255,255,0.35);margin-top:14px; }
+
+    .lp-section { padding:80px 0; }
+    .lp-section-dark { background:linear-gradient(145deg,#0d1b2a 0%,#1a2f47 100%); }
+    .lp-section-light { background:var(--cream); }
+    .lp-section-black { background:#060d17; }
+
+    .lp-section-title { font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700;margin-bottom:16px; }
+
+    /* Value stack cards */
+    .vs-card { background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 32px 28px;position:relative; }
+    .vs-card-number { position:absolute;top:20px;right:24px;font-family:var(--font-serif);font-size:48px;font-weight:700;color:rgba(201,168,76,0.1);line-height:1; }
+    .vs-card-title { font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--white);margin-bottom:12px; }
+    .vs-card-body { font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:16px; }
+    .vs-card-kicker { font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6;font-style:italic;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08); }
+    .vs-card-value { display:inline-block;margin-top:16px;font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--gold); }
+
+    .vs-total { text-align:center;margin-top:48px;padding:40px;background:linear-gradient(145deg,rgba(201,168,76,0.1) 0%,rgba(201,168,76,0.03) 100%);border:1.5px solid rgba(201,168,76,0.25);border-radius:20px; }
+    .vs-total-line { font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:4px; }
+    .vs-total-value { font-family:var(--font-serif);font-size:28px;font-weight:700;color:rgba(255,255,255,0.4);text-decoration:line-through;margin-bottom:4px; }
+    .vs-total-price { font-family:var(--font-serif);font-size:56px;font-weight:700;color:var(--gold);line-height:1.1; }
+    .vs-total-note { font-size:14px;color:rgba(255,255,255,0.45);margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7; }
+
+    /* Who this is for bullets */
+    .wf-list { max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:16px; }
+    .wf-item { display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--text-muted);line-height:1.7; }
+    .wf-icon { color:var(--gold);font-size:18px;flex-shrink:0;margin-top:3px; }
+
+    /* FAQ on dark bg */
+    .lp-faq-dark { max-width:680px;margin:0 auto; }
+    .lp-faq-dark .lp-faq-item { border-bottom:1px solid rgba(255,255,255,0.08);padding:28px 0; }
+    .lp-faq-dark .lp-faq-q { font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--white);margin-bottom:10px; }
+    .lp-faq-dark .lp-faq-a { font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7; }
+
+    .lp-final-cta { text-align:center;background:linear-gradient(145deg,rgba(201,168,76,0.1) 0%,rgba(201,168,76,0.03) 100%);border:1.5px solid rgba(201,168,76,0.25);border-radius:20px;padding:56px 40px;max-width:700px;margin:0 auto; }
+
+    .lp-sticky-bar { position:fixed;bottom:0;left:0;right:0;background:rgba(6,13,23,0.95);backdrop-filter:blur(12px);border-top:1px solid rgba(201,168,76,0.2);padding:14px 0;z-index:100;transform:translateY(100%);transition:transform 0.3s; }
+    .lp-sticky-bar.visible { transform:translateY(0); }
+    .lp-sticky-inner { max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px; }
+    .lp-sticky-text { font-family:var(--font-serif);font-size:15px;color:var(--white); }
+    .lp-sticky-text span { color:var(--gold);font-weight:700; }
+    .lp-sticky-btn { padding:12px 36px;font-size:0.95rem; }
+
+    /* Consulting footer teaser */
+    .lp-consult-footer { background:#060d17;border-top:1px solid rgba(255,255,255,0.06);padding:48px 0;text-align:center; }
+
+    @media(max-width:768px) {
+      .lp-hero { padding:110px 0 60px; }
+      .lp-price { font-size:42px; }
+      .lp-cta { padding:18px 40px;font-size:1.05rem; }
+      .lp-sticky-inner { flex-direction:column;gap:8px;text-align:center; }
+      .lp-sticky-btn { width:100%; }
+      .vs-total-price { font-size:44px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MINIMAL NAV — Logo + CTA only -->
+  <nav class="nav lp-nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <a href="#get-toolkit" class="btn btn-gold nav-cta-solo" style="padding:10px 28px;font-size:14px;">Get the Transfer Toolkit &mdash; $9</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 1: HERO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="lp-badge">Limited-Time Offer</div>
+      <h1 class="lp-h1">The Complete Transfer<br>Admissions Toolkit</h1>
+      <p class="lp-sub">Everything a T-14 transfer used to make the leap &mdash; the transfer playbook, the grade maximization system, the personal statement framework, the school selection strategy, the application timeline, and the transfer vs. stay decision model &mdash; for less than lunch.</p>
+
+      <div class="lp-price-row">
+        <span class="lp-price-old">$120</span>
+        <span class="lp-price">$9</span>
+      </div>
+      <p class="lp-price-note">One-time payment. Instant delivery. Yours forever.</p>
+
+      <!-- Replace href with your Stripe Payment Link. Set Stripe success_url to transfer-thank-you.html -->
+      <a href="#STRIPE_PAYMENT_LINK" class="lp-cta bundle-cta">Get Instant Access &mdash; $9</a>
+      <p class="lp-cta-sub">Delivered to your inbox in under 60 seconds.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 2: PAIN AGITATION -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-section lp-section-dark">
+    <div class="container" style="max-width:740px;">
+      <p class="lp-section-title" style="color:var(--white);text-align:center;">Sound Familiar?</p>
+      <div style="margin-top:32px;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.9;">
+        <p style="margin-bottom:20px;">Your 1L grades just came back and they're better than you expected. For the first time, you're thinking: what if I could transfer somewhere better?</p>
+        <p style="margin-bottom:20px;">But the moment you start researching, you realize nobody talks about this. Reddit has 30 threads with contradictory advice from people who didn't transfer. Every admissions consultant you find specializes in initial admissions and treats transfers as an afterthought. And the transfer window? It's weeks, not months. By the time you figure out what you're supposed to be doing, the deadline is tomorrow.</p>
+        <p style="margin-bottom:20px;">Meanwhile, the 1Ls who successfully transfer into T-14 schools aren't smarter than you. They just had the playbook. They knew what transfer committees look for, how to frame the "why transfer" essay, which schools actually accept transfers in meaningful numbers, and how to execute on a timeline that doesn't forgive hesitation.</p>
+        <p style="color:var(--gold);font-weight:600;font-family:var(--font-serif);font-size:17px;">That's what this toolkit is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 3: VALUE STACK -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-section lp-section-black" id="get-toolkit">
+    <div class="container" style="max-width:760px;">
+      <p class="lp-section-title" style="color:var(--white);text-align:center;margin-bottom:48px;">Here's Everything You're Getting</p>
+
+      <div style="display:flex;flex-direction:column;gap:24px;">
+
+        <!-- Guide 1 -->
+        <div class="vs-card">
+          <div class="vs-card-number">1</div>
+          <div class="vs-card-title">The T-14 Transfer Playbook</div>
+          <div class="vs-card-body">The complete strategic overview &mdash; when to apply, how to position yourself, what transfer committees actually evaluate (it's not the same as initial admissions), and how to stand out against other 1Ls who had the same idea you did.</div>
+          <div class="vs-card-kicker">This is the guide that turns "should I transfer?" into "here's exactly how."</div>
+          <div class="vs-card-value">Value: $30</div>
+        </div>
+
+        <!-- Guide 2 -->
+        <div class="vs-card">
+          <div class="vs-card-number">2</div>
+          <div class="vs-card-title">1L Grade Maximizer</div>
+          <div class="vs-card-body">Exam strategies, study systems, and outline methods from students who actually transferred into T-14 schools. Your 1L GPA is the single most important factor in transfer admissions &mdash; this helps you squeeze every point out of your remaining exams.</div>
+          <div class="vs-card-kicker">The difference between a 3.5 and a 3.7 can be the difference between a waitlist and an acceptance. This closes that gap.</div>
+          <div class="vs-card-value">Value: $30</div>
+        </div>
+
+        <!-- Guide 3 -->
+        <div class="vs-card">
+          <div class="vs-card-number">3</div>
+          <div class="vs-card-title">Transfer Personal Statement Toolkit</div>
+          <div class="vs-card-body">Frameworks, annotated real examples, and the critical differences between a transfer essay and an initial personal statement. Includes how to answer "why transfer" without insulting your current school, how to demonstrate growth, and how to make a compelling case for why you belong at a higher-ranked institution.</div>
+          <div class="vs-card-kicker">Most transfer essays fail for the same 3 reasons. This guide eliminates all of them.</div>
+          <div class="vs-card-value">Value: $25</div>
+        </div>
+
+        <!-- Guide 4 -->
+        <div class="vs-card">
+          <div class="vs-card-number">4</div>
+          <div class="vs-card-title">Transfer School Selection Guide</div>
+          <div class="vs-card-body">Which T-14s actually accept transfers in significant numbers? Which ones are realistic given your GPA and class rank? How many schools should you target? This guide turns guesswork into a data-driven list built around your actual numbers.</div>
+          <div class="vs-card-kicker">Applying to the wrong schools wastes weeks you don't have. This makes sure every application counts.</div>
+          <div class="vs-card-value">Value: $25</div>
+        </div>
+
+        <!-- Guide 5 -->
+        <div class="vs-card">
+          <div class="vs-card-number">5</div>
+          <div class="vs-card-title">Transfer Application Checklist &amp; Timeline</div>
+          <div class="vs-card-body">Week-by-week execution plan with document trackers and school-specific requirement matrices. The transfer timeline is compressed and unforgiving &mdash; this makes sure nothing falls through the cracks and you're never scrambling.</div>
+          <div class="vs-card-kicker">Most transfer applicants start too late and submit rushed applications. This prevents that.</div>
+          <div class="vs-card-value">Value: $20</div>
+        </div>
+
+        <!-- Guide 6 -->
+        <div class="vs-card">
+          <div class="vs-card-number">6</div>
+          <div class="vs-card-title">Transfer vs. Stay Decision Framework</div>
+          <div class="vs-card-body">Financial modeling templates, career outcome comparisons by school tier, and a structured decision framework. Sometimes staying is the right call &mdash; especially with a strong scholarship. This helps you figure that out before you commit time and money to applications.</div>
+          <div class="vs-card-kicker">The wrong decision here can cost you $100,000+. This framework makes sure you're choosing with data, not emotion.</div>
+          <div class="vs-card-value">Value: $20</div>
+        </div>
+
+      </div>
+
+      <!-- Total value vs price -->
+      <div class="vs-total">
+        <div class="vs-total-line">Total Value</div>
+        <div class="vs-total-value">$150</div>
+        <div class="vs-total-line" style="margin-top:8px;">Today's Price</div>
+        <div class="vs-total-price">$9</div>
+        <div class="vs-total-note">That's 94% off. Not because it's not worth $150 &mdash; but because the transfer window is short, the information gap is enormous, and we'd rather every qualified 1L have the playbook than charge what consultants charge and help a handful.</div>
+        <div style="margin-top:28px;">
+          <a href="#STRIPE_PAYMENT_LINK" class="lp-cta bundle-cta">Get Instant Access &mdash; $9</a>
+        </div>
+        <p class="lp-cta-sub">Instant delivery. No subscription. No upsell at checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 4: AUTHORITY -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-section lp-section-light">
+    <div class="container" style="max-width:740px;">
+      <p class="lp-section-title" style="color:var(--text);text-align:center;">Built by T-14 Students Who Actually Transferred &mdash; Not Consultants Who Read About It</p>
+      <div style="margin-top:32px;font-size:15px;color:var(--text-muted);line-height:1.9;">
+        <p style="margin-bottom:20px;">Most admissions advice is written for initial applicants by people who've never dealt with a transfer application in their lives. Transfer admissions is a fundamentally different process &mdash; different essays, different timelines, different evaluation criteria, different financial aid landscape &mdash; and applying initial admissions strategies to transfers will actively hurt you.</p>
+        <p>We're current students at T-14 law schools. We understand the transfer process because we've lived it. We know what transfer committees actually weigh, which schools are genuinely transfer-friendly, and what the "why transfer" essay needs to say versus what most applicants write.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 5: WHO THIS IS FOR -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-section lp-section-dark">
+    <div class="container">
+      <p class="lp-section-title" style="color:var(--white);text-align:center;margin-bottom:40px;">This Is For You If...</p>
+      <div class="wf-list">
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span style="color:rgba(255,255,255,0.65);">You just finished 1L (or are finishing soon) and your grades came in stronger than expected</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span style="color:rgba(255,255,255,0.65);">You're at a school ranked 20&ndash;100 and wondering if you can move up to a T-14</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span style="color:rgba(255,255,255,0.65);">You're a splitter who underperformed in initial admissions and now has the GPA to prove you belong higher</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span style="color:rgba(255,255,255,0.65);">You have no idea how transfer admissions works and need a system, not Reddit speculation</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span style="color:rgba(255,255,255,0.65);">You're weighing the financial tradeoffs of transferring (losing scholarship, paying sticker) and need a clear framework</span>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:44px;">
+        <a href="#STRIPE_PAYMENT_LINK" class="lp-cta bundle-cta">Get Instant Access &mdash; $9</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 6: OBJECTION HANDLING -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-section lp-section-black">
+    <div class="container">
+      <p class="lp-section-title" style="color:var(--white);text-align:center;margin-bottom:8px;">Still Thinking About It?</p>
+
+      <div class="lp-faq-dark">
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">"Is transfer admissions really that different from initial admissions?"</div>
+          <div class="lp-faq-a">Completely. Different evaluation criteria, different essays, different timelines, different financial aid considerations. Using initial admissions guides for transfer apps is like studying for the wrong exam. These guides are built exclusively for the transfer process.</div>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">"My grades are good but I'm not sure I'm competitive."</div>
+          <div class="lp-faq-a">That's exactly what the Transfer School Selection Guide and our free Transfer Predictor tool are for. Plug in your numbers and see where you actually stand before deciding. The $9 gets you the strategic framework; the free tools give you the data.</div>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">"I haven't decided if I should transfer yet."</div>
+          <div class="lp-faq-a">Guide 6 is built entirely for this question. It's a structured decision framework with financial modeling &mdash; not vibes, not Reddit opinions, but actual analysis. Start there.</div>
+        </div>
+        <div class="lp-faq-item" style="border-bottom:none;">
+          <div class="lp-faq-q">"The deadline is really soon &mdash; is it too late?"</div>
+          <div class="lp-faq-a">If you can read and execute quickly, probably not. The Timeline guide will tell you exactly where you stand and what to prioritize. But every day matters in transfers. Stop deliberating and start with the data.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 7: FINAL CTA -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="lp-section lp-section-dark">
+    <div class="container">
+      <div class="lp-final-cta">
+        <p class="lp-section-title" style="color:var(--white);margin-bottom:12px;">$9. Six Guides. The Complete Transfer Playbook.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.55);max-width:540px;margin:0 auto 32px;line-height:1.8;">You can keep scrolling Reddit threads written by people who didn't transfer. Or you can spend less than a Chipotle bowl and get the full system from people who are currently at T-14 law schools.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:32px;">The transfer window doesn't wait. Neither should you.</p>
+        <a href="#STRIPE_PAYMENT_LINK" class="lp-cta bundle-cta">Get Instant Access &mdash; $9</a>
+        <p class="lp-cta-sub">Instant delivery. No subscription. No upsell at checkout. Just the guides.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SECTION 8: CONSULTING TEASER FOOTER -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="lp-consult-footer">
+    <div class="container" style="max-width:600px;">
+      <p style="font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--white);margin-bottom:12px;">Want Personalized Help?</p>
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:24px;">These guides will give you the framework. If you want someone to review your specific transfer personal statement, build your specific school list, and prep you for your specific interviews &mdash; we offer a limited number of 1-on-1 transfer consulting spots each cycle.</p>
+      <a href="./services.html" style="font-size:14px;font-weight:600;color:var(--gold);text-decoration:none;">Learn more about transfer consulting &rarr;</a>
+    </div>
+  </div>
+
+  <!-- STICKY BOTTOM BAR -->
+  <div class="lp-sticky-bar" id="stickyBar">
+    <div class="lp-sticky-inner">
+      <div class="lp-sticky-text">The Complete Transfer Toolkit &mdash; <span>$9</span></div>
+      <a href="#STRIPE_PAYMENT_LINK" class="lp-cta lp-sticky-btn bundle-cta">Get Instant Access</a>
+    </div>
+  </div>
+
+  <!-- MINIMAL FOOTER -->
+  <footer style="background:#060d17;padding:32px 0;border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <a href="../../index.html" class="logo" style="font-size:18px;">Ivy<span>Ambition</span></a>
+      <p style="font-size:12px;color:rgba(255,255,255,0.35);margin:0;">&copy; 2025 IvyAmbition. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Sticky bar: show after scrolling past the hero ──
+    var sticky = document.getElementById('stickyBar');
+    window.addEventListener('scroll', function() {
+      sticky.classList.toggle('visible', window.scrollY > 600);
+    });
+
+    // ── Bundle CTA: for testing, redirect to thank-you page ──
+    // Replace '#STRIPE_PAYMENT_LINK' with your Stripe Payment Link.
+    // Set the Stripe success_url to: https://yourdomain.com/transfer-thank-you.html
+    var BUNDLE_LINK = '#STRIPE_PAYMENT_LINK';
+    document.querySelectorAll('.bundle-cta').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        if (BUNDLE_LINK === '#STRIPE_PAYMENT_LINK') {
+          e.preventDefault();
+          window.location.href = './thank-you.html';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

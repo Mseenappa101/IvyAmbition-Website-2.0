@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Admissions Tools | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .gate-tool-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .gate-tool-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .gate-tool-name {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .gate-tool-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+    .gate-tool-kicker {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .gate-form-box {
+      text-align: center;
+      background: linear-gradient(145deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.03) 100%);
+      border: 1.5px solid rgba(201,168,76,0.25);
+      border-radius: 20px;
+      padding: 44px 40px;
+    }
+    .gate-email-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 20px auto 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .gate-email-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 14px 18px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .gate-email-input:focus {
+      border-color: var(--gold);
+    }
+    .gate-submit-btn {
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gold), #b8943e);
+      color: #0a1628;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      white-space: nowrap;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+    }
+    .gate-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.4);
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+    .faq-q {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="./">Law School</a></li>
+        <li><a href="./services.html">Services</a></li>
+        <li><a href="./free-tools.html">Free Tools</a></li>
+        <li><a href="../../pages/transfer/">Transfer</a></li>
+        <li><a href="https://calendly.com/ivyambition/strategy-call" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="./">Law School</a>
+      <a href="./services.html">Services</a>
+      <a href="./free-tools.html">Free Tools</a>
+      <a href="../../pages/transfer/">Transfer</a>
+      <a href="https://calendly.com/ivyambition/strategy-call" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="padding:140px 0 80px;background:linear-gradient(160deg,#060d17 0%,#0d1b2a 40%,#1a2f47 100%);text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 65%);pointer-events:none;"></div>
+    <div class="container" style="position:relative;max-width:760px;">
+      <span style="display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,0.12);padding:7px 18px;border-radius:100px;margin-bottom:24px;">Free Access</span>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:20px;">The Same Tools T-14 Admits Use to Plan Their Applications — Yours for Free.</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:640px;margin:0 auto 36px;line-height:1.8;">Admissions Predictor. Scholarship Estimator. LSAT Study Planner. Debt Calculator. 10 tools built by Columbia Law students that do in 30 seconds what most applicants spend weeks guessing about. Just enter your email and they're yours.</p>
+      <p style="font-size:14px;color:rgba(255,255,255,0.45);"><span id="userCount" style="color:var(--gold);font-weight:600;">2,400+</span> applicants have used these tools this cycle</p>
+    </div>
+  </section>
+
+  <!-- EMAIL FORM — TOP -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:48px 0 0;">
+    <div class="container" style="max-width:600px;">
+      <div class="gate-form-box">
+        <p style="font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;">All 10 tools. Free. Just enter your email.</p>
+        <form id="gateFormTop" class="gate-email-form">
+          <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" class="gate-email-input" />
+          <button type="submit" class="gate-submit-btn">Get Free Access →</button>
+        </form>
+        <p id="gateErrorTop" style="font-size:13px;color:#ef5350;margin-top:10px;display:none;"></p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:16px;line-height:1.6;">No spam. No 47-email sequence about our "journey." Just tools and occasionally useful admissions strategy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOL PREVIEW STACK -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:64px 0 80px;">
+    <div class="container" style="max-width:760px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">What You're Getting</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">10 Tools. Built by Columbia Law Students.</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">🎯</span>
+          <div>
+            <div class="gate-tool-name">Admissions Predictor</div>
+            <div class="gate-tool-desc">Plug in your LSAT and GPA. See your real odds at all 120 ABA law schools. Stop wondering — know.</div>
+            <div class="gate-tool-kicker">Consultants charge $200+ for a "chances" evaluation. This does it instantly.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">⚡</span>
+          <div>
+            <div class="gate-tool-name">Splitter Finder</div>
+            <div class="gate-tool-desc">High LSAT, lower GPA? This tool finds the schools that weight your strengths most favorably so you're not wasting applications on schools that will auto-reject you.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">📚</span>
+          <div>
+            <div class="gate-tool-name">LSAT Study Plan Generator</div>
+            <div class="gate-tool-desc">Enter your current score and target school. Get a personalized 8, 12, or 16-week study plan. Not a generic schedule — one built around your numbers.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">🔄</span>
+          <div>
+            <div class="gate-tool-name">LSAT Retake Decision Tool</div>
+            <div class="gate-tool-desc">Should you retake? Get a data-driven answer with probability impact analysis instead of asking strangers on Reddit who scored 12 points lower than you.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">💰</span>
+          <div>
+            <div class="gate-tool-name">Scholarship Estimator</div>
+            <div class="gate-tool-desc">Your LSAT and GPA vs. school medians — translated into actual scholarship tier estimates with dollar ranges. Know what you're likely to get before you apply.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">💼</span>
+          <div>
+            <div class="gate-tool-name">BigLaw vs. Public Interest Calculator</div>
+            <div class="gate-tool-desc">10-year financial comparison with LRAP and loan forgiveness factored in. See the real numbers, not the vibes.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">📊</span>
+          <div>
+            <div class="gate-tool-name">Debt Calculator</div>
+            <div class="gate-tool-desc">Total debt, monthly payments, income needed, and LRAP eligibility — school by school. The math most applicants refuse to do until it's too late.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card">
+          <span class="gate-tool-icon">⚖️</span>
+          <div>
+            <div class="gate-tool-name">Practice Area Guide</div>
+            <div class="gate-tool-desc">Guides for 10 legal specialties plus a quiz that matches your personality to a practice area. Figure out where you're headed before you pick a school optimized for somewhere else.</div>
+          </div>
+        </div>
+
+        <div class="gate-tool-card" style="border-color:rgba(201,168,76,0.2);background:rgba(201,168,76,0.04);">
+          <span class="gate-tool-icon">📋</span>
+          <div>
+            <div class="gate-tool-name" style="color:var(--gold);">+ 2 More Tools</div>
+            <div class="gate-tool-desc">Because we keep building them.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:#060d17;padding:80px 0;">
+    <div class="container" style="max-width:640px;">
+      <div class="faq-item">
+        <div class="faq-q">"Why do I need to enter my email?"</div>
+        <div class="faq-a">Two reasons. First, I send occasional updates when I add new tools or when there's a timing-critical admissions deadline you should know about. Second, I built these tools while being a full-time Columbia Law student and working at a litigation boutique — your email is how I know people are actually using them, which is what motivates me to keep building more. That's it. No catch.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:600px;text-align:center;">
+      <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);margin-bottom:20px;">Stop guessing. Start with data.</h2>
+
+      <div class="gate-form-box">
+        <p style="font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;">All 10 tools. Free. Just enter your email.</p>
+        <form id="gateFormBottom" class="gate-email-form">
+          <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" class="gate-email-input" />
+          <button type="submit" class="gate-submit-btn">Get Free Access →</button>
+        </form>
+        <p id="gateErrorBottom" style="font-size:13px;color:#ef5350;margin-top:10px;display:none;"></p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:16px;line-height:1.6;">No spam. No 47-email sequence about our "journey." Just tools and occasionally useful admissions strategy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="./services.html">All Services</a></li>
+            <li><a href="./counseling.html">End-to-End Counseling</a></li>
+            <li><a href="./toolkit.html">$9 Toolkit</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="./">Law School</a></li>
+            <li><a href="../../pages/transfer/">Law School Transfer</a></li>
+            <li><a href="./free-tools.html">Free Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="https://calendly.com/ivyambition/strategy-call" target="_blank">Book a Call</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EMAIL GATE SCRIPT -->
+  <script>
+  (function() {
+    var STORAGE_KEY = 'ivyambition_tools_email';
+    var formTop = document.getElementById('gateFormTop');
+    var formBottom = document.getElementById('gateFormBottom');
+    var errorTop = document.getElementById('gateErrorTop');
+    var errorBottom = document.getElementById('gateErrorBottom');
+
+    // If already submitted, redirect straight to tools
+    if (localStorage.getItem(STORAGE_KEY)) {
+      window.location.href = './#tools';
+      return;
+    }
+
+    // ════════════════════════════════════════════
+    // EMAIL SUBMISSION HANDLER
+    // ════════════════════════════════════════════
+    // SWAP THIS FUNCTION when connecting to your email provider.
+    //
+    // Mailchimp:
+    //   async function submitEmail(email) {
+    //     await fetch('https://YOUR_LIST.us1.list-manage.com/subscribe/post-json?u=XXXX&id=XXXX&EMAIL=' + encodeURIComponent(email), { mode: 'no-cors' });
+    //   }
+    //
+    // ConvertKit:
+    //   async function submitEmail(email) {
+    //     await fetch('https://api.convertkit.com/v3/forms/YOUR_FORM_ID/subscribe', {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ api_key: 'YOUR_API_KEY', email: email })
+    //     });
+    //   }
+    //
+    async function submitEmail(email) {
+      console.log('[IvyAmbition] Tools email captured:', email);
+      return new Promise(function(resolve) { setTimeout(resolve, 400); });
+    }
+
+    function handleSubmit(form, errorEl) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var emailInput = form.querySelector('input[type="email"]');
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var email = emailInput.value.trim();
+        if (!email) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Unlocking...';
+        errorEl.style.display = 'none';
+
+        try {
+          await submitEmail(email);
+          localStorage.setItem(STORAGE_KEY, email);
+          window.location.href = './#tools';
+        } catch (err) {
+          errorEl.textContent = 'Something went wrong. Please try again.';
+          errorEl.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get Free Access →';
+        }
+      });
+    }
+
+    handleSubmit(formTop, errorTop);
+    handleSubmit(formBottom, errorBottom);
+  })();
+  </script>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

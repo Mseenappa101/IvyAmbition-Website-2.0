@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transfer Student Employment Outcomes | IvyAmbition</title>
+  <meta name="description" content="BigLaw placement, clerkship rates, and OCI access for transfer students at top law schools." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <style>
+    .insights-box { background:linear-gradient(135deg,#0d1b2a 0%,#1a2e47 100%);border-radius:14px;padding:1.5rem 2rem;margin-bottom:2rem;color:#fff; }
+    .insights-box h3 { font-family:'Playfair Display',serif;color:#c9a84c;margin:0 0 1rem; }
+    .insights-list { list-style:none;padding:0;margin:0; }
+    .insights-list li { padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.88rem;line-height:1.6; }
+    .insights-list li:last-child { border-bottom:none; }
+    .insights-list li::before { content:'→ ';color:#c9a84c;font-weight:700; }
+    .emp-table-wrap { overflow-x:auto;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1.5rem; }
+    .emp-table { width:100%;border-collapse:collapse;font-size:.85rem; }
+    .emp-table th { background:#f8fafc;color:#64748b;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;padding:.75rem 1rem;border-bottom:2px solid #e2e8f0;text-align:left;cursor:pointer;white-space:nowrap; }
+    .emp-table th:hover { background:#f1f5f9; }
+    .emp-table td { padding:.7rem 1rem;border-bottom:1px solid #f1f5f9;color:#334155;vertical-align:middle; }
+    .emp-table tr:last-child td { border-bottom:none; }
+    .emp-table tr:hover td { background:#f8fafc; }
+    .rank-badge { display:inline-block;background:#0d1b2a;color:#c9a84c;font-size:.7rem;font-weight:700;padding:.1rem .45rem;border-radius:4px;margin-right:.4rem; }
+    .rate-chip { display:inline-block;padding:.2rem .55rem;border-radius:6px;font-weight:700;font-size:.82rem; }
+    .rate-high { background:#f0fdf4;color:#166534; }
+    .rate-mid { background:#fef9c3;color:#92400e; }
+    .rate-low { background:#fef2f2;color:#991b1b; }
+    .oci-full { background:#eff6ff;color:#1d4ed8;font-size:.78rem;font-weight:700;padding:.15rem .5rem;border-radius:6px; }
+    .oci-partial { background:#fef3c7;color:#92400e;font-size:.78rem;font-weight:700;padding:.15rem .5rem;border-radius:6px; }
+    .oci-limited { background:#fef2f2;color:#991b1b;font-size:.78rem;font-weight:700;padding:.15rem .5rem;border-radius:6px; }
+    .explainer-box { background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.25rem 1.5rem;margin:1.5rem 0; }
+    .explainer-box h3 { font-family:'Playfair Display',serif;color:#1e40af;margin:0 0 .75rem; }
+    .explainer-box p { font-size:.88rem;color:#1e3a8a;line-height:1.7;margin:.5rem 0; }
+    .tips-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0; }
+    @media(max-width:640px){ .tips-grid { grid-template-columns:1fr; } }
+    .tip-card { background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.25rem; }
+    .tip-card h4 { font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 .5rem;font-size:.95rem; }
+    .tip-card p { font-size:.84rem;color:#64748b;line-height:1.6;margin:0; }
+    .emp-filters { display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem; }
+    .emp-pill { padding:.35rem .75rem;border:1px solid #e2e8f0;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;background:#fff;color:#334155;transition:background .15s; }
+    .emp-pill.active { background:#0d1b2a;color:#fff;border-color:#0d1b2a; }
+    .data-notes { background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;font-size:.8rem;color:#64748b;line-height:1.6;margin-top:1.5rem; }
+    .results-count { font-size:.82rem;color:#64748b;margin-bottom:.75rem; }
+    .section-h2 { font-family:'Playfair Display',serif;font-size:1.2rem;color:#0d1b2a;font-weight:700;margin:2rem 0 .75rem; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+      <li><a href="../../pages/law-school/">Law School</a></li>
+      <li><a href="../../pages/transfer/">Transfer</a></li>
+      <li><a href="../../pages/transfer/#tools">Free Tools</a></li>
+      <li><a href="../../pages/transfer/#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../../pages/undergraduate/">Undergrad</a><a href="../../pages/law-school/">Law School</a><a href="../../pages/transfer/">Transfer</a><a href="../../pages/transfer/#tools">Free Tools</a><a href="../../pages/transfer/#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<section class="tool-hero">
+  <div class="container tool-hero-content">
+    <div class="tool-breadcrumb"><a href="../../pages/transfer/">Transfer</a> &rsaquo; <a href="../../pages/transfer/tools.html">Free Tools</a> &rsaquo; Employment Outcomes</div>
+    <p class="tool-eyebrow">Free Tool &middot; Career Data</p>
+    <h1>Transfer Student Employment Outcomes</h1>
+    <p class="tool-hero-sub">BigLaw placement, clerkship rates, and OCI access for transfer students at top law schools — see what your career looks like after transferring.</p>
+  </div>
+</section>
+
+<div class="tool-body">
+  <div class="container">
+
+    <!-- Key Insights -->
+    <div class="insights-box">
+      <h3>Key Findings on Transfer Employment</h3>
+      <ul class="insights-list">
+        <li>Transfer students at T14 schools achieve BigLaw placement rates comparable to matriculated students — the destination school's brand drives outcomes, not your transfer status.</li>
+        <li>OCI (On-Campus Interviewing) access is the #1 employment advantage for transfers — it provides structured, high-volume access to BigLaw recruiters that is nearly impossible to replicate through cold outreach.</li>
+        <li>Top transfers from T25–T50 schools to T14 typically improve BigLaw access from under 5% to 30–50%, a dramatic career improvement achievable with strong 1L grades.</li>
+        <li>Schools vary significantly on whether transfer students receive full OCI access — some limit transfers to spring OCI only. Research each school's policy before applying.</li>
+      </ul>
+    </div>
+
+    <!-- Table Section -->
+    <h2 class="section-h2">Employment Outcomes by School</h2>
+
+    <div class="emp-filters">
+      <span style="font-size:.8rem;font-weight:600;color:#64748b;">Filter:</span>
+      <button class="emp-pill active" data-filter="all">All Schools</button>
+      <button class="emp-pill" data-filter="t14">T14 Only</button>
+      <button class="emp-pill" data-filter="oci">Full OCI Access</button>
+    </div>
+    <div class="results-count" id="empCount"></div>
+
+    <div class="emp-table-wrap">
+      <table class="emp-table">
+        <thead>
+          <tr>
+            <th data-col="usnwrRank">School</th>
+            <th data-col="biglawRate">BigLaw Rate</th>
+            <th data-col="clerkshipRate">Clerkship</th>
+            <th data-col="piRate">PI / Gov</th>
+            <th data-col="ociAccessForTransfers">OCI Access (Transfers)</th>
+            <th>Typical Sending School BigLaw</th>
+          </tr>
+        </thead>
+        <tbody id="empTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- OCI Explainer -->
+    <h2 class="section-h2">Understanding OCI for Transfer Students</h2>
+    <div class="explainer-box">
+      <h3>What Is OCI and Why Does It Matter?</h3>
+      <p><strong>On-Campus Interviewing (OCI)</strong> is the structured recruiting process where law firms interview and hire summer associates directly at law schools. It takes place in late summer/fall of 2L year (fall OCI) and spring semester (spring OCI).</p>
+      <p><strong>Why it matters for transfers:</strong> BigLaw firms hire the vast majority of their future associates through the 2L summer associate program. OCI is the primary gateway to those offers. Without OCI access, transfers must compete through significantly harder direct-application channels, which have much lower success rates.</p>
+      <p><strong>Full vs. Limited OCI:</strong> Some schools give transfer students full and equal access to both fall and spring OCI — this is the gold standard. Others allow transfers only in spring OCI (missing the largest cycle). A few schools have informal policies that disadvantage transfers in firm selection. <strong>Always confirm OCI policy directly with career services before committing to a transfer school.</strong></p>
+      <p><strong>Schools known for strong transfer OCI:</strong> Georgetown, Penn, Northwestern, and Cornell consistently give transfer students full OCI access. Yale, Harvard, and Columbia have smaller but highly prestigious OCI programs where transfer students participate equally.</p>
+    </div>
+
+    <!-- Career Tips -->
+    <h2 class="section-h2">Career Strategy for Transfer Students</h2>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h4>Apply for OCI in Both Semesters</h4>
+        <p>Even if your school's fall OCI has already occurred when you arrive, reach out to career services immediately. Many firms conduct rolling interviews outside formal OCI windows. Prioritize spring OCI for your primary recruiting push — and apply to every firm that interests you.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Leverage Your 1L School Network</h4>
+        <p>Your sending school's alumni network and professor connections remain valuable. Former 1L professors can write strong recommendations for clerkships and firm applications. Classmates who stayed may have connections to firms recruiting at your original school. Layer both networks.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Prioritize the 2L Summer Associate Offer</h4>
+        <p>The 2L summer associate offer is the most reliable path into BigLaw. Transfers who secure a summer associate position convert to full-time associates at over 90% rates at most firms. Every other credential (journal, moot court, grades) matters primarily insofar as it helps you land that summer offer.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Consider Regional Market Advantages</h4>
+        <p>Transfers to regionally strong T14 schools — Georgetown (D.C.), Texas (Texas markets), Vanderbilt (Southeast) — often have outsized local market access. If you have strong ties to a specific region, a school that dominates local recruiting may outperform a higher-ranked school focused purely on New York markets.</p>
+      </div>
+    </div>
+
+    <div class="data-notes">
+      <strong>Data Notes:</strong> BigLaw, clerkship, and PI rates reflect school-wide employment outcomes from ABA 509 disclosures and law school employment reports. Transfer-specific disaggregated data is not uniformly reported; figures represent school-wide rates that transfers can expect to achieve with full OCI access. Sending school BigLaw estimates are illustrative ranges based on T25–T50 school averages. OCI access classifications are based on publicly available information — verify directly with career services. Data current as of most recent available reporting cycle. IvyAmbition makes no guarantee of employment outcomes.
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="./transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="./transfer-stats.html">Transfer Stats</a></li>
+        <li><a href="./transfer-policies.html">Transfer Policies</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>1L Resources</h5><ul>
+        <li><a href="./course-outlines.html">Course Outlines</a></li>
+        <li><a href="./attack-sheets.html">Attack Sheets</a></li>
+        <li><a href="./gpa-calculator.html">GPA Calculator</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition.</p></div></div>
+</footer>
+
+<script src="../../data/transfer-data.js"></script>
+<script>
+let activeFilter = 'all', sortCol = 'usnwrRank', sortAsc = true;
+
+function getBlClass(bl){ return bl>=40?'rate-high':bl>=20?'rate-mid':'rate-low'; }
+function getOciClass(oci){
+  if(!oci) return 'oci-limited';
+  const v = oci.toLowerCase();
+  return v==='full'?'oci-full':v==='partial'?'oci-partial':'oci-limited';
+}
+
+function renderTable(){
+  let schools = [...(TRANSFER_SCHOOLS||[])];
+  if(activeFilter==='t14') schools = schools.filter(s=>s.usnwrRank<=14);
+  if(activeFilter==='oci') schools = schools.filter(s=>(s.ociAccessForTransfers||'').toLowerCase()==='full');
+  schools.sort((a,b)=>{
+    let va=a[sortCol], vb=b[sortCol];
+    if(typeof va==='string') return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
+    return sortAsc?((va||999)-(vb||999)):((vb||999)-(va||999));
+  });
+  document.getElementById('empCount').textContent = schools.length+' school'+(schools.length===1?'':'s');
+  document.getElementById('empTableBody').innerHTML = schools.map(s=>{
+    const bl = s.biglawRate||0;
+    const oci = s.ociAccessForTransfers||'Unknown';
+    return `<tr>
+      <td><span class="rank-badge">#${s.usnwrRank}</span>${s.name}</td>
+      <td><span class="rate-chip ${getBlClass(bl)}">${bl}%</span></td>
+      <td>${s.clerkshipRate||'—'}%</td>
+      <td>${s.piRate||'—'}%</td>
+      <td><span class="${getOciClass(oci)}">${oci}</span></td>
+      <td style="color:#94a3b8;font-size:.8rem;">&lt; 5% (T25–T50 est.)</td>
+    </tr>`;
+  }).join('');
+}
+
+document.querySelectorAll('.emp-pill').forEach(p=>{
+  p.onclick=()=>{ document.querySelectorAll('.emp-pill').forEach(x=>x.classList.remove('active')); p.classList.add('active'); activeFilter=p.dataset.filter; renderTable(); };
+});
+document.querySelectorAll('.emp-table th[data-col]').forEach(th=>{
+  th.onclick=()=>{ const c=th.dataset.col; if(sortCol===c) sortAsc=!sortAsc; else{sortCol=c;sortAsc=c==='name';} renderTable(); };
+});
+
+renderTable();
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>

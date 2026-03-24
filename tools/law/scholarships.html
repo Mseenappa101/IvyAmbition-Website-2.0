@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scholarship Database | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="tool-page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+        <li><a href="../../pages/law-school/free-tools.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="../../pages/undergraduate/">Undergrad</a>
+      <a href="../../pages/law-school/free-tools.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="../../pages/law-school/free-tools.html" class="tool-breadcrumb">← Back to Free Tools</a>
+      <span class="tool-eyebrow">Free Tool · Scholarship Database</span>
+      <h1>Find Scholarships Built for You</h1>
+      <p>Search 60+ national scholarships by demographics, major, state, and award amount. Filter to find what you actually qualify for.</p>
+    </div>
+  </section>
+
+  <!-- TOOL BODY -->
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout">
+
+        <!-- FILTER SIDEBAR -->
+        <aside class="filter-sidebar" id="filterSidebar">
+          <div class="filter-sidebar-header">
+            <span class="filter-sidebar-title">Filters</span>
+            <button class="filter-clear-all" id="clearAllBtn">Clear All</button>
+          </div>
+
+          <!-- Search -->
+          <div class="filter-group">
+            <div class="filter-group-head">Keyword Search</div>
+            <input type="text" class="filter-search-input" id="kwSearch" placeholder="Search scholarship name..." />
+          </div>
+
+          <!-- Demographic -->
+          <div class="filter-group">
+            <div class="filter-group-head">Demographic Eligibility</div>
+            <select id="demoFilter" class="filter-select">
+              <option value="">All Students</option>
+            </select>
+          </div>
+
+          <!-- Major -->
+          <div class="filter-group">
+            <div class="filter-group-head">Field of Study</div>
+            <select id="majorFilter" class="filter-select">
+              <option value="">All Majors</option>
+            </select>
+          </div>
+
+          <!-- State -->
+          <div class="filter-group">
+            <div class="filter-group-head">State Residency</div>
+            <select id="stateFilter" class="filter-select">
+              <option value="">All States</option>
+              <option value="CA">California</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="IL">Illinois</option>
+              <option value="NY">New York</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+            </select>
+          </div>
+
+          <!-- Amount Range -->
+          <div class="filter-group">
+            <div class="filter-group-head">Min Award Amount</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>$0</span><span id="amountVal">$0</span>
+              </div>
+              <input type="range" id="amountRange" min="0" max="30000" value="0" step="500" />
+              <div class="filter-range-note">Awards of at least <strong id="amountNote">$0</strong></div>
+            </div>
+          </div>
+
+          <!-- Renewable -->
+          <div class="filter-group">
+            <div class="filter-group-head">Renewable</div>
+            <div class="filter-pills" id="renewableFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="yes">Renewable</button>
+              <button class="filter-pill" data-val="no">One-Time</button>
+            </div>
+          </div>
+
+          <!-- Need vs Merit -->
+          <div class="filter-group">
+            <div class="filter-group-head">Award Type</div>
+            <div class="filter-pills" id="typeFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="need">Need-Based</button>
+              <button class="filter-pill" data-val="merit">Merit-Based</button>
+            </div>
+          </div>
+
+          <!-- GPA -->
+          <div class="filter-group">
+            <div class="filter-group-head">My GPA</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>1.0</span><span id="gpaVal">4.0</span>
+              </div>
+              <input type="range" id="gpaRange" min="1.0" max="4.0" value="4.0" step="0.1" />
+              <div class="filter-range-note">Show scholarships where min GPA ≤ <strong id="gpaNoteEl">4.0</strong></div>
+            </div>
+          </div>
+
+          <!-- Sort -->
+          <div class="filter-group">
+            <div class="filter-group-head">Sort By</div>
+            <select id="sortSelect" class="filter-select">
+              <option value="amount-desc">Amount (High→Low)</option>
+              <option value="amount-asc">Amount (Low→High)</option>
+              <option value="deadline-asc">Deadline (Soonest First)</option>
+              <option value="name-asc">Name (A→Z)</option>
+            </select>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <div class="tool-results">
+          <div class="tool-results-header">
+            <span id="resultsCount" class="results-count">Loading scholarships...</span>
+            <button class="filter-toggle-btn" id="filterToggleBtn">&#9776; Filters</button>
+          </div>
+          <div class="scholarship-list" id="scholarshipList"></div>
+          <div class="no-results" id="noResults" style="display:none;">
+            <p>No scholarships match your current filters. Try broadening your search.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite undergraduate admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Free Tools</h5>
+          <ul>
+            <li><a href="./college-search.html">College Search</a></li>
+            <li><a href="./scholarships.html">Scholarships</a></li>
+            <li><a href="./sat-act-tool.html">SAT/ACT Tool</a></li>
+            <li><a href="./roi-calculator.html">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../../pages/undergraduate/">Undergraduate</a></li>
+            <li><a href="../../pages/law-school/">Law School</a></li>
+            <li><a href="../../pages/transfer/">Law School Transfer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script src="../../data/scholarship-data.js"></script>
+  <script>
+  (function(){
+    const state = {
+      kw: '',
+      demo: '',
+      major: '',
+      state: '',
+      amount: 0,
+      renewable: 'all',
+      type: 'all',
+      gpa: 4.0,
+      sort: 'amount-desc'
+    };
+
+    // Populate dropdowns
+    const demoSel = document.getElementById('demoFilter');
+    ALL_DEMOGRAPHICS.forEach(d => {
+      if (d === 'All Students') return;
+      const o = document.createElement('option');
+      o.value = d; o.textContent = d;
+      demoSel.appendChild(o);
+    });
+    const majorSel = document.getElementById('majorFilter');
+    SCHOLARSHIP_MAJORS.forEach(m => {
+      if (m === 'All Majors') return;
+      const o = document.createElement('option');
+      o.value = m; o.textContent = m;
+      majorSel.appendChild(o);
+    });
+
+    // Range sliders
+    function initRange(id, valId, noteId, stateKey, fmt) {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => {
+        const v = +el.value;
+        state[stateKey] = v;
+        if (valId) document.getElementById(valId).textContent = fmt(v);
+        if (noteId) document.getElementById(noteId).textContent = fmt(v);
+        applyFilters();
+      });
+    }
+    initRange('amountRange','amountVal','amountNote','amount', v => '$' + v.toLocaleString());
+    initRange('gpaRange','gpaVal','gpaNoteEl','gpa', v => (+v).toFixed(1));
+
+    // Pill filters
+    function initPills(cid, key) {
+      document.getElementById(cid).addEventListener('click', e => {
+        if (!e.target.classList.contains('filter-pill')) return;
+        e.target.closest('.filter-pills').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        e.target.classList.add('active');
+        state[key] = e.target.dataset.val;
+        applyFilters();
+      });
+    }
+    initPills('renewableFilter','renewable');
+    initPills('typeFilter','type');
+
+    document.getElementById('kwSearch').addEventListener('input', e => { state.kw = e.target.value.toLowerCase(); applyFilters(); });
+    demoSel.addEventListener('change', e => { state.demo = e.target.value; applyFilters(); });
+    majorSel.addEventListener('change', e => { state.major = e.target.value; applyFilters(); });
+    document.getElementById('stateFilter').addEventListener('change', e => { state.state = e.target.value; applyFilters(); });
+    document.getElementById('sortSelect').addEventListener('change', e => { state.sort = e.target.value; applyFilters(); });
+    document.getElementById('clearAllBtn').addEventListener('click', () => location.reload());
+    document.getElementById('filterToggleBtn').addEventListener('click', () => {
+      document.getElementById('filterSidebar').classList.toggle('open');
+    });
+
+    function applyFilters() {
+      let list = SCHOLARSHIPS.filter(s => {
+        if (state.kw && !s.name.toLowerCase().includes(state.kw) && !s.provider.toLowerCase().includes(state.kw)) return false;
+        if (state.demo && !s.demographics.includes(state.demo) && !s.demographics.includes('All Students')) return false;
+        if (state.major && !s.majors.includes(state.major) && !s.majors.includes('All Majors') && !s.majors.includes('STEM')) return false;
+        if (state.state && !s.states.includes(state.state) && !s.states.includes('All States')) return false;
+        if (state.amount > 0 && s.amountNum < state.amount) return false;
+        if (state.renewable === 'yes' && !s.renewable) return false;
+        if (state.renewable === 'no' && s.renewable) return false;
+        if (state.type === 'need' && !s.needBased) return false;
+        if (state.type === 'merit' && !s.meritBased) return false;
+        if (s.gpaMin > 0 && state.gpa < s.gpaMin) return false;
+        return true;
+      });
+
+      list.sort((a, b) => {
+        switch(state.sort) {
+          case 'amount-desc': return b.amountNum - a.amountNum;
+          case 'amount-asc':  return a.amountNum - b.amountNum;
+          case 'name-asc':    return a.name.localeCompare(b.name);
+          default: return 0;
+        }
+      });
+
+      renderResults(list);
+    }
+
+    function renderResults(list) {
+      const container = document.getElementById('scholarshipList');
+      const noRes = document.getElementById('noResults');
+      document.getElementById('resultsCount').textContent = `${list.length} scholarship${list.length !== 1 ? 's' : ''} found`;
+      if (list.length === 0) { container.innerHTML = ''; noRes.style.display = 'block'; return; }
+      noRes.style.display = 'none';
+
+      container.innerHTML = list.map(s => {
+        const demoBadges = s.demographics.map(d => `<span class="sc-tag">${d}</span>`).join('');
+        const majorBadges = s.majors.slice(0,4).map(m => `<span class="sc-tag">${m}</span>`).join('');
+        const stateBadges = s.states.includes('All States') ? '<span class="sc-tag">All States</span>' : s.states.map(st => `<span class="sc-tag">${st}</span>`).join('');
+        return `
+        <div class="scholarship-card">
+          <div class="sc-top">
+            <div>
+              <div class="sc-name">${s.name}</div>
+              <div class="sc-provider">${s.provider}</div>
+            </div>
+            <div class="sc-amount">${s.amount}</div>
+          </div>
+          <div class="sc-tags">
+            ${s.needBased ? '<span class="sc-tag" style="background:#fff8e6;color:#b7830a;border-color:#e8c97a">Need-Based</span>' : ''}
+            ${s.meritBased ? '<span class="sc-tag" style="background:#e8f0ff;color:#1a2f80;border-color:#b0c4f4">Merit-Based</span>' : ''}
+            ${s.renewable ? '<span class="sc-tag" style="background:#eaf7f0;color:#1e8449;border-color:#90d5ad">Renewable</span>' : '<span class="sc-tag">One-Time</span>'}
+          </div>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:12px;">${s.description}</p>
+          <div class="sc-tags" style="margin-bottom:8px;"><strong style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-right:6px;">Who:</strong>${demoBadges}</div>
+          <div class="sc-tags" style="margin-bottom:8px;"><strong style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-right:6px;">Majors:</strong>${majorBadges}</div>
+          <div class="sc-tags" style="margin-bottom:12px;"><strong style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-right:6px;">State:</strong>${stateBadges}</div>
+          <div class="sc-meta">
+            ${s.gpaMin > 0 ? `<div class="sc-meta-item">Min GPA: <strong>${s.gpaMin}</strong></div>` : ''}
+            <div class="sc-meta-item">Deadline: <strong>${s.deadline}</strong></div>
+            <div class="sc-meta-item">Citizenship: <strong>${s.citizenship}</strong></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    applyFilters();
+  })();
+  </script>
+</body>
+</html>

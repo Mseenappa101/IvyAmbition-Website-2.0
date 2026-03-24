@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Law School Admissions Tools | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Gate page overrides ── */
+    .gate-hero {
+      padding: 140px 0 80px;
+      background: linear-gradient(160deg, #060d17 0%, #0d1b2a 40%, #1a2f47 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .gate-hero::before {
+      content: '';
+      position: absolute;
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .gate-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+      padding: 7px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .gate-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gate-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    /* Email form */
+    .gate-form {
+      display: flex;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .gate-form input[type="email"] {
+      flex: 1;
+      min-width: 240px;
+      padding: 16px 20px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .gate-form input[type="email"]::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+    .gate-form input[type="email"]:focus {
+      border-color: var(--gold);
+    }
+    .gate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--gold), #b8943e);
+      color: #0a1628;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+      font-family: var(--font-sans);
+      white-space: nowrap;
+    }
+    .gate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.4);
+    }
+    .gate-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .gate-form-note {
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* Section base */
+    .gate-section { padding: 80px 0; }
+    .gate-section-dark { background: linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%); }
+    .gate-section-black { background: #060d17; }
+    .gate-section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    /* Tool preview cards */
+    .gate-tool-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .gate-tool-card:hover {
+      border-color: rgba(201,168,76,0.3);
+    }
+    .gate-tool-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .gate-tool-info {
+      flex: 1;
+    }
+    .gate-tool-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .gate-tool-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .gate-tool-kicker {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+      font-style: italic;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* "More tools" card */
+    .gate-tool-card-more {
+      background: rgba(201,168,76,0.06);
+      border: 1px dashed rgba(201,168,76,0.3);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    /* Social proof */
+    .gate-social-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 10px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .gate-social-proof-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4caf50;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .gate-social-proof-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    /* FAQ */
+    .gate-faq { max-width: 680px; margin: 0 auto; }
+    .gate-faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 28px 0; }
+    .gate-faq-item:last-child { border-bottom: none; }
+    .gate-faq-q { font-family: var(--font-serif); font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+    .gate-faq-a { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* Final CTA box */
+    .gate-final-cta {
+      text-align: center;
+      background: linear-gradient(145deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.03) 100%);
+      border: 1.5px solid rgba(201,168,76,0.25);
+      border-radius: 20px;
+      padding: 56px 40px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Form error state */
+    .gate-form-error {
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+      color: #ef5350;
+      margin-top: 8px;
+      display: none;
+    }
+    .gate-form-error.visible { display: block; }
+
+    @media (max-width: 768px) {
+      .gate-hero { padding: 110px 0 60px; }
+      .gate-form { flex-direction: column; align-items: stretch; }
+      .gate-form input[type="email"] { min-width: auto; }
+      .gate-btn { width: 100%; justify-content: center; }
+      .gate-tool-card { flex-direction: column; gap: 12px; }
+      .gate-final-cta { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="./">Law School</a></li>
+        <li><a href="../../pages/transfer/">Transfer</a></li>
+        <li><a href="./free-tools-gate.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="./">Law School</a>
+      <a href="../../pages/transfer/">Transfer</a>
+      <a href="./free-tools-gate.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- HERO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="gate-hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="gate-badge">Free Access</div>
+      <h1 class="gate-h1">The Same Tools T-14 Admits Use to Plan Their Applications — Yours for Free.</h1>
+      <p class="gate-sub">Admissions Predictor. Scholarship Estimator. LSAT Study Planner. Debt Calculator. 10 tools built by Columbia Law students that do in 30 seconds what most applicants spend weeks guessing about. Just enter your email and they're yours.</p>
+
+      <!-- Social proof — update the number as you collect data -->
+      <div class="gate-social-proof">
+        <div class="gate-social-proof-dot"></div>
+        <span class="gate-social-proof-text"><span id="userCount">2,400+</span> applicants have used these tools this cycle</span>
+      </div>
+
+      <form class="gate-form" id="gateFormHero">
+        <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
+        <button type="submit" class="gate-btn">Get Free Access <span>→</span></button>
+        <p class="gate-form-note">No spam. No 47-email sequence about our "journey." Just tools and occasionally useful admissions strategy. Unsubscribe anytime.</p>
+        <p class="gate-form-error" id="heroFormError"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- TOOL PREVIEW STACK -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="gate-section gate-section-black" id="tools-preview">
+    <div class="container" style="max-width:760px;">
+      <p class="gate-section-title" style="color:var(--white);text-align:center;margin-bottom:48px;">What You're Getting</p>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+
+        <!-- Tool 1 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">🎯</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">Admissions Predictor</div>
+            <div class="gate-tool-desc">Plug in your LSAT and GPA. See your real odds at all 120 ABA law schools. Stop wondering — know.</div>
+            <div class="gate-tool-kicker">Consultants charge $200+ for a "chances" evaluation. This does it instantly.</div>
+          </div>
+        </div>
+
+        <!-- Tool 2 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">⚡</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">Splitter Finder</div>
+            <div class="gate-tool-desc">High LSAT, lower GPA? This tool finds the schools that weight your strengths most favorably so you're not wasting applications on schools that will auto-reject you.</div>
+          </div>
+        </div>
+
+        <!-- Tool 3 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">📚</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">LSAT Study Plan Generator</div>
+            <div class="gate-tool-desc">Enter your current score and target school. Get a personalized 8, 12, or 16-week study plan. Not a generic schedule — one built around your numbers.</div>
+          </div>
+        </div>
+
+        <!-- Tool 4 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">🔄</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">LSAT Retake Decision Tool</div>
+            <div class="gate-tool-desc">Should you retake? Get a data-driven answer with probability impact analysis instead of asking strangers on Reddit who scored 12 points lower than you.</div>
+          </div>
+        </div>
+
+        <!-- Tool 5 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">💰</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">Scholarship Estimator</div>
+            <div class="gate-tool-desc">Your LSAT and GPA vs. school medians — translated into actual scholarship tier estimates with dollar ranges. Know what you're likely to get before you apply.</div>
+          </div>
+        </div>
+
+        <!-- Tool 6 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">💼</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">BigLaw vs. Public Interest Calculator</div>
+            <div class="gate-tool-desc">10-year financial comparison with LRAP and loan forgiveness factored in. See the real numbers, not the vibes.</div>
+          </div>
+        </div>
+
+        <!-- Tool 7 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">📊</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">Debt Calculator</div>
+            <div class="gate-tool-desc">Total debt, monthly payments, income needed, and LRAP eligibility — school by school. The math most applicants refuse to do until it's too late.</div>
+          </div>
+        </div>
+
+        <!-- Tool 8 -->
+        <div class="gate-tool-card">
+          <div class="gate-tool-icon">⚖️</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title">Practice Area Guide</div>
+            <div class="gate-tool-desc">Guides for 10 legal specialties plus a quiz that matches your personality to a practice area. Figure out where you're headed before you pick a school optimized for somewhere else.</div>
+          </div>
+        </div>
+
+        <!-- +2 More -->
+        <div class="gate-tool-card-more">
+          <div class="gate-tool-icon">📋</div>
+          <div class="gate-tool-info">
+            <div class="gate-tool-title" style="color:var(--gold);">+ 2 More Tools</div>
+            <div class="gate-tool-desc">Because we keep building them.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- EMAIL CTA #1 -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="gate-section gate-section-dark">
+    <div class="container" style="max-width:640px;text-align:center;">
+      <p class="gate-section-title" style="color:var(--white);margin-bottom:12px;">All 10 tools. Exposed. Free.</p>
+      <p style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:36px;line-height:1.8;">Just enter your email.</p>
+
+      <form class="gate-form" id="gateFormMid">
+        <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
+        <button type="submit" class="gate-btn">Get Free Access <span>→</span></button>
+        <p class="gate-form-note">No spam. No 47-email sequence about our "journey." Just tools and occasionally useful admissions strategy. Unsubscribe anytime.</p>
+        <p class="gate-form-error" id="midFormError"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- FAQ — WHY GATE IT? -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="gate-section gate-section-black">
+    <div class="container">
+      <p class="gate-section-title" style="color:var(--white);text-align:center;margin-bottom:8px;">Got Questions?</p>
+
+      <div class="gate-faq">
+        <div class="gate-faq-item">
+          <div class="gate-faq-q">"Why do I need to enter my email?"</div>
+          <div class="gate-faq-a">Two reasons. First, I send occasional updates when I add new tools or when there's a timing-critical admissions deadline you should know about. Second, I built these tools while being a full-time Columbia Law student and working at a litigation boutique — your email is how I know people are actually using them, which is what motivates me to keep building more. That's it. No catch.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- FINAL CTA -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="gate-section gate-section-dark">
+    <div class="container">
+      <div class="gate-final-cta">
+        <p class="gate-section-title" style="color:var(--white);margin-bottom:12px;">Stop guessing. Start with data.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.55);max-width:540px;margin:0 auto 32px;line-height:1.8;">10 free tools built by Columbia Law students. Enter your email and get instant access.</p>
+
+        <form class="gate-form" id="gateFormFinal">
+          <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
+          <button type="submit" class="gate-btn">Get Free Access <span>→</span></button>
+          <p class="gate-form-error" id="finalFormError"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Free Tools</h5>
+          <ul>
+            <li><a href="./free-tools-gate.html">Admissions Predictor</a></li>
+            <li><a href="./free-tools-gate.html">Splitter Finder</a></li>
+            <li><a href="./free-tools-gate.html">LSAT Study Plan</a></li>
+            <li><a href="./free-tools-gate.html">Retake Decision</a></li>
+            <li><a href="./free-tools-gate.html">Debt Calculator</a></li>
+            <li><a href="./free-tools-gate.html">BigLaw vs. PI</a></li>
+            <li><a href="./free-tools-gate.html">Scholarship Estimator</a></li>
+            <li><a href="./free-tools-gate.html">Practice Areas</a></li>
+            <li><a href="./free-tools-gate.html">Legal Markets</a></li>
+            <li><a href="./free-tools-gate.html">Negotiation Database</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="./">Law School</a></li>
+            <li><a href="../../pages/transfer/">Law School Transfer</a></li>
+            <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Elite Consulting</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile menu ──
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
+    });
+
+    // ════════════════════════════════════════════
+    // EMAIL SUBMISSION HANDLER
+    // ════════════════════════════════════════════
+    // SWAP THIS FUNCTION when connecting to your email provider.
+    //
+    // Mailchimp example:
+    //   async function submitEmailToProvider(email) {
+    //     await fetch('https://YOUR_LIST.us1.list-manage.com/subscribe/post-json?u=XXXX&id=XXXX&EMAIL=' + encodeURIComponent(email), { mode: 'no-cors' });
+    //     return true;
+    //   }
+    //
+    // ConvertKit example:
+    //   async function submitEmailToProvider(email) {
+    //     await fetch('https://api.convertkit.com/v3/forms/YOUR_FORM_ID/subscribe', {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ api_key: 'YOUR_API_KEY', email: email })
+    //     });
+    //     return true;
+    //   }
+    //
+    async function submitEmailToProvider(email) {
+      // ── PLACEHOLDER: logs to console, always succeeds ──
+      console.log('[IvyAmbition] Email captured:', email);
+      // Simulate a brief network delay
+      return new Promise(function(resolve) { setTimeout(resolve, 400); });
+    }
+
+    // ── Wire up all gate forms ──
+    var gateForms = document.querySelectorAll('#gateFormHero, #gateFormMid, #gateFormFinal');
+    gateForms.forEach(function(form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var emailInput = form.querySelector('input[type="email"]');
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var errorEl = form.querySelector('.gate-form-error');
+        var email = emailInput.value.trim();
+
+        if (!email) return;
+
+        // Disable while submitting
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        errorEl.classList.remove('visible');
+
+        try {
+          await submitEmailToProvider(email);
+          // Success — redirect to the tools page
+          window.location.href = './#tools';
+        } catch (err) {
+          errorEl.textContent = 'Something went wrong. Please try again.';
+          errorEl.classList.add('visible');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Get Free Access <span>→</span>';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law School Transfer Policies Database | IvyAmbition</title>
+  <meta name="description" content="School-by-school transfer application requirements: dean's certification, LORs, essays, deadlines, and more for top law schools." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .policies-filters { display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem; }
+    .filter-search { flex:1;min-width:180px;max-width:280px;padding:.5rem .75rem;border:1px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit; }
+    .filter-select { padding:.5rem .75rem;border:1px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#fff;cursor:pointer; }
+    .tier-pills { display:flex;gap:.4rem;flex-wrap:wrap; }
+    .tier-pill { padding:.35rem .75rem;border:1px solid #e2e8f0;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;background:#fff;color:#334155;transition:background .15s; }
+    .tier-pill.active { background:#0d1b2a;color:#fff;border-color:#0d1b2a; }
+    .results-count { font-size:.82rem;color:#64748b;margin-bottom:.75rem; }
+    .policies-table-wrap { overflow-x:auto;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1.5rem; }
+    .policies-table { width:100%;border-collapse:collapse;font-size:.84rem; }
+    .policies-table th { background:#f8fafc;color:#64748b;font-size:.73rem;text-transform:uppercase;letter-spacing:.04em;padding:.75rem .85rem;border-bottom:2px solid #e2e8f0;text-align:left;white-space:nowrap;cursor:pointer; }
+    .policies-table th:hover { background:#f1f5f9; }
+    .policies-table td { padding:.65rem .85rem;border-bottom:1px solid #f1f5f9;color:#334155;vertical-align:middle; }
+    .policies-table tr:last-child td { border-bottom:none; }
+    .policies-table tr:hover td { background:#f8fafc; }
+    .rank-badge { display:inline-block;background:#0d1b2a;color:#c9a84c;font-size:.68rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;margin-right:.4rem; }
+    .chip-yes { background:#dcfce7;color:#166534;font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px; }
+    .chip-no { background:#f1f5f9;color:#64748b;font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px; }
+    .chip-optional { background:#fef9c3;color:#92400e;font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:6px; }
+    .deadline-range { font-size:.8rem;color:#334155; }
+    .deadline-note { font-size:.72rem;color:#94a3b8;display:block; }
+    .policy-notes-row { background:#f8fafc; }
+    .policy-notes-cell { padding:.5rem .85rem .75rem 3.5rem;font-size:.8rem;color:#64748b;line-height:1.6;border-bottom:1px solid #f1f5f9; }
+    .expand-row-btn { background:none;border:none;font-size:.75rem;color:#94a3b8;cursor:pointer;padding:.1rem .25rem; }
+    .expand-row-btn:hover { color:#334155; }
+    .req-dots { display:flex;gap:.3rem;flex-wrap:wrap; }
+    .req-dot { width:.55rem;height:.55rem;border-radius:50%;background:#e2e8f0; }
+    .req-dot.filled { background:#0d1b2a; }
+    .school-name-cell { display:flex;align-items:center;gap:.5rem;min-width:160px; }
+    .school-name-link { color:#0d1b2a;font-weight:600;text-decoration:none; }
+    .school-name-link:hover { color:#c9a84c; }
+    .lor-count { font-weight:700;color:#0d1b2a; }
+    .deadline-chip { display:inline-block;background:#f1f5f9;color:#334155;font-size:.75rem;padding:.2rem .5rem;border-radius:6px; }
+    .legend-row { display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem;font-size:.78rem;color:#64748b; }
+    .legend-item { display:flex;align-items:center;gap:.35rem; }
+    .info-banner { background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:.85rem 1.1rem;font-size:.84rem;color:#1e3a8a;margin-bottom:1.5rem;line-height:1.6; }
+    .info-banner strong { color:#1e40af; }
+    .data-notes { background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;font-size:.8rem;color:#64748b;line-height:1.6;margin-top:1.5rem; }
+    .section-heading { font-family:'Playfair Display',serif;font-size:1.15rem;color:#0d1b2a;font-weight:700;margin:2rem 0 .75rem; }
+    .req-summary-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-bottom:1.75rem; }
+    @media(max-width:768px){ .req-summary-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:480px){ .req-summary-grid { grid-template-columns:1fr 1fr; } }
+    .req-card { background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:.85rem 1rem;text-align:center; }
+    .req-card-val { font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#0d1b2a;margin:0 0 .2rem; }
+    .req-card-label { font-size:.73rem;color:#64748b;margin:0; }
+    .req-card-sub { font-size:.72rem;color:#94a3b8;margin:.15rem 0 0; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+      <li><a href="../../pages/law-school/">Law School</a></li>
+      <li><a href="../../pages/transfer/">Transfer</a></li>
+      <li><a href="../../pages/transfer/#tools">Free Tools</a></li>
+      <li><a href="../../pages/transfer/#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../../pages/undergraduate/">Undergrad</a><a href="../../pages/law-school/">Law School</a><a href="../../pages/transfer/">Transfer</a><a href="../../pages/transfer/#tools">Free Tools</a><a href="../../pages/transfer/#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<section class="tool-hero">
+  <div class="container tool-hero-content">
+    <div class="tool-breadcrumb"><a href="../../pages/transfer/">Transfer</a> &rsaquo; <a href="../../pages/transfer/tools.html">Free Tools</a> &rsaquo; Transfer Policies</div>
+    <p class="tool-eyebrow">Free Tool &middot; Application Requirements</p>
+    <h1>Law School Transfer Policies Database</h1>
+    <p class="tool-hero-sub">School-by-school breakdown of every transfer application requirement — dean's certifications, letters of recommendation, personal statements, deadlines, and more.</p>
+  </div>
+</section>
+
+<div class="tool-body">
+  <div class="container">
+
+    <div class="info-banner">
+      <strong>How to use this database:</strong> Use the table to compare requirements across target schools before you begin your application. Pay attention to deadline ranges — transfer applications typically open in March and close between June and August. Always verify requirements directly with each school's admissions office, as policies change annually.
+    </div>
+
+    <!-- Summary Requirement Cards -->
+    <h2 class="section-heading">At-a-Glance Requirements</h2>
+    <div class="req-summary-grid" id="summaryGrid"></div>
+
+    <!-- Filters -->
+    <div class="policies-filters">
+      <div class="tier-pills">
+        <button class="tier-pill active" data-tier="all">All Schools</button>
+        <button class="tier-pill" data-tier="t14">T14</button>
+        <button class="tier-pill" data-tier="t25">T25</button>
+        <button class="tier-pill" data-tier="t50">T50</button>
+      </div>
+      <input type="text" class="filter-search" id="searchInput" placeholder="Search school name…" />
+      <select class="filter-select" id="sortSelect">
+        <option value="usnwrRank">Sort: USNWR Rank</option>
+        <option value="name">Sort: School Name</option>
+        <option value="typicalDeadlineStart">Sort: Deadline (Early)</option>
+      </select>
+    </div>
+
+    <div class="legend-row">
+      <span class="legend-item"><span class="chip-yes">Yes</span> = Required</span>
+      <span class="legend-item"><span class="chip-optional">Optional</span> = Recommended but not required</span>
+      <span class="legend-item"><span class="chip-no">No</span> = Not required</span>
+    </div>
+
+    <div class="results-count" id="resultsCount"></div>
+
+    <!-- Policies Table -->
+    <div class="policies-table-wrap">
+      <table class="policies-table">
+        <thead>
+          <tr>
+            <th data-sort="name">School</th>
+            <th data-sort="usnwrRank">Rank</th>
+            <th>Dean's Cert</th>
+            <th data-sort="lorCount">LORs</th>
+            <th>Why Transfer</th>
+            <th>Resume</th>
+            <th>LSAT</th>
+            <th>Original App</th>
+            <th>Deadline Window</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Component Deep-Dives -->
+    <h2 class="section-heading">Application Component Guide</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+      <!-- Dean's Cert -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.25rem;">
+        <h4 style="font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 .6rem;">📋 Dean's Certification</h4>
+        <p style="font-size:.84rem;color:#64748b;line-height:1.7;margin:0 0 .5rem;">A letter from your current law school's dean or registrar certifying your enrollment, academic standing, and good standing. Required by virtually all T14 schools.</p>
+        <p style="font-size:.84rem;color:#334155;line-height:1.7;margin:0;"><strong>Tip:</strong> Request this 4–6 weeks before your deadline. Some schools charge a fee. Use our <a href="./deans-certification.html" style="color:#c9a84c;">Dean's Certification Template</a> to write the request letter.</p>
+      </div>
+      <!-- LOR -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.25rem;">
+        <h4 style="font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 .6rem;">✉️ Letters of Recommendation</h4>
+        <p style="font-size:.84rem;color:#64748b;line-height:1.7;margin:0 0 .5rem;">Most schools require 2–3 LORs from law school professors. At least one should be from a 1L professor who can speak to your legal analytical ability. LORs from undergrad professors are typically not sufficient alone.</p>
+        <p style="font-size:.84rem;color:#334155;line-height:1.7;margin:0;"><strong>Tip:</strong> Ask professors immediately after finishing their class while your performance is fresh. Visit office hours to build rapport first.</p>
+      </div>
+      <!-- Personal Statement -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.25rem;">
+        <h4 style="font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 .6rem;">✍️ Why Transfer Essay</h4>
+        <p style="font-size:.84rem;color:#64748b;line-height:1.7;margin:0 0 .5rem;">Required by most schools. Typically 1–2 pages. Schools want to know: why this school specifically, why transfer (not just "it's ranked higher"), and what you'll contribute to their community.</p>
+        <p style="font-size:.84rem;color:#334155;line-height:1.7;margin:0;"><strong>Tip:</strong> Be specific about programs, clinics, faculty, and geographic ties. Generic "top school" essays are red flags. Visit campus or attend a virtual info session if possible.</p>
+      </div>
+      <!-- Deadlines -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.25rem;">
+        <h4 style="font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 .6rem;">📅 Deadlines</h4>
+        <p style="font-size:.84rem;color:#64748b;line-height:1.7;margin:0 0 .5rem;">Transfer applications open as early as March/April and close between late June and mid-August, depending on the school. Most schools will not have your spring grades before the deadline — they're making an offer based on fall grades and predict spring performance.</p>
+        <p style="font-size:.84rem;color:#334155;line-height:1.7;margin:0;"><strong>Tip:</strong> Apply to early-deadline schools (Yale, Harvard, Stanford: June/July) before late ones. Send spring transcript update as soon as it's available.</p>
+      </div>
+    </div>
+
+    <div class="data-notes">
+      <strong>Data Sources & Disclaimer:</strong> Requirements compiled from ABA-required disclosures, school websites, LSAC transfer application portals, and reported applicant experiences (2023–2025 cycle data). Transfer application requirements change annually. Always verify current requirements on each school's official admissions website before submitting. Some schools require applications through LSAC's Law School Admission Council transfer portal; others use proprietary portals.
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="./transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="./transfer-stats.html">Transfer Stats</a></li>
+        <li><a href="./transfer-policies.html">Transfer Policies</a></li>
+        <li><a href="./deans-certification.html">Dean's Cert Template</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>1L Resources</h5><ul>
+        <li><a href="./course-outlines.html">Course Outlines</a></li>
+        <li><a href="./attack-sheets.html">Attack Sheets</a></li>
+        <li><a href="./gpa-calculator.html">GPA Calculator</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition.</p></div></div>
+</footer>
+
+<script src="../../data/transfer-data.js"></script>
+<script>
+let activeTier = 'all', sortCol = 'usnwrRank', sortDir = 1;
+
+function yn(val){ return val ? '<span class="chip-yes">Yes</span>' : '<span class="chip-no">No</span>'; }
+
+function getFiltered(){
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  return TRANSFER_SCHOOLS.filter(s=>{
+    if(activeTier==='t14' && s.usnwrRank>14) return false;
+    if(activeTier==='t25' && s.usnwrRank>25) return false;
+    if(activeTier==='t50' && s.usnwrRank>50) return false;
+    if(q && !s.name.toLowerCase().includes(q)) return false;
+    return true;
+  }).sort((a,b)=>{
+    let va=a[sortCol], vb=b[sortCol];
+    if(typeof va==='string') return sortDir*(va.localeCompare(vb));
+    return sortDir*((va||999)-(vb||999));
+  });
+}
+
+function renderTable(){
+  const rows = getFiltered();
+  document.getElementById('resultsCount').textContent = rows.length+' school'+(rows.length===1?'':'s');
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = rows.map(s=>{
+    const deadline = s.typicalDeadlineStart && s.typicalDeadlineEnd
+      ? `<span class="deadline-chip">${s.typicalDeadlineStart}–${s.typicalDeadlineEnd}</span>`
+      : '<span style="color:#94a3b8;font-size:.78rem">See school site</span>';
+    const notes = s.policyNotes ? `<button class="expand-row-btn" onclick="toggleNotes(this)" title="Show notes">+</button>` : '—';
+    return `<tr>
+      <td><div class="school-name-cell"><span class="rank-badge">#${s.usnwrRank}</span><span class="school-name-link">${s.name}</span></div></td>
+      <td>${s.usnwrRank}</td>
+      <td>${yn(s.requiresDeansCert)}</td>
+      <td><span class="lor-count">${s.lorCount||'2'}</span></td>
+      <td>${yn(s.requiresWhyTransfer)}</td>
+      <td>${yn(s.requiresResume)}</td>
+      <td>${s.requiresLSAT ? '<span class="chip-optional">Optional</span>' : '<span class="chip-no">No</span>'}</td>
+      <td>${yn(s.requiresOriginalApp)}</td>
+      <td>${deadline}</td>
+      <td>${notes}</td>
+    </tr>${s.policyNotes ? `<tr class="policy-notes-row" style="display:none"><td colspan="10" class="policy-notes-cell">📌 ${s.policyNotes}</td></tr>` : ''}`;
+  }).join('');
+}
+
+function toggleNotes(btn){
+  const row = btn.closest('tr');
+  const notesRow = row.nextElementSibling;
+  if(notesRow && notesRow.classList.contains('policy-notes-row')){
+    const isHidden = notesRow.style.display==='none';
+    notesRow.style.display = isHidden ? '' : 'none';
+    btn.textContent = isHidden ? '−' : '+';
+  }
+}
+
+function renderSummary(){
+  const all = TRANSFER_SCHOOLS;
+  const certCount = all.filter(s=>s.requiresDeansCert).length;
+  const essayCount = all.filter(s=>s.requiresWhyTransfer).length;
+  const avgLor = (all.reduce((s,x)=>s+(x.lorCount||2),0)/all.length).toFixed(1);
+  const lsatCount = all.filter(s=>s.requiresLSAT).length;
+  document.getElementById('summaryGrid').innerHTML = `
+    <div class="req-card"><p class="req-card-val">${certCount}/${all.length}</p><p class="req-card-label">Require Dean's Certification</p><p class="req-card-sub">Nearly universal at T14</p></div>
+    <div class="req-card"><p class="req-card-val">${avgLor}</p><p class="req-card-label">Average LORs Required</p><p class="req-card-sub">Range: 1–3 letters</p></div>
+    <div class="req-card"><p class="req-card-val">${essayCount}/${all.length}</p><p class="req-card-label">Require Why Transfer Essay</p><p class="req-card-sub">1–2 pages typically</p></div>
+    <div class="req-card"><p class="req-card-val">${lsatCount}</p><p class="req-card-label">Request LSAT Score</p><p class="req-card-sub">Usually optional/informational</p></div>
+  `;
+}
+
+document.querySelectorAll('.tier-pill').forEach(p=>{
+  p.onclick=()=>{
+    document.querySelectorAll('.tier-pill').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    activeTier=p.dataset.tier;
+    renderTable();
+  };
+});
+
+document.querySelectorAll('[data-sort]').forEach(th=>{
+  th.onclick=()=>{
+    const col=th.dataset.sort;
+    if(sortCol===col) sortDir*=-1; else{sortCol=col;sortDir=1;}
+    renderTable();
+  };
+});
+
+document.getElementById('searchInput').oninput=renderTable;
+document.getElementById('sortSelect').onchange=e=>{sortCol=e.target.value;sortDir=1;renderTable();};
+
+renderSummary();
+renderTable();
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>

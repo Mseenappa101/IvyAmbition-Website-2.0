@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>End-to-End Comprehensive Counseling | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .vs-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px 32px 28px;
+      position: relative;
+    }
+    .vs-card-number {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-family: var(--font-serif);
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.1);
+      line-height: 1;
+    }
+    .vs-card-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .vs-card-body {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .vs-card-kicker {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+      font-style: italic;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .why-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .why-card-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .why-card-body {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .process-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .process-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #b8943e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: #0a1628;
+    }
+    .process-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .process-body {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    .process-line {
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.4), rgba(201,168,76,0.15));
+      z-index: 0;
+    }
+    .wf-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+    .wf-icon {
+      color: var(--gold);
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .wf-not {
+      color: rgba(255,255,255,0.4);
+    }
+    .wf-not .wf-icon {
+      color: rgba(255,255,255,0.3);
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+    .faq-q {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .math-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .math-item:last-child { border-bottom: none; }
+    .math-name { font-size: 15px; color: rgba(255,255,255,0.7); }
+    .math-price { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.5); }
+    @media (max-width: 1024px) {
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+      .process-line { display: none; }
+    }
+    @media (max-width: 768px) {
+      .process-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="./">Law School</a></li>
+        <li><a href="./services.html">Services</a></li>
+        <li><a href="./free-tools.html">Free Tools</a></li>
+        <li><a href="../../pages/transfer/">Transfer</a></li>
+        <li><a href="https://calendly.com/ivyambition/strategy-call" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="./">Law School</a>
+      <a href="./services.html">Services</a>
+      <a href="./free-tools.html">Free Tools</a>
+      <a href="../../pages/transfer/">Transfer</a>
+      <a href="https://calendly.com/ivyambition/strategy-call" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="padding:140px 0 80px;background:linear-gradient(160deg,#060d17 0%,#0d1b2a 40%,#1a2f47 100%);text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.1) 0%,transparent 65%);pointer-events:none;"></div>
+    <div class="container" style="position:relative;max-width:800px;">
+      <span style="display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,0.12);padding:7px 18px;border-radius:100px;margin-bottom:24px;">Limited Spots — Fall 2026 Cycle</span>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:20px;">Get Into Your Top Law School.<br>We'll Be With You Every Step.</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:640px;margin:0 auto 36px;line-height:1.8;">End-to-end admissions counseling from a current Columbia Law student. Every essay. Every decision. Every deadline. From your first strategy session to your last "submit" click — and everything in between.</p>
+      <a href="https://calendly.com/ivyambition/strategy-call" target="_blank" class="btn btn-gold" style="padding:20px 56px;font-size:1.15rem;">Book a Free Strategy Call →</a>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;">15 minutes. No cost. No pressure. We'll figure out if this is right for your situation.</p>
+    </div>
+  </section>
+
+  <!-- PAIN SECTION -->
+  <section style="background:var(--cream);padding:80px 0;">
+    <div class="container" style="max-width:760px;">
+      <div style="text-align:center;margin-bottom:40px;">
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--navy);margin-bottom:16px;">The Admissions Process Is Designed to Overwhelm You</h2>
+      </div>
+      <div style="font-size:1rem;color:var(--text-muted);line-height:1.9;">
+        <p style="margin-bottom:16px;">You have one shot per cycle at each school. One personal statement to capture who you are in 2 pages. One school list that determines your options for the next 3 years and the trajectory of your entire career. One set of supplementals, each with a different prompt and a different word limit and a different unstated expectation.</p>
+        <p style="margin-bottom:16px;">And you're supposed to figure all of this out while working, studying for the LSAT, managing recommendations, hitting deadlines, and pretending you're not stressed.</p>
+        <p style="margin-bottom:16px;">The applicants who get into T-14 schools aren't the ones who figured it out alone. They're the ones who had someone in their corner who had done it before and could tell them exactly what to do, when to do it, and what not to waste time on.</p>
+        <p style="font-weight:600;color:var(--navy);">That's what this is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STACK -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:800px;">
+      <div style="text-align:center;margin-bottom:56px;">
+        <span class="section-label" style="color:var(--gold);">What's Included</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">Here's Everything That's Included</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+
+        <div class="vs-card">
+          <div class="vs-card-title">Application Strategy & Positioning</div>
+          <div class="vs-card-body">We start with a full diagnostic — your numbers, your background, your goals, your timeline. Then we build the strategic narrative that ties your entire application together. Every piece you submit will tell the same story, and it'll be the right one.</div>
+          <div class="vs-card-kicker">Strategy sessions alone cost $250. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">School List Development</div>
+          <div class="vs-card-body">We build your list together — not from US News rankings, but from data. Your LSAT/GPA positioning at each school, scholarship probability, career placement strength for your goals, and geographic fit. You'll apply to schools where you're competitive and where the ROI makes sense.</div>
+          <div class="vs-card-kicker">School list sessions cost $125. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Personal Statement Development</div>
+          <div class="vs-card-body">We don't start with a template. We start with your story. Through multiple working sessions, we'll find the angle that makes your essay memorable, then refine it draft by draft until an admissions officer pauses on it.</div>
+          <div class="vs-card-kicker">Personal statement development costs $400. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Diversity Statement Guidance</div>
+          <div class="vs-card-body">Should you write one? What topic? What tone? We'll figure it out together and make sure it strengthens your application rather than raising questions.</div>
+          <div class="vs-card-kicker">Diversity statement review costs $150. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">"Why X School" Essays — Every Single One</div>
+          <div class="vs-card-body">Every supplemental essay for every school on your list. Not generic templates with the school name swapped in — tailored essays that show genuine knowledge of each program and a clear reason for applying.</div>
+          <div class="vs-card-kicker">Individual "Why X" reviews cost $150 each. All of yours are included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Resume & Application Positioning</div>
+          <div class="vs-card-body">Law school resumes aren't regular resumes. We'll reframe your experience, leadership, and extracurriculars in the language admissions committees actually respond to.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Full Application Review</div>
+          <div class="vs-card-body">Before you submit anything, I review the complete package — every essay, every form, every supplemental. Nothing goes out with a weakness I could have caught.</div>
+          <div class="vs-card-kicker">Full application review costs $600. This is included.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Interview Preparation</div>
+          <div class="vs-card-body">Mock interviews with real-time feedback. We cover the standard questions, the curveballs, and the one answer most applicants bomb because they didn't prepare for it.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Timeline & Deadline Management</div>
+          <div class="vs-card-body">I keep you on track across every school. When to submit, when to send updates, when to follow up on waitlists, when to hold off. No missed deadlines. No panic submissions.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">Unlimited Messaging</div>
+          <div class="vs-card-body">Questions between sessions? Message me directly. You're not waiting a week for your next scheduled call to get an answer on something time-sensitive. I respond within 24 hours.</div>
+        </div>
+
+        <div class="vs-card">
+          <div class="vs-card-title">AI-Powered Application Tools</div>
+          <div class="vs-card-body">Access to our proprietary AI system — admissions predictor, scholarship estimator, school matching, and more. The same tools on our site, plus additional features reserved for full clients.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- THE MATH -->
+  <section style="background:#060d17;padding:80px 0;">
+    <div class="container" style="max-width:720px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">The Math</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">If You Purchased These Services Individually</h2>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px 36px;margin-bottom:32px;">
+        <div class="math-item">
+          <span class="math-name">Application Strategy Session</span>
+          <span class="math-price">$250</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">School List Strategy</span>
+          <span class="math-price">$125</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Personal Statement Development</span>
+          <span class="math-price">$400</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Diversity Statement Review</span>
+          <span class="math-price">$150</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">"Why X" Essays (5 schools avg)</span>
+          <span class="math-price">$750</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Full Application Review</span>
+          <span class="math-price">$600</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Interview Prep</span>
+          <span class="math-price">$300+</span>
+        </div>
+        <div class="math-item">
+          <span class="math-name">Resume Positioning</span>
+          <span class="math-price">$200+</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0 0;border-top:2px solid rgba(201,168,76,0.2);margin-top:8px;">
+          <span style="font-size:16px;font-weight:600;color:var(--white);">À la carte total</span>
+          <span style="font-family:var(--font-serif);font-size:22px;font-weight:700;color:rgba(255,255,255,0.5);text-decoration:line-through;">$2,775+</span>
+        </div>
+      </div>
+
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);text-align:center;line-height:1.7;margin-bottom:32px;">And you'd STILL be missing unlimited messaging, timeline management, and AI tools.</p>
+
+      <div style="text-align:center;background:linear-gradient(145deg,rgba(201,168,76,0.1) 0%,rgba(201,168,76,0.03) 100%);border:1.5px solid rgba(201,168,76,0.25);border-radius:20px;padding:48px 40px;">
+        <p style="font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:6px;">End-to-End Comprehensive Counseling</p>
+        <div style="font-family:var(--font-serif);font-size:56px;font-weight:700;color:var(--gold);margin-bottom:8px;">$3,500</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 24px;line-height:1.7;">For context: the big admissions firms charge $8,000–$15,000 for this. You get it from someone who just did this — at a T-6 school — for a fraction of the price.</p>
+        <a href="https://calendly.com/ivyambition/strategy-call" target="_blank" class="btn btn-gold" style="padding:18px 48px;font-size:1.05rem;">Book a Free Strategy Call →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section style="background:var(--cream);padding:80px 0;">
+    <div class="container" style="max-width:800px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label">What Makes Us Different</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--navy);">Why This Is Different From Every Other Consulting Service</h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">We're at Columbia right now.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">Not 10 years ago. We know what's happening in admissions this cycle — the trends, the essay topics that are landing, the schools that shifted their evaluation criteria. Our advice isn't recycled from 2015.</div>
+        </div>
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">You work with us directly.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">No handoff to a junior associate. No call center. Every piece of feedback comes from someone who got into a T-6 school and is currently living the law school experience.</div>
+        </div>
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">We keep our roster small.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">We only take a handful of clients per cycle. That's not a sales tactic — it's a constraint. We're full-time law students. The tradeoff is that every client gets real, focused attention.</div>
+        </div>
+        <div class="why-card" style="background:var(--white);border-color:var(--border);">
+          <div class="why-card-title" style="color:var(--navy);">Our incentives are aligned with yours.</div>
+          <div class="why-card-body" style="color:var(--text-muted);">We don't make more money if your process drags on. We don't upsell you mid-cycle. The fee is the fee, and our reputation depends on your outcomes.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:720px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">Fit Check</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">This Is Built For You If...</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:48px;">
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You're targeting T-14 or T-25 schools where the margin between "admit" and "waitlist" is razor thin</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You're a splitter and need every piece of your application positioned carefully to compensate</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You're a career changer and need your non-traditional background framed as an asset, not a question mark</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You're applying to 5+ schools and the thought of managing all those supplementals on your own makes you want to quit</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You want someone who will tell you the truth — not just agree with every draft you show them</span>
+        </div>
+        <div class="wf-item">
+          <span class="wf-icon">&#10003;</span>
+          <span>You understand that the ROI on getting into the right school with the right scholarship is measured in hundreds of thousands of dollars</span>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-serif);font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:20px;">Probably Not For You If...</h3>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="wf-item wf-not">
+          <span class="wf-icon">&#10007;</span>
+          <span>You want someone to write your essays for you (we won't — and you shouldn't want us to)</span>
+        </div>
+        <div class="wf-item wf-not">
+          <span class="wf-icon">&#10007;</span>
+          <span>You're only applying to 1–2 schools with low selectivity</span>
+        </div>
+        <div class="wf-item wf-not">
+          <span class="wf-icon">&#10007;</span>
+          <span>You're not willing to put in the work between sessions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROCESS -->
+  <section style="background:#060d17;padding:80px 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+    <div class="container" style="max-width:960px;">
+      <div style="text-align:center;margin-bottom:56px;">
+        <span class="section-label" style="color:var(--gold);">How It Works</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">The Process</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-line"></div>
+
+        <div class="process-step">
+          <div class="process-num">1</div>
+          <div class="process-title">Free Strategy Call</div>
+          <div class="process-body">We talk about where you are, where you want to go, and whether working together makes sense. If it's not the right fit, we'll tell you. No pitch, no pressure.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">2</div>
+          <div class="process-title">Full Diagnostic</div>
+          <div class="process-body">We start with a comprehensive assessment — your numbers, your story, your goals, your timeline. We build the complete application strategy together.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">3</div>
+          <div class="process-title">We Execute — Together</div>
+          <div class="process-body">Personal statement drafts, school list refinement, supplemental essays, resume positioning, diversity statement, interview prep. We work through everything on your timeline.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">4</div>
+          <div class="process-title">Review & Submit</div>
+          <div class="process-body">Before anything goes out, we review the full application package for every school. Nothing gets submitted until it's ready.</div>
+        </div>
+
+        <div class="process-step">
+          <div class="process-num">5</div>
+          <div class="process-title">Post-Submission</div>
+          <div class="process-body">Waitlisted? We strategize. Got in everywhere? We help you decide. The relationship doesn't end at "submit."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:linear-gradient(145deg, #0d1b2a 0%, #1a2f47 100%);padding:80px 0;">
+    <div class="container" style="max-width:760px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span class="section-label" style="color:var(--gold);">FAQ</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(1.5rem,3.5vw,2.2rem);color:var(--white);">Common Questions</h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <div class="faq-item">
+          <div class="faq-q">"How many clients do you take per cycle?"</div>
+          <div class="faq-a">A small number. Once we're full, we close enrollment until the next cycle. This isn't scalable on purpose — we'd rather do exceptional work for a few people than average work for many.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"What if I've already started my applications?"</div>
+          <div class="faq-a">Many clients come to us mid-process. We'll audit what you've done, fix what needs fixing, and sharpen everything else. Starting late is better than submitting weak applications on time.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"Can I just buy individual services instead?"</div>
+          <div class="faq-a">Absolutely — we offer everything from $125 single sessions to $600 application reviews. But most serious applicants realize the full package is the better deal when they do the math. <a href="./services.html" style="color:var(--gold);">Check our services page</a> to see all options.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"How is this different from the $1,500 Full Application Package?"</div>
+          <div class="faq-a">The $1,500 package covers the core application components. The $3,500 End-to-End includes everything in the $1,500 plus unlimited messaging, AI tools, every single supplemental essay, post-submission support, and more intensive ongoing guidance. It's the difference between help and a full partnership.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"Do you guarantee admission to a specific school?"</div>
+          <div class="faq-a">No. Anyone who guarantees that is lying. What we guarantee is that your application will be the strongest possible version of itself, your strategy will be sound, and you'll have a current Columbia Law student in your corner for every decision.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">"Is $3,500 worth it?"</div>
+          <div class="faq-a">The average sticker price at a T-14 school is roughly $70,000/year — that's $210,000 for three years. A half-scholarship saves you $105,000. If our work improves your application enough to move from a quarter-scholarship to a half-scholarship at even one school, the return on $3,500 is 30x. The big firms charge $8,000–$15,000 for the same thing. This is the best value in high-end admissions consulting.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#060d17;padding:80px 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;bottom:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+    <div class="container" style="position:relative;max-width:680px;text-align:center;">
+      <h2 style="font-family:var(--font-serif);font-size:clamp(1.6rem,4vw,2.4rem);color:var(--white);margin-bottom:16px;line-height:1.2;">One Cycle. One Shot at Each School.<br>Make It Count.</h2>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.6);max-width:600px;margin:0 auto 32px;line-height:1.8;">The difference between a great application and an average one isn't intelligence — it's strategy, positioning, and having someone who's been exactly where you're trying to go review every word before you submit.</p>
+      <a href="https://calendly.com/ivyambition/strategy-call" target="_blank" class="btn btn-gold" style="padding:20px 56px;font-size:1.15rem;">Book Your Free Strategy Call →</a>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;font-style:italic;">Limited spots available for the current admissions cycle. Once we're full, enrollment closes.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="./services.html">All Services</a></li>
+            <li><a href="./counseling.html">End-to-End Counseling</a></li>
+            <li><a href="./toolkit.html">$9 Toolkit</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="./">Law School</a></li>
+            <li><a href="../../pages/transfer/">Law School Transfer</a></li>
+            <li><a href="./free-tools.html">Free Tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="https://calendly.com/ivyambition/strategy-call" target="_blank">Book a Call</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

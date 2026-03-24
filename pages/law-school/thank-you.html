@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're All Set | IvyAmbition</title>
+  <meta name="description" content="Your strategy session is booked. Here's what to expect." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--navy); }
+
+    /* ── THANK YOU PAGE ── */
+    .sc-thankyou {
+      padding: 80px 24px 32px;
+      background: var(--navy);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sc-thankyou-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .sc-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .sc-thankyou h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      color: var(--white);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+    .sc-thankyou h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .sc-thankyou-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    /* Video section */
+    .sc-thankyou-video-section {
+      padding: 0 24px 60px;
+      background: var(--navy);
+      text-align: center;
+    }
+    .sc-thankyou-video-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .sc-thankyou-video-label {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+    .sc-thankyou-video {
+      width: 100%;
+      max-width: 800px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 2px solid #B8860B;
+      background: #0a1628;
+    }
+    .sc-thankyou-video-caption {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.4);
+      margin-top: 16px;
+    }
+
+    /* What to expect */
+    .sc-expect {
+      padding: 80px 24px;
+      background: var(--cream);
+    }
+    .sc-expect-inner {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .sc-expect h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 36px;
+      line-height: 1.2;
+    }
+    .sc-expect-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .sc-expect-list li {
+      font-size: 16px;
+      color: var(--text);
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .sc-expect-list li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    /* ── FOOTER ── */
+    .sc-footer {
+      border-top: 1px solid var(--gold);
+      background: #060d17;
+      padding: 40px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 100%;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.8;
+    }
+    .sc-footer a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .sc-footer a:hover {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .sc-footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .sc-thankyou { padding: 72px 20px 60px; }
+      .sc-expect { padding: 48px 20px; }
+      .sc-footer { flex-direction: column; gap: 20px; text-align: center; align-items: center; }
+      .sc-footer-links { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       THANK YOU HERO
+       ═══════════════════════════════════════════ -->
+  <section class="sc-thankyou">
+    <div class="sc-thankyou-inner">
+      <span class="sc-eyebrow">YOU'RE ALL SET</span>
+      <h1>Your Strategy Session Is <em>Booked.</em></h1>
+      <p class="sc-thankyou-sub">Check your email for a calendar invite and confirmation details. We are looking forward to meeting you and your student.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       VIDEO MESSAGE FROM FOUNDERS
+       ═══════════════════════════════════════════ -->
+  <section class="sc-thankyou-video-section">
+    <div class="sc-thankyou-video-inner">
+      <p class="sc-thankyou-video-label">A Message From Michael &amp; Constantine</p>
+
+      <video id="founders-video" class="sc-thankyou-video" playsinline muted autoplay loop controls>
+        <source src="/assets/videos/founders-video.mp4" type="video/mp4">
+      </video>
+
+      <p class="sc-thankyou-video-caption">Michael Seenappa &amp; Constantine Trubitski, Co-Founders of IvyAmbition</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WHAT TO EXPECT
+       ═══════════════════════════════════════════ -->
+  <section class="sc-expect">
+    <div class="sc-expect-inner">
+      <h2>What to Expect on Your Call</h2>
+      <ul class="sc-expect-list">
+        <li><strong>An honest profile assessment</strong> — We evaluate your child's GPA, test scores, extracurriculars, and story and tell you exactly where they stand.</li>
+        <li><strong>A customized college list</strong> — A real list built around your child's numbers, interests, career goals, and scholarship probability.</li>
+        <li><strong>Their personal statement angle</strong> — We identify the one story from your child's background that stops an admissions officer mid-read.</li>
+        <li><strong>Clear next steps</strong> — You will leave the call knowing exactly what to do next, whether you work with us or not.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="sc-footer">
+    <div>
+      <div>&copy; 2025 IvyAmbition. All Rights Reserved.</div>
+      <div>IvyAmbition LLC | New York, NY</div>
+      <div>Contact: coachmike@ivyambition.com</div>
+    </div>
+    <div class="sc-footer-links">
+      <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+      <a href="../../legal/terms-of-service.html">Terms of Service</a>
+      <a href="../../legal/disclaimer.html">Disclaimer</a>
+    </div>
+  </footer>
+
+  <script>
+    var vid = document.getElementById('founders-video');
+    vid.muted = true;
+    vid.play().catch(function() {});
+    document.addEventListener('click', function() {
+      vid.play().catch(function() {});
+    }, { once: true });
+  </script>
+
+</body>
+</html>

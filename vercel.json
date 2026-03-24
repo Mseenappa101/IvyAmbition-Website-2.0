@@ -1,0 +1,17 @@
+{
+  "redirects": [
+    { "source": "/lawschool", "destination": "/pages/law-school/", "permanent": true },
+    { "source": "/lawschool.html", "destination": "/pages/law-school/", "permanent": true },
+    { "source": "/transfer", "destination": "/pages/transfer/", "permanent": true },
+    { "source": "/transfer.html", "destination": "/pages/transfer/", "permanent": true },
+    { "source": "/services.html", "destination": "/pages/law-school/services.html", "permanent": true },
+    { "source": "/transfer-services.html", "destination": "/pages/transfer/services.html", "permanent": true },
+    { "source": "/free-tools.html", "destination": "/pages/law-school/free-tools.html", "permanent": true },
+    { "source": "/transfer-free-tools.html", "destination": "/pages/transfer/free-tools.html", "permanent": true },
+    { "source": "/law-predictor.html", "destination": "/tools/law/law-predictor.html", "permanent": true },
+    { "source": "/transfer-predictor.html", "destination": "/tools/transfer/transfer-predictor.html", "permanent": true },
+    { "source": "/privacy-policy.html", "destination": "/legal/privacy-policy.html", "permanent": true },
+    { "source": "/terms-of-service.html", "destination": "/legal/terms-of-service.html", "permanent": true },
+    { "source": "/disclaimer.html", "destination": "/legal/disclaimer.html", "permanent": true }
+  ]
+}

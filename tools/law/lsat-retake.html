@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LSAT Retake Decision Tool | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .decision-badge { border-radius:16px;padding:32px;text-align:center;margin-bottom:28px; }
+    .decision-badge h2 { font-family:var(--font-serif);font-size:36px;margin:0 0 10px; }
+    .decision-badge p  { font-size:15px;line-height:1.7;max-width:560px;margin:0 auto;opacity:.85; }
+    .db-retake   { background:#1a3a1a;color:#6fcf97; } .db-retake h2{color:#6fcf97;}
+    .db-consider { background:#3a2f0a;color:#f2c94c; } .db-consider h2{color:#f2c94c;}
+    .db-apply    { background:var(--navy,#0d1b2a);color:rgba(255,255,255,.9); } .db-apply h2{color:#c9a84c;}
+    .prob-delta { color:#198754;font-weight:600; }
+    .insight-card { background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px 24px;margin-bottom:16px; }
+    .insight-card h5 { font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px; }
+    .insight-card p  { font-size:13px;line-height:1.7;color:var(--text-muted);margin:0; }
+    .score-bar-wrap { margin-top:16px; }
+    .score-bar-label { font-size:13px;color:var(--text-muted);margin-bottom:6px; }
+    .score-bar-track { background:#e9ecef;border-radius:20px;height:12px;position:relative;overflow:visible; }
+    .score-bar-fill  { height:100%;border-radius:20px;transition:width .5s; }
+    .score-marker    { position:absolute;top:-4px;width:20px;height:20px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  </style>
+</head>
+<body class="tool-page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+        <li><a href="../../pages/law-school/">Law School</a></li>
+        <li><a href="../../pages/law-school/free-tools.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="../../pages/undergraduate/">Undergrad</a>
+      <a href="../../pages/law-school/">Law School</a>
+      <a href="../../pages/law-school/free-tools.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="../../pages/law-school/#tools" class="tool-breadcrumb">← Law School Tools</a>
+      <span class="tool-eyebrow">Free Tool · Law School Admissions</span>
+      <h1>Should You Retake the LSAT?</h1>
+      <p>Enter your score, GPA, target schools, and study time availability. Get a data-driven Retake / Consider / Apply Now recommendation with probability impact analysis.</p>
+    </div>
+  </section>
+
+  <!-- TOOL BODY -->
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="filter-sidebar">
+          <div class="calc-card">
+            <h3 style="font-family:var(--font-serif);font-size:20px;margin-bottom:20px;color:var(--navy);">Your Situation</h3>
+
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="rtLSAT">Current LSAT Score</label>
+                <input type="number" id="rtLSAT" min="120" max="180" placeholder="e.g. 163" />
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="priorTakes">Number of Prior Takes</label>
+                <select id="priorTakes" class="filter-select">
+                  <option value="0">This is my first take</option>
+                  <option value="1">1 prior take</option>
+                  <option value="2">2 prior takes</option>
+                  <option value="3">3 or more prior takes</option>
+                </select>
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="rtGPA">GPA</label>
+                <input type="number" id="rtGPA" min="0" max="4.0" step="0.01" placeholder="e.g. 3.70" />
+              </div>
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bottom:6px;">Target Schools (select up to 3)</label>
+              <select id="sch1" class="filter-select" style="margin-bottom:8px;"><option value="">— Target School 1 —</option></select>
+              <select id="sch2" class="filter-select" style="margin-bottom:8px;"><option value="">— Target School 2 (optional) —</option></select>
+              <select id="sch3" class="filter-select" style="margin-bottom:8px;"><option value="">— Target School 3 (optional) —</option></select>
+            </div>
+
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="rtHours">Study Hours Available / Week</label>
+                <select id="rtHours" class="filter-select">
+                  <option value="7">Less than 10 hours</option>
+                  <option value="12">10–15 hours</option>
+                  <option value="17" selected>15–20 hours</option>
+                  <option value="22">20+ hours</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="calc-submit" id="rtBtn">Analyze My Situation</button>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <div class="results-area">
+          <div id="rtDefault" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;color:var(--text-muted);">
+            <div style="font-size:64px;margin-bottom:16px;opacity:.3;">🔄</div>
+            <h3 style="color:var(--navy);font-family:var(--font-serif);margin-bottom:8px;">Should You Retake?</h3>
+            <p style="max-width:360px;line-height:1.6;">Fill in your information on the left and click <strong>Analyze My Situation</strong> for a personalized recommendation.</p>
+          </div>
+
+          <div id="rtResults" style="display:none;">
+            <!-- Decision badge -->
+            <div class="decision-badge" id="decisionBadge">
+              <h2 id="decisionTitle"></h2>
+              <p id="decisionReason"></p>
+            </div>
+
+            <!-- Probability impact table -->
+            <div style="margin-bottom:28px;">
+              <h3 style="font-family:var(--font-serif);font-size:20px;color:var(--navy);margin-bottom:4px;">Probability Impact Analysis</h3>
+              <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">How your admission probability changes with score improvements at each target school.</p>
+              <div class="matrix-table-wrap">
+                <table class="matrix-table">
+                  <thead><tr><th>School</th><th>Current Prob.</th><th>+4 pts</th><th>+8 pts</th><th>Gain (4pts)</th></tr></thead>
+                  <tbody id="probTable"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Expected improvement -->
+            <div class="results-panel" style="margin-bottom:28px;">
+              <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:16px;">Expected Score Improvement</h4>
+              <p style="color:rgba(255,255,255,.7);font-size:14px;margin-bottom:16px;" id="improvementText"></p>
+              <div class="score-bar-wrap" id="scoreBarWrap"></div>
+            </div>
+
+            <!-- Insight cards -->
+            <div style="margin-bottom:28px;">
+              <h3 style="font-family:var(--font-serif);font-size:20px;color:var(--navy);margin-bottom:16px;">Key Facts</h3>
+              <div class="insight-card">
+                <h5>Schools Take Your Highest Score</h5>
+                <p>Most ABA law schools consider your highest LSAT score — not an average. Multiple takes do not hurt you if you improve. Admissions committees understand that candidates improve with preparation.</p>
+              </div>
+              <div class="insight-card">
+                <h5>Average Retake Improvement</h5>
+                <p>The average LSAT improvement on a retake is <strong>2.8 points</strong>. Students who study 15+ hours per week consistently average 4–6 points of improvement. The key is structured prep with deep wrong-answer review — not just retaking tests.</p>
+              </div>
+              <div class="insight-card" id="takesCard">
+                <h5>Diminishing Returns on 3rd+ Takes</h5>
+                <p>After 3+ takes with minimal improvement, the data suggest your score may have plateaued. At this stage, investing prep time in other application elements — personal statement quality, addenda, demonstrated interest, and scholarship negotiation — often yields better returns than another retake.</p>
+              </div>
+              <div class="insight-card" id="gpaContextCard">
+                <h5 id="gpaCtxTitle">Your GPA in Context</h5>
+                <p id="gpaCtxText"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Law School Tools</h5>
+          <ul>
+            <li><a href="./law-predictor.html">Admissions Predictor</a></li>
+            <li><a href="./splitter-finder.html">Splitter Finder</a></li>
+            <li><a href="./lsat-improvement.html">LSAT Study Plan</a></li>
+            <li><a href="./lsat-retake.html">Retake Decision</a></li>
+            <li><a href="./law-debt.html">Debt Calculator</a></li>
+            <li><a href="./biglaw-pi.html">BigLaw vs. PI</a></li>
+            <li><a href="./law-scholarship-estimator.html">Scholarship Estimator</a></li>
+            <li><a href="./practice-areas.html">Practice Areas</a></li>
+            <li><a href="./legal-markets.html">Legal Markets</a></li>
+            <li><a href="./scholarship-negotiation.html">Negotiation Database</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../../pages/undergraduate/">Undergraduate</a></li>
+            <li><a href="../../pages/law-school/">Law School</a></li>
+            <li><a href="../../pages/transfer/">Law School Transfer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal"><a href="../../legal/privacy-policy.html">Privacy Policy</a><a href="../../legal/terms-of-service.html">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../data/law-data.js"></script>
+  <script src="../../script.js"></script>
+  <script>
+    const sorted = [...LAW_SCHOOLS].sort((a,b) => a.usnwrRank - b.usnwrRank);
+    ['sch1','sch2','sch3'].forEach(id => {
+      const sel = document.getElementById(id);
+      sorted.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.name} (#${s.usnwrRank})`;
+        sel.appendChild(opt);
+      });
+    });
+
+    function calcProb(lsat, gpa, school) {
+      const lsatZ = (lsat - school.lsat50) / 3.5;
+      const gpaZ  = (gpa  - school.gpa50)  / 0.18;
+      const z = lsatZ * 0.60 + gpaZ * 0.40;
+      const rawProb = 1 / (1 + Math.exp(-2.2 * z));
+      const factor = Math.min(school.accept / 50, 1.4);
+      return Math.round(Math.max(1, Math.min(97, rawProb * factor * 100)));
+    }
+
+    function probCell(p) {
+      const c = p >= 65 ? '#198754' : p >= 35 ? '#d68910' : p >= 15 ? '#e67e22' : '#c0392b';
+      return `<span style="font-weight:700;color:${c};">${p}%</span>`;
+    }
+
+    document.getElementById('rtBtn').addEventListener('click', () => {
+      const lsat  = parseInt(document.getElementById('rtLSAT').value);
+      const takes = parseInt(document.getElementById('priorTakes').value);
+      const gpa   = parseFloat(document.getElementById('rtGPA').value);
+      const hrs   = parseInt(document.getElementById('rtHours').value);
+
+      if (!lsat || lsat < 120 || lsat > 180) { alert('Enter a valid LSAT score.'); return; }
+      if (!gpa  || gpa  < 0   || gpa  > 4.0)  { alert('Enter a valid GPA.'); return; }
+
+      const schIds = ['sch1','sch2','sch3'].map(id => parseInt(document.getElementById(id).value)).filter(Boolean);
+      const schools = schIds.map(id => LAW_SCHOOLS.find(s => s.id === id)).filter(Boolean);
+
+      if (!schools.length) { alert('Please select at least one target school.'); return; }
+
+      // Decision logic
+      const pointsToMedians = schools.map(s => Math.max(0, s.lsat50 - lsat));
+      const maxNeeded = Math.max(...pointsToMedians);
+      const aboveAllMedians = schools.every(s => lsat >= s.lsat50);
+
+      let decision;
+      if (takes >= 3) {
+        decision = 'apply';
+      } else if (aboveAllMedians && lsat >= 165) {
+        decision = 'apply';
+      } else if (maxNeeded >= 8 && takes <= 2 && hrs >= 15) {
+        decision = 'retake';
+      } else if (maxNeeded >= 5 && takes <= 1 && hrs >= 12) {
+        decision = 'retake';
+      } else if (maxNeeded >= 3 && takes <= 2 && hrs >= 10) {
+        decision = 'consider';
+      } else if (aboveAllMedians) {
+        decision = 'apply';
+      } else {
+        decision = 'consider';
+      }
+
+      const badge = document.getElementById('decisionBadge');
+      badge.className = 'decision-badge';
+
+      const decisionData = {
+        retake: {
+          cls:'db-retake', title:'Retake the LSAT',
+          reason: `Your current score of ${lsat} falls short of your target schools' medians by up to ${maxNeeded} points. With ${hrs >= 15 ? 'strong' : 'moderate'} study availability and ${takes <= 1 ? 'few' : 'limited'} prior takes, a focused retake is your best path to meaningful probability improvements.`
+        },
+        consider: {
+          cls:'db-consider', title:'Consider Retaking',
+          reason: `Your situation is borderline. A retake could improve your odds — but only if you can commit to 15+ hours of weekly prep. If study time is limited, your energy may be better spent strengthening other application elements.`
+        },
+        apply: {
+          cls:'db-apply', title:'Apply Now',
+          reason: takes >= 3
+            ? `You've taken the LSAT ${takes + 1} times. Additional takes show diminishing returns. Focus your energy on building the strongest possible application with your current score.`
+            : aboveAllMedians
+            ? `Your score of ${lsat} is at or above the median at your target schools. You're in a strong position — apply now and focus on scholarship negotiation and essay quality.`
+            : `Applying now with your current score gives you a real shot at your target schools.`
+        }
+      };
+
+      const dd = decisionData[decision];
+      badge.classList.add(dd.cls);
+      document.getElementById('decisionTitle').textContent = dd.title;
+      document.getElementById('decisionReason').textContent = dd.reason;
+
+      // Probability table
+      let rows = '';
+      schools.forEach(s => {
+        const p0 = calcProb(lsat, gpa, s);
+        const p4 = calcProb(lsat + 4, gpa, s);
+        const p8 = calcProb(lsat + 8, gpa, s);
+        const gain = p4 - p0;
+        rows += `<tr>
+          <td><strong>${s.name}</strong></td>
+          <td>${probCell(p0)}</td>
+          <td>${probCell(p4)}</td>
+          <td>${probCell(p8)}</td>
+          <td>${gain > 0 ? `<span class="prob-delta">+${gain}%</span>` : `<span style="color:#888;">—</span>`}</td>
+        </tr>`;
+      });
+      document.getElementById('probTable').innerHTML = rows;
+
+      // Expected improvement bar
+      const improveMap = {7:[1,2],12:[2,4],17:[3,6],22:[4,8]};
+      const [lo,hi] = improveMap[hrs] || [2,4];
+      document.getElementById('improvementText').textContent =
+        `Based on ${hrs < 10 ? 'under 10' : hrs < 15 ? '10–15' : hrs < 20 ? '15–20' : '20+'} study hours per week, a realistic retake improvement is +${lo} to +${hi} points. Focused prep with structured wrong-answer review can push to the higher end.`;
+
+      const barWrap = document.getElementById('scoreBarWrap');
+      const pct = (v => Math.max(0,Math.min(100,(v-120)/60*100)));
+      barWrap.innerHTML = `
+        <div class="score-bar-label">Score Range: 120 → 180</div>
+        <div class="score-bar-track" style="height:16px;position:relative;margin-bottom:8px;">
+          <div class="score-bar-fill" style="width:${pct(lsat+hi)}%;background:rgba(201,168,76,.3);"></div>
+          <div class="score-marker" style="left:calc(${pct(lsat)}% - 10px);background:#c9a84c;" title="Current: ${lsat}"></div>
+          <div class="score-marker" style="left:calc(${pct(lsat+lo)}% - 10px);background:#6fcf97;" title="Likely: ${lsat+lo}"></div>
+          <div class="score-marker" style="left:calc(${pct(lsat+hi)}% - 10px);background:#2ecc71;" title="Best case: ${lsat+hi}"></div>
+        </div>
+        <div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,.7);">
+          <span>🟡 Current: ${lsat}</span>
+          <span>🟢 Likely: ${lsat+lo}–${lsat+hi}</span>
+          ${schools[0] ? `<span>🎯 Target median: ${schools[0].lsat50}</span>` : ''}
+        </div>
+      `;
+
+      // GPA context
+      const gpaCtxTitle = document.getElementById('gpaCtxTitle');
+      const gpaCtxText  = document.getElementById('gpaCtxText');
+      const aboveGPAMedians = schools.every(s => gpa >= s.gpa50);
+      const belowGPAMedians = schools.every(s => gpa < s.gpa50);
+      gpaCtxTitle.textContent = `Your GPA of ${gpa.toFixed(2)} in Context`;
+      if (aboveGPAMedians) {
+        gpaCtxText.textContent = 'Your GPA is at or above the median at your target schools — a genuine strength. Even a 4-point LSAT improvement could unlock significantly larger scholarship offers, making a retake worth considering even if admission is already likely.';
+      } else if (belowGPAMedians) {
+        gpaCtxText.textContent = 'Your GPA falls below the median at your target schools. A strong LSAT score becomes even more critical. If your GPA dip has an explanation (grade trend, difficult major, medical/personal circumstances), a well-written GPA addendum is essential.';
+      } else {
+        gpaCtxText.textContent = `Your GPA is competitive at some of your target schools but not all. Focus your strongest application at schools where your GPA meets or exceeds the median.`;
+      }
+
+      document.getElementById('rtDefault').style.display = 'none';
+      document.getElementById('rtResults').style.display = 'block';
+      document.getElementById('rtResults').scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  </script>
+</body>
+</html>

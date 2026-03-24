@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law School Debt Calculator | IvyAmbition</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .pay-panels { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px; }
+    .pay-panel  { background:rgba(255,255,255,.07);border-radius:12px;padding:18px; }
+    .pay-panel h5{ color:var(--gold,#c9a84c);font-size:14px;font-weight:700;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:8px; }
+    .pay-row    { display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13px;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.05); }
+    .pay-row:last-child { border:none; }
+    .pay-val    { font-weight:600;color:#fff; }
+    .dti-bar-wrap { margin:12px 0; }
+    .dti-bar    { height:10px;border-radius:5px;transition:width .5s; }
+    .lrap-badge { display:inline-block;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:10px; }
+    .lrap-yes   { background:#198754;color:#fff; }
+    .lrap-no    { background:#e67e22;color:#fff; }
+    @media(max-width:600px){ .pay-panels{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body class="tool-page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../pages/undergraduate/">Undergrad</a></li>
+        <li><a href="../../pages/law-school/">Law School</a></li>
+        <li><a href="../../pages/law-school/free-tools.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../../index.html">Home</a>
+      <a href="../../pages/undergraduate/">Undergrad</a>
+      <a href="../../pages/law-school/">Law School</a>
+      <a href="../../pages/law-school/free-tools.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="../../pages/law-school/#tools" class="tool-breadcrumb">← Law School Tools</a>
+      <span class="tool-eyebrow">Free Tool · Law School Admissions</span>
+      <h1>Law School Debt Calculator</h1>
+      <p>Pick a school and scholarship amount to see your 3-year cost, total debt at graduation, monthly payment options, the income you need, and LRAP eligibility.</p>
+    </div>
+  </section>
+
+  <!-- TOOL BODY -->
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="filter-sidebar">
+          <div class="calc-card">
+            <h3 style="font-family:var(--font-serif);font-size:20px;margin-bottom:20px;color:var(--navy);">Your Details</h3>
+
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="debtSchool">Select Law School</label>
+                <select id="debtSchool" class="filter-select">
+                  <option value="">— Select a school —</option>
+                </select>
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="scholarship">Annual Scholarship Amount ($)</label>
+                <input type="number" id="scholarship" min="0" max="80000" step="500" value="0" placeholder="0" />
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="living">Annual Living Expenses ($)</label>
+                <input type="number" id="living" min="10000" max="60000" step="500" value="25000" />
+                <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">Include rent, food, transportation, personal expenses.</p>
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="careerPath">Career Path / Starting Salary</label>
+                <select id="careerPath" class="filter-select">
+                  <option value="215000">BigLaw associate ($215,000)</option>
+                  <option value="135000">Mid-size firm ($135,000)</option>
+                  <option value="80000">Small firm / solo ($80,000)</option>
+                  <option value="72000">Federal government ($72,000)</option>
+                  <option value="62000">State / local government ($62,000)</option>
+                  <option value="55000">Public interest / nonprofit ($55,000)</option>
+                  <option value="0">Undecided — use school median</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="calc-submit" id="calcDebtBtn">Calculate My Debt</button>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <div class="results-area">
+          <div id="debtDefault" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;color:var(--text-muted);">
+            <div style="font-size:64px;margin-bottom:16px;opacity:.3;">💳</div>
+            <h3 style="color:var(--navy);font-family:var(--font-serif);margin-bottom:8px;">Know Before You Borrow</h3>
+            <p style="max-width:360px;line-height:1.6;">Select a school and enter your details to see a complete financial picture — debt, payments, and LRAP eligibility.</p>
+          </div>
+
+          <div id="debtResults" style="display:none;">
+
+            <!-- Cost summary -->
+            <div class="results-panel" style="margin-bottom:24px;">
+              <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:16px;" id="costTitle">3-Year Cost Breakdown</h4>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;" id="costMetrics"></div>
+              <div class="result-divider"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;" id="debtMetrics"></div>
+            </div>
+
+            <!-- Payment options -->
+            <div class="results-panel" style="margin-bottom:24px;">
+              <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:16px;">Monthly Payment Options</h4>
+              <div class="pay-panels" id="payPanels"></div>
+              <div id="pslfNote" style="display:none;background:rgba(201,168,76,.15);border-left:3px solid var(--gold,#c9a84c);border-radius:6px;padding:12px 16px;margin-top:8px;">
+                <strong style="color:var(--gold,#c9a84c);font-size:13px;">PSLF Eligible</strong>
+                <p style="color:rgba(255,255,255,.8);font-size:13px;margin:4px 0 0;">On this career path, you may qualify for Public Service Loan Forgiveness after 120 qualifying monthly payments (10 years). Remaining balance forgiven TAX-FREE.</p>
+              </div>
+            </div>
+
+            <!-- Income needed -->
+            <div class="results-panel" style="margin-bottom:24px;">
+              <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:16px;">Income Needed</h4>
+              <p style="color:rgba(255,255,255,.7);font-size:14px;margin-bottom:12px;">To keep annual debt payments at or below 10% of gross income:</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;" id="incomeMetrics"></div>
+              <div class="dti-bar-wrap">
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.6);margin-bottom:4px;">
+                  <span>Debt-to-Income Ratio</span><span id="dtiPct"></span>
+                </div>
+                <div style="background:rgba(255,255,255,.1);border-radius:5px;height:10px;">
+                  <div class="dti-bar" id="dtiBar"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.4);margin-top:4px;">
+                  <span>0%</span><span style="color:#6fcf97;">10%</span><span style="color:#f2c94c;">20%</span><span>30%+</span>
+                </div>
+              </div>
+              <div id="dtiInsight" style="margin-top:12px;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:600;"></div>
+            </div>
+
+            <!-- LRAP -->
+            <div class="results-panel" style="margin-bottom:24px;" id="lrapPanel"></div>
+
+            <!-- Bottom insight -->
+            <div class="results-panel" id="bottomInsight"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Law School Tools</h5>
+          <ul>
+            <li><a href="./law-predictor.html">Admissions Predictor</a></li>
+            <li><a href="./splitter-finder.html">Splitter Finder</a></li>
+            <li><a href="./lsat-improvement.html">LSAT Study Plan</a></li>
+            <li><a href="./lsat-retake.html">Retake Decision</a></li>
+            <li><a href="./law-debt.html">Debt Calculator</a></li>
+            <li><a href="./biglaw-pi.html">BigLaw vs. PI</a></li>
+            <li><a href="./law-scholarship-estimator.html">Scholarship Estimator</a></li>
+            <li><a href="./practice-areas.html">Practice Areas</a></li>
+            <li><a href="./legal-markets.html">Legal Markets</a></li>
+            <li><a href="./scholarship-negotiation.html">Negotiation Database</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../../pages/undergraduate/">Undergraduate</a></li>
+            <li><a href="../../pages/law-school/">Law School</a></li>
+            <li><a href="../../pages/transfer/">Law School Transfer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal"><a href="../../legal/privacy-policy.html">Privacy Policy</a><a href="../../legal/terms-of-service.html">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../data/law-data.js"></script>
+  <script src="../../script.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    const sorted = [...LAW_SCHOOLS].sort((a,b) => a.usnwrRank - b.usnwrRank);
+    sorted.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = `${s.name} (#${s.usnwrRank}) — ${fmt(s.tuition)}/yr`;
+      $('debtSchool').appendChild(opt);
+    });
+
+    function pmt(debt, rate, months) {
+      const r = rate / 12;
+      return debt * r / (1 - Math.pow(1 + r, -months));
+    }
+
+    function metric(label, value, sub='') {
+      return `<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px 12px;text-align:center;">
+        <div style="font-size:20px;font-weight:700;color:var(--gold,#c9a84c);">${value}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:4px;">${label}</div>
+        ${sub ? `<div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:2px;">${sub}</div>` : ''}
+      </div>`;
+    }
+
+    $('calcDebtBtn').addEventListener('click', () => {
+      const schoolId  = parseInt($('debtSchool').value);
+      const scholarship = parseFloat($('scholarship').value) || 0;
+      const living    = parseFloat($('living').value) || 25000;
+      const careerVal = parseInt($('careerPath').value);
+
+      if (!schoolId) { alert('Please select a law school.'); return; }
+      const school = LAW_SCHOOLS.find(s => s.id === schoolId);
+      if (!school) return;
+
+      const salary = careerVal === 0 ? school.medPrivate : careerVal;
+      const netAnnual = school.tuition - scholarship;
+      const tuition3  = netAnnual * 3;
+      const living3   = living * 3;
+      const totalCOA  = tuition3 + living3;
+      const debt      = Math.round(totalCOA * 1.21); // 7% avg, 3yr capitalization
+
+      // Payments
+      const stdMonthly  = pmt(debt, 0.075, 120);
+      const stdTotal    = stdMonthly * 120;
+      const stdInterest = stdTotal - debt;
+      const poverty     = 15060;
+      const discret     = Math.max(0, salary - 1.5 * poverty);
+      let ibrMonthly    = discret * 0.10 / 12;
+      ibrMonthly        = Math.min(ibrMonthly, stdMonthly);
+      const isPI        = salary <= 72000;
+      const isFedGov    = salary === 72000;
+
+      // Cost metrics
+      $('costTitle').textContent = `3-Year Cost Breakdown — ${school.name}`;
+      $('costMetrics').innerHTML =
+        metric('Annual Net Tuition', fmt(netAnnual)) +
+        metric('3-Year Tuition Total', fmt(tuition3)) +
+        metric('3-Year Living Expenses', fmt(living3));
+
+      $('debtMetrics').innerHTML =
+        metric('Total Cost of Attendance', fmt(totalCOA), 'Tuition + living') +
+        metric('Estimated Debt at Graduation', fmt(debt), 'With ~7% avg interest');
+
+      // Payment panels
+      $('payPanels').innerHTML = `
+        <div class="pay-panel">
+          <h5>Standard 10-Year Plan</h5>
+          <div class="pay-row"><span>Interest Rate</span><span class="pay-val">7.5% blended avg</span></div>
+          <div class="pay-row"><span>Monthly Payment</span><span class="pay-val">${fmt(stdMonthly)}/mo</span></div>
+          <div class="pay-row"><span>Total Paid (10 yrs)</span><span class="pay-val">${fmt(stdTotal)}</span></div>
+          <div class="pay-row"><span>Total Interest</span><span class="pay-val">${fmt(stdInterest)}</span></div>
+          <div class="pay-row"><span>% of Monthly Salary</span><span class="pay-val">${(stdMonthly / (salary/12) * 100).toFixed(1)}%</span></div>
+        </div>
+        <div class="pay-panel">
+          <h5>IBR / SAVE Plan (Income-Driven)</h5>
+          <div class="pay-row"><span>Discretionary Income</span><span class="pay-val">${fmt(discret)}/yr</span></div>
+          <div class="pay-row"><span>IBR Monthly Payment</span><span class="pay-val">${fmt(ibrMonthly)}/mo</span></div>
+          <div class="pay-row"><span>Plan Duration</span><span class="pay-val">${isPI ? '10 yrs (PSLF)' : '20 years'}</span></div>
+          <div class="pay-row"><span>Forgiveness</span><span class="pay-val">${isPI ? 'Tax-free (PSLF)' : 'Taxable (yr 20)'}</span></div>
+          <div class="pay-row"><span>% of Monthly Salary</span><span class="pay-val">${(ibrMonthly / (salary/12) * 100).toFixed(1)}%</span></div>
+        </div>
+      `;
+
+      $('pslfNote').style.display = isPI ? 'block' : 'none';
+
+      // Income needed
+      const incomeNeeded = stdMonthly * 12 / 0.10;
+      const dtiRatio = (stdMonthly * 12) / salary * 100;
+      $('incomeMetrics').innerHTML =
+        metric('Income Needed', fmt(incomeNeeded), 'For 10% debt rule') +
+        metric('Your Salary', fmt(salary)) +
+        metric('Gap / Surplus', (salary >= incomeNeeded ? '+' : '-') + fmt(Math.abs(salary - incomeNeeded)));
+
+      $('dtiPct').textContent = dtiRatio.toFixed(1) + '%';
+      const barW = Math.min(100, dtiRatio / 30 * 100);
+      const barColor = dtiRatio <= 10 ? '#6fcf97' : dtiRatio <= 20 ? '#f2c94c' : '#eb5757';
+      $('dtiBar').style.width = barW + '%';
+      $('dtiBar').style.background = barColor;
+
+      const dtiLabel = dtiRatio <= 10 ? 'Manageable' : dtiRatio <= 20 ? 'Heavy' : 'Extreme';
+      const dtiBg    = dtiRatio <= 10 ? 'rgba(111,207,151,.2)' : dtiRatio <= 20 ? 'rgba(242,201,76,.2)' : 'rgba(235,87,87,.2)';
+      $('dtiInsight').style.background = dtiBg;
+      $('dtiInsight').style.color = barColor;
+      $('dtiInsight').textContent = `${dtiLabel} — ${dtiRatio.toFixed(1)}% of income goes to debt payments`;
+
+      // LRAP
+      let lrapHTML = '';
+      if (school.lrap) {
+        let lrapBenefit = 0;
+        if (isPI && salary < school.lrapThreshold) {
+          lrapBenefit = Math.min(stdMonthly * 12 * 0.80, 20000);
+        } else if (isPI && salary < school.lrapMaxIncome) {
+          const t = (school.lrapMaxIncome - salary) / (school.lrapMaxIncome - school.lrapThreshold);
+          lrapBenefit = Math.min(stdMonthly * 12 * 0.80, 20000) * t;
+        }
+        lrapHTML = `
+          <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:12px;">LRAP Eligibility</h4>
+          <div><span class="lrap-badge lrap-yes">✓ LRAP Available at ${school.name}</span></div>
+          <p style="color:rgba(255,255,255,.8);font-size:14px;line-height:1.7;margin-bottom:${lrapBenefit > 0 ? '16px' : '0'};">
+            This school's Loan Repayment Assistance Program provides benefits for graduates earning below ${fmt(school.lrapThreshold)}. Benefits phase out at ${fmt(school.lrapMaxIncome)}.
+          </p>
+          ${lrapBenefit > 0 ? `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+            <div style="background:rgba(111,207,151,.15);border-radius:8px;padding:14px;text-align:center;">
+              <div style="font-size:22px;font-weight:700;color:#6fcf97;">${fmt(lrapBenefit)}</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.6);">Est. Annual LRAP Benefit</div>
+            </div>
+            <div style="background:rgba(111,207,151,.15);border-radius:8px;padding:14px;text-align:center;">
+              <div style="font-size:22px;font-weight:700;color:#6fcf97;">${fmt(Math.max(0, stdMonthly - lrapBenefit/12))}/mo</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.6);">Effective Payment After LRAP</div>
+            </div>
+          </div>` : ''}
+        `;
+      } else {
+        lrapHTML = `
+          <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:12px;">LRAP Eligibility</h4>
+          <div><span class="lrap-badge lrap-no">No Robust LRAP Program</span></div>
+          <p style="color:rgba(255,255,255,.8);font-size:14px;line-height:1.7;margin-top:10px;">
+            ${school.name} does not have a substantial LRAP program. If you pursue public interest or government work, rely on the federal Public Service Loan Forgiveness (PSLF) program — forgiveness after 120 qualifying IBR payments (10 years), tax-free.
+          </p>
+        `;
+      }
+      $('lrapPanel').innerHTML = lrapHTML;
+
+      // Bottom insight
+      let insightText, insightColor;
+      if (dtiRatio <= 10) {
+        insightText = `Your debt load of ${fmt(debt)} is manageable on a ${fmt(salary)} starting salary. A debt-to-income ratio of ${dtiRatio.toFixed(1)}% is below the 10% guideline. This is a financially sound choice even on a public interest salary path.`;
+        insightColor = '#6fcf97';
+      } else if (dtiRatio <= 20) {
+        insightText = `Your debt-to-income ratio of ${dtiRatio.toFixed(1)}% is elevated but manageable on a private sector salary. Public interest careers at ${fmt(salary)} would be financially stressful without LRAP or PSLF support.${school.lrap ? ' Fortunately, this school has LRAP.' : ''}`;
+        insightColor = '#f2c94c';
+      } else {
+        insightText = `A ${dtiRatio.toFixed(1)}% debt-to-income ratio is significant. Consider negotiating a larger scholarship — even $10,000 more per year reduces your debt by $30K+. Only BigLaw placement${school.lrap ? ' or LRAP-backed public interest' : ''} makes this picture financially viable.`;
+        insightColor = '#eb5757';
+      }
+      $('bottomInsight').innerHTML = `
+        <h4 style="color:var(--gold,#c9a84c);font-family:var(--font-serif);margin-bottom:12px;">Bottom Line</h4>
+        <p style="color:rgba(255,255,255,.85);font-size:14px;line-height:1.8;border-left:3px solid ${insightColor};padding-left:14px;">${insightText}</p>
+      `;
+
+      $('debtDefault').style.display = 'none';
+      $('debtResults').style.display = 'block';
+      $('debtResults').scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  </script>
+</body>
+</html>

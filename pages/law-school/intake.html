@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tell Us About Your Student | IvyAmbition</title>
+  <meta name="description" content="Help us prepare for your free strategy session by telling us about your student." />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--navy); }
+
+    /* ── INTAKE PAGE ── */
+    .sc-intake {
+      padding: 80px 24px;
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sc-intake-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    /* Progress indicator */
+    .sc-progress {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+    .sc-progress-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .sc-progress-step.completed {
+      color: var(--gold);
+    }
+    .sc-progress-step.active {
+      color: var(--white);
+    }
+    .sc-progress-step .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: transparent;
+    }
+    .sc-progress-step.completed .step-num {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.15);
+      color: var(--gold);
+    }
+    .sc-progress-step.active .step-num {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+    }
+    .sc-progress-divider {
+      width: 32px;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      align-self: center;
+    }
+    .sc-intake h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      color: var(--white);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .sc-intake-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .sc-intake-group {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 20px;
+    }
+    .sc-intake-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .sc-intake-radio-group {
+      display: flex;
+      gap: 16px;
+    }
+    .sc-intake-radio {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .sc-intake-radio input[type="radio"] {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .sc-intake-radio span {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+    .sc-intake-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .sc-intake-select:focus {
+      border-color: var(--gold);
+    }
+    .sc-intake-select option {
+      background: #1a2f47;
+      color: var(--white);
+    }
+    .sc-intake-text {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--white);
+      background: rgba(255,255,255,0.06);
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .sc-intake-text::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    .sc-intake-text:focus {
+      border-color: var(--gold);
+    }
+    .sc-intake-error {
+      font-size: 12px;
+      color: #e74c3c;
+      margin-top: 8px;
+      display: none;
+    }
+    .sc-form-btn {
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .sc-form-btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-1px);
+    }
+    .sc-form-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .sc-intake-submit {
+      width: 100%;
+      margin-top: 12px;
+    }
+    .sc-form-error {
+      font-size: 13px;
+      color: #e74c3c;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    .sc-footer {
+      border-top: 1px solid var(--gold);
+      background: #060d17;
+      padding: 40px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 100%;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.8;
+    }
+    .sc-footer a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+    .sc-footer a:hover {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .sc-footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .sc-intake { padding: 60px 20px; }
+      .sc-intake-radio-group { flex-direction: column; gap: 10px; }
+      .sc-footer { flex-direction: column; gap: 20px; text-align: center; align-items: center; }
+      .sc-footer-links { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="sc-intake">
+    <div class="sc-intake-inner">
+
+      <!-- Progress indicator -->
+      <div class="sc-progress">
+        <div class="sc-progress-step completed">
+          <span class="step-num">&#10003;</span> Email
+        </div>
+        <div class="sc-progress-divider"></div>
+        <div class="sc-progress-step completed">
+          <span class="step-num">&#10003;</span> Booked
+        </div>
+        <div class="sc-progress-divider"></div>
+        <div class="sc-progress-step active">
+          <span class="step-num">3</span> About You
+        </div>
+      </div>
+
+      <h2>One quick step before we meet &mdash;<br>tell us about your student.</h2>
+      <p class="sc-intake-sub">This helps us make your 45 minutes as useful as possible.</p>
+
+      <form id="sc-intake-form" novalidate>
+        <!-- Q0a: Who will we be speaking with? -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label">Who will we be speaking with?</label>
+          <div class="sc-intake-radio-group">
+            <label class="sc-intake-radio">
+              <input type="radio" name="who_speaking_with" value="A Parent" required />
+              <span>A Parent</span>
+            </label>
+            <label class="sc-intake-radio">
+              <input type="radio" name="who_speaking_with" value="The Student" required />
+              <span>The Student</span>
+            </label>
+          </div>
+          <p class="sc-intake-error" data-field="who_speaking_with">Please select an option.</p>
+        </div>
+
+        <!-- Q0b: Parent's Name (shown only if "A Parent" selected) -->
+        <div class="sc-intake-group" id="parent-name-group" style="display:none;">
+          <label class="sc-intake-label" for="intake_parent_name">Parent's Name</label>
+          <input type="text" class="sc-intake-text" id="intake_parent_name" name="parent_name" placeholder="Your full name" />
+          <p class="sc-intake-error" data-field="parent_name">Please enter your name.</p>
+        </div>
+
+        <!-- Q0c: Student's Name (shown only if "A Parent" selected) -->
+        <div class="sc-intake-group" id="student-name-group" style="display:none;">
+          <label class="sc-intake-label" for="intake_student_name">Student's Name</label>
+          <input type="text" class="sc-intake-text" id="intake_student_name" name="student_name" placeholder="Your child's full name" />
+          <p class="sc-intake-error" data-field="student_name">Please enter the student's name.</p>
+        </div>
+
+        <!-- Q0d: Location -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label" for="intake_location">Where are you currently located?</label>
+          <input type="text" class="sc-intake-text" id="intake_location" name="location" placeholder="City, State" required />
+          <p class="sc-intake-error" data-field="location">Please enter your location.</p>
+        </div>
+
+        <!-- Q1: Who are you? -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label">Who are you filling this out for?</label>
+          <div class="sc-intake-radio-group">
+            <label class="sc-intake-radio">
+              <input type="radio" name="intake_who" value="Myself (I am the student)" required />
+              <span>Myself (I am the student)</span>
+            </label>
+            <label class="sc-intake-radio">
+              <input type="radio" name="intake_who" value="My child" required />
+              <span>My child</span>
+            </label>
+          </div>
+          <p class="sc-intake-error" data-field="intake_who">Please select an option.</p>
+        </div>
+
+        <!-- Q2: Grade -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label" for="intake_grade">What grade is the student currently in?</label>
+          <select class="sc-intake-select" id="intake_grade" name="intake_grade" required>
+            <option value="" disabled selected>Select grade...</option>
+            <option value="9th grade">9th grade</option>
+            <option value="10th grade">10th grade</option>
+            <option value="11th grade">11th grade</option>
+            <option value="12th grade">12th grade</option>
+            <option value="Gap year / already graduated">Gap year / already graduated</option>
+          </select>
+          <p class="sc-intake-error" data-field="intake_grade">Please select a grade.</p>
+        </div>
+
+        <!-- Q3: GPA -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label" for="intake_gpa">What is the student's current GPA?</label>
+          <select class="sc-intake-select" id="intake_gpa" name="intake_gpa" required>
+            <option value="" disabled selected>Select GPA range...</option>
+            <option value="3.8 or above">3.8 or above</option>
+            <option value="3.5 – 3.7">3.5 &ndash; 3.7</option>
+            <option value="3.2 – 3.4">3.2 &ndash; 3.4</option>
+            <option value="Below 3.2">Below 3.2</option>
+          </select>
+          <p class="sc-intake-error" data-field="intake_gpa">Please select a GPA range.</p>
+        </div>
+
+        <!-- Q4: Dream schools (optional) -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label" for="intake_schools">What are 1&ndash;3 schools the student is targeting?</label>
+          <input type="text" class="sc-intake-text" id="intake_schools" name="intake_schools" placeholder="e.g. Georgetown, Vanderbilt, USC..." />
+        </div>
+
+        <!-- Q5: Timeline -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label" for="intake_timeline">When are you looking to apply?</label>
+          <select class="sc-intake-select" id="intake_timeline" name="intake_timeline" required>
+            <option value="" disabled selected>Select timeline...</option>
+            <option value="This cycle (next few months)">This cycle (next few months)</option>
+            <option value="Next cycle (12+ months out)">Next cycle (12+ months out)</option>
+            <option value="Just exploring for now">Just exploring for now</option>
+          </select>
+          <p class="sc-intake-error" data-field="intake_timeline">Please select a timeline.</p>
+        </div>
+
+        <!-- Q6: Financial Aid -->
+        <div class="sc-intake-group">
+          <label class="sc-intake-label" for="intake_financial_aid">About how much in financial aid do you plan on applying for?</label>
+          <select class="sc-intake-select" id="intake_financial_aid" name="financial_aid" required>
+            <option value="" disabled selected>Select an option...</option>
+            <option value="No financial aid needed">No financial aid needed</option>
+            <option value="Less than $10,000">Less than $10,000</option>
+            <option value="$10,000 - $25,000">$10,000 &ndash; $25,000</option>
+            <option value="$25,000 - $50,000">$25,000 &ndash; $50,000</option>
+            <option value="More than $50,000">More than $50,000</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+          <p class="sc-intake-error" data-field="financial_aid">Please select an option.</p>
+        </div>
+
+        <button type="submit" class="sc-form-btn sc-intake-submit">Submit &amp; Finish &rarr;</button>
+        <p class="sc-form-error" id="sc-submit-error">Something went wrong. Please try again.</p>
+      </form>
+
+    </div>
+  </section>
+
+  <footer class="sc-footer">
+    <div>
+      <div>&copy; 2025 IvyAmbition. All Rights Reserved.</div>
+      <div>IvyAmbition LLC | New York, NY</div>
+      <div>Contact: coachmike@ivyambition.com</div>
+    </div>
+    <div class="sc-footer-links">
+      <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+      <a href="../../legal/terms-of-service.html">Terms of Service</a>
+      <a href="../../legal/disclaimer.html">Disclaimer</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var intakeForm = document.getElementById('sc-intake-form');
+      var submitBtn = intakeForm.querySelector('.sc-intake-submit');
+      var submitError = document.getElementById('sc-submit-error');
+
+      // Get email from sessionStorage (set during strategy-call.html)
+      var capturedEmail = '';
+      try { capturedEmail = sessionStorage.getItem('ia_email') || ''; } catch (e) {}
+
+      // Show/hide parent & student name fields based on "who speaking with" selection
+      var speakingRadios = intakeForm.querySelectorAll('input[name="who_speaking_with"]');
+      var parentNameGroup = document.getElementById('parent-name-group');
+      var studentNameGroup = document.getElementById('student-name-group');
+
+      speakingRadios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          if (this.value === 'A Parent') {
+            parentNameGroup.style.display = '';
+            studentNameGroup.style.display = '';
+          } else {
+            parentNameGroup.style.display = 'none';
+            studentNameGroup.style.display = 'none';
+          }
+        });
+      });
+
+      intakeForm.addEventListener('submit', async function (e) {
+        console.log('[IvyAmbition] Form submitted');
+        e.preventDefault();
+        submitError.style.display = 'none';
+
+        // Clear previous errors
+        intakeForm.querySelectorAll('.sc-intake-error').forEach(function (el) {
+          el.style.display = 'none';
+        });
+
+        var valid = true;
+
+        // Validate "Who will we be speaking with?" radio
+        var speakingSelected = Array.from(speakingRadios).find(function (r) { return r.checked; });
+        if (!speakingSelected) {
+          intakeForm.querySelector('[data-field="who_speaking_with"]').style.display = 'block';
+          valid = false;
+        }
+
+        // If "A Parent" selected, validate parent and student name
+        if (speakingSelected && speakingSelected.value === 'A Parent') {
+          if (!intakeForm.querySelector('[name="parent_name"]').value.trim()) {
+            intakeForm.querySelector('[data-field="parent_name"]').style.display = 'block';
+            valid = false;
+          }
+          if (!intakeForm.querySelector('[name="student_name"]').value.trim()) {
+            intakeForm.querySelector('[data-field="student_name"]').style.display = 'block';
+            valid = false;
+          }
+        }
+
+        // Validate location
+        if (!intakeForm.querySelector('[name="location"]').value.trim()) {
+          intakeForm.querySelector('[data-field="location"]').style.display = 'block';
+          valid = false;
+        }
+
+        // Validate radio (Q1)
+        var whoRadios = intakeForm.querySelectorAll('input[name="intake_who"]');
+        var whoSelected = Array.from(whoRadios).some(function (r) { return r.checked; });
+        if (!whoSelected) {
+          intakeForm.querySelector('[data-field="intake_who"]').style.display = 'block';
+          valid = false;
+        }
+
+        // Validate selects (Q2, Q3, Q5, Q6)
+        ['intake_grade', 'intake_gpa', 'intake_timeline', 'financial_aid'].forEach(function (name) {
+          var el = intakeForm.querySelector('[name="' + name + '"]');
+          if (!el.value) {
+            intakeForm.querySelector('[data-field="' + name + '"]').style.display = 'block';
+            valid = false;
+          }
+        });
+
+        if (!valid) return;
+
+        // Collect all responses
+        var intakeData = {
+          email: capturedEmail,
+          who_speaking_with: speakingSelected.value,
+          parent_name: intakeForm.querySelector('[name="parent_name"]').value.trim(),
+          student_name: intakeForm.querySelector('[name="student_name"]').value.trim(),
+          location: intakeForm.querySelector('[name="location"]').value.trim(),
+          who: intakeForm.querySelector('input[name="intake_who"]:checked').value,
+          grade: intakeForm.intake_grade.value,
+          gpa: intakeForm.intake_gpa.value,
+          schools: intakeForm.intake_schools.value.trim(),
+          timeline: intakeForm.intake_timeline.value,
+          financial_aid: intakeForm.querySelector('[name="financial_aid"]').value
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        try {
+          console.log('[IvyAmbition] Intake data:', intakeData);
+          var fetchUrl = '/api/intake';
+          console.log('[IvyAmbition] Submitting to:', fetchUrl);
+
+          var response = await fetch(fetchUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(intakeData)
+          });
+
+          var responseBody = await response.text();
+          console.log('[IvyAmbition] Intake API response status:', response.status);
+          console.log('[IvyAmbition] Intake API response body:', responseBody);
+
+          // Redirect to thank you page on any successful response
+          if (response.ok) {
+            console.log('[IvyAmbition] Response OK, redirecting to thank-you.html');
+            window.location.href = './thank-you.html';
+            return;
+          }
+
+          throw new Error('Intake submit failed with status ' + response.status + ' body: ' + responseBody);
+
+        } catch (err) {
+          console.error('[IvyAmbition] Intake submission failed:', err);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit & Finish \u2192';
+          submitError.style.display = 'block';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

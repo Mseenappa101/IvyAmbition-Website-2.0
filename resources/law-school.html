@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law School Free Tools | IvyAmbition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy-dark: #060d17; --gold: #c9a84c; --gold-light: #e2c97e;
+      --white: #ffffff; --cream: #f8f5ef; --text-muted: #6b7280;
+      --font-serif: 'Playfair Display', Georgia, serif; --font-sans: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--navy); }
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,13,23,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 24px;
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: white; text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .nav-back { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: white; }
+    .page-hero { background: linear-gradient(160deg, #060d17 0%, #0d1b2a 100%); padding: 120px 24px 64px; text-align: center; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 16px; }
+    .page-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: white; margin-bottom: 14px; }
+    .page-sub { font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; line-height: 1.8; }
+    .tools-section { padding: 64px 24px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; max-width: 1100px; margin: 0 auto; }
+    .tool-card {
+      background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 16px;
+      padding: 28px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px;
+      transition: box-shadow 0.2s, transform 0.2s; position: relative; overflow: hidden;
+    }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
+    .tool-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon { font-size: 28px; }
+    .tool-title { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--navy); }
+    .tool-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+    .tool-cta { font-size: 13px; font-weight: 600; color: var(--gold); margin-top: 4px; }
+    .cta-banner {
+      background: linear-gradient(145deg, #0d1b2a, #1a2f47); margin: 0 24px 64px;
+      border-radius: 20px; padding: 48px 40px; text-align: center;
+      max-width: 1052px; margin-left: auto; margin-right: auto;
+    }
+    .cta-banner h3 { font-family: var(--font-serif); font-size: 1.8rem; color: white; margin-bottom: 12px; }
+    .cta-banner p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 28px; line-height: 1.8; }
+    .btn-gold { background: var(--gold); color: #060d17; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-gold:hover { background: var(--gold-light); }
+    .footer { background: #030810; padding: 32px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: white; text-decoration: none; }
+    .footer-logo span { color: var(--gold); }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 10px; }
+    @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <a href="./index.html" class="nav-back">← All Tools</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="page-eyebrow">Law School Admissions</span>
+  <h1 class="page-title">Free Tools for Law School Applicants</h1>
+  <p class="page-sub">Predictors, estimators, and strategy tools to give you a real edge in your application cycle — completely free.</p>
+</div>
+
+<section class="tools-section">
+  <div class="tools-grid">
+
+    <a href="./law-predictor.html" class="tool-card">
+      <div class="tool-icon">🎯</div>
+      <div class="tool-title">Law School Admissions Predictor</div>
+      <div class="tool-body">Enter your LSAT and GPA to see your real odds at every T-14 and top 25 law school.</div>
+      <div class="tool-cta">Predict My Odds →</div>
+    </a>
+
+    <a href="./law-scholarship-estimator.html" class="tool-card">
+      <div class="tool-icon">💰</div>
+      <div class="tool-title">Scholarship Estimator</div>
+      <div class="tool-body">See how much merit aid you're likely to receive at each school based on your numbers.</div>
+      <div class="tool-cta">Estimate My Aid →</div>
+    </a>
+
+    <a href="./law-debt.html" class="tool-card">
+      <div class="tool-icon">📉</div>
+      <div class="tool-title">Law School Debt Projector</div>
+      <div class="tool-body">Project your total debt load at graduation and monthly payment by school and scholarship scenario.</div>
+      <div class="tool-cta">Project My Debt →</div>
+    </a>
+
+    <a href="./lsat-improvement.html" class="tool-card">
+      <div class="tool-icon">📈</div>
+      <div class="tool-title">LSAT Improvement Planner</div>
+      <div class="tool-body">See how much a higher LSAT score would change your odds and scholarship outcomes at your target schools.</div>
+      <div class="tool-cta">Model My LSAT →</div>
+    </a>
+
+    <a href="./lsat-retake.html" class="tool-card">
+      <div class="tool-icon">🔄</div>
+      <div class="tool-title">Should I Retake the LSAT?</div>
+      <div class="tool-body">Data-driven analysis of whether retaking makes sense given your score, targets, and timeline.</div>
+      <div class="tool-cta">Analyze My Options →</div>
+    </a>
+
+    <a href="./splitter-finder.html" class="tool-card">
+      <div class="tool-icon">⚡</div>
+      <div class="tool-title">Splitter Strategy Tool</div>
+      <div class="tool-body">High LSAT, lower GPA — or the reverse? Find the schools where your specific profile gives you the best shot.</div>
+      <div class="tool-cta">Find My Schools →</div>
+    </a>
+
+    <a href="./scholarship-negotiation.html" class="tool-card">
+      <div class="tool-icon">🤝</div>
+      <div class="tool-title">Scholarship Negotiation Guide</div>
+      <div class="tool-body">Scripts, timing strategies, and templates to negotiate your merit aid offer after acceptance.</div>
+      <div class="tool-cta">Start Negotiating →</div>
+    </a>
+
+    <a href="./biglaw-pi.html" class="tool-card">
+      <div class="tool-icon">🏢</div>
+      <div class="tool-title">BigLaw vs. Public Interest Calculator</div>
+      <div class="tool-body">Compare long-term earnings, debt payoff timelines, and career outcomes across different legal career paths.</div>
+      <div class="tool-cta">Compare Paths →</div>
+    </a>
+
+    <a href="./legal-markets.html" class="tool-card">
+      <div class="tool-icon">🗺️</div>
+      <div class="tool-title">Legal Market Explorer</div>
+      <div class="tool-body">Research job markets, firm hiring patterns, and placement strength by school and geography.</div>
+      <div class="tool-cta">Explore Markets →</div>
+    </a>
+
+    <a href="./practice-areas.html" class="tool-card">
+      <div class="tool-icon">📚</div>
+      <div class="tool-title">Practice Area Guide</div>
+      <div class="tool-body">Understand the major areas of law, compensation ranges, and which schools place strongest in each area.</div>
+      <div class="tool-cta">Explore Practice Areas →</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h3>Want a Full Application Strategy?</h3>
+  <p>Book a free strategy call with a Columbia Law JD candidate. We'll review your numbers and tell you exactly how we'd approach your cycle.</p>
+  <a href="../tabs/law-school/landing-pages/v1.html" class="btn-gold">Book a Free Strategy Call →</a>
+</div>
+
+<footer class="footer">
+  <a href="../index.html" class="footer-logo">Ivy<span>Ambition</span></a>
+  <p class="footer-note">© 2025 IvyAmbition. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transfer Law School Free Tools | IvyAmbition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy-dark: #060d17; --gold: #c9a84c; --gold-light: #e2c97e;
+      --white: #ffffff; --cream: #f8f5ef; --text-muted: #6b7280;
+      --font-serif: 'Playfair Display', Georgia, serif; --font-sans: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--navy); }
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,13,23,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 24px;
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: white; text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .nav-back { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: white; }
+    .page-hero { background: linear-gradient(160deg, #060d17 0%, #0d1b2a 100%); padding: 120px 24px 64px; text-align: center; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 16px; }
+    .page-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: white; margin-bottom: 14px; }
+    .page-sub { font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; line-height: 1.8; }
+    .tools-section { padding: 64px 24px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; max-width: 1100px; margin: 0 auto; }
+    .tool-card {
+      background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 16px;
+      padding: 28px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px;
+      transition: box-shadow 0.2s, transform 0.2s; position: relative; overflow: hidden;
+    }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
+    .tool-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon { font-size: 28px; }
+    .tool-title { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--navy); }
+    .tool-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+    .tool-cta { font-size: 13px; font-weight: 600; color: var(--gold); margin-top: 4px; }
+    .cta-banner {
+      background: linear-gradient(145deg, #0d1b2a, #1a2f47); margin: 0 24px 64px;
+      border-radius: 20px; padding: 48px 40px; text-align: center;
+      max-width: 1052px; margin-left: auto; margin-right: auto;
+    }
+    .cta-banner h3 { font-family: var(--font-serif); font-size: 1.8rem; color: white; margin-bottom: 12px; }
+    .cta-banner p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 28px; line-height: 1.8; }
+    .btn-gold { background: var(--gold); color: #060d17; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-gold:hover { background: var(--gold-light); }
+    .footer { background: #030810; padding: 32px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: white; text-decoration: none; }
+    .footer-logo span { color: var(--gold); }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 10px; }
+    @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <a href="./index.html" class="nav-back">← All Tools</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="page-eyebrow">Transfer Law School Admissions</span>
+  <h1 class="page-title">Free Tools for Transfer Applicants</h1>
+  <p class="page-sub">Everything you need to evaluate your transfer odds, research your target schools, and execute a successful upward move.</p>
+</div>
+
+<section class="tools-section">
+  <div class="tools-grid">
+
+    <a href="./transfer-predictor.html" class="tool-card">
+      <div class="tool-icon">🎯</div>
+      <div class="tool-title">Transfer Admissions Predictor</div>
+      <div class="tool-body">Enter your 1L GPA and current school to see your real transfer odds at every T-14 program.</div>
+      <div class="tool-cta">Predict My Odds →</div>
+    </a>
+
+    <a href="./transfer-policies.html" class="tool-card">
+      <div class="tool-icon">📋</div>
+      <div class="tool-title">Transfer Policies Database</div>
+      <div class="tool-body">Every T-14 school's transfer policies — application deadlines, credit transfer rules, median GPA of admitted transfers.</div>
+      <div class="tool-cta">Research Policies →</div>
+    </a>
+
+    <a href="./transfer-stats.html" class="tool-card">
+      <div class="tool-icon">📊</div>
+      <div class="tool-title">Transfer Statistics</div>
+      <div class="tool-body">Historical transfer acceptance rates, class sizes, and feeder school data for every T-14 program.</div>
+      <div class="tool-cta">View Stats →</div>
+    </a>
+
+    <a href="./transfer-employment.html" class="tool-card">
+      <div class="tool-icon">💼</div>
+      <div class="tool-title">Employment Outcomes Comparator</div>
+      <div class="tool-body">Compare BigLaw placement rates, federal clerkship outcomes, and employment data between your current school and transfer targets.</div>
+      <div class="tool-cta">Compare Outcomes →</div>
+    </a>
+
+    <a href="./transfer-vs-stay.html" class="tool-card">
+      <div class="tool-icon">⚖️</div>
+      <div class="tool-title">Transfer vs. Stay Calculator</div>
+      <div class="tool-body">Model the long-term financial and career impact of transferring versus staying at your current school with a scholarship.</div>
+      <div class="tool-cta">Run the Numbers →</div>
+    </a>
+
+    <a href="./attack-sheets.html" class="tool-card">
+      <div class="tool-icon">📝</div>
+      <div class="tool-title">1L Attack Sheets</div>
+      <div class="tool-body">Subject-by-subject exam attack frameworks for Contracts, Torts, Civil Procedure, Property, and Criminal Law.</div>
+      <div class="tool-cta">Get Attack Sheets →</div>
+    </a>
+
+    <a href="./course-outlines.html" class="tool-card">
+      <div class="tool-icon">📖</div>
+      <div class="tool-title">1L Course Outlines</div>
+      <div class="tool-body">Comprehensive outlines for every core 1L subject built to help you study smarter and perform at the top of your class.</div>
+      <div class="tool-cta">Access Outlines →</div>
+    </a>
+
+    <a href="./deans-certification.html" class="tool-card">
+      <div class="tool-icon">🏫</div>
+      <div class="tool-title">Dean's Certification Guide</div>
+      <div class="tool-body">Everything you need to know about the dean's certification process — what it includes, how to request it, and how to time it correctly.</div>
+      <div class="tool-cta">Read the Guide →</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h3>Ready to Build Your Transfer Strategy?</h3>
+  <p>Book a free strategy call with a Columbia Law transfer — someone who has done exactly what you're trying to do and can tell you precisely how to execute it.</p>
+  <a href="../tabs/transfer/landing-pages/v1.html" class="btn-gold">Book a Free Strategy Call →</a>
+</div>
+
+<footer class="footer">
+  <a href="../index.html" class="footer-logo">Ivy<span>Ambition</span></a>
+  <p class="footer-note">© 2025 IvyAmbition. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

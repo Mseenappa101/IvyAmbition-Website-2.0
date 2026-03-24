@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undergraduate Free Tools | IvyAmbition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy-dark: #060d17; --gold: #c9a84c; --gold-light: #e2c97e;
+      --white: #ffffff; --cream: #f8f5ef; --text-muted: #6b7280;
+      --font-serif: 'Playfair Display', Georgia, serif; --font-sans: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--navy); }
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,13,23,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 24px;
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: white; text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .nav-back { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: white; }
+    .page-hero {
+      background: linear-gradient(160deg, #060d17 0%, #0d1b2a 100%);
+      padding: 120px 24px 64px; text-align: center;
+    }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 16px; }
+    .page-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: white; margin-bottom: 14px; }
+    .page-sub { font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; line-height: 1.8; }
+    .tools-section { padding: 64px 24px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; max-width: 1100px; margin: 0 auto; }
+    .tool-card {
+      background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 16px;
+      padding: 28px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px;
+      transition: box-shadow 0.2s, transform 0.2s; position: relative; overflow: hidden;
+    }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
+    .tool-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon { font-size: 28px; }
+    .tool-title { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--navy); }
+    .tool-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+    .tool-cta { font-size: 13px; font-weight: 600; color: var(--gold); margin-top: 4px; }
+    .cta-banner {
+      background: linear-gradient(145deg, #0d1b2a, #1a2f47);
+      margin: 0 24px 64px; border-radius: 20px; padding: 48px 40px;
+      text-align: center; max-width: 1052px; margin-left: auto; margin-right: auto;
+    }
+    .cta-banner h3 { font-family: var(--font-serif); font-size: 1.8rem; color: white; margin-bottom: 12px; }
+    .cta-banner p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 28px; line-height: 1.8; }
+    .btn-gold { background: var(--gold); color: #060d17; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 8px; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-gold:hover { background: var(--gold-light); }
+    .footer { background: #030810; padding: 32px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: white; text-decoration: none; }
+    .footer-logo span { color: var(--gold); }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 10px; }
+    @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <a href="./index.html" class="nav-back">← All Tools</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="page-eyebrow">Undergraduate Admissions</span>
+  <h1 class="page-title">Free Tools for College Applicants</h1>
+  <p class="page-sub">Everything you need to research schools, find money, and build a stronger application — no account required.</p>
+</div>
+
+<section class="tools-section">
+  <div class="tools-grid">
+
+    <a href="./college-search.html" class="tool-card">
+      <div class="tool-icon">🏛️</div>
+      <div class="tool-title">College Search Database</div>
+      <div class="tool-body">Search 150+ schools by acceptance rate, tuition, test scores, major, and 20+ more criteria.</div>
+      <div class="tool-cta">Search Colleges →</div>
+    </a>
+
+    <a href="./scholarships.html" class="tool-card">
+      <div class="tool-icon">🎓</div>
+      <div class="tool-title">Scholarship Database</div>
+      <div class="tool-body">Filter 60+ national scholarships by demographics, major, and state.</div>
+      <div class="tool-cta">Find Scholarships →</div>
+    </a>
+
+    <a href="./sat-act-tool.html" class="tool-card">
+      <div class="tool-icon">📊</div>
+      <div class="tool-title">SAT/ACT Decision Tool</div>
+      <div class="tool-body">Should you submit your score? Get a personalized recommendation for every school on your list.</div>
+      <div class="tool-cta">Analyze My Scores →</div>
+    </a>
+
+    <a href="./net-price.html" class="tool-card">
+      <div class="tool-icon">💳</div>
+      <div class="tool-title">Net Price Calculator</div>
+      <div class="tool-body">The sticker price isn't what you pay. See your estimated real cost at every school in our database.</div>
+      <div class="tool-cta">Calculate Net Price →</div>
+    </a>
+
+    <a href="./efc-calculator.html" class="tool-card">
+      <div class="tool-icon">📋</div>
+      <div class="tool-title">EFC & Debt Projector</div>
+      <div class="tool-body">Estimate your Expected Family Contribution and project your loan balance at graduation.</div>
+      <div class="tool-cta">Project My Debt →</div>
+    </a>
+
+    <a href="./roi-calculator.html" class="tool-card">
+      <div class="tool-icon">📈</div>
+      <div class="tool-title">College ROI Calculator</div>
+      <div class="tool-body">Pick a school and major — see starting salary, mid-career earnings, and break-even point.</div>
+      <div class="tool-cta">Calculate ROI →</div>
+    </a>
+
+    <a href="./ec-calculator.html" class="tool-card">
+      <div class="tool-icon">🏆</div>
+      <div class="tool-title">EC Impact Calculator</div>
+      <div class="tool-body">Score your activity list across leadership, impact, and commitment — with personalized recommendations.</div>
+      <div class="tool-cta">Score My ECs →</div>
+    </a>
+
+    <a href="./activity-optimizer.html" class="tool-card">
+      <div class="tool-icon">✍️</div>
+      <div class="tool-title">Activity Description Optimizer</div>
+      <div class="tool-body">Make every Common App character count. Instant analysis of verb strength, quantification, and passive voice.</div>
+      <div class="tool-cta">Optimize Descriptions →</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h3>Want a Full Strategy — Not Just Tools?</h3>
+  <p>Book a free strategy call with a Columbia Law JD candidate. We'll review your profile and tell you exactly how we'd approach your application.</p>
+  <a href="../tabs/undergraduate/landing-pages/v1.html" class="btn-gold">Book a Free Strategy Call →</a>
+</div>
+
+<footer class="footer">
+  <a href="../index.html" class="footer-logo">Ivy<span>Ambition</span></a>
+  <p class="footer-note">© 2025 IvyAmbition. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

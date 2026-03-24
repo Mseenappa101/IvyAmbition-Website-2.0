@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BigLaw vs. Public Interest Calculator | IvyAmbition</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .compare-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px; }
+    .path-card    { border-radius:16px;overflow:hidden; }
+    .path-header  { padding:20px 24px;display:flex;justify-content:space-between;align-items:center; }
+    .path-header h3 { font-family:var(--font-serif);font-size:22px;margin:0;color:#fff; }
+    .path-stat    { text-align:right;color:rgba(255,255,255,.75);font-size:13px; }
+    .path-stat strong { display:block;color:#fff;font-size:18px; }
+    .biglaw-header { background:var(--navy,#0d1b2a); }
+    .pi-header     { background:#1a3a4b; }
+    .path-table-wrap { overflow-x:auto; }
+    .path-table   { width:100%;border-collapse:collapse;font-size:13px; }
+    .path-table th { background:#f0f0f0;padding:8px 10px;text-align:right;font-weight:600;color:var(--navy);font-size:12px; }
+    .path-table th:first-child { text-align:center; }
+    .path-table td { padding:7px 10px;text-align:right;border-bottom:1px solid #f0f0f0; }
+    .path-table td:first-child { text-align:center;font-weight:700;color:var(--navy); }
+    .path-table tfoot td { font-weight:700;color:var(--navy);border-top:2px solid var(--navy);background:#f8f9fa; }
+    .forgiven    { color:#198754;font-weight:700; }
+    .summary-box { background:var(--navy,#0d1b2a);border-radius:16px;padding:32px;margin-bottom:32px;text-align:center; }
+    .summary-box h3 { font-family:var(--font-serif);color:#fff;margin-bottom:20px; }
+    .bar-row     { display:flex;align-items:center;gap:12px;margin-bottom:12px; }
+    .bar-label   { min-width:120px;text-align:right;font-size:13px;color:rgba(255,255,255,.75); }
+    .bar-track   { flex:1;background:rgba(255,255,255,.1);border-radius:20px;height:24px;overflow:hidden; }
+    .bar-fill    { height:100%;border-radius:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;transition:width .6s; }
+    .bar-biglaw  { background:var(--gold,#c9a84c); }
+    .bar-pi      { background:#90e0ef; }
+    .diff-badge  { display:inline-block;background:rgba(201,168,76,.2);color:var(--gold,#c9a84c);border-radius:8px;padding:4px 12px;font-size:14px;font-weight:700; }
+    .notes-grid  { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+    .note-card   { background:#f8f9fa;border-radius:10px;padding:16px 18px;font-size:13px;line-height:1.7;color:var(--text-muted); }
+    .note-card strong { display:block;color:var(--navy);margin-bottom:4px;font-size:14px; }
+    @media(max-width:700px){ .compare-grid{grid-template-columns:1fr;} .notes-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body class="tool-page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+        <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+        <li><a href="./index.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a>
+      <a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a>
+      <a href="../tabs/law-school/landing-pages/v1.html">Law School</a>
+      <a href="./index.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="./index.html" class="tool-breadcrumb">← Law School Tools</a>
+      <span class="tool-eyebrow">Free Tool · Law School Admissions</span>
+      <h1>BigLaw vs. Public Interest Calculator</h1>
+      <p>Compare the 10-year financial picture of BigLaw vs. public interest law — salary, loan payments, LRAP benefits, and cumulative wealth side by side.</p>
+    </div>
+  </section>
+
+  <!-- TOOL BODY -->
+  <div class="tool-body">
+    <div class="container">
+
+      <!-- Input form (top bar) -->
+      <div class="calc-card" style="max-width:760px;margin:0 auto 40px;">
+        <h3 style="font-family:var(--font-serif);font-size:20px;margin-bottom:20px;color:var(--navy);">Your Inputs</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="calc-field">
+            <label for="biSchool">Law School</label>
+            <select id="biSchool" class="filter-select"><option value="">— Select a school —</option></select>
+          </div>
+          <div class="calc-field">
+            <label for="biScholarship">Annual Scholarship ($)</label>
+            <input type="number" id="biScholarship" min="0" max="80000" step="500" value="0" placeholder="0" />
+          </div>
+          <div class="calc-field">
+            <label for="biCity">BigLaw City</label>
+            <select id="biCity" class="filter-select">
+              <option value="225000">New York City / San Francisco ($225K)</option>
+              <option value="215000" selected>Chicago / LA / DC ($215K)</option>
+              <option value="190000">Other Major Market ($190K)</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label for="piField">Public Interest Field</label>
+            <select id="piField" class="filter-select">
+              <option value="72000">Federal Government ($72,000 start)</option>
+              <option value="62000">State / Local Government ($62,000)</option>
+              <option value="55000" selected>Nonprofit / Public Interest ($55,000)</option>
+              <option value="52000">Legal Aid ($52,000)</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:20px;text-align:center;">
+          <button class="calc-submit" id="runBtn" style="max-width:240px;">Run Comparison</button>
+        </div>
+      </div>
+
+      <!-- Results (hidden initially) -->
+      <div id="biDefault" style="text-align:center;padding:60px 0;color:var(--text-muted);">
+        <div style="font-size:64px;opacity:.3;margin-bottom:16px;">⚖️</div>
+        <h3 style="font-family:var(--font-serif);color:var(--navy);">BigLaw vs. Public Interest</h3>
+        <p>Select a school and career paths above, then click Run Comparison.</p>
+      </div>
+
+      <div id="biResults" style="display:none;">
+        <h2 style="font-family:var(--font-serif);font-size:28px;color:var(--navy);margin-bottom:28px;text-align:center;" id="biTitle"></h2>
+
+        <div class="compare-grid">
+          <!-- BigLaw -->
+          <div class="path-card">
+            <div class="path-header biglaw-header">
+              <h3>BigLaw Path</h3>
+              <div class="path-stat"><strong id="blYear1"></strong>Year 1 Salary</div>
+            </div>
+            <div class="path-table-wrap">
+              <table class="path-table">
+                <thead><tr><th>Yr</th><th>Salary</th><th>After Tax</th><th>Loan Pmt</th><th>Net</th></tr></thead>
+                <tbody id="blBody"></tbody>
+                <tfoot><tr><td colspan="4">10-Year Cumulative Net</td><td id="blTotal"></td></tr></tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- PI -->
+          <div class="path-card">
+            <div class="path-header pi-header">
+              <h3>Public Interest Path</h3>
+              <div class="path-stat"><strong id="piYear1"></strong>Year 1 Salary</div>
+            </div>
+            <div class="path-table-wrap">
+              <table class="path-table">
+                <thead><tr><th>Yr</th><th>Salary</th><th>After Tax</th><th>Loan</th><th>LRAP</th><th>Net</th></tr></thead>
+                <tbody id="piBody"></tbody>
+                <tfoot><tr><td colspan="5">10-Year Cumulative Net</td><td id="piTotal"></td></tr></tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary bar chart -->
+        <div class="summary-box">
+          <h3>10-Year Financial Summary</h3>
+          <div id="barChart"></div>
+          <div style="margin-top:20px;" id="diffStatement"></div>
+        </div>
+
+        <!-- Notes -->
+        <div style="margin-bottom:32px;">
+          <h3 style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:16px;">Important Context</h3>
+          <div class="notes-grid" id="notesGrid"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Law School Tools</h5>
+          <ul>
+            <li><a href="./law-predictor.html">Admissions Predictor</a></li>
+            <li><a href="./splitter-finder.html">Splitter Finder</a></li>
+            <li><a href="./lsat-improvement.html">LSAT Study Plan</a></li>
+            <li><a href="./lsat-retake.html">Retake Decision</a></li>
+            <li><a href="./law-debt.html">Debt Calculator</a></li>
+            <li><a href="./biglaw-pi.html">BigLaw vs. PI</a></li>
+            <li><a href="./law-scholarship-estimator.html">Scholarship Estimator</a></li>
+            <li><a href="./practice-areas.html">Practice Areas</a></li>
+            <li><a href="./legal-markets.html">Legal Markets</a></li>
+            <li><a href="./scholarship-negotiation.html">Negotiation Database</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li>
+            <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+            <li><a href="../tabs/transfer/landing-pages/v1.html">Law School Transfer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal"><a href="../legal/privacy-policy.html">Privacy Policy</a><a href="../legal/terms-of-service.html">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data/law-data.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    const $id = id => document.getElementById(id);
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    const sorted = [...LAW_SCHOOLS].sort((a,b) => a.usnwrRank - b.usnwrRank);
+    sorted.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = `${s.name} (#${s.usnwrRank})`;
+      $id('biSchool').appendChild(opt);
+    });
+
+    function pmtCalc(debt, rate, months) {
+      const r = rate / 12;
+      return debt * r / (1 - Math.pow(1 + r, -months));
+    }
+
+    const CRAVATH = [215000, 215000, 230000, 265000, 295000, 330000, 365000, 400000, 400000, 400000];
+
+    $id('runBtn').addEventListener('click', () => {
+      const schoolId = parseInt($id('biSchool').value);
+      const scholarship = parseFloat($id('biScholarship').value) || 0;
+      const blSalaryY1 = parseInt($id('biCity').value);
+      const piSalaryStart = parseInt($id('piField').value);
+
+      if (!schoolId) { alert('Please select a law school.'); return; }
+      const school = LAW_SCHOOLS.find(s => s.id === schoolId);
+      if (!school) return;
+
+      const totalCOA = (school.tuition - scholarship) * 3 + 25000 * 3;
+      const debt = Math.round(totalCOA * 1.21);
+      const stdMonthly = pmtCalc(debt, 0.075, 120);
+      const poverty = 15060;
+
+      // BigLaw table
+      const salaryMultiplier = blSalaryY1 / 215000;
+      let blCumulative = 0, loanRemaining = debt, blRows = '';
+      for (let yr = 1; yr <= 10; yr++) {
+        const salary = Math.round(CRAVATH[yr-1] * salaryMultiplier);
+        const afterTax = Math.round(salary * 0.65);
+        const loanPmt = loanRemaining > 0 ? Math.min(stdMonthly * 12, loanRemaining * 1.075) : 0;
+        loanRemaining = Math.max(0, loanRemaining - loanPmt + (loanRemaining > 0 ? loanRemaining * 0.075 : 0));
+        const net = afterTax - Math.round(loanPmt);
+        blCumulative += net;
+        blRows += `<tr>
+          <td>${yr}</td>
+          <td>${fmt(salary)}</td>
+          <td>${fmt(afterTax)}</td>
+          <td>${loanPmt > 0 ? fmt(loanPmt) : '<span style="color:#198754;">✓ Paid off</span>'}</td>
+          <td>${fmt(net)}</td>
+        </tr>`;
+      }
+      $id('blBody').innerHTML = blRows;
+      $id('blYear1').textContent = fmt(Math.round(CRAVATH[0] * salaryMultiplier));
+      $id('blTotal').textContent = fmt(blCumulative);
+
+      // PI table
+      const isGov = piSalaryStart >= 62000;
+      const growthRate = isGov ? 0.03 : 0.02;
+      let piCumulative = 0, piLoanRemaining = debt, piRows = '';
+      let pslfForgiven = 0;
+      for (let yr = 1; yr <= 10; yr++) {
+        const salary = Math.round(piSalaryStart * Math.pow(1 + growthRate, yr - 1));
+        const afterTax = Math.round(salary * 0.78);
+        const discret = Math.max(0, salary - 1.5 * poverty);
+        const ibrMonthly = Math.min(discret * 0.10 / 12, stdMonthly);
+        const ibrAnnual = ibrMonthly * 12;
+
+        let lrapBenefit = 0;
+        if (school.lrap) {
+          if (salary < school.lrapThreshold) {
+            lrapBenefit = Math.min(ibrAnnual, 18000);
+          } else if (salary < school.lrapMaxIncome) {
+            const t = (school.lrapMaxIncome - salary) / (school.lrapMaxIncome - school.lrapThreshold);
+            lrapBenefit = Math.round(Math.min(ibrAnnual, 18000) * t);
+          }
+        }
+
+        piLoanRemaining = Math.max(0, piLoanRemaining * 1.075 - ibrAnnual);
+        const net = afterTax - ibrAnnual + lrapBenefit;
+        piCumulative += net;
+
+        if (yr === 10 && piLoanRemaining > 0) pslfForgiven = piLoanRemaining;
+
+        piRows += `<tr>
+          <td>${yr}</td>
+          <td>${fmt(salary)}</td>
+          <td>${fmt(afterTax)}</td>
+          <td>${fmt(ibrAnnual)}</td>
+          <td>${lrapBenefit > 0 ? fmt(lrapBenefit) : '—'}</td>
+          <td>${fmt(net)}</td>
+        </tr>`;
+      }
+
+      if (pslfForgiven > 0) {
+        piRows += `<tr><td colspan="5" class="forgiven">PSLF Forgiveness (Yr 10)</td><td class="forgiven">+${fmt(pslfForgiven)}</td></tr>`;
+        piCumulative += pslfForgiven;
+      }
+
+      $id('piBody').innerHTML = piRows;
+      $id('piYear1').textContent = fmt(piSalaryStart);
+      $id('piTotal').textContent = fmt(piCumulative);
+
+      $id('biTitle').textContent = `10-Year Financial Snapshot: ${school.name}`;
+
+      // Bar chart
+      const maxVal = Math.max(blCumulative, piCumulative, 1);
+      const blPct = Math.round(blCumulative / maxVal * 100);
+      const piPct = Math.round(piCumulative / maxVal * 100);
+      $id('barChart').innerHTML = `
+        <div class="bar-row">
+          <span class="bar-label">BigLaw</span>
+          <div class="bar-track"><div class="bar-fill bar-biglaw" style="width:${blPct}%;">${fmt(blCumulative)}</div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Public Interest</span>
+          <div class="bar-track"><div class="bar-fill bar-pi" style="width:${piPct}%;color:#0d1b2a;">${fmt(piCumulative)}</div></div>
+        </div>
+      `;
+      const diff = Math.abs(blCumulative - piCumulative);
+      const winner = blCumulative > piCumulative ? 'BigLaw' : 'Public Interest';
+      $id('diffStatement').innerHTML = `
+        <div class="diff-badge">${winner} generates ${fmt(diff)} more over 10 years</div>
+        ${pslfForgiven > 0 ? `<p style="color:rgba(255,255,255,.65);font-size:13px;margin-top:12px;">PI total includes ${fmt(pslfForgiven)} in PSLF tax-free forgiveness at Year 10.</p>` : ''}
+      `;
+
+      // Notes
+      const notes = [
+        { title: 'BigLaw Attrition Reality', text: '~80% of BigLaw associates leave within 5 years — often for in-house or government roles. This projection assumes you stay for 10 full years, which most associates do not.' },
+        { title: school.biglaw < 20 ? `BigLaw Access at ${school.name}` : 'BigLaw Placement', text: school.biglaw < 20 ? `Only ${school.biglaw}% of ${school.name} graduates enter BigLaw firms. Your actual odds of this career path depend heavily on class rank, networking, and OCI performance.` : `${school.biglaw}% of ${school.name} graduates enter BigLaw — a strong pipeline. The path shown assumes successful OCI recruitment.` },
+        { title: 'LRAP Advantage', text: school.lrap ? `${school.name}'s LRAP program can cover substantial PI loan payments for qualifying graduates — making public service financially viable from day one.` : 'This school lacks a robust LRAP program. Federal PSLF remains your primary loan forgiveness tool on a public interest path.' },
+        { title: 'The Long Game', text: 'The PI financial advantage compounds post-Year 10: once PSLF kicks in, cash flow dramatically improves. BigLaw savings can also accelerate if invested early. Both paths can build wealth — the key is career satisfaction and staying power.' }
+      ];
+      $id('notesGrid').innerHTML = notes.map(n => `<div class="note-card"><strong>${n.title}</strong>${n.text}</div>`).join('');
+
+      $id('biDefault').style.display = 'none';
+      $id('biResults').style.display = 'block';
+      $id('biResults').scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  </script>
+</body>
+</html>

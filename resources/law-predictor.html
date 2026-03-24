@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law School Admissions Predictor | IvyAmbition</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .row-likely { background: #d4edda !important; }
+    .row-target { background: #fff3cd !important; }
+    .row-reach  { background: #ffe0b2 !important; }
+    .row-longshot { background: #ffcdd2 !important; }
+    .badge-likely   { background:#198754;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .badge-target   { background:#ffc107;color:#333;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .badge-reach    { background:#fd7e14;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .badge-longshot { background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap; }
+    .stat-diff-good { color:#198754;font-weight:600; }
+    .stat-diff-bad  { color:#dc3545;font-weight:600; }
+    .insight-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px; }
+    .insight-box  { background:var(--navy-light,#1a2d42);border-radius:10px;padding:16px 12px;text-align:center; }
+    .insight-box .ib-num { font-size:28px;font-weight:700;color:var(--gold,#c9a84c); }
+    .insight-box .ib-lbl { font-size:12px;color:rgba(255,255,255,.65);margin-top:4px; }
+    .insight-box.ib-likely .ib-num { color:#6fcf97; }
+    .insight-box.ib-target .ib-num { color:#f2c94c; }
+    .insight-box.ib-reach  .ib-num { color:#f2994a; }
+    .insight-box.ib-long   .ib-num { color:#eb5757; }
+    .default-msg { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;color:var(--text-muted,#6c757d); }
+    .default-msg svg { opacity:.3;margin-bottom:20px; }
+    @media(max-width:700px){ .insight-grid{grid-template-columns:repeat(2,1fr);} }
+  </style>
+</head>
+<body class="tool-page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+        <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+        <li><a href="./index.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a>
+      <a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a>
+      <a href="../tabs/law-school/landing-pages/v1.html">Law School</a>
+      <a href="./index.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="./index.html" class="tool-breadcrumb">← Law School Tools</a>
+      <span class="tool-eyebrow">Free Tool · Law School Admissions</span>
+      <h1>Law School Admissions Predictor</h1>
+      <p>Enter your LSAT and GPA to see your admission probability at all 120 ABA-accredited law schools — color-coded by Likely, Target, Reach, and Long Shot.</p>
+    </div>
+  </section>
+
+  <!-- TOOL BODY -->
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="filter-sidebar">
+          <div class="calc-card">
+            <h3 style="font-family:var(--font-serif);font-size:20px;margin-bottom:20px;color:var(--navy);">Your Stats</h3>
+
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="lsatInput">LSAT Score</label>
+                <input type="number" id="lsatInput" min="120" max="180" placeholder="e.g. 170" />
+              </div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="gpaInput">GPA</label>
+                <input type="number" id="gpaInput" min="0" max="4.0" step="0.01" placeholder="e.g. 3.75" />
+              </div>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <label style="font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bottom:8px;">Filter by Tier</label>
+              <div class="filter-pills" id="tierPills">
+                <button class="filter-pill active" data-tier="all">All</button>
+                <button class="filter-pill" data-tier="t14">T14</button>
+                <button class="filter-pill" data-tier="t25">T15–T25</button>
+                <button class="filter-pill" data-tier="t50">T26–T50</button>
+                <button class="filter-pill" data-tier="t100">T51–T100</button>
+                <button class="filter-pill" data-tier="regional">Regional</button>
+              </div>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <label style="font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bottom:8px;">Filter by Region</label>
+              <div class="filter-pills" id="regionPills">
+                <button class="filter-pill active" data-region="all">All</button>
+                <button class="filter-pill" data-region="northeast">Northeast</button>
+                <button class="filter-pill" data-region="southeast">Southeast</button>
+                <button class="filter-pill" data-region="midwest">Midwest</button>
+                <button class="filter-pill" data-region="south">South</button>
+                <button class="filter-pill" data-region="west">West</button>
+              </div>
+            </div>
+
+            <div class="calc-row" style="margin-bottom:20px;">
+              <div class="calc-field">
+                <label for="sortSelect">Sort Results By</label>
+                <select id="sortSelect" class="filter-select">
+                  <option value="best">Best Match</option>
+                  <option value="prob">Highest Probability</option>
+                  <option value="name">Name (A–Z)</option>
+                  <option value="rank">School Rank</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="calc-submit" id="analyzeBtn">Analyze My Chances</button>
+          </div>
+
+          <!-- How it works box -->
+          <div style="background:#f8f9fa;border-radius:12px;padding:16px;margin-top:20px;font-size:13px;color:var(--text-muted);">
+            <strong style="color:var(--navy);display:block;margin-bottom:8px;">How This Works</strong>
+            Our model weights LSAT 60% and GPA 40%, normalized against each school's 50th percentile and calibrated by the school's acceptance rate. Labels: <strong>Likely</strong> ≥65%, <strong>Target</strong> 35–64%, <strong>Reach</strong> 15–34%, <strong>Long Shot</strong> &lt;15%.
+          </div>
+        </aside>
+
+        <!-- RESULTS AREA -->
+        <div class="results-area">
+
+          <!-- Default message -->
+          <div id="defaultMsg" class="default-msg">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <h3 style="color:var(--navy);font-family:var(--font-serif);margin-bottom:8px;">Ready to Predict Your Odds?</h3>
+            <p style="max-width:360px;line-height:1.6;">Enter your LSAT score and GPA above, then click <strong>Analyze My Chances</strong> to see your probability at all 120 law schools.</p>
+          </div>
+
+          <!-- Results container (hidden until analyzed) -->
+          <div id="resultsContainer" style="display:none;">
+
+            <!-- Insight grid -->
+            <div class="insight-grid" id="insightRow">
+              <div class="insight-box ib-likely"><div class="ib-num" id="likelyCount">0</div><div class="ib-lbl">Likely (&ge;65%)</div></div>
+              <div class="insight-box ib-target"><div class="ib-num" id="targetCount">0</div><div class="ib-lbl">Target (35–64%)</div></div>
+              <div class="insight-box ib-reach"><div class="ib-num" id="reachCount">0</div><div class="ib-lbl">Reach (15–34%)</div></div>
+              <div class="insight-box ib-long"><div class="ib-num" id="longshotCount">0</div><div class="ib-lbl">Long Shot (&lt;15%)</div></div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <span class="results-count" id="resultsCount"></span>
+            </div>
+
+            <div class="matrix-table-wrap">
+              <table class="matrix-table" id="resultsTable">
+                <thead>
+                  <tr>
+                    <th style="min-width:200px;">School</th>
+                    <th>Rank</th>
+                    <th>LSAT vs Median</th>
+                    <th>GPA vs Median</th>
+                    <th>Probability</th>
+                    <th>Label</th>
+                  </tr>
+                </thead>
+                <tbody id="resultsBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite law school admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Law School Tools</h5>
+          <ul>
+            <li><a href="./law-predictor.html">Admissions Predictor</a></li>
+            <li><a href="./splitter-finder.html">Splitter Finder</a></li>
+            <li><a href="./lsat-improvement.html">LSAT Study Plan</a></li>
+            <li><a href="./lsat-retake.html">Retake Decision</a></li>
+            <li><a href="./law-debt.html">Debt Calculator</a></li>
+            <li><a href="./biglaw-pi.html">BigLaw vs. PI</a></li>
+            <li><a href="./law-scholarship-estimator.html">Scholarship Estimator</a></li>
+            <li><a href="./practice-areas.html">Practice Areas</a></li>
+            <li><a href="./legal-markets.html">Legal Markets</a></li>
+            <li><a href="./scholarship-negotiation.html">Negotiation Database</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li>
+            <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+            <li><a href="../tabs/transfer/landing-pages/v1.html">Law School Transfer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data/law-data.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    let selectedTier = 'all';
+    let selectedRegion = 'all';
+    let allResults = [];
+
+    function calcProbability(userLSAT, userGPA, school) {
+      const lsatZ = (userLSAT - school.lsat50) / 3.5;
+      const gpaZ  = (userGPA  - school.gpa50)  / 0.18;
+      const z = lsatZ * 0.60 + gpaZ * 0.40;
+      const rawProb = 1 / (1 + Math.exp(-2.2 * z));
+      const selectivityFactor = Math.min(school.accept / 50, 1.4);
+      let prob = rawProb * selectivityFactor;
+      return Math.round(Math.max(1, Math.min(97, prob * 100)));
+    }
+
+    function getLabel(prob) {
+      if (prob >= 65) return 'Likely';
+      if (prob >= 35) return 'Target';
+      if (prob >= 15) return 'Reach';
+      return 'Long Shot';
+    }
+
+    function getLabelClass(prob) {
+      if (prob >= 65) return 'badge-likely';
+      if (prob >= 35) return 'badge-target';
+      if (prob >= 15) return 'badge-reach';
+      return 'badge-longshot';
+    }
+
+    function getRowClass(prob) {
+      if (prob >= 65) return 'row-likely';
+      if (prob >= 35) return 'row-target';
+      if (prob >= 15) return 'row-reach';
+      return 'row-longshot';
+    }
+
+    function formatLSAT(userLSAT, school) {
+      const diff = userLSAT - school.lsat50;
+      const cls = diff >= 0 ? 'stat-diff-good' : 'stat-diff-bad';
+      const sign = diff >= 0 ? '+' : '';
+      return `${userLSAT} <span class="${cls}">(${sign}${diff})</span> <small style="color:#888;">med ${school.lsat50}</small>`;
+    }
+
+    function formatGPA(userGPA, school) {
+      const diff = (userGPA - school.gpa50).toFixed(2);
+      const cls = parseFloat(diff) >= 0 ? 'stat-diff-good' : 'stat-diff-bad';
+      const sign = parseFloat(diff) >= 0 ? '+' : '';
+      return `${userGPA.toFixed(2)} <span class="${cls}">(${sign}${diff})</span> <small style="color:#888;">med ${school.gpa50}</small>`;
+    }
+
+    function filterAndSort() {
+      let filtered = allResults.slice();
+
+      if (selectedTier !== 'all') {
+        filtered = filtered.filter(r => r.school.tier === selectedTier);
+      }
+      if (selectedRegion !== 'all') {
+        filtered = filtered.filter(r => r.school.region === selectedRegion);
+      }
+
+      const sort = document.getElementById('sortSelect').value;
+      if (sort === 'prob') {
+        filtered.sort((a,b) => b.prob - a.prob);
+      } else if (sort === 'name') {
+        filtered.sort((a,b) => a.school.name.localeCompare(b.school.name));
+      } else if (sort === 'rank') {
+        filtered.sort((a,b) => a.school.usnwrRank - b.school.usnwrRank);
+      } else {
+        // Best Match: sort by probability (highest first)
+        filtered.sort((a,b) => b.prob - a.prob);
+      }
+
+      return filtered;
+    }
+
+    function renderResults(userLSAT, userGPA) {
+      const filtered = filterAndSort();
+      const tbody = document.getElementById('resultsBody');
+      tbody.innerHTML = '';
+
+      const likely = filtered.filter(r => r.prob >= 65).length;
+      const target = filtered.filter(r => r.prob >= 35 && r.prob < 65).length;
+      const reach  = filtered.filter(r => r.prob >= 15 && r.prob < 35).length;
+      const longshot = filtered.filter(r => r.prob < 15).length;
+
+      document.getElementById('likelyCount').textContent = likely;
+      document.getElementById('targetCount').textContent = target;
+      document.getElementById('reachCount').textContent  = reach;
+      document.getElementById('longshotCount').textContent = longshot;
+      document.getElementById('resultsCount').textContent = `Showing ${filtered.length} school${filtered.length !== 1 ? 's' : ''}`;
+
+      filtered.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.className = getRowClass(r.prob);
+        tr.innerHTML = `
+          <td><strong>${r.school.name}</strong><br><small style="color:#555;">${r.school.city}, ${r.school.state}</small></td>
+          <td>#${r.school.usnwrRank}</td>
+          <td>${formatLSAT(userLSAT, r.school)}</td>
+          <td>${formatGPA(userGPA, r.school)}</td>
+          <td><strong>${r.prob}%</strong></td>
+          <td><span class="${getLabelClass(r.prob)}">${getLabel(r.prob)}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('analyzeBtn').addEventListener('click', () => {
+      const lsatVal = parseFloat(document.getElementById('lsatInput').value);
+      const gpaVal  = parseFloat(document.getElementById('gpaInput').value);
+
+      if (!lsatVal || lsatVal < 120 || lsatVal > 180) {
+        alert('Please enter a valid LSAT score (120–180).');
+        return;
+      }
+      if (!gpaVal || gpaVal < 0 || gpaVal > 4.0) {
+        alert('Please enter a valid GPA (0.00–4.00).');
+        return;
+      }
+
+      allResults = LAW_SCHOOLS.map(s => ({
+        school: s,
+        prob: calcProbability(lsatVal, gpaVal, s)
+      }));
+
+      document.getElementById('defaultMsg').style.display = 'none';
+      document.getElementById('resultsContainer').style.display = 'block';
+      renderResults(lsatVal, gpaVal);
+    });
+
+    // Tier pills
+    document.getElementById('tierPills').querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('tierPills').querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedTier = btn.dataset.tier;
+        if (allResults.length) {
+          const lsatVal = parseFloat(document.getElementById('lsatInput').value);
+          const gpaVal  = parseFloat(document.getElementById('gpaInput').value);
+          renderResults(lsatVal, gpaVal);
+        }
+      });
+    });
+
+    // Region pills
+    document.getElementById('regionPills').querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('regionPills').querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedRegion = btn.dataset.region;
+        if (allResults.length) {
+          const lsatVal = parseFloat(document.getElementById('lsatInput').value);
+          const gpaVal  = parseFloat(document.getElementById('gpaInput').value);
+          renderResults(lsatVal, gpaVal);
+        }
+      });
+    });
+
+    // Sort
+    document.getElementById('sortSelect').addEventListener('change', () => {
+      if (allResults.length) {
+        const lsatVal = parseFloat(document.getElementById('lsatInput').value);
+        const gpaVal  = parseFloat(document.getElementById('gpaInput').value);
+        renderResults(lsatVal, gpaVal);
+      }
+    });
+  </script>
+</body>
+</html>

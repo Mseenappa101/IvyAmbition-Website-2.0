@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EFC & Student Debt Projector | IvyAmbition</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="tool-page">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+        <li><a href="./index.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a>
+      <a href="./index.html">Free Tools</a><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="./index.html" class="tool-breadcrumb">← Back to Free Tools</a>
+      <span class="tool-eyebrow">Free Tool · EFC & Debt Projector</span>
+      <h1>Expected Family Contribution &amp; Debt Projector</h1>
+      <p>Estimate how much your family will be expected to pay for college — and project your student loan balance at graduation based on your school choice.</p>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout wide-form">
+
+        <!-- INPUT CARD -->
+        <div class="calc-card">
+          <h2>Your Financial Profile</h2>
+          <p>Based on federal FAFSA methodology (simplified). All figures are approximate estimates.</p>
+
+          <div style="margin-bottom:24px;">
+            <div class="section-divider-label">Family Income</div>
+            <div class="calc-row" style="margin-top:12px;">
+              <div class="calc-field">
+                <label>Parent Adjusted Gross Income (AGI)</label>
+                <input type="number" id="parentAGI" placeholder="e.g. 85000" value="85000" />
+              </div>
+              <div class="calc-field">
+                <label>Student Income (if any)</label>
+                <input type="number" id="studentIncome" placeholder="e.g. 0" value="0" />
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:24px;">
+            <div class="section-divider-label">Assets</div>
+            <div class="calc-row" style="margin-top:12px;">
+              <div class="calc-field">
+                <label>Parent Assets (savings, investments)</label>
+                <input type="number" id="parentAssets" placeholder="e.g. 50000" value="50000" />
+              </div>
+              <div class="calc-field">
+                <label>Student Assets (savings, etc.)</label>
+                <input type="number" id="studentAssets" placeholder="e.g. 5000" value="5000" />
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:24px;">
+            <div class="section-divider-label">Household</div>
+            <div class="calc-row" style="margin-top:12px;">
+              <div class="calc-field">
+                <label>Household Size</label>
+                <select id="householdSize">
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7+">7+</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label>College Students in Household</label>
+                <select id="collegeStudents">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3+">3+</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:28px;">
+            <div class="section-divider-label">School &amp; Debt Projection</div>
+            <div class="calc-row" style="margin-top:12px;">
+              <div class="calc-field">
+                <label>Annual Cost of Attendance (COA)</label>
+                <input type="number" id="coa" placeholder="e.g. 78000" value="78000" />
+                <div class="hint">Total: tuition + room + board + fees</div>
+              </div>
+              <div class="calc-field">
+                <label>Expected Annual Grant Aid</label>
+                <input type="number" id="grantAid" placeholder="e.g. 40000" value="0" />
+                <div class="hint">Grants/scholarships you expect to receive</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="calcBtn" style="width:100%;">Calculate EFC &amp; Debt →</button>
+        </div>
+
+        <!-- RESULTS PANEL -->
+        <div class="results-panel" id="resultsPanel">
+          <h3>Your Financial Aid Estimate</h3>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Estimated EFC (Per Year)</div>
+            <div class="result-metric-value" id="efcVal">—</div>
+            <div class="result-metric-sub">Expected Family Contribution</div>
+          </div>
+
+          <div class="result-divider"></div>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Financial Need (Per Year)</div>
+            <div class="result-metric-value" id="needVal">—</div>
+            <div class="result-metric-sub">COA minus EFC</div>
+          </div>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Unmet Need After Grants</div>
+            <div class="result-metric-value" id="unmetVal">—</div>
+            <div class="result-metric-sub">Gap you must cover via loans or work</div>
+          </div>
+
+          <div class="result-divider"></div>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Projected 4-Year Debt</div>
+            <div class="result-metric-value lg" id="debtVal">—</div>
+            <div class="result-metric-sub">Total federal + private loans estimated</div>
+          </div>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Monthly Payment After Graduation</div>
+            <div class="result-metric-value" id="paymentVal">—</div>
+            <div class="result-metric-sub">Est. 10-year standard repayment at 5.5% avg</div>
+          </div>
+
+          <div class="result-divider"></div>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Debt-to-Income Ratio (Entry Salary: $55K)</div>
+            <div class="result-metric-value" id="dtiVal">—</div>
+            <div class="result-metric-sub">Under 1.0x is manageable; over 2.0x is risky</div>
+          </div>
+
+          <div id="debtInsight" class="result-insight" style="display:none;"></div>
+        </div>
+
+      </div>
+
+      <!-- Loan Type Breakdown -->
+      <div class="calc-card" style="max-width:760px;margin:32px auto 0;" id="loanBreakdown" style="display:none;">
+        <h2 style="font-size:20px;">Federal Loan Limits (Annual)</h2>
+        <div class="matrix-table-wrap">
+          <table class="matrix-table">
+            <thead><tr><th>Loan Type</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Total Limit</th></tr></thead>
+            <tbody>
+              <tr><td>Subsidized (need-based)</td><td>$3,500</td><td>$4,500</td><td>$5,500</td><td>$5,500</td><td>$19,000</td></tr>
+              <tr><td>Unsubsidized (all students)</td><td>$2,000</td><td>$2,000</td><td>$2,000</td><td>$2,000</td><td>$8,000</td></tr>
+              <tr><td><strong>Federal Total (Dependent)</strong></td><td><strong>$5,500</strong></td><td><strong>$6,500</strong></td><td><strong>$7,500</strong></td><td><strong>$7,500</strong></td><td><strong>$27,000</strong></td></tr>
+              <tr style="background:#fff8e6;"><td colspan="5">Remaining gap → parent PLUS loans or private loans</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite undergraduate admissions consulting.</p></div>
+      <div class="footer-links">
+        <div class="footer-col"><h5>Free Tools</h5><ul>
+          <li><a href="./college-search.html">College Search</a></li><li><a href="scholarships.html">Scholarships</a></li>
+          <li><a href="./efc-calculator.html">EFC Calculator</a></li><li><a href="roi-calculator.html">ROI Calculator</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Programs</h5><ul>
+          <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li><li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition. All rights reserved.</p></div></div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+  document.getElementById('calcBtn').addEventListener('click', calculate);
+
+  function calculate() {
+    const parentAGI = +document.getElementById('parentAGI').value || 0;
+    const studentIncome = +document.getElementById('studentIncome').value || 0;
+    const parentAssets = +document.getElementById('parentAssets').value || 0;
+    const studentAssets = +document.getElementById('studentAssets').value || 0;
+    const householdSize = parseInt(document.getElementById('householdSize').value) || 4;
+    const collegeStudents = parseInt(document.getElementById('collegeStudents').value) || 1;
+    const coa = +document.getElementById('coa').value || 0;
+    const grantAid = +document.getElementById('grantAid').value || 0;
+
+    // Simplified EFC calculation (FAFSA methodology approximation)
+    // Income protection allowance by household size
+    const ipaTable = {2:19080, 3:23840, 4:29420, 5:34750, 6:40630};
+    const ipa = ipaTable[Math.min(householdSize, 6)] || 40630;
+    const taxAllowance = parentAGI * 0.22; // estimated tax ~22%
+
+    let availableParentIncome = Math.max(0, parentAGI - ipa - taxAllowance);
+    // Income contribution: 22% of available income
+    let parentIncomeContrib = availableParentIncome * 0.22;
+    // Asset contribution: 5.64% of parent assets above asset protection (simplified)
+    const assetProtection = Math.max(0, parentAssets * 0.88 - 12000);
+    let parentAssetContrib = assetProtection * 0.0564;
+    // Student income & assets
+    let studentContrib = Math.max(0, studentIncome - 7600) * 0.5 + studentAssets * 0.2;
+
+    let efc = Math.max(0, parentIncomeContrib + parentAssetContrib + studentContrib);
+    // Divide by number of college students
+    if (collegeStudents >= 2) efc = efc / collegeStudents;
+
+    const need = Math.max(0, coa - efc);
+    const unmetNeed = Math.max(0, need - grantAid);
+    const outOfPocket = efc + unmetNeed; // annual amount that needs to be covered
+
+    // Conservative debt projection: assume federal loans first, then remainder via private/PLUS
+    const fedLoanAnnual = [5500, 6500, 7500, 7500]; // dep. student limits
+    const totalFed = fedLoanAnnual.reduce((a,b) => a+b, 0); // $27000
+    // Remaining gap after EFC, grants, and federal loans goes to private loans
+    const annualPrivate = Math.max(0, unmetNeed - (totalFed / 4));
+    const totalPrivate = annualPrivate * 4;
+    const totalDebt = Math.min(totalFed, unmetNeed * 4) + totalPrivate;
+
+    // Monthly payment: 10yr standard, 5.5% avg interest
+    const rate = 0.055 / 12;
+    const n = 120;
+    const payment = totalDebt > 0 ? (totalDebt * rate * Math.pow(1+rate, n)) / (Math.pow(1+rate, n) - 1) : 0;
+    const dti = totalDebt / 55000;
+
+    // Render
+    document.getElementById('efcVal').textContent = '$' + Math.round(efc).toLocaleString();
+    document.getElementById('needVal').textContent = '$' + Math.round(need).toLocaleString();
+    document.getElementById('unmetVal').textContent = '$' + Math.round(unmetNeed).toLocaleString();
+    document.getElementById('debtVal').textContent = '$' + Math.round(totalDebt).toLocaleString();
+    document.getElementById('paymentVal').textContent = '$' + Math.round(payment).toLocaleString() + '/mo';
+    document.getElementById('dtiVal').textContent = dti.toFixed(2) + 'x';
+
+    const insight = document.getElementById('debtInsight');
+    insight.style.display = 'block';
+    if (dti < 1) {
+      insight.innerHTML = '<strong style="color:var(--gold)">✓ Manageable debt load.</strong> A debt-to-income ratio under 1.0x is generally considered financially sustainable for most career paths.';
+    } else if (dti < 2) {
+      insight.innerHTML = '<strong style="color:#f0a500">⚠ Moderate debt load.</strong> A DTI of 1–2x is manageable but limiting. Consider merit aid negotiations or lower-cost schools to reduce this figure.';
+    } else {
+      insight.innerHTML = '<strong style="color:#e55">⚠ High debt load.</strong> A DTI above 2.0x can create significant financial stress. Consider negotiating scholarships, applying to schools with strong merit aid, or state schools with lower tuition.';
+    }
+    document.getElementById('loanBreakdown').style.display = 'block';
+  }
+  </script>
+
+  <style>
+  .section-divider-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  </style>
+</body>
+</html>

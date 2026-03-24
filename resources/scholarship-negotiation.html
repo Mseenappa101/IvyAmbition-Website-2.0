@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scholarship Negotiation Database | IvyAmbition</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .neg-card { background:#fff;border:1px solid #e5e5e5;border-radius:14px;padding:24px;margin-bottom:20px;transition:box-shadow .2s; }
+    .neg-card:hover { box-shadow:0 4px 20px rgba(0,0,0,.08); }
+    .neg-card-header { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px; }
+    .neg-school-name { font-family:var(--font-serif);font-size:20px;color:var(--navy);font-weight:600; }
+    .neg-rank-badge { background:var(--navy);color:var(--gold,#c9a84c);border-radius:6px;padding:3px 10px;font-size:13px;font-weight:700; }
+    .neg-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px; }
+    .neg-stat  { background:#f8f9fa;border-radius:8px;padding:12px;text-align:center; }
+    .neg-stat .ns-val { font-size:22px;font-weight:700;color:var(--navy); }
+    .neg-stat .ns-lbl { font-size:11px;color:var(--text-muted);margin-top:4px; }
+    .neg-tier-table { width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px; }
+    .neg-tier-table th { background:#f0f0f0;padding:8px 10px;text-align:left;font-weight:600;color:var(--navy);font-size:12px; }
+    .neg-tier-table td { padding:7px 10px;border-bottom:1px solid #f5f5f5; }
+    .leverage-pills { display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px; }
+    .leverage-pill  { background:#eef0ff;color:#3a3aff;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:500; }
+    .notes-text     { font-size:13px;color:var(--text-muted);line-height:1.7;max-height:60px;overflow:hidden;transition:max-height .3s; }
+    .notes-text.expanded { max-height:300px; }
+    .notes-toggle   { background:none;border:none;color:var(--gold,#c9a84c);font-size:12px;cursor:pointer;font-weight:600;padding:4px 0;margin-top:4px; }
+    .copy-btn       { background:var(--navy);color:#fff;border:none;border-radius:6px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s; }
+    .copy-btn:hover { background:#1a3050; }
+    .copy-btn.copied { background:#198754; }
+    .success-pct    { font-size:18px;font-weight:700; }
+    .success-high   { color:#198754; }
+    .success-mid    { color:#e67e22; }
+    .success-low    { color:#dc3545; }
+    .template-block { background:#0d1b2a;border-radius:12px;padding:20px;margin-bottom:16px; }
+    .template-block h4 { color:var(--gold,#c9a84c);font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center; }
+    .template-pre   { color:rgba(255,255,255,.8);font-size:12px;line-height:1.8;white-space:pre-wrap;font-family:monospace;margin:0; }
+    .stats-strip    { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px; }
+    .stats-strip-item { background:var(--navy,#0d1b2a);border-radius:12px;padding:20px;text-align:center; }
+    .stats-strip-item .ssi-val { font-size:32px;font-weight:700;color:var(--gold,#c9a84c); }
+    .stats-strip-item .ssi-lbl { font-size:12px;color:rgba(255,255,255,.6);margin-top:6px; }
+    .section-toggle { background:none;border:none;font-family:var(--font-serif);font-size:22px;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;padding:16px 0;border-bottom:2px solid #e5e5e5;margin-bottom:16px; }
+    .section-content { display:block; }
+    .section-content.collapsed { display:none; }
+    @media(max-width:600px){ .neg-stats{grid-template-columns:1fr 1fr;} .stats-strip{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body class="tool-page">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+        <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+        <li><a href="./index.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a><a href="../tabs/law-school/landing-pages/v1.html">Law School</a>
+      <a href="./index.html">Free Tools</a><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="./index.html" class="tool-breadcrumb">← Law School Tools</a>
+      <span class="tool-eyebrow">Free Tool · Law School Admissions</span>
+      <h1>Scholarship Negotiation Database</h1>
+      <p>School-by-school negotiation patterns, success rates, best leverage schools, historical bump data, and copy-ready email templates. The average negotiation increases a scholarship by $15,000.</p>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <div class="container">
+
+      <!-- Stats strip -->
+      <div class="stats-strip">
+        <div class="stats-strip-item"><div class="ssi-val" id="avgSuccessRate">—</div><div class="ssi-lbl">Average Negotiation Success Rate</div></div>
+        <div class="stats-strip-item"><div class="ssi-val" id="avgBump">—</div><div class="ssi-lbl">Average Scholarship Increase</div></div>
+        <div class="stats-strip-item"><div class="ssi-val">Mar–Apr</div><div class="ssi-lbl">Best Time to Negotiate (before deposit deadlines)</div></div>
+      </div>
+
+      <div class="tool-layout">
+        <!-- SIDEBAR -->
+        <aside class="filter-sidebar">
+          <div class="calc-card">
+            <h3 style="font-family:var(--font-serif);font-size:18px;margin-bottom:16px;color:var(--navy);">Filter Schools</h3>
+            <div class="calc-field" style="margin-bottom:12px;">
+              <label>Search School</label>
+              <input type="text" id="negSearch" class="filter-select" placeholder="e.g. Columbia..." />
+            </div>
+            <div style="margin-bottom:12px;">
+              <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:6px;">Success Rate</label>
+              <div class="filter-pills" id="successPills">
+                <button class="filter-pill active" data-success="any">Any</button>
+                <button class="filter-pill" data-success="high">High (&gt;55%)</button>
+                <button class="filter-pill" data-success="very">Very High (&gt;65%)</button>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:6px;">Average Bump</label>
+              <div class="filter-pills" id="bumpPills">
+                <button class="filter-pill active" data-bump="any">Any</button>
+                <button class="filter-pill" data-bump="10">$10K+</button>
+                <button class="filter-pill" data-bump="15">$15K+</button>
+                <button class="filter-pill" data-bump="20">$20K+</button>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Sort By</label>
+              <select id="negSortSel" class="filter-select">
+                <option value="rank">School Rank</option>
+                <option value="success">Success Rate</option>
+                <option value="bump">Highest Bump</option>
+              </select>
+            </div>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <div class="results-area">
+          <div id="negSchoolsWrap"></div>
+
+          <!-- Negotiation Tips Section -->
+          <div style="margin-top:40px;">
+            <button class="section-toggle" id="tipsToggle">10 Rules for Successful Scholarship Negotiation <span>▾</span></button>
+            <div class="section-content" id="tipsContent"></div>
+          </div>
+
+          <!-- Email Templates -->
+          <div style="margin-top:32px;">
+            <button class="section-toggle" id="templatesToggle">Email Templates (Copy &amp; Customize) <span>▾</span></button>
+            <div class="section-content collapsed" id="templatesContent"></div>
+          </div>
+
+          <!-- Leverage Pairs -->
+          <div style="margin-top:32px;">
+            <button class="section-toggle" id="pairsToggle">Best Negotiation School Pairs <span>▾</span></button>
+            <div class="section-content collapsed" id="pairsContent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school admissions consulting.</p></div>
+      <div class="footer-links">
+        <div class="footer-col"><h5>Law School Tools</h5><ul>
+          <li><a href="./law-predictor.html">Admissions Predictor</a></li><li><a href="./splitter-finder.html">Splitter Finder</a></li>
+          <li><a href="./lsat-improvement.html">LSAT Study Plan</a></li><li><a href="./lsat-retake.html">Retake Decision</a></li>
+          <li><a href="./law-debt.html">Debt Calculator</a></li><li><a href="./biglaw-pi.html">BigLaw vs. PI</a></li>
+          <li><a href="./law-scholarship-estimator.html">Scholarship Estimator</a></li><li><a href="./practice-areas.html">Practice Areas</a></li>
+          <li><a href="./legal-markets.html">Legal Markets</a></li><li><a href="./scholarship-negotiation.html">Negotiation Database</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Programs</h5><ul>
+          <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li><li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li><li><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Company</h5><ul>
+          <li><a href="../index.html#founders">About Us</a></li><li><a href="#">Blog</a></li><li><a href="#">YouTube</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition. All rights reserved.</p><div class="footer-legal"><a href="../legal/privacy-policy.html">Privacy Policy</a><a href="../legal/terms-of-service.html">Terms of Service</a></div></div></div>
+  </footer>
+
+  <script src="../data/scholarship-negotiation-data.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    const $id = id => document.getElementById(id);
+    let activeSuccess = 'any', activeBump = 'any';
+
+    // Stats
+    const avgSuccess = Math.round(SCHOLARSHIP_NEGOTIATION.reduce((s,n)=>s+n.negotiationSuccessRate,0)/SCHOLARSHIP_NEGOTIATION.length);
+    const avgBumpVal = Math.round(SCHOLARSHIP_NEGOTIATION.reduce((s,n)=>s+n.avgNegotiationBump,0)/SCHOLARSHIP_NEGOTIATION.length);
+    $id('avgSuccessRate').textContent = avgSuccess + '%';
+    $id('avgBump').textContent = '$' + avgBumpVal.toLocaleString();
+
+    function fmt(n){ return '$' + n.toLocaleString(); }
+    function successClass(r){ return r > 55 ? 'success-high' : r > 40 ? 'success-mid' : 'success-low'; }
+
+    function renderSchools() {
+      const search  = $id('negSearch').value.toLowerCase();
+      const sortVal = $id('negSortSel').value;
+      let data = SCHOLARSHIP_NEGOTIATION.filter(n => {
+        if (search && !n.schoolName.toLowerCase().includes(search)) return false;
+        if (activeSuccess === 'high'  && n.negotiationSuccessRate <= 55) return false;
+        if (activeSuccess === 'very'  && n.negotiationSuccessRate <= 65) return false;
+        if (activeBump === '10' && n.avgNegotiationBump < 10000) return false;
+        if (activeBump === '15' && n.avgNegotiationBump < 15000) return false;
+        if (activeBump === '20' && n.avgNegotiationBump < 20000) return false;
+        return true;
+      });
+      if (sortVal === 'success') data.sort((a,b)=>b.negotiationSuccessRate-a.negotiationSuccessRate);
+      else if (sortVal === 'bump') data.sort((a,b)=>b.avgNegotiationBump-a.avgNegotiationBump);
+      else data.sort((a,b)=>a.usnwrRank-b.usnwrRank);
+
+      $id('negSchoolsWrap').innerHTML = data.map((n,i) => {
+        const tiers = n.scholarshipByTier;
+        return `<div class="neg-card">
+          <div class="neg-card-header">
+            <div><div class="neg-school-name">${n.schoolName}</div></div>
+            <span class="neg-rank-badge">#${n.usnwrRank}</span>
+          </div>
+          <div class="neg-stats">
+            <div class="neg-stat"><div class="ns-val"><span class="success-pct ${successClass(n.negotiationSuccessRate)}">${n.negotiationSuccessRate}%</span></div><div class="ns-lbl">Success Rate</div></div>
+            <div class="neg-stat"><div class="ns-val">${fmt(n.avgNegotiationBump)}</div><div class="ns-lbl">Avg. Increase</div></div>
+            <div class="neg-stat"><div class="ns-val">${n.leverageSchools.length}</div><div class="ns-lbl">Leverage Schools</div></div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;">Best Leverage Schools</div>
+            <div class="leverage-pills">${n.leverageSchools.map(l=>`<span class="leverage-pill">${l}</span>`).join('')}</div>
+          </div>
+          <table class="neg-tier-table">
+            <thead><tr><th>Your Stats vs. School</th><th>Estimated Scholarship Range</th></tr></thead>
+            <tbody>
+              <tr><td>Above 75th percentile</td><td>${tiers.top[0]>0?fmt(tiers.top[0])+' – '+fmt(tiers.top[1])+'/yr':'N/A'}</td></tr>
+              <tr><td>50th – 75th percentile</td><td>${tiers.mid[0]>0?fmt(tiers.mid[0])+' – '+fmt(tiers.mid[1])+'/yr':'N/A'}</td></tr>
+              <tr><td>Near median</td><td>${tiers.median[0]>0?fmt(tiers.median[0])+' – '+fmt(tiers.median[1])+'/yr':'N/A'}</td></tr>
+              <tr><td>Below median</td><td><span style="color:#999;">Unlikely</span></td></tr>
+            </tbody>
+          </table>
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px;">Negotiation Notes</div>
+            <div class="notes-text" id="notes-${i}">${n.negotiationNotes}</div>
+            <button class="notes-toggle" onclick="toggleNotes(${i})">Read more ▾</button>
+          </div>
+          <button class="copy-btn" id="copy-${i}" onclick="copyScript(${i})">📋 Copy Email Template</button>
+        </div>`;
+      }).join('') || '<p style="color:var(--text-muted);text-align:center;padding:40px 0;">No schools match your filters.</p>';
+    }
+
+    window.toggleNotes = function(i) {
+      const el = $id('notes-'+i);
+      const btn = el.nextElementSibling;
+      el.classList.toggle('expanded');
+      btn.textContent = el.classList.contains('expanded') ? 'Show less ▴' : 'Read more ▾';
+    };
+
+    window.copyScript = function(i) {
+      const search = $id('negSearch').value.toLowerCase();
+      const sortVal = $id('negSortSel').value;
+      let data = SCHOLARSHIP_NEGOTIATION.filter(n => !search || n.schoolName.toLowerCase().includes(search));
+      if (sortVal === 'success') data.sort((a,b)=>b.negotiationSuccessRate-a.negotiationSuccessRate);
+      else if (sortVal === 'bump') data.sort((a,b)=>b.avgNegotiationBump-a.avgNegotiationBump);
+      else data.sort((a,b)=>a.usnwrRank-b.usnwrRank);
+      const n = data[i];
+      if (!n) return;
+      navigator.clipboard.writeText(n.bestScript).then(() => {
+        const btn = $id('copy-'+i);
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copied');
+        setTimeout(()=>{ btn.textContent='📋 Copy Email Template'; btn.classList.remove('copied'); }, 3000);
+      });
+    };
+
+    // Tips
+    $id('tipsContent').innerHTML = `<ol style="padding-left:20px;">` +
+      NEGOTIATION_TIPS.map(t => `<li style="font-size:14px;line-height:1.8;color:var(--text-muted);margin-bottom:8px;">${t}</li>`).join('') +
+      `</ol>`;
+
+    // Templates
+    $id('templatesContent').innerHTML = Object.entries(NEGOTIATION_TEMPLATES).map(([key,text]) => {
+      const labels = { email:'Initial Request Email', followUp:'Follow-Up Email (7–10 days later)', acceptOffer:'Acceptance Confirmation Email' };
+      const id = 'tpl-' + key;
+      return `<div class="template-block">
+        <h4>${labels[key]||key} <button class="copy-btn" style="padding:4px 12px;font-size:12px;" onclick="copyTemplate('${id}')">Copy</button></h4>
+        <pre class="template-pre" id="${id}">${text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
+      </div>`;
+    }).join('');
+
+    window.copyTemplate = function(id) {
+      const el = $id(id);
+      if (!el) return;
+      navigator.clipboard.writeText(el.textContent).then(() => {
+        const btn = el.previousElementSibling.querySelector('button');
+        btn.textContent = 'Copied!'; btn.classList.add('copied');
+        setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); }, 3000);
+      });
+    };
+
+    // Leverage pairs
+    $id('pairsContent').innerHTML = `
+      <div class="matrix-table-wrap">
+        <table class="matrix-table">
+          <thead><tr><th>If You're Negotiating at...</th><th>Use Offer From...</th><th>Why It Works</th></tr></thead>
+          <tbody>${LEVERAGE_PAIRS.map(p=>`<tr><td><strong>${p.school}</strong></td><td>${p.bestLeverage}</td><td style="font-size:13px;color:#666;">${p.note}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+    `;
+
+    // Filters
+    $id('negSearch').addEventListener('input', renderSchools);
+    $id('negSortSel').addEventListener('change', renderSchools);
+
+    $id('successPills').querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        $id('successPills').querySelectorAll('.filter-pill').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active'); activeSuccess = btn.dataset.success; renderSchools();
+      });
+    });
+    $id('bumpPills').querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        $id('bumpPills').querySelectorAll('.filter-pill').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active'); activeBump = btn.dataset.bump; renderSchools();
+      });
+    });
+
+    // Section toggles
+    ['tipsToggle','templatesToggle','pairsToggle'].forEach(tid => {
+      $id(tid).addEventListener('click', () => {
+        const contentId = tid.replace('Toggle','Content');
+        const content = $id(contentId);
+        content.classList.toggle('collapsed');
+        $id(tid).querySelector('span').textContent = content.classList.contains('collapsed') ? '▾' : '▴';
+      });
+    });
+
+    renderSchools();
+  </script>
+</body>
+</html>

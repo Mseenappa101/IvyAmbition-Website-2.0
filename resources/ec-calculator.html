@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extracurricular Impact Calculator | IvyAmbition</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="tool-page">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+        <li><a href="./index.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a>
+      <a href="./index.html">Free Tools</a><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="./index.html" class="tool-breadcrumb">← Back to Free Tools</a>
+      <span class="tool-eyebrow">Free Tool · EC Impact Calculator</span>
+      <h1>How Strong Is Your Activity List?</h1>
+      <p>Add your extracurricular activities and leadership roles. We'll score your profile across the dimensions admissions committees actually evaluate — and show you where to focus.</p>
+    </div>
+  </section>
+
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout wide-form">
+
+        <!-- ACTIVITY BUILDER -->
+        <div>
+          <!-- Academic Context -->
+          <div class="calc-card" style="margin-bottom:24px;">
+            <h2>Academic Context</h2>
+            <p>Your GPA and test scores provide context for how AOs will weight your activities.</p>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label>GPA (Unweighted)</label>
+                <input type="number" id="gpa" placeholder="3.8" value="3.8" min="0" max="4.0" step="0.01" />
+              </div>
+              <div class="calc-field">
+                <label>SAT / ACT</label>
+                <input type="number" id="testScore" placeholder="1350 SAT or 30 ACT" />
+                <div class="hint">Enter SAT (400–1600) or ACT (1–36)</div>
+              </div>
+            </div>
+            <div class="calc-row" style="margin-top:16px;">
+              <div class="calc-field">
+                <label>Target School Tier</label>
+                <select id="targetTier">
+                  <option value="elite">Elite (Ivies, MIT, Stanford, etc.)</option>
+                  <option value="top25" selected>Top 25</option>
+                  <option value="top50">Top 50</option>
+                  <option value="top100">Top 100</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label>Overall Course Rigor</label>
+                <select id="rigor">
+                  <option value="max">Maximum — All AP/IB available</option>
+                  <option value="high" selected>High — Many AP/IB courses</option>
+                  <option value="medium">Medium — Some APs</option>
+                  <option value="low">Low — Minimal APs</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity List -->
+          <div class="calc-card" style="margin-bottom:24px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+              <div>
+                <h2 style="margin-bottom:4px;">Your Activities</h2>
+                <p style="margin:0;font-size:13px;color:var(--text-muted);">Add up to 10 activities. Common App allows 10.</p>
+              </div>
+              <button class="btn btn-outline" id="addActivityBtn" style="white-space:nowrap">+ Add Activity</button>
+            </div>
+            <div class="ec-activity-list" id="activityList"></div>
+          </div>
+
+          <button class="btn btn-primary" id="analyzeBtn" style="width:100%;margin-bottom:24px;">Analyze My Profile →</button>
+        </div>
+
+        <!-- RESULTS PANEL -->
+        <div class="results-panel" id="resultsPanel">
+          <h3>Your EC Profile Score</h3>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Overall EC Score</div>
+            <div class="result-metric-value lg" id="overallScore">—</div>
+            <div class="result-metric-sub" id="overallLabel">Add activities to see your score</div>
+          </div>
+
+          <div class="result-divider"></div>
+
+          <div class="result-metric">
+            <div class="result-metric-label">Leadership Depth</div>
+            <div class="result-metric-value" id="leadershipScore">—</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-label">Spike / Specialization</div>
+            <div class="result-metric-value" id="spikeScore">—</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-label">Impact &amp; Scope</div>
+            <div class="result-metric-value" id="impactScore">—</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-label">Commitment / Longevity</div>
+            <div class="result-metric-value" id="commitmentScore">—</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-label">Narrative Coherence</div>
+            <div class="result-metric-value" id="narrativeScore">—</div>
+          </div>
+
+          <div class="result-divider"></div>
+
+          <div id="scoreInsight" class="result-insight"></div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="calc-card" style="margin-top:32px;" id="recommendationsCard" style="display:none;">
+        <h2>Recommendations to Strengthen Your Profile</h2>
+        <div id="recommendations" style="display:flex;flex-direction:column;gap:16px;margin-top:16px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite undergraduate admissions consulting.</p></div>
+      <div class="footer-links">
+        <div class="footer-col"><h5>Free Tools</h5><ul>
+          <li><a href="./college-search.html">College Search</a></li>
+          <li><a href="./ec-calculator.html">EC Calculator</a></li>
+          <li><a href="./activity-optimizer.html">Activity Optimizer</a></li>
+        </ul></div>
+        <div class="footer-col"><h5>Programs</h5><ul>
+          <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li><li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition. All rights reserved.</p></div></div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+  (function() {
+    const ACTIVITY_TYPES = [
+      "Academic / Research",
+      "Arts (Music, Visual, Theater)",
+      "Athletics / Sports",
+      "Community Service / Volunteer",
+      "Career-Oriented / Internship",
+      "Cultural / Identity",
+      "Debate / Speech",
+      "Entrepreneurship / Business",
+      "Government / Civic",
+      "Journalism / Writing / Media",
+      "Religious / Spiritual",
+      "Science / Math Competition",
+      "Student Government",
+      "Other Club / Organization"
+    ];
+
+    let activityCount = 0;
+    const MAX_ACTIVITIES = 10;
+
+    function addActivity() {
+      if (activityCount >= MAX_ACTIVITIES) {
+        alert('Common App allows a maximum of 10 activities.');
+        return;
+      }
+      activityCount++;
+      const id = 'act-' + Date.now();
+      const item = document.createElement('div');
+      item.className = 'ec-activity-item';
+      item.id = id;
+      item.innerHTML = `
+        <div class="ec-ai-top">
+          <div class="ec-activity-name">Activity ${activityCount}</div>
+          <button class="ec-remove-btn" data-id="${id}">×</button>
+        </div>
+        <div class="calc-row">
+          <div class="calc-field">
+            <label>Activity Name / Description</label>
+            <input type="text" class="act-name" placeholder="e.g. Varsity Soccer Captain" />
+          </div>
+          <div class="calc-field">
+            <label>Category</label>
+            <select class="act-type">
+              ${ACTIVITY_TYPES.map(t => `<option value="${t}">${t}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="calc-row" style="margin-top:12px;">
+          <div class="calc-field">
+            <label>Leadership Role</label>
+            <select class="act-leadership">
+              <option value="1">Participant / Member</option>
+              <option value="2">Officer / Committee Chair</option>
+              <option value="3">Captain / President / Editor-in-Chief</option>
+              <option value="4">Founder / Creator</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label>Years of Involvement</label>
+            <select class="act-years">
+              <option value="1">1 year</option>
+              <option value="2">2 years</option>
+              <option value="3">3 years</option>
+              <option value="4">4 years</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-row" style="margin-top:12px;">
+          <div class="calc-field">
+            <label>Scope of Impact</label>
+            <select class="act-impact">
+              <option value="1">School / Local</option>
+              <option value="2">Regional / State</option>
+              <option value="3">National</option>
+              <option value="4">International</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label>Awards / Recognition (if any)</label>
+            <select class="act-award">
+              <option value="0">None</option>
+              <option value="1">School-level award</option>
+              <option value="2">Regional / State award</option>
+              <option value="3">National award / competition finalist</option>
+              <option value="4">International award</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-row" style="margin-top:12px;">
+          <div class="calc-field">
+            <label>Hours per week</label>
+            <input type="number" class="act-hours" placeholder="e.g. 10" min="0" max="40" value="5" />
+          </div>
+          <div class="calc-field">
+            <label>Weeks per year</label>
+            <input type="number" class="act-weeks" placeholder="e.g. 35" min="0" max="52" value="35" />
+          </div>
+        </div>
+      `;
+      document.getElementById('activityList').appendChild(item);
+    }
+
+    document.getElementById('addActivityBtn').addEventListener('click', addActivity);
+
+    document.getElementById('activityList').addEventListener('click', e => {
+      if (e.target.classList.contains('ec-remove-btn')) {
+        document.getElementById(e.target.dataset.id).remove();
+        activityCount--;
+      }
+    });
+
+    document.getElementById('analyzeBtn').addEventListener('click', analyze);
+
+    // Add one activity by default
+    addActivity();
+
+    function analyze() {
+      const activities = document.querySelectorAll('.ec-activity-item');
+      if (activities.length === 0) { alert('Add at least one activity.'); return; }
+
+      const targetTier = document.getElementById('targetTier').value;
+      const gpa = +document.getElementById('gpa').value || 3.5;
+      const rigor = document.getElementById('rigor').value;
+
+      let leadershipTotal = 0, spikeTotal = 0, impactTotal = 0, commitmentTotal = 0;
+      const categoryCount = {};
+      let maxLeadership = 0;
+
+      activities.forEach(item => {
+        const leadership = +item.querySelector('.act-leadership').value;
+        const years = +item.querySelector('.act-years').value;
+        const impact = +item.querySelector('.act-impact').value;
+        const award = +item.querySelector('.act-award').value;
+        const hours = +item.querySelector('.act-hours').value || 5;
+        const type = item.querySelector('.act-type').value;
+
+        leadershipTotal += leadership;
+        if (leadership > maxLeadership) maxLeadership = leadership;
+        impactTotal += impact + award;
+        commitmentTotal += years * (hours / 10);
+        categoryCount[type] = (categoryCount[type] || 0) + 1;
+      });
+
+      const n = activities.length;
+
+      // Spike: dominant category gets bonus
+      const maxCatCount = Math.max(...Object.values(categoryCount));
+      const spikeRaw = maxCatCount >= 3 ? 4 : maxCatCount === 2 ? 3 : 2;
+
+      // Scores out of 10
+      const leadershipScore = Math.min(10, Math.round((leadershipTotal / n + maxLeadership) / 2 * 2));
+      const spikeScore = Math.min(10, spikeRaw * 2.5);
+      const impactScore = Math.min(10, Math.round(impactTotal / n * 1.8));
+      const commitmentScore = Math.min(10, Math.round(commitmentTotal / n * 2.5));
+
+      // Narrative: diversity of meaningful categories
+      const diverseCategories = Object.keys(categoryCount).length;
+      const narrativeScore = Math.min(10, diverseCategories >= 4 ? 8 : diverseCategories === 3 ? 7 : diverseCategories === 2 ? 6 : 5);
+
+      const overall = Math.round((leadershipScore * 0.25 + spikeScore * 0.20 + impactScore * 0.25 + commitmentScore * 0.15 + narrativeScore * 0.15) * 10);
+
+      document.getElementById('overallScore').textContent = overall + '/100';
+      document.getElementById('leadershipScore').textContent = leadershipScore + '/10';
+      document.getElementById('spikeScore').textContent = spikeScore + '/10';
+      document.getElementById('impactScore').textContent = impactScore + '/10';
+      document.getElementById('commitmentScore').textContent = commitmentScore + '/10';
+      document.getElementById('narrativeScore').textContent = narrativeScore + '/10';
+
+      const tierThresholds = { elite: 80, top25: 65, top50: 50, top100: 40 };
+      const threshold = tierThresholds[targetTier];
+      let label, insight;
+
+      if (overall >= threshold + 15) {
+        label = 'Very Strong for your target schools';
+        insight = `<strong style="color:var(--gold)">Your activity profile is a genuine strength.</strong> Focus now on writing descriptions that quantify your impact and tell a clear story about who you are.`;
+      } else if (overall >= threshold) {
+        label = 'Competitive for your target schools';
+        insight = `<strong style="color:var(--gold)">Solid profile.</strong> Consider deepening leadership in your top 2-3 activities or pursuing a regional/national recognition opportunity before application season.`;
+      } else {
+        label = 'Needs development for your target schools';
+        insight = `<strong style="color:#f0a500">Room to grow.</strong> ${targetTier === 'elite' ? 'Elite schools want to see national-level impact or founder-level leadership.' : 'Focus on earning a leadership position in your strongest activity and increasing demonstrated impact.'} Use the activity description optimizer to make the most of what you have.`;
+      }
+
+      document.getElementById('overallLabel').textContent = label;
+      document.getElementById('scoreInsight').innerHTML = insight;
+
+      // Recommendations
+      const recs = [];
+      if (leadershipScore < 7) recs.push({ icon: '🎯', title: 'Pursue Leadership Positions', text: 'Apply to be president, captain, or editor-in-chief of your most important activity. Leadership tier is the single biggest driver of admissions impact.' });
+      if (impactScore < 6) recs.push({ icon: '📊', title: 'Create Measurable Impact', text: 'Admissions readers respond to numbers: students served, money raised, events organized, articles published. Reframe your activities around outcomes.' });
+      if (maxCatCount < 2) recs.push({ icon: '🔍', title: 'Develop a Clear Spike', text: 'Applicants who do many unrelated things rarely stand out. Focus on 2-3 activities in a coherent theme — even if they span multiple categories, they should tell one story.' });
+      if (n < 7) recs.push({ icon: '➕', title: 'Fill Your Activity Slots', text: 'Common App allows 10 activities. If you have fewer than 8, look for academic competitions, online courses with certifications, independent research, or community initiatives to fill the gap.' });
+      if (commitmentScore < 6) recs.push({ icon: '📅', title: 'Increase Time Commitment', text: 'Admissions readers can tell the difference between serious involvement and padding. Aim for at least 8-10 hours/week in your top 1-2 activities.' });
+
+      const recsEl = document.getElementById('recommendations');
+      recsEl.innerHTML = recs.map(r => `
+        <div style="display:flex;gap:16px;padding:16px;background:var(--cream);border-radius:12px;border:1.5px solid var(--border);">
+          <div style="font-size:28px;flex-shrink:0;">${r.icon}</div>
+          <div><div style="font-weight:700;color:var(--navy);margin-bottom:4px;">${r.title}</div><div style="font-size:13px;color:var(--text-muted);line-height:1.6;">${r.text}</div></div>
+        </div>`).join('');
+
+      if (recs.length === 0) {
+        recsEl.innerHTML = '<div style="padding:20px;color:#2e7d32;font-weight:600;">✓ No major gaps identified. Focus on polishing your activity descriptions using the Activity Optimizer.</div>';
+      }
+      document.getElementById('recommendationsCard').style.display = 'block';
+    }
+  })();
+  </script>
+</body>
+</html>

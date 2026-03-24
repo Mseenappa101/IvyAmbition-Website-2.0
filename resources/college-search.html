@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Search Database | IvyAmbition</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="tool-page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+        <li><a href="./index.html">Free Tools</a></li>
+        <li><a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html">Home</a>
+      <a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a>
+      <a href="./index.html">Free Tools</a>
+      <a href="https://calendly.com/d/ctmv-k59-8g6/ivyreader-free-consultation-with-founders" target="_blank">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero">
+    <div class="container tool-hero-content">
+      <a href="./index.html" class="tool-breadcrumb">← Back to Free Tools</a>
+      <span class="tool-eyebrow">Free Tool · College Database</span>
+      <h1>Search 150+ Colleges &amp; Universities</h1>
+      <p>Filter by acceptance rate, tuition, test scores, size, setting, major, and 25+ more criteria. Find the schools that actually fit your profile.</p>
+    </div>
+  </section>
+
+  <!-- TOOL BODY -->
+  <div class="tool-body">
+    <div class="container">
+      <div class="tool-layout">
+
+        <!-- FILTER SIDEBAR -->
+        <aside class="filter-sidebar" id="filterSidebar">
+          <div class="filter-sidebar-header">
+            <span class="filter-sidebar-title">Filters</span>
+            <button class="filter-clear-all" id="clearAllBtn">Clear All</button>
+          </div>
+
+          <!-- Search -->
+          <div class="filter-group">
+            <div class="filter-group-head">School Name</div>
+            <input type="text" class="filter-search-input" id="nameSearch" placeholder="Search by name..." />
+          </div>
+
+          <!-- Type -->
+          <div class="filter-group">
+            <div class="filter-group-head">Type</div>
+            <div class="filter-pills" id="typeFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="private">Private</button>
+              <button class="filter-pill" data-val="public">Public</button>
+            </div>
+          </div>
+
+          <!-- Kind -->
+          <div class="filter-group">
+            <div class="filter-group-head">School Kind</div>
+            <div class="filter-pills" id="kindFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="university">University</button>
+              <button class="filter-pill" data-val="lac">Liberal Arts</button>
+              <button class="filter-pill" data-val="technical">Technical</button>
+            </div>
+          </div>
+
+          <!-- Region -->
+          <div class="filter-group">
+            <div class="filter-group-head">Region</div>
+            <div class="filter-pills" id="regionFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="northeast">Northeast</button>
+              <button class="filter-pill" data-val="southeast">Southeast</button>
+              <button class="filter-pill" data-val="midwest">Midwest</button>
+              <button class="filter-pill" data-val="south">South</button>
+              <button class="filter-pill" data-val="west">West</button>
+            </div>
+          </div>
+
+          <!-- Setting -->
+          <div class="filter-group">
+            <div class="filter-group-head">Setting</div>
+            <div class="filter-pills" id="settingFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="urban">Urban</button>
+              <button class="filter-pill" data-val="suburban">Suburban</button>
+              <button class="filter-pill" data-val="town">College Town</button>
+              <button class="filter-pill" data-val="rural">Rural</button>
+            </div>
+          </div>
+
+          <!-- Acceptance Rate -->
+          <div class="filter-group">
+            <div class="filter-group-head">Acceptance Rate</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>0%</span><span id="acceptVal">100%</span>
+              </div>
+              <input type="range" id="acceptRange" min="0" max="100" value="100" step="1" />
+              <div class="filter-range-note">Show schools with ≤ <strong id="acceptNote">100</strong>% acceptance rate</div>
+            </div>
+          </div>
+
+          <!-- SAT Range -->
+          <div class="filter-group">
+            <div class="filter-group-head">SAT Score (Your Score)</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>800</span><span id="satVal">1600</span>
+              </div>
+              <input type="range" id="satRange" min="800" max="1600" value="1600" step="10" />
+              <div class="filter-range-note">Show schools where your <strong id="satNote">1600</strong> is in or above the 25th–75th range</div>
+            </div>
+          </div>
+
+          <!-- ACT Range -->
+          <div class="filter-group">
+            <div class="filter-group-head">ACT Score (Your Score)</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>1</span><span id="actVal">36</span>
+              </div>
+              <input type="range" id="actRange" min="1" max="36" value="36" step="1" />
+              <div class="filter-range-note">Show schools where your <strong id="actNote">36</strong> is in or above the 25th–75th range</div>
+            </div>
+          </div>
+
+          <!-- Tuition -->
+          <div class="filter-group">
+            <div class="filter-group-head">Max Tuition (Out-of-State)</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>$0</span><span id="tuitionVal">$70K+</span>
+              </div>
+              <input type="range" id="tuitionRange" min="0" max="70000" value="70000" step="1000" />
+              <div class="filter-range-note">Max: <strong id="tuitionNote">$70,000</strong></div>
+            </div>
+          </div>
+
+          <!-- Enrollment -->
+          <div class="filter-group">
+            <div class="filter-group-head">Enrollment Size</div>
+            <div class="filter-pills" id="sizeFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="small">Small (&lt;5K)</button>
+              <button class="filter-pill" data-val="medium">Medium (5K–15K)</button>
+              <button class="filter-pill" data-val="large">Large (&gt;15K)</button>
+            </div>
+          </div>
+
+          <!-- Grad Rate -->
+          <div class="filter-group">
+            <div class="filter-group-head">Min Graduation Rate</div>
+            <div class="filter-range">
+              <div class="filter-range-labels">
+                <span>50%</span><span id="gradVal">50%</span>
+              </div>
+              <input type="range" id="gradRange" min="50" max="100" value="50" step="1" />
+              <div class="filter-range-note">At least <strong id="gradNote">50</strong>% grad rate</div>
+            </div>
+          </div>
+
+          <!-- Research -->
+          <div class="filter-group">
+            <div class="filter-group-head">Research Activity</div>
+            <div class="filter-pills" id="researchFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="high">High</button>
+              <button class="filter-pill" data-val="medium">Medium</button>
+              <button class="filter-pill" data-val="low">Low</button>
+            </div>
+          </div>
+
+          <!-- Test Optional -->
+          <div class="filter-group">
+            <div class="filter-group-head">Test Policy</div>
+            <div class="filter-pills" id="testOptFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="to">Test Optional</button>
+              <button class="filter-pill" data-val="req">Test Required</button>
+            </div>
+          </div>
+
+          <!-- Athletics -->
+          <div class="filter-group">
+            <div class="filter-group-head">Athletics</div>
+            <div class="filter-pills" id="athleticsFilter">
+              <button class="filter-pill active" data-val="all">All</button>
+              <button class="filter-pill" data-val="D1">D1</button>
+              <button class="filter-pill" data-val="D2">D2</button>
+              <button class="filter-pill" data-val="D3">D3</button>
+            </div>
+          </div>
+
+          <!-- Special -->
+          <div class="filter-group">
+            <div class="filter-group-head">Special Characteristics</div>
+            <label class="filter-check"><input type="checkbox" id="hbcuCheck" /> HBCUs Only</label>
+            <label class="filter-check"><input type="checkbox" id="womensCheck" /> Women's Colleges Only</label>
+            <label class="filter-check"><input type="checkbox" id="greekCheck" /> Greek Life Present</label>
+            <label class="filter-check"><input type="checkbox" id="religiousCheck" /> Religiously Affiliated</label>
+          </div>
+
+          <!-- Major -->
+          <div class="filter-group">
+            <div class="filter-group-head">Major / Field of Study</div>
+            <select id="majorFilter" class="filter-select">
+              <option value="">All Majors</option>
+            </select>
+          </div>
+
+          <!-- Sort -->
+          <div class="filter-group">
+            <div class="filter-group-head">Sort By</div>
+            <select id="sortSelect" class="filter-select">
+              <option value="accept-asc">Acceptance Rate (Low→High)</option>
+              <option value="accept-desc">Acceptance Rate (High→Low)</option>
+              <option value="tuition-asc">Tuition (Low→High)</option>
+              <option value="tuition-desc">Tuition (High→Low)</option>
+              <option value="grad-desc">Graduation Rate (High→Low)</option>
+              <option value="sat-desc">SAT 75th Pct (High→Low)</option>
+              <option value="name-asc">Name (A→Z)</option>
+            </select>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <div class="tool-results">
+          <div class="tool-results-header">
+            <span id="resultsCount" class="results-count">Loading colleges...</span>
+            <button class="filter-toggle-btn" id="filterToggleBtn">&#9776; Filters</button>
+          </div>
+          <div class="school-results-grid" id="resultsGrid"></div>
+          <div class="no-results" id="noResults" style="display:none;">
+            <p>No schools match your current filters. Try loosening some criteria.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+        <p>Elite undergraduate admissions consulting.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Free Tools</h5>
+          <ul>
+            <li><a href="./college-search.html">College Search</a></li>
+            <li><a href="scholarships.html">Scholarships</a></li>
+            <li><a href="./sat-act-tool.html">SAT/ACT Tool</a></li>
+            <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li>
+            <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+            <li><a href="../tabs/transfer/landing-pages/v1.html">Law School Transfer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../index.html#founders">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 IvyAmbition. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../legal/privacy-policy.html">Privacy Policy</a>
+          <a href="../legal/terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="../data/college-data.js"></script>
+  <script>
+  (function() {
+    // ─── State ───────────────────────────────────────────────────────────────
+    const state = {
+      name: '',
+      type: 'all',
+      kind: 'all',
+      region: 'all',
+      setting: 'all',
+      size: 'all',
+      research: 'all',
+      testOpt: 'all',
+      athletics: 'all',
+      accept: 100,
+      sat: 1600,
+      act: 36,
+      tuition: 70000,
+      grad: 50,
+      hbcu: false,
+      womens: false,
+      greek: false,
+      religious: false,
+      major: '',
+      sort: 'accept-asc'
+    };
+
+    // ─── Populate major dropdown ──────────────────────────────────────────────
+    const majorSel = document.getElementById('majorFilter');
+    (ALL_MAJORS || []).sort().forEach(m => {
+      const o = document.createElement('option');
+      o.value = m; o.textContent = m;
+      majorSel.appendChild(o);
+    });
+
+    // ─── Range sliders ────────────────────────────────────────────────────────
+    function initRange(rangeId, valId, noteId, stateKey, fmt) {
+      const range = document.getElementById(rangeId);
+      const valEl = document.getElementById(valId);
+      const noteEl = document.getElementById(noteId);
+      function update() {
+        const v = +range.value;
+        state[stateKey] = v;
+        const label = fmt(v);
+        if (valEl) valEl.textContent = label;
+        if (noteEl) noteEl.textContent = v;
+        applyFilters();
+      }
+      range.addEventListener('input', update);
+      update();
+    }
+    initRange('acceptRange','acceptVal','acceptNote','accept', v => v === 100 ? '100%' : v + '%');
+    initRange('satRange','satVal','satNote','sat', v => v);
+    initRange('actRange','actVal','actNote','act', v => v);
+    initRange('tuitionRange','tuitionVal','tuitionNote','tuition', v => v >= 70000 ? '$70K+' : '$' + v.toLocaleString());
+    initRange('gradRange','gradVal','gradNote','grad', v => v + '%');
+
+    // ─── Pill filters ─────────────────────────────────────────────────────────
+    function initPills(containerId, stateKey) {
+      document.getElementById(containerId).addEventListener('click', e => {
+        if (!e.target.classList.contains('filter-pill')) return;
+        e.target.closest('.filter-pills').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        e.target.classList.add('active');
+        state[stateKey] = e.target.dataset.val;
+        applyFilters();
+      });
+    }
+    initPills('typeFilter','type');
+    initPills('kindFilter','kind');
+    initPills('regionFilter','region');
+    initPills('settingFilter','setting');
+    initPills('sizeFilter','size');
+    initPills('researchFilter','research');
+    initPills('testOptFilter','testOpt');
+    initPills('athleticsFilter','athletics');
+
+    // ─── Text search ──────────────────────────────────────────────────────────
+    document.getElementById('nameSearch').addEventListener('input', e => {
+      state.name = e.target.value.toLowerCase().trim();
+      applyFilters();
+    });
+
+    // ─── Checkboxes ───────────────────────────────────────────────────────────
+    ['hbcu','womens','greek','religious'].forEach(k => {
+      document.getElementById(k+'Check').addEventListener('change', e => {
+        state[k] = e.target.checked;
+        applyFilters();
+      });
+    });
+
+    // ─── Major & Sort ─────────────────────────────────────────────────────────
+    majorSel.addEventListener('change', e => { state.major = e.target.value; applyFilters(); });
+    document.getElementById('sortSelect').addEventListener('change', e => { state.sort = e.target.value; applyFilters(); });
+
+    // ─── Clear all ───────────────────────────────────────────────────────────
+    document.getElementById('clearAllBtn').addEventListener('click', () => {
+      location.reload();
+    });
+
+    // ─── Mobile filter toggle ────────────────────────────────────────────────
+    document.getElementById('filterToggleBtn').addEventListener('click', () => {
+      document.getElementById('filterSidebar').classList.toggle('open');
+    });
+
+    // ─── Filtering ────────────────────────────────────────────────────────────
+    function sizeCategory(enroll) {
+      if (enroll < 5000) return 'small';
+      if (enroll <= 15000) return 'medium';
+      return 'large';
+    }
+
+    function matchesSAT(school) {
+      if (state.sat === 1600) return true; // no filter
+      // User's score is at or above the 25th pct (i.e., it's within the middle 50 or above)
+      return state.sat >= school.sat25 - 50;
+    }
+
+    function matchesACT(school) {
+      if (state.act === 36) return true;
+      return state.act >= school.act25 - 1;
+    }
+
+    function applyFilters() {
+      let list = COLLEGES.filter(s => {
+        if (state.name && !s.name.toLowerCase().includes(state.name)) return false;
+        if (state.type !== 'all' && s.type !== state.type) return false;
+        if (state.kind !== 'all' && s.kind !== state.kind) return false;
+        if (state.region !== 'all' && s.region !== state.region) return false;
+        if (state.setting !== 'all' && s.setting !== state.setting) return false;
+        if (state.size !== 'all' && sizeCategory(s.enroll) !== state.size) return false;
+        if (state.research !== 'all' && s.research !== state.research) return false;
+        if (state.accept < 100 && s.accept > state.accept) return false;
+        if (state.tuition < 70000 && s.tuitionO > state.tuition) return false;
+        if (state.grad > 50 && s.gradRate < state.grad) return false;
+        if (state.testOpt === 'to' && !s.testOpt) return false;
+        if (state.testOpt === 'req' && s.testOpt) return false;
+        if (state.athletics !== 'all' && s.athletics !== state.athletics) return false;
+        if (state.hbcu && !s.hbcu) return false;
+        if (state.womens && !s.womens) return false;
+        if (state.greek && !s.greek) return false;
+        if (state.religious && !s.religion) return false;
+        if (state.major && !(s.majors || []).includes(state.major)) return false;
+        if (!matchesSAT(s)) return false;
+        if (!matchesACT(s)) return false;
+        return true;
+      });
+
+      // Sort
+      list.sort((a, b) => {
+        switch (state.sort) {
+          case 'accept-asc':  return a.accept - b.accept;
+          case 'accept-desc': return b.accept - a.accept;
+          case 'tuition-asc': return a.tuitionO - b.tuitionO;
+          case 'tuition-desc':return b.tuitionO - a.tuitionO;
+          case 'grad-desc':   return b.gradRate - a.gradRate;
+          case 'sat-desc':    return b.sat75 - a.sat75;
+          case 'name-asc':    return a.name.localeCompare(b.name);
+          default: return 0;
+        }
+      });
+
+      renderResults(list);
+    }
+
+    // ─── Rendering ───────────────────────────────────────────────────────────
+    function kindLabel(k) {
+      if (k === 'lac') return 'Liberal Arts';
+      if (k === 'technical') return 'Technical';
+      return 'University';
+    }
+
+    function admitLabel(accept) {
+      if (accept <= 10) return '<span class="src-badge badge-reach">Highly Selective</span>';
+      if (accept <= 25) return '<span class="src-badge badge-target">Selective</span>';
+      if (accept <= 50) return '<span class="src-badge badge-likely">Moderately Selective</span>';
+      return '<span class="src-badge badge-likely" style="background:#eef5ff;color:#1a5cb8">Less Selective</span>';
+    }
+
+    function renderResults(list) {
+      const grid = document.getElementById('resultsGrid');
+      const noRes = document.getElementById('noResults');
+      document.getElementById('resultsCount').textContent = `${list.length} college${list.length !== 1 ? 's' : ''} found`;
+
+      if (list.length === 0) {
+        grid.innerHTML = '';
+        noRes.style.display = 'block';
+        return;
+      }
+      noRes.style.display = 'none';
+
+      grid.innerHTML = list.map(s => {
+        const typeClass = s.hbcu ? 'hbcu-card' : s.kind === 'lac' ? 'lac-card' : s.type === 'public' ? 'public-card' : 'private-card';
+        const toCost = s.type === 'public' ? `$${s.tuitionO.toLocaleString()} OOS / $${s.tuitionI.toLocaleString()} IS` : `$${s.tuitionO.toLocaleString()}`;
+        const totalCOA = s.tuitionO + s.rb;
+        return `
+        <div class="school-result-card ${typeClass}">
+          <div class="src-top">
+            <div>
+              <div class="src-name">${s.name}</div>
+              <div class="src-location">📍 ${s.city}, ${s.state} · ${s.setting.charAt(0).toUpperCase() + s.setting.slice(1)}</div>
+            </div>
+            ${admitLabel(s.accept)}
+          </div>
+          <div class="src-badges">
+            <span class="src-badge ${s.type === 'public' ? 'badge-public' : 'badge-private'}">${s.type === 'public' ? 'Public' : 'Private'}</span>
+            <span class="src-badge badge-kind">${kindLabel(s.kind)}</span>
+            ${s.testOpt ? '<span class="src-badge badge-to">Test Optional</span>' : ''}
+            ${s.hbcu ? '<span class="src-badge badge-hbcu">HBCU</span>' : ''}
+            ${s.womens ? '<span class="src-badge badge-womens">Women\'s</span>' : ''}
+            <span class="src-badge badge-athletics">${s.athletics}</span>
+          </div>
+          <div class="src-stats">
+            <div class="src-stat">
+              <div class="src-stat-val">${s.accept}%</div>
+              <div class="src-stat-label">Acceptance</div>
+            </div>
+            <div class="src-stat">
+              <div class="src-stat-val">${s.sat25}–${s.sat75}</div>
+              <div class="src-stat-label">SAT Mid-50%</div>
+            </div>
+            <div class="src-stat">
+              <div class="src-stat-val">${s.act25}–${s.act75}</div>
+              <div class="src-stat-label">ACT Mid-50%</div>
+            </div>
+            <div class="src-stat">
+              <div class="src-stat-val">${s.gradRate}%</div>
+              <div class="src-stat-label">Grad Rate</div>
+            </div>
+            <div class="src-stat">
+              <div class="src-stat-val">${s.enroll.toLocaleString()}</div>
+              <div class="src-stat-label">Undergrads</div>
+            </div>
+            <div class="src-stat">
+              <div class="src-stat-val">1:${s.sfr}</div>
+              <div class="src-stat-label">Student:Faculty</div>
+            </div>
+          </div>
+          <div class="src-financials">
+            <div class="src-fin-row">
+              <span>Tuition</span><strong>${toCost}</strong>
+            </div>
+            <div class="src-fin-row">
+              <span>Total COA (est.)</span><strong>$${totalCOA.toLocaleString()}</strong>
+            </div>
+            <div class="src-fin-row">
+              <span>Avg Need-Based Grant</span><strong>${s.avgGrant ? '$' + s.avgGrant.toLocaleString() : 'N/A'}</strong>
+            </div>
+            ${s.avgMerit ? `<div class="src-fin-row"><span>Avg Merit Aid</span><strong>$${s.avgMerit.toLocaleString()}</strong></div>` : ''}
+            <div class="src-fin-row">
+              <span>Avg Debt at Graduation</span><strong>$${s.avgDebt.toLocaleString()}</strong>
+            </div>
+          </div>
+          <div class="src-majors">
+            <div class="src-majors-label">Popular Majors</div>
+            <div class="src-majors-list">${(s.majors || []).map(m => `<span class="src-major-tag">${m}</span>`).join('')}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Initial render
+    applyFilters();
+  })();
+  </script>
+</body>
+</html>

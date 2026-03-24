@@ -1798,3 +1798,12 @@ a { color: inherit; text-decoration: none; }
   .decoded-deliverables { grid-template-columns: 1fr; }
   .decoded-card-top { flex-direction: column; gap: 10px; }
 }
+
+/* Undergraduate journey card */
+.jc-undergrad {
+  border-top: 3px solid #4a90d9;
+}
+.jc-undergrad:hover {
+  border-color: #4a90d9;
+  box-shadow: 0 8px 32px rgba(74,144,217,0.15);
+}

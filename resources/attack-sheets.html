@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1L Attack Sheets | IvyAmbition</title>
+  <meta name="description" content="Issue-spotting attack sheets for all 6 1L law courses. Step-by-step frameworks for Contracts, Torts, Civil Procedure, Criminal Law, Constitutional Law, and Property exams." />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .course-tabs { display:flex;gap:0;border-bottom:2px solid #e2e8f0;margin-bottom:2rem;overflow-x:auto; }
+    .course-tab { padding:.65rem 1.1rem;font-size:.88rem;font-weight:600;color:#64748b;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s;margin-bottom:-2px; }
+    .course-tab.active { color:#0d1b2a;border-bottom-color:#c9a84c; }
+    .course-tab:hover:not(.active) { color:#0d1b2a; }
+    .course-panel { display:none; }
+    .course-panel.active { display:block; }
+
+    .attack-intro { background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;font-size:.88rem;color:#334155;line-height:1.7;margin-bottom:1.75rem; }
+    .attack-intro strong { color:#0d1b2a; }
+
+    .attack-step { border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1.25rem;overflow:hidden; }
+    .attack-step-header { display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:#fff;cursor:pointer;transition:background .15s; }
+    .attack-step-header:hover { background:#f8fafc; }
+    .step-number { flex-shrink:0;width:2rem;height:2rem;border-radius:50%;background:#0d1b2a;color:#c9a84c;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem; }
+    .step-issue { flex:1; }
+    .step-issue-name { font-family:'Playfair Display',serif;font-size:1rem;color:#0d1b2a;font-weight:600;margin:0 0 .2rem; }
+    .step-issue-trigger { font-size:.8rem;color:#64748b;margin:0; }
+    .step-toggle { font-size:.75rem;color:#94a3b8;transition:transform .2s;margin-top:.35rem;flex-shrink:0; }
+    .attack-step-header.open .step-toggle { transform:rotate(180deg); }
+
+    .attack-step-body { display:none;padding:.85rem 1.25rem 1.1rem;border-top:1px solid #e2e8f0;background:#fafbfc; }
+    .attack-step-body.open { display:block; }
+
+    .analysis-grid { display:grid;grid-template-columns:1fr 1fr;gap:.65rem; }
+    @media(max-width:640px){ .analysis-grid { grid-template-columns:1fr; } }
+
+    .analysis-item { background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:.65rem .85rem; }
+    .analysis-label { font-size:.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem; }
+    .analysis-text { font-size:.83rem;color:#334155;line-height:1.6; }
+    .analysis-text ul { margin:.35rem 0 0 1rem;padding:0; }
+    .analysis-text li { margin-bottom:.2rem; }
+
+    .rule-box { background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:.65rem .85rem;margin-top:.65rem; }
+    .rule-box-label { font-size:.72rem;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem; }
+    .rule-box-text { font-size:.83rem;color:#1e3a8a;line-height:1.6; }
+
+    .step-flag { display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .5rem;border-radius:10px;margin-left:.5rem;vertical-align:middle; }
+    .flag-always { background:#dcfce7;color:#166534; }
+    .flag-if { background:#fef9c3;color:#854d0e; }
+    .flag-rare { background:#f1f5f9;color:#64748b; }
+
+    .course-actions { display:flex;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center; }
+    .action-btn { padding:.5rem 1rem;border:1px solid #e2e8f0;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;background:#fff;color:#334155;transition:background .15s; }
+    .action-btn:hover { background:#f8fafc; }
+    .expand-btn { padding:.45rem 1rem;background:#f1f5f9;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;color:#334155; }
+    .expand-btn:hover { background:#e2e8f0; }
+
+    .usage-note { background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:#92400e;margin-bottom:1.5rem; }
+
+    .steps-count { font-size:.82rem;color:#64748b;margin-left:auto; }
+
+    .course-header-block { margin-bottom:1.5rem; }
+    .course-title-row { display:flex;align-items:center;gap:.75rem;margin-bottom:.4rem; }
+    .course-main-title { font-family:'Playfair Display',serif;font-size:1.4rem;color:#0d1b2a;margin:0; }
+    .course-sub { font-size:.88rem;color:#64748b;margin:0 0 .75rem; }
+    .course-meta { display:flex;gap:.65rem;flex-wrap:wrap; }
+    .meta-chip { font-size:.78rem;font-weight:600;padding:.25rem .7rem;border-radius:20px;background:#f1f5f9;color:#334155; }
+    .meta-chip-gold { background:#fef3c7;color:#92400e; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+      <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+      <li><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a></li>
+      <li><a href="./index.html">Free Tools</a></li>
+      <li><a href="../tabs/transfer/landing-pages/v1.html#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a><a href="../tabs/law-school/landing-pages/v1.html">Law School</a><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a><a href="./index.html">Free Tools</a><a href="../tabs/transfer/landing-pages/v1.html#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<section class="tool-hero">
+  <div class="container tool-hero-content">
+    <div class="tool-breadcrumb"><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a> &rsaquo; <a href="./index.html">Free Tools</a> &rsaquo; Attack Sheets</div>
+    <p class="tool-eyebrow">Free Tool &middot; 1L Exam Prep</p>
+    <h1>1L Attack Sheets</h1>
+    <p class="tool-hero-sub">Step-by-step issue-spotting frameworks for all 6 1L courses. Walk through every fact pattern systematically — never miss a testable issue again.</p>
+  </div>
+</section>
+
+<div class="tool-body">
+  <div class="container">
+    <div class="usage-note">
+      <strong>How to use attack sheets:</strong> In an exam, read the call of the question first, then scan the fact pattern using this checklist. Work through each step in order. If a step's trigger facts are present, analyze that issue fully before moving on. Flag ambiguous issues and address them even if briefly.
+    </div>
+
+    <!-- COURSE TABS -->
+    <div class="course-tabs" id="courseTabs"></div>
+
+    <!-- PANELS -->
+    <div id="coursePanels"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>1L Resources</h5><ul>
+        <li><a href="./course-outlines.html">Course Outlines</a></li>
+        <li><a href="./attack-sheets.html">Attack Sheets</a></li>
+        <li><a href="./gpa-calculator.html">GPA Calculator</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="./transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="./transfer-vs-stay.html">Transfer vs. Stay</a></li>
+        <li><a href="./transfer-stats.html">Transfer Stats</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition.</p></div></div>
+</footer>
+
+<script src="../data/1l-content-data.js"></script>
+<script>
+const COURSE_ICONS = { contracts:'📝', torts:'⚖️', civpro:'⚖️', crimlaw:'🔍', conlaw:'🏛️', property:'🏠' };
+
+// Extended attack sheet data (supplementing what's in 1l-content-data.js)
+const ATTACK_DATA = {
+  contracts: {
+    title: 'Contracts Attack Sheet',
+    subtitle: 'Common Law + UCC Article 2',
+    meta: ['Common Law & UCC Art. 2', 'High-Frequency Exam Course', '~25% of typical 1L exam weight'],
+    intro: 'Start by identifying the <strong>type of contract</strong> (goods = UCC Art. 2; services/real property = common law; mixed = predominant purpose test). Then work through formation → defenses → conditions → breach → remedies in that order.',
+    steps: [
+      {
+        issue: 'Governing Law',
+        trigger: 'Any time a contract is formed — first question always.',
+        flag: 'always',
+        rule: 'UCC Art. 2 governs transactions in goods (movable, tangible personal property). Common law governs everything else (services, real estate, employment). Mixed contracts: predominant purpose test (what is the primary purpose of the deal?).',
+        analysis: [
+          { label: 'Identify', text: 'What is the subject matter? Goods, services, or mixed?' },
+          { label: 'Mixed K Issue', text: 'If mixed, ask: is the primary purpose the goods or the services? The incidental component follows the primary purpose.' },
+          { label: 'Key Difference', text: 'UCC has gap-fillers and relaxed formation rules; common law requires mirror-image and strict terms.' }
+        ]
+      },
+      {
+        issue: 'Offer',
+        trigger: 'Any communication proposing a bargain.',
+        flag: 'always',
+        rule: 'Offer: manifestation of present contractual intent, with definite terms (parties, subject matter, quantity, price at minimum), communicated to offeree.',
+        analysis: [
+          { label: 'Definite Terms', text: 'Common law requires definite terms. UCC only requires quantity; other terms can be gap-filled.' },
+          { label: 'Advertisements', text: 'Generally invitations to offer, NOT offers — unless specific, limited in quantity, and directed at specific group.' },
+          { label: 'Termination', text: 'Check: revocation (before acceptance), rejection/counter-offer, death, lapse, or destruction of subject matter.' }
+        ]
+      },
+      {
+        issue: 'Acceptance',
+        trigger: 'Offeree response after receiving an offer.',
+        flag: 'always',
+        rule: 'Acceptance: unequivocal assent to the offer\'s terms. Under common law: mirror-image rule. Under UCC: acceptance with additional/different terms = still acceptance (§2-207).',
+        analysis: [
+          { label: 'Mirror Image (CL)', text: 'Any variance = counter-offer (rejection + new offer). Check mailbox rule: acceptance effective upon dispatch if using an authorized medium.' },
+          { label: 'Battle of Forms (UCC)', text: '§2-207: Additional terms = proposals for addition; different terms = knockout rule (term drops out, UCC gap-fillers apply). If material alteration → both must expressly agree.' },
+          { label: 'Unilateral K', text: 'Can only be accepted by full performance. Part performance creates option contract — offeror cannot revoke.' }
+        ]
+      },
+      {
+        issue: 'Consideration',
+        trigger: 'Any promise or agreement — verify consideration exists.',
+        flag: 'always',
+        rule: 'Consideration: bargained-for exchange (legal detriment or legal benefit). Both parties must give consideration.',
+        analysis: [
+          { label: 'Adequacy', text: 'Courts don\'t examine adequacy. Even peppercorn is sufficient if genuinely bargained for.' },
+          { label: 'Pre-Existing Duty', text: 'Promise to do what one is already legally obligated to do = no new consideration (CL). UCC: modification needs no new consideration if in good faith.' },
+          { label: 'Substitutes', text: 'Promissory estoppel (detrimental reliance), material benefit rule, or moral obligation may substitute for consideration.' }
+        ]
+      },
+      {
+        issue: 'Defenses to Formation',
+        trigger: 'Facts suggesting a party was unable to contract or was misled.',
+        flag: 'if',
+        rule: 'Incapacity (minor, mentally ill, intoxicated), Statute of Frauds (writing required), Misrepresentation, Fraud, Duress, Undue Influence, Mistake (mutual/unilateral), Unconscionability.',
+        analysis: [
+          { label: 'Statute of Frauds', text: 'MY LEGS: Marriage, Year (>1 yr performance), Land, Executor (estate debts), Goods ≥$500 (UCC), Suretyship. Must be signed writing with essential terms.' },
+          { label: 'Mistake', text: 'Mutual mistake of material fact → voidable. Unilateral mistake: generally NOT a defense unless other party knew or should have known.' },
+          { label: 'Misrepresentation', text: 'False assertion of fact, material, relied upon = voidable. Fraudulent misrep = also tort claim for damages.' }
+        ]
+      },
+      {
+        issue: 'Parol Evidence Rule',
+        trigger: 'Written contract + parties try to introduce prior oral or written statements.',
+        flag: 'if',
+        rule: 'Integrated written agreement bars evidence of prior/contemporaneous oral agreements that contradict (fully integrated) or that would naturally be included (partially integrated). Exceptions: to show formation defects, ambiguity, subsequent oral agreement, condition precedent.',
+        analysis: [
+          { label: 'Integration Level', text: 'Fully integrated = four corners only. Partially integrated = can add consistent terms, not contradictory terms.' },
+          { label: 'Key Exceptions', text: 'Always admissible to show: fraud, mistake, duress, lack of consideration, condition precedent to contract taking effect, or to clarify ambiguous terms.' },
+          { label: 'UCC', text: 'Same basic rule, but course of dealing, course of performance, and trade usage always admissible to explain/supplement.' }
+        ]
+      },
+      {
+        issue: 'Conditions',
+        trigger: 'Contract depends on some future event; party claims excuse from performance.',
+        flag: 'if',
+        rule: 'Condition precedent must occur before duty arises. Condition subsequent extinguishes duty. Express, implied, or constructive (by operation of law).',
+        analysis: [
+          { label: 'Types', text: 'Express: clear language ("if," "on condition," "provided that"). Constructive: concurrent conditions in bilateral K (tender by one triggers duty of other).' },
+          { label: 'Excuse of Condition', text: 'Waiver (voluntary relinquishment), estoppel, prevention/hindrance by promisor, or substantial performance (avoids forfeiture for non-material breach).' },
+          { label: 'Order of Performance', text: 'If one party\'s duty is easier/less time-consuming, theirs performs first. Otherwise, concurrent.' }
+        ]
+      },
+      {
+        issue: 'Performance & Breach',
+        trigger: 'One party fails to perform or performs defectively.',
+        flag: 'always',
+        rule: 'Material breach: other party may suspend + eventually terminate + sue for total breach. Minor breach: other party must still perform but can sue for partial breach. Perfect tender rule (UCC): buyer can reject for any defect.',
+        analysis: [
+          { label: 'Material vs. Minor', text: 'Factors: amount of benefit received, adequacy of damages compensation, likelihood of cure, hardship on breaching party, willful bad faith.' },
+          { label: 'Anticipatory Repudiation', text: 'Unequivocal statement/action that party will not perform → non-repudiating party may treat as immediate breach, suspend, and sue now.' },
+          { label: 'UCC Perfect Tender', text: 'Buyer can reject goods for any nonconformity. But seller has right to cure if time remains and reasonable grounds to believe delivery would be acceptable.' }
+        ]
+      },
+      {
+        issue: 'Discharge / Excuse',
+        trigger: 'Events after formation make performance impossible or different.',
+        flag: 'if',
+        rule: 'Impossibility (objective — truly impossible), Impracticability (UCC + modern CL: extreme hardship due to unforeseen event), Frustration of Purpose (purpose destroyed by unforeseen event).',
+        analysis: [
+          { label: 'Impossibility', text: 'Three-part test: (1) unexpected event; (2) non-occurrence was basic assumption; (3) party seeking excuse did not assume the risk.' },
+          { label: 'Impracticability', text: 'Performance technically possible but extremely costly/burdensome due to unforeseen contingency (commodity price shock, war, natural disaster).' },
+          { label: 'Frustration', text: 'Both parties understood purpose; purpose completely frustrated; event not foreseeable. Ex: hall burns down before rented concert.' }
+        ]
+      },
+      {
+        issue: 'Third Party Rights',
+        trigger: 'Someone not originally party to the contract has rights or duties.',
+        flag: 'if',
+        rule: 'Third-Party Beneficiary: intended (can sue) vs. incidental (cannot). Assignment: transfer of rights (generally allowed). Delegation: transfer of duties (allowed unless contract prohibits or requires unique skill).',
+        analysis: [
+          { label: 'TPB Vesting', text: 'Beneficiary\'s rights vest when they: (1) materially change position in reliance, (2) assent to gift, or (3) file suit. Before vesting, promisee + promisor can modify.' },
+          { label: 'Assignment', text: 'Gratuitous assignments freely revocable. Assignments for consideration irrevocable. Anti-assignment clause: waivable; prohibition clause: void.' },
+          { label: 'Delegation', text: 'Delegating party remains liable. Obligee can refuse if contract requires personal service or if there is material reason to prefer original party.' }
+        ]
+      },
+      {
+        issue: 'Remedies',
+        trigger: 'Breach established — now calculate what non-breaching party gets.',
+        flag: 'always',
+        rule: 'Expectation damages (default): put in position as if contract performed. Reliance: put in position as if contract never made. Restitution: prevent unjust enrichment. Liquidated damages: enforceable if reasonable estimate, not penalty.',
+        analysis: [
+          { label: 'Expectation Formula', text: 'Expectation = (contract price − cost avoided − loss avoided) + consequential damages (foreseeable, Hadley v. Baxendale) − duty to mitigate.' },
+          { label: 'Mitigation', text: 'Non-breaching party must take reasonable steps to mitigate. Cannot recover damages that mitigation would have avoided. Cannot recover costs of unreasonable mitigation.' },
+          { label: 'Specific Performance', text: 'Available when subject matter is unique (real property, rare goods, personal items) and money damages are inadequate. Not available for personal service contracts.' }
+        ]
+      }
+    ]
+  },
+  torts: {
+    title: 'Torts Attack Sheet',
+    subtitle: 'Common Law — Negligence, Intentional Torts & Strict Liability',
+    meta: ['Common Law', 'High-Frequency Exam Course', 'Issue-Spot Every Element'],
+    intro: 'Identify the <strong>category of tort first</strong>: Intentional → Negligence → Strict Liability. Then run through all potentially applicable torts for each defendant. Always check defenses after establishing prima facie case.',
+    steps: [
+      {
+        issue: 'Intentional Torts — Threshold Check',
+        trigger: 'Defendant deliberately does something that causes harm.',
+        flag: 'if',
+        rule: 'Intent: defendant acts with purpose to bring about result, OR knowledge to substantial certainty that result will occur. Transferred intent doctrine: intent transfers between persons and between torts (BAFT-BAFT: Battery, Assault, False Imprisonment, Trespass to Land, Trespass to Chattels).',
+        analysis: [
+          { label: 'Check All 7 ITs', text: 'Battery, Assault, False Imprisonment, Intentional Infliction of Emotional Distress (IIED), Trespass to Land, Trespass to Chattels, Conversion.' },
+          { label: 'Transferred Intent', text: 'If A intends to hit B but hits C, intent transfers to C. If A intends assault but causes battery, intent transfers.' },
+          { label: 'Mistake No Defense', text: 'Good faith mistake is generally no defense to intentional torts (except consent, self-defense, necessity).' }
+        ]
+      },
+      {
+        issue: 'Battery',
+        trigger: 'Physical contact or indirect contact that causes harm or offense.',
+        flag: 'if',
+        rule: 'Intentional harmful or offensive contact with plaintiff\'s person. Contact = any extension of person (clothing, object held). Offensive = contact a reasonable person would find offensive without consent.',
+        analysis: [
+          { label: 'Harmful OR Offensive', text: 'Either is sufficient. No physical injury required for offensive battery.' },
+          { label: 'Extends to Person', text: 'Knocking a tray out of someone\'s hand = battery. Snatching hat off someone\'s head = battery.' },
+          { label: 'No Awareness Needed', text: 'P need not be aware of contact at time it occurs (e.g., kissed while asleep).' }
+        ]
+      },
+      {
+        issue: 'Assault',
+        trigger: 'Threatening words/gestures; victim anticipates imminent harm.',
+        flag: 'if',
+        rule: 'Intentional act by defendant causing plaintiff reasonable apprehension of imminent harmful or offensive contact.',
+        analysis: [
+          { label: 'Imminent', text: 'Future threats = no assault ("I\'ll get you next week"). Must be immediate.' },
+          { label: 'Reasonable Apprehension', text: 'Objective test. Conditional threats ("if you weren\'t my friend...") = generally no assault.' },
+          { label: 'Words Alone', text: 'Words alone are insufficient. Must be coupled with act or circumstances.' }
+        ]
+      },
+      {
+        issue: 'False Imprisonment',
+        trigger: 'Person confined to a bounded area without consent.',
+        flag: 'if',
+        rule: 'Intentional act that confines plaintiff to a bounded area, plaintiff is aware of confinement (or harmed by it), and confinement is against plaintiff\'s will.',
+        analysis: [
+          { label: 'Bounded Area', text: 'Must be bounded in ALL directions. Blocking one path with another exit available = no FI.' },
+          { label: 'Means of Confinement', text: 'Physical force, threats, invalid legal authority, failure to provide means of escape, or duress on P\'s property/family.' },
+          { label: 'Reasonable Means of Escape', text: 'If reasonable means of escape exists that P is aware of, no FI. Unreasonably dangerous escape = still confined.' }
+        ]
+      },
+      {
+        issue: 'IIED',
+        trigger: 'Extreme/outrageous conduct causing severe emotional distress.',
+        flag: 'if',
+        rule: 'Intentional or reckless; extreme and outrageous conduct; causal connection; severe emotional distress resulted.',
+        analysis: [
+          { label: 'Outrageous', text: 'Beyond all decency tolerated in a civilized society. Mere insults ≠ outrageous. Key factors: continuous, power differential, known vulnerability.' },
+          { label: 'Recklessness Suffices', text: 'Unlike other ITs, reckless disregard for high probability of emotional distress is enough.' },
+          { label: 'Third Party', text: 'Third party present who is close family member can also recover if D knew they were present.' }
+        ]
+      },
+      {
+        issue: 'Negligence — Prima Facie Case',
+        trigger: 'Any harm caused by careless/inadvertent conduct (no intent).',
+        flag: 'always',
+        rule: 'Duty + Breach + Causation (actual + proximate) + Damages. All four elements required.',
+        analysis: [
+          { label: 'Duty', text: 'General duty of reasonable care to all foreseeable plaintiffs. Special duties: land possessors, professionals, common carriers, innkeepers.' },
+          { label: 'Breach', text: 'Failure to meet standard of reasonable person (objective). Custom, statutes (negligence per se), Learned Hand Formula (B < P×L) help determine breach.' },
+          { label: 'Cause-in-Fact', text: 'But-for test: but for D\'s conduct, would harm have occurred? Multiple causes: substantial factor test. Burden shifting: Summers v. Tice alternative liability.' }
+        ]
+      },
+      {
+        issue: 'Negligence — Duty Analysis',
+        trigger: 'Plaintiff was not physically present at risk; duty is unclear.',
+        flag: 'if',
+        rule: 'Cardozo (majority): duty only owed to foreseeable plaintiffs in zone of danger. Andrews (minority): duty to all because all are connected.',
+        analysis: [
+          { label: 'Rescuers', text: 'Danger invites rescue. D who creates danger owes duty to foreseeable rescuers.' },
+          { label: 'Bystanders (emotional)', text: 'Bystander NIED: must be (1) near accident, (2) observe accident, (3) close relative. Some states: only zone of danger.' },
+          { label: 'No Duty to Act', text: 'No duty to rescue a stranger absent special relationship (employer-employee, common carrier, innkeeper, parent-child, etc.).' }
+        ]
+      },
+      {
+        issue: 'Negligence — Breach / Standard of Care',
+        trigger: 'Whether defendant met the required standard.',
+        flag: 'always',
+        rule: 'Objective reasonable person standard (not subjective). Professionals: reasonable professional in same field. Children: reasonable child of same age/intelligence/experience (except adult activity).',
+        analysis: [
+          { label: 'Negligence Per Se', text: 'Unexcused statutory violation = breach per se if (1) P is in class statute protects AND (2) harm is type statute designed to prevent.' },
+          { label: 'Res Ipsa', text: 'Inference of negligence if: (1) accident doesn\'t ordinarily occur without negligence, (2) D had exclusive control of instrumentality, (3) P did not contribute.' },
+          { label: 'Custom', text: 'Industry custom is evidence of reasonableness, not conclusive. Can be negligent even if following custom (T.J. Hooper).' }
+        ]
+      },
+      {
+        issue: 'Negligence — Causation',
+        trigger: 'Link between defendant\'s conduct and plaintiff\'s harm.',
+        flag: 'always',
+        rule: 'Actual cause (but-for or substantial factor) + proximate cause (legal/policy limit). Scope of liability for foreseeable consequences of foreseeable risks.',
+        analysis: [
+          { label: 'Proximate Cause', text: 'Directness test (minority) or foreseeability test (majority/Restatement). D not liable for unforeseeable consequences.' },
+          { label: 'Intervening Causes', text: 'Foreseeable intervening acts (negligent rescuers, negligent medical treatment) = D still liable. Superseding intervening act (unforeseeable, criminal acts) = D NOT liable.' },
+          { label: 'Egg Shell Skull', text: 'D takes P as they find them. Once a battery or foreseeable physical harm occurs, D is liable for ALL resulting damages even if victim unusually vulnerable.' }
+        ]
+      },
+      {
+        issue: 'Defenses to Negligence',
+        trigger: 'After establishing prima facie case — check for defenses.',
+        flag: 'always',
+        rule: 'Contributory Negligence (old rule: total bar), Comparative Negligence (majority: apportions), Assumption of Risk (express = full bar; implied = comparative fault).',
+        analysis: [
+          { label: 'Pure vs. Modified Comp', text: 'Pure comparative: P can recover even if 99% at fault. Modified comparative: P cannot recover if at fault ≥50% (or ≥51% in some states).' },
+          { label: 'Implied Assumption', text: 'P voluntarily and knowingly encountered a specific risk. Modern trend: merges into comparative fault framework.' },
+          { label: 'Express Assumption', text: 'Signed release — enforceable unless unconscionable or for gross negligence/intentional torts.' }
+        ]
+      },
+      {
+        issue: 'Strict Liability',
+        trigger: 'Abnormally dangerous activities, wild animals, or defective products.',
+        flag: 'if',
+        rule: 'Liability without fault. No negligence or intent required. Three categories: (1) animals, (2) abnormally dangerous activities (Rylands test + Restatement factors), (3) products liability.',
+        analysis: [
+          { label: 'Abnormally Dangerous', text: 'Restatement 3d factors: high risk of harm, serious harm if it occurs, cannot be made safe by due care, not common usage, inappropriate location, utility doesn\'t outweigh risk.' },
+          { label: 'Animals', text: 'Wild animals: strict liability. Domestic animals: strict liability only if owner knew or should have known of dangerous propensity (one-bite rule).' },
+          { label: 'Products Liability', text: 'Manufacturing defect (strict), Design defect (consumer expectation or risk-utility test), Failure to warn (what should have been disclosed).' }
+        ]
+      }
+    ]
+  },
+  civpro: {
+    title: 'Civil Procedure Attack Sheet',
+    subtitle: 'Federal Rules of Civil Procedure + Erie Doctrine',
+    meta: ['FRCP + Erie Doctrine', 'High-Frequency Exam Course', 'Rule Numbers Matter'],
+    intro: 'Start every civ pro question with <strong>subject matter jurisdiction</strong> — this is non-waivable and can be raised at any time. Then check personal jurisdiction, venue, and Erie before analyzing procedure. Courts without SMJ must dismiss.',
+    steps: [
+      {
+        issue: 'Subject Matter Jurisdiction',
+        trigger: 'ANY federal court case — always first analysis.',
+        flag: 'always',
+        rule: 'Federal courts are courts of limited jurisdiction. Two main heads: (1) Federal Question (28 U.S.C. §1331) — claim arises under federal law; (2) Diversity (28 U.S.C. §1332) — complete diversity + amount in controversy >$75,000.',
+        analysis: [
+          { label: 'Federal Question', text: 'Claim must arise under Constitution, federal statute, or treaty. Well-pleaded complaint rule: federal issue must appear in plaintiff\'s claim, not anticipated defense.' },
+          { label: 'Diversity — Citizenship', text: 'Citizens of different states at time of filing. Individual: domicile (physical presence + intent to remain). Corporation: state of incorporation AND principal place of business (nerve center).' },
+          { label: 'Amount in Controversy', text: '>$75,000, exclusive of interest and costs. Look to good-faith claim. Aggregation: one P multiple claims OK; multiple Ps aggregate only if joint/undivided interest.' }
+        ]
+      },
+      {
+        issue: 'Supplemental Jurisdiction',
+        trigger: 'Some claims lack independent federal basis; joined to federal claims.',
+        flag: 'if',
+        rule: '28 U.S.C. §1367: supplemental jurisdiction over claims that share a common nucleus of operative fact with the anchor claim. Court may decline in certain circumstances.',
+        analysis: [
+          { label: 'Common Nucleus', text: 'Claims must be so related they\'d ordinarily be tried in one proceeding. Compulsory counterclaims always meet this.' },
+          { label: 'Discretionary Decline', text: '§1367(c): court may decline if novel state issue predominates, state claims substantially predominate, federal claims dismissed early, or exceptional circumstances.' },
+          { label: 'Diversity Limitation', text: '§1367(b): in diversity-only cases, supplemental jurisdiction cannot be used to add plaintiffs whose joinder would destroy diversity (Rules 14, 19, 20, 24).' }
+        ]
+      },
+      {
+        issue: 'Removal & Remand',
+        trigger: 'State court case defendant wants to move to federal court.',
+        flag: 'if',
+        rule: 'Defendant may remove if case could have been brought originally in federal court. Must remove within 30 days of receiving paper that shows case is removable. Remand motion: within 30 days (except SMJ — anytime).',
+        analysis: [
+          { label: 'Who Removes', text: 'ALL defendants must join in removal (unanimity rule). Exception: nominal, fraudulently joined parties.' },
+          { label: 'In-State Defendant Rule', text: 'In diversity cases: no removal if any defendant is citizen of the state where the case is filed.' },
+          { label: '1-Year Limit', text: 'Diversity-based removal: cannot remove more than 1 year after commencement of action (unless bad faith).' }
+        ]
+      },
+      {
+        issue: 'Personal Jurisdiction',
+        trigger: 'Any out-of-state defendant; question of power over the defendant.',
+        flag: 'always',
+        rule: 'Constitutional due process limits. General PJ: domicile/incorporation/consent or continuous and systematic contacts (Daimler). Specific PJ: claim arises from/relates to defendant\'s contacts with forum — minimum contacts + reasonable fairness.',
+        analysis: [
+          { label: 'Traditional Bases', text: 'Presence in state at time of service (transient/tag jurisdiction), domicile, consent (express or by conduct), incorporation in state.' },
+          { label: 'Minimum Contacts', text: 'Int\'l Shoe: contacts such that exercise of jurisdiction doesn\'t offend traditional notions of fair play and substantial justice. Purposeful availment = key.' },
+          { label: 'Fairness Factors', text: 'Burden on defendant, forum\'s interest, plaintiff\'s interest in convenient relief, interstate efficiency, shared substantive policies.' }
+        ]
+      },
+      {
+        issue: 'Venue',
+        trigger: 'Where (which district) does the case belong?',
+        flag: 'if',
+        rule: 'Proper venue (28 U.S.C. §1391): (1) district where any defendant resides if all in same state; (2) district where substantial part of events/omissions giving rise to claim occurred; (3) if no other district, where any defendant is subject to PJ.',
+        analysis: [
+          { label: 'Corporations', text: 'Corporation resides in any district where subject to PJ at time action is commenced.' },
+          { label: 'Transfer', text: '§1404: transfer to more convenient forum even if venue is proper. §1406: transfer to cure improper venue.' },
+          { label: 'Forum Non Conveniens', text: 'Dismissal (not transfer) when foreign forum is more appropriate. Court weighs private and public interest factors.' }
+        ]
+      },
+      {
+        issue: 'Erie Doctrine',
+        trigger: 'Federal court sitting in diversity — which law applies?',
+        flag: 'always',
+        rule: 'Erie R.R. v. Tompkins: In diversity, federal court must apply state substantive law + federal procedural law. Federal common law does not exist for purely private rights.',
+        analysis: [
+          { label: 'Substance vs. Procedure', text: 'Substance: elements of claims/defenses, statutes of limitations, burden of proof, choice of law rules, outcome determinative tests (York). Procedure: pleading, discovery, trial conduct.' },
+          { label: 'Hanna v. Plumer', text: 'When FRCP conflicts with state law: (1) Is the Federal Rule valid under REA? (2) Does it directly conflict? If yes to both, Federal Rule applies.' },
+          { label: 'Outcome Determinativeness', text: 'Would applying federal rule significantly affect outcome? Would it lead to forum shopping or inequitable administration of law? If yes → apply state law.' }
+        ]
+      },
+      {
+        issue: 'Pleadings',
+        trigger: 'Plaintiff\'s complaint or defendant\'s responsive pleading is at issue.',
+        flag: 'always',
+        rule: 'FRCP 8(a): short and plain statement of claim showing entitlement to relief. Post-Twombly/Iqbal: plausible claim, not just conceivable one. Must plead enough facts to state a claim.',
+        analysis: [
+          { label: 'Twombly/Iqbal Test', text: '(1) Identify and disregard conclusory statements. (2) Assume truth of well-pleaded factual allegations. (3) Are remaining facts plausibly consistent with claim?' },
+          { label: 'Rule 12 Motions', text: 'MTD for: (b)(1) SMJ, (b)(2) PJ, (b)(3) venue, (b)(4) process, (b)(5) service, (b)(6) failure to state a claim. (b)(1) and (b)(6) can be raised at any time.' },
+          { label: 'Waivable Defenses', text: 'PJ, venue, insufficient process/service: waived if not raised by first Rule 12 motion or responsive pleading.' }
+        ]
+      },
+      {
+        issue: 'Discovery',
+        trigger: 'Parties seek evidence from each other or third parties.',
+        flag: 'if',
+        rule: 'Scope (Rule 26): any nonprivileged matter relevant to any party\'s claim or defense AND proportional to the needs of the case. Attorney-client privilege and work product doctrine limit discovery.',
+        analysis: [
+          { label: 'Tools', text: 'Depositions (Rule 30/31), Interrogatories (Rule 33, max 25), Document Requests (Rule 34), Physical/Mental Exams (Rule 35, court order required), Requests for Admission (Rule 36).' },
+          { label: 'Work Product', text: 'Materials prepared in anticipation of litigation. Qualified immunity — overcome by substantial need and no other means. Opinion work product = absolute protection.' },
+          { label: 'e-Discovery', text: 'Electronically stored information (ESI) discoverable. Spoliation sanctions if evidence destroyed after litigation reasonably anticipated.' }
+        ]
+      },
+      {
+        issue: 'Summary Judgment',
+        trigger: 'One party claims no trial is needed; law should resolve the case.',
+        flag: 'if',
+        rule: 'Rule 56: SJ proper when no genuine dispute of material fact AND movant entitled to judgment as matter of law. View facts in light most favorable to non-movant.',
+        analysis: [
+          { label: 'Movant\'s Burden', text: 'Party without ultimate burden of proof: can simply point out absence of evidence. Party with burden: must affirmatively show evidence supporting each element.' },
+          { label: 'Non-Movant Response', text: 'Must come forward with specific facts showing genuine dispute. Speculation insufficient. Must be based on admissible evidence.' },
+          { label: 'Partial SJ', text: 'Court may grant SJ on some issues, leaving remaining issues for trial.' }
+        ]
+      },
+      {
+        issue: 'Joinder of Parties & Claims',
+        trigger: 'Multiple parties or claims in one case.',
+        flag: 'if',
+        rule: 'Permissive joinder (Rule 20): plaintiffs/defendants if (1) claim arises from same transaction/occurrence AND (2) common question of law or fact. Compulsory joinder (Rule 19): necessary parties must be joined if feasible.',
+        analysis: [
+          { label: 'Crossclaims', text: 'Rule 13(g): claims against co-parties arising from same transaction/occurrence. Permissive only.' },
+          { label: 'Counterclaims', text: 'Compulsory (Rule 13(a)): must bring if arises from same T/O or waived. Permissive (13(b)): any claim against opposing party.' },
+          { label: 'Impleader (Rule 14)', text: 'Defendant may implead third-party defendant who "may be liable" to D for D\'s liability to P. Third-party claim, not P\'s direct claim.' }
+        ]
+      }
+    ]
+  },
+  crimlaw: {
+    title: 'Criminal Law Attack Sheet',
+    subtitle: 'Common Law + Model Penal Code (MPC)',
+    meta: ['Common Law & MPC', 'High-Frequency Exam Course', 'Compare CL vs. MPC'],
+    intro: 'Always analyze <strong>both CL and MPC</strong> unless the call of the question specifies one. Start with actus reus, then mens rea, then causation (for result crimes), then attendant circumstances. Then check defenses.',
+    steps: [
+      {
+        issue: 'Actus Reus',
+        trigger: 'Any criminal case — always first element.',
+        flag: 'always',
+        rule: 'Voluntary physical act (or omission if duty exists) + social harm. Must be volitional movement. Omissions: legal duty only (statute, contract, relationship, voluntary assumption, creation of peril).',
+        analysis: [
+          { label: 'Voluntary Act', text: 'Reflexes, seizures, sleep: not voluntary. Habitual acts: voluntary. Prior voluntariness may satisfy requirement for some crimes.' },
+          { label: 'Omission Liability', text: 'CL: only if special duty (parent-child, employer-employee, statute, voluntary assumption). MPC: same — liability for omission only when legal duty.' },
+          { label: 'Social Harm', text: 'Result crimes (murder, battery): harm must occur. Conduct crimes (reckless driving): the conduct itself is the harm.' }
+        ]
+      },
+      {
+        issue: 'Mens Rea',
+        trigger: 'Any criminal case — always second element.',
+        flag: 'always',
+        rule: 'CL levels: specific intent (purpose), general intent (awareness), malice, strict liability. MPC levels: purpose, knowledge, recklessness, negligence. Check which level required for each element of the offense.',
+        analysis: [
+          { label: 'MPC Four Levels', text: 'Purpose: conscious object. Knowledge: aware of high probability. Recklessness: conscious disregard of substantial/unjustifiable risk. Negligence: should have been aware.' },
+          { label: 'CL Specific Intent', text: 'Offenses requiring additional intent beyond act: First-degree murder, attempt, conspiracy, larceny, burglary, robbery, solicitation. Mistake of fact defense applies.' },
+          { label: 'Transferred Intent', text: 'CL: intent to harm A, harm B instead → intent transfers to B for same offense. MPC: result element satisfied if D was aware result would occur to someone.' }
+        ]
+      },
+      {
+        issue: 'Homicide — Classification',
+        trigger: 'Death of a human being.',
+        flag: 'if',
+        rule: 'CL Homicide hierarchy: Murder (intent to kill, intent to cause SBI, depraved heart, felony murder) → Voluntary Manslaughter → Involuntary Manslaughter. MPC: Murder (purpose/knowledge, or extreme recklessness), Manslaughter (reckless or extreme mental/emotional disturbance), Negligent Homicide.',
+        analysis: [
+          { label: 'Intent to Kill', text: 'Proven by: use of deadly weapon, absence of provocation, statements, opportunity + flight. Deadly weapon rule: inference of intent.' },
+          { label: 'Depraved Heart', text: 'Extreme recklessness (CL) = implied malice murder. Risk must be grave, unjustifiable, and show indifference to human life.' },
+          { label: 'Felony Murder', text: 'CL: any killing during inherently dangerous felony (BARRK: Burglary, Arson, Rape, Robbery, Kidnapping). Merger doctrine limits. Agency theory vs. proximate cause for third-party killings.' }
+        ]
+      },
+      {
+        issue: 'Voluntary Manslaughter',
+        trigger: 'Heat of passion; provocation argument raised.',
+        flag: 'if',
+        rule: 'CL: intentional killing after adequate provocation that would cause reasonable person to lose control, without sufficient cooling time. Classic categories: catching spouse in act, serious battery, mutual combat. MPC: EMED defense (extreme mental or emotional disturbance with reasonable explanation).',
+        analysis: [
+          { label: 'CL Adequate Provocation', text: 'Words alone generally insufficient (traditional). Some jurisdictions: words can suffice. Dead body of loved one may suffice. Test: reasonable person in defendant\'s situation.' },
+          { label: 'Cooling Time', text: 'Objective cooling time: how long would a reasonable person take to cool down? Rekindling: if confronted with fresh reminder, clock may reset.' },
+          { label: 'MPC EMED', text: 'Broader than CL: subjective element (D actually experienced disturbance) + objective element (reasonable explanation for disturbance). Reduces to manslaughter, not acquittal.' }
+        ]
+      },
+      {
+        issue: 'Attempt',
+        trigger: 'Crime not completed; defendant took steps toward it.',
+        flag: 'if',
+        rule: 'CL: specific intent to commit the crime + overt act beyond mere preparation (proximity test: last act, dangerous proximity, physical proximity, indispensable element tests). MPC: purpose to commit crime + substantial step strongly corroborative of purpose.',
+        analysis: [
+          { label: 'Mens Rea for Attempt', text: 'Requires SPECIFIC INTENT to commit the target crime, even if target crime is general intent. Cannot attempt reckless/negligent crimes under traditional CL.' },
+          { label: 'Abandonment', text: 'CL: no defense once attempt begun. MPC: complete and voluntary renunciation is a defense (not if motivated by increased likelihood of detection).' },
+          { label: 'Impossibility', text: 'CL: factual impossibility = no defense; legal impossibility = defense. MPC: factual impossibility = no defense; legal impossibility if circumstances as defendant believed them = still guilty.' }
+        ]
+      },
+      {
+        issue: 'Conspiracy',
+        trigger: 'Two or more people planning to commit a crime.',
+        flag: 'if',
+        rule: 'CL: agreement between 2+ persons (bilateral) + overt act (in most states) + intent to agree + intent to achieve object. MPC: unilateral conspiracy (can conspire even if other person is undercover). Pinkerton liability: co-conspirators liable for all crimes committed in furtherance by any member.',
+        analysis: [
+          { label: 'Agreement', text: 'Doesn\'t require formal agreement. Conduct showing common plan sufficient. Wharton\'s Rule: if crime by definition requires 2 (bribery, adultery, bigamy), no conspiracy unless third party involved.' },
+          { label: 'Withdrawal', text: 'Does not negate conspiracy liability (already occurred). May be defense to future crimes of co-conspirators if: (1) affirmative notification to all co-conspirators AND (2) timely to allow them to abandon.' },
+          { label: 'RICO Note', text: 'In federal law, racketeering adds conspiracy charges with enhanced penalties. On exams, stick to common law conspiracy.' }
+        ]
+      },
+      {
+        issue: 'Defenses — Justification',
+        trigger: 'Defendant claims conduct was legally permitted in the circumstances.',
+        flag: 'if',
+        rule: 'Self-defense: reasonable belief in imminent unlawful threat, force must be proportional. Defense of others: same standard. Necessity (lesser evil): harm committed to prevent greater harm. Law enforcement: authorized force.',
+        analysis: [
+          { label: 'Self-Defense Requirements', text: '(1) Unprovoked, (2) actual and reasonable belief in imminent threat, (3) force proportional to threat, (4) no duty to retreat (CL stand your ground) vs. duty to retreat (castle doctrine exception).' },
+          { label: 'Imperfect Self-Defense', text: 'Unreasonable but genuine belief in self-defense: not a complete defense but may reduce murder to voluntary manslaughter in some jurisdictions.' },
+          { label: 'Necessity', text: 'Harm caused must be lesser than harm avoided; no adequate legal alternative; D did not create the situation. Does NOT work for homicide in most jurisdictions.' }
+        ]
+      },
+      {
+        issue: 'Defenses — Excuse',
+        trigger: 'Defendant claims lack of responsibility due to mental state or external pressure.',
+        flag: 'if',
+        rule: 'Insanity: M\'Naghten (know nature/know wrong), Irresistible Impulse, Durham, MPC (appreciate/conform). Intoxication: voluntary (specific intent only), involuntary (complete defense). Duress: imminent threat of death/SBI, not available for murder (CL).',
+        analysis: [
+          { label: 'Insanity Tests', text: 'M\'Naghten: didn\'t know nature of act OR didn\'t know it was wrong. MPC: substantial inability to appreciate wrongfulness OR conform conduct to law.' },
+          { label: 'Voluntary Intoxication', text: 'Defense to SPECIFIC INTENT crimes only (e.g., premeditation in first-degree murder, specific intent in larceny). Not a defense to general intent crimes.' },
+          { label: 'Entrapment', text: 'Government induced crime AND defendant not predisposed to commit it. Subjective test (majority): was this defendant predisposed? Objective test (MPC): would average law-abiding person have been induced?' }
+        ]
+      }
+    ]
+  },
+  conlaw: {
+    title: 'Constitutional Law Attack Sheet',
+    subtitle: 'U.S. Constitution — Federal Power & Individual Rights',
+    meta: ['U.S. Constitution', 'High-Frequency Exam Course', 'Apply Scrutiny Levels'],
+    intro: 'Start every con law question with <strong>justiciability</strong>. Then identify whether the issue is structural (federal power) or rights-based (individual rights). For rights claims, always identify the right, the level of scrutiny, and apply it. Always ask who is acting and what they are doing.',
+    steps: [
+      {
+        issue: 'Justiciability (SCAN)',
+        trigger: 'Any constitutional challenge — always first check.',
+        flag: 'always',
+        rule: 'Four doctrines limit federal court jurisdiction: Standing, Caseness/Controversy, Advisory Opinions (no), Mootness.',
+        analysis: [
+          { label: 'Standing (LAIR)', text: 'Injury: concrete, actual/imminent. Causation: D caused injury. Redressability: ruling will likely redress injury. Also: no 3rd party standing (exceptions: overbreadth, associational), no generalized grievances.' },
+          { label: 'Ripeness', text: 'Hardship of withholding review vs. fitness of issue for judicial decision. Purely speculative future harm = not ripe.' },
+          { label: 'Mootness', text: 'No live controversy. Exceptions: (1) capable of repetition yet evading review, (2) voluntary cessation with likelihood of recurrence, (3) class actions (named plaintiff\'s claim may be moot).' }
+        ]
+      },
+      {
+        issue: 'Congressional Power',
+        trigger: 'Congress enacts a federal law — is it within federal power?',
+        flag: 'if',
+        rule: 'Congress has only enumerated powers. Three most tested: (1) Commerce Clause, (2) Spending Power, (3) Necessary and Proper Clause (piggybacks on other powers).',
+        analysis: [
+          { label: 'Commerce Clause', text: 'Congress can regulate: (1) channels of interstate commerce, (2) instrumentalities + persons/things in interstate commerce, (3) activities having substantial effect on interstate commerce (Lopez/Morrison: non-economic activity needs stronger showing).' },
+          { label: 'Spending Power', text: 'Congress can tax and spend for general welfare. May attach conditions, but: must be unambiguous, related to federal interest in program, not coercive (NFIB v. Sebelius: Medicaid expansion unconstitutionally coercive).' },
+          { label: 'N&P Clause', text: 'McCulloch: means reasonably adapted to achieving legitimate constitutional end. Not independently a power — must be attached to another enumerated power.' }
+        ]
+      },
+      {
+        issue: 'Executive Power',
+        trigger: 'President takes action; separation of powers question.',
+        flag: 'if',
+        rule: 'President\'s powers: Commander-in-Chief, foreign affairs, veto, appointment/removal, pardons, executive agreements. Youngstown Steel framework (Jackson): strong when Congress authorizes; weak when Congress silent; weakest when Congress forbids.',
+        analysis: [
+          { label: 'Appointment Power', text: 'Officers: Senate confirmation. Inferior officers: Congress can vest in President alone, courts, heads of departments. Congress cannot appoint executive officers or retain removal power inconsistent with President\'s.' },
+          { label: 'Removal', text: 'President can remove executive officers at will. Congress can limit removal only for independent agencies with "for cause" standard. Cannot eliminate removal entirely (Seila Law).' },
+          { label: 'Executive Privilege', text: 'Qualified privilege for confidential communications. Can be overcome by demonstrated specific need in criminal prosecution (U.S. v. Nixon).' }
+        ]
+      },
+      {
+        issue: 'Due Process — Procedural',
+        trigger: 'Government deprives a person of life, liberty, or property without fair process.',
+        flag: 'if',
+        rule: 'Two-step: (1) Has a protected life/liberty/property interest been deprived? (2) What process is due? (Mathews v. Eldridge: importance of interest, risk of erroneous deprivation, government\'s interest).',
+        analysis: [
+          { label: 'Liberty Interest', text: 'Physical freedom. Also: certain aspects of one\'s life (Meachum: prisoners), liberty from stigma + discharge (stigma-plus). Voluntary relinquishment = waiver.' },
+          { label: 'Property Interest', text: 'Legitimate claim of entitlement (not mere expectation). Public employment: if "for cause" termination = property interest.' },
+          { label: 'Mathews Factors', text: 'Weight private interest, risk of erroneous deprivation (if more process, would error rate decrease?), government\'s interest in current procedure.' }
+        ]
+      },
+      {
+        issue: 'Due Process — Substantive (Fundamental Rights)',
+        trigger: 'Government restricts a liberty that may be "fundamental."',
+        flag: 'if',
+        rule: 'Strict scrutiny if fundamental right. Rational basis if not. Fundamental rights (recognized): voting, travel, access to courts, privacy (contraception, marriage, family, procreation, child-rearing), 2nd Amendment (Bruen — history/tradition).',
+        analysis: [
+          { label: 'Privacy Rights', text: 'Griswold (contraception), Loving (interracial marriage), Eisenstadt (unmarried), Roe/Casey/Dobbs (abortion: returned to states), Obergefell (same-sex marriage).' },
+          { label: 'Strict Scrutiny', text: 'Government must show: (1) compelling interest AND (2) law narrowly tailored (necessary) to achieve it. Government almost always loses.' },
+          { label: 'Rational Basis', text: 'Law must be rationally related to any legitimate government interest. Government almost always wins. P must negate every conceivable basis.' }
+        ]
+      },
+      {
+        issue: 'Equal Protection',
+        trigger: 'Government treats similarly situated people differently.',
+        flag: 'if',
+        rule: 'Three levels: (1) Strict scrutiny — suspect class (race, national origin, alienage) or fundamental right; (2) Intermediate scrutiny — quasi-suspect class (sex, legitimacy); (3) Rational basis — everything else.',
+        analysis: [
+          { label: 'Race/National Origin', text: 'Strict scrutiny. Facially neutral laws: still strict scrutiny if discriminatory purpose AND effect (Washington v. Davis). Affirmative action: strict scrutiny (Fisher). Race-based admissions: Struck down in SFFA v. Harvard (2023).' },
+          { label: 'Sex/Gender', text: 'Intermediate scrutiny: law must be substantially related to important government interest. Exceedingly persuasive justification (VMI). Facially neutral sex-based discrimination: need discriminatory intent.' },
+          { label: 'Rational Basis', text: 'Everything else: economic regulation, age, disability, sexual orientation (historically — now possibly intermediate scrutiny in some circuits post-Windsor).' }
+        ]
+      },
+      {
+        issue: 'First Amendment — Speech',
+        trigger: 'Government restricts speech, expression, or association.',
+        flag: 'if',
+        rule: 'Strong presumption against content-based restrictions. Content-based: strict scrutiny. Content-neutral (time/place/manner): intermediate scrutiny. Unprotected categories have different rules.',
+        analysis: [
+          { label: 'Content-Based vs. Neutral', text: 'Content-based: regulates because of message, viewpoint, or subject matter → SS. Content-neutral: regulates regardless of message (e.g., noise ordinance, permit requirements) → intermediate scrutiny (substantial gov interest, not suppress speech, alternative channels).' },
+          { label: 'Unprotected Speech', text: 'Incitement (Brandenburg: imminent lawless action), Obscenity (Miller test), True Threats, Defamation (actual malice for public figures), Fighting Words, Child Pornography. No protection = can be banned.' },
+          { label: 'Overbreadth & Vagueness', text: 'Overbreadth: law chills too much protected speech. Vagueness: reasonable person can\'t tell what\'s prohibited. Both facial challenges.' }
+        ]
+      },
+      {
+        issue: 'State Action Doctrine',
+        trigger: 'Private entity (not government) restricts someone\'s constitutional rights.',
+        flag: 'always',
+        rule: 'Constitution only restrains government action. Private action: no constitutional claim (can have statutory claim). Exceptions: public function, entanglement/encouragement, symbiotic relationship.',
+        analysis: [
+          { label: 'Public Function', text: 'Private entity performs function traditionally exclusively reserved to state (running company town, running elections). Rare.' },
+          { label: 'Entanglement', text: 'Sufficient state involvement in private discrimination (state authorizes/encourages/profits from private discrimination). Moose Lodge: mere licensing insufficient.' },
+          { label: 'Apply First', text: 'Always confirm state action before analyzing constitutional rights. If no state action → dismiss constitutional claim, check statutory options (§1983 requires state action too).' }
+        ]
+      }
+    ]
+  },
+  property: {
+    title: 'Property Attack Sheet',
+    subtitle: 'Real Property — Estates, Transactions, Landlord-Tenant & Regulatory Takings',
+    meta: ['Real Property', 'High-Frequency Exam Course', 'Future Interests Are Key'],
+    intro: 'Property exams frequently test <strong>future interests</strong> (work through each step of RAP carefully), <strong>adverse possession</strong> (run through all elements), and <strong>recording acts</strong> (identify BFP status and statute type). Landlord-tenant and takings are also highly testable.',
+    steps: [
+      {
+        issue: 'Present Estates — Classification',
+        trigger: 'Language conveying interest in land.',
+        flag: 'always',
+        rule: 'Identify: Fee Simple Absolute (FSA), Fee Simple Determinable (FSD), Fee Simple Subject to Condition Subsequent (FSSCS), Fee Simple Subject to Executory Limitation (FSSEL), Fee Tail (abolished most states), Life Estate.',
+        analysis: [
+          { label: 'Language Signals', text: 'FSA: "to A and her heirs" (no limit). FSD: "to A so long as..." "while," "during," "until" → automatic forfeiture → Possibility of Reverter. FSSCS: "to A, but if..." "on condition that," "provided that" → right of entry (no automatic forfeiture). FSSEL: "to A, but if... then to B."' },
+          { label: 'Life Estate', text: '"To A for life." Life estate pur autre vie: measured by someone else\'s life. Waste doctrine applies: affirmative waste (active destruction), permissive waste (failure to maintain), ameliorative waste (changes that increase value but alter character).' },
+          { label: 'Defeasible Fees', text: 'FSD: grantor holds Possibility of Reverter (automatic). FSSCS: grantor holds Right of Entry/Power of Termination (must re-enter). FSSEL: third party holds Executory Interest (shifts estate).' }
+        ]
+      },
+      {
+        issue: 'Future Interests',
+        trigger: 'After identifying present estate — classify the future interest.',
+        flag: 'always',
+        rule: 'In grantor: Reversion, Possibility of Reverter, Right of Entry. In grantee: Remainder (vested vs. contingent) or Executory Interest (shifting vs. springing). Always apply RAP to contingent remainders and executory interests.',
+        analysis: [
+          { label: 'Vested vs. Contingent Remainder', text: 'Vested: (1) in ascertained person, (2) no condition precedent (other than prior estate ending). Contingent: unascertained person OR condition precedent. Indefeasibly vested vs. vested subject to open vs. vested subject to complete defeasance.' },
+          { label: 'Executory Interests', text: 'Shifting: cuts short a grantee\'s estate in favor of third party. Springing: cuts short grantor\'s estate and springs to grantee in future. Both violate RAP if not vest within perpetuities period.' },
+          { label: 'Class Gifts', text: 'Vested Subject to Open: at least one class member ascertained but class can grow. ALL members must vest within RAP period or entire gift fails (all-or-nothing rule under traditional RAP).' }
+        ]
+      },
+      {
+        issue: 'Rule Against Perpetuities (RAP)',
+        trigger: 'Contingent remainder, executory interest, or class gift created.',
+        flag: 'always',
+        rule: 'No interest is valid unless it must vest, if at all, within 21 years after some life in being at the creation of the interest. Test: is there any possible scenario where interest could vest outside the period?',
+        analysis: [
+          { label: 'RAP Steps', text: '(1) Identify the interest. (2) Is it subject to RAP (contingent remainder, executory interest, vested subject to open)? (3) Find validating life. (4) Must interest vest within 21 years after validating life\'s death? (5) Is there any scenario where it could vest later? If yes → void.' },
+          { label: 'Common Traps', text: 'Fertile octogenarian (can always have children). Unborn widow (surviving spouse may not be alive at creation). Administrative contingency (events tied to estate administration can last >21 years).' },
+          { label: 'Modern RAP', text: 'Many states: USRAP (90-year wait and see period). Some states: wait and see approach. Some states: abolished entirely. Always check which approach applies.' }
+        ]
+      },
+      {
+        issue: 'Adverse Possession',
+        trigger: 'Person in possession of another\'s land for extended period claims title.',
+        flag: 'if',
+        rule: 'ECHOA: Elements (possession must be): Exclusive, Continuous (for statutory period), Hostile/Claim of Right, Open & Notorious, Actual. All elements for the full statutory period (typically 10-21 years).',
+        analysis: [
+          { label: 'Hostile', text: 'Not owner\'s permission. Three standards: objective (regardless of state of mind), good faith (believes owns it), bad faith (knows not owner but claims anyway). Majority: objective.' },
+          { label: 'Continuity', text: 'Use consistent with how an ordinary owner would use the land seasonally. Tacking: adverse possessor can tack to predecessors\' time if privity of possession (voluntary transfer).' },
+          { label: 'Open & Notorious', text: 'Such that a reasonable owner would be put on notice. Depends on nature of land — building on property clearly open; minor encroachment may not be.' }
+        ]
+      },
+      {
+        issue: 'Recording Acts',
+        trigger: 'Two parties have competing claims to the same property.',
+        flag: 'if',
+        rule: 'Three types of recording statutes protect subsequent purchasers against prior unrecorded interests. Race: first to record wins. Notice: BFP without notice wins. Race-Notice: first to record without notice at time of recording wins.',
+        analysis: [
+          { label: 'BFP Status', text: 'Bona fide purchaser: (1) pays valuable consideration, (2) without notice of prior interest (actual, constructive from record, inquiry notice from possession/easements).' },
+          { label: 'Shelter Rule', text: 'Person who takes from BFP acquires BFP\'s status, even if they themselves had notice. Protects marketability of title.' },
+          { label: 'Notice Types', text: 'Actual: knows of prior deed. Record (Constructive): prior deed in chain of title. Inquiry: possession by another or visible easement would put reasonable buyer on inquiry.' }
+        ]
+      },
+      {
+        issue: 'Landlord-Tenant',
+        trigger: 'Lease, possession, condition of premises, or eviction is at issue.',
+        flag: 'if',
+        rule: 'Four tenancies: Term of Years, Periodic Tenancy, Tenancy at Will, Tenancy at Sufferance. Landlord duties: implied warranty of habitability (residential), covenant of quiet enjoyment. Tenant duties: pay rent, not commit waste.',
+        analysis: [
+          { label: 'IWH', text: 'Implied Warranty of Habitability: residential leases only. Property must be fit for human habitation. Tenant remedies: repair and deduct, rent withholding/reduction, rescission, damages.' },
+          { label: 'Constructive Eviction', text: 'LL substantially interferes with tenant\'s quiet enjoyment → tenant abandons within reasonable time → treated as eviction. Tenant must vacate to assert.' },
+          { label: 'Assignment vs. Sublease', text: 'Assignment: full remainder of term → privity of estate with LL (original tenant still has privity of K). Sublease: less than full term → no privity of estate or K with LL; LL can\'t sue sublessee for rent.' }
+        ]
+      },
+      {
+        issue: 'Easements',
+        trigger: 'Non-possessory right to use another\'s land.',
+        flag: 'if',
+        rule: 'Creation: Express (grant/reservation), Implication (prior use or necessity), Prescription (like AP without exclusivity). Appurtenant (runs with land) vs. In Gross (personal to holder). Termination: WENNER (Written release, Estoppel, Necessity ends, Non-use+abandonment, Recording, Release).',
+        analysis: [
+          { label: 'Easement by Implication', text: 'Prior use: (1) single parcel later divided, (2) prior use existed, (3) use apparent, (4) reasonably necessary. By necessity: absolute necessity (landlocked parcel). Requires common ownership then severance.' },
+          { label: 'Easement by Prescription', text: 'ECHO without Exclusivity: (1) actual, (2) open/notorious, (3) hostile, (4) continuous for statutory period. Public prescription also possible in some states.' },
+          { label: 'Scope', text: 'Limited to reasonable use within original purpose. Cannot expand scope without new grant. Apportionment: easement in gross for commercial purposes may be apportioned; personal in gross may not.' }
+        ]
+      },
+      {
+        issue: 'Takings',
+        trigger: 'Government acquires or regulates private property.',
+        flag: 'if',
+        rule: 'Fifth Amendment: private property shall not be taken for public use without just compensation. Physical takings (per se): always a taking. Regulatory takings: Lucas (total elimination of value = per se taking) or Penn Central balancing test.',
+        analysis: [
+          { label: 'Per Se Taking', text: 'Physical invasion: permanent physical occupation = categorical taking (Loretto). Total wipeout of economic value: categorically a taking unless use already prohibited by background principles of state law (Lucas).' },
+          { label: 'Penn Central', text: 'Ad hoc inquiry: (1) economic impact on claimant, (2) interference with investment-backed expectations, (3) character of government action (physical invasion vs. mere adjustment of benefits/burdens).' },
+          { label: 'Public Use', text: 'Fifth Amendment: taking must be for public use. Kelo: economic development qualifies as public use (if going through a comprehensive plan). Just compensation = fair market value at time of taking.' }
+        ]
+      }
+    ]
+  }
+};
+
+const courseIds = Object.keys(ATTACK_DATA);
+
+// Build tabs
+const tabsEl = document.getElementById('courseTabs');
+courseIds.forEach((id,i)=>{
+  const btn = document.createElement('button');
+  btn.className = 'course-tab'+(i===0?' active':'');
+  const icons = { contracts:'📝', torts:'⚖️', civpro:'⚖️', crimlaw:'🔍', conlaw:'🏛️', property:'🏠' };
+  btn.textContent = (icons[id]||'📋')+' '+ATTACK_DATA[id].title.replace(' Attack Sheet','');
+  btn.onclick = ()=>switchCourse(id, btn);
+  tabsEl.appendChild(btn);
+});
+
+// Build panels
+const panelsEl = document.getElementById('coursePanels');
+courseIds.forEach((id,idx)=>{
+  const data = ATTACK_DATA[id];
+  const panel = document.createElement('div');
+  panel.id = 'panel-'+id;
+  panel.className = 'course-panel'+(idx===0?' active':'');
+
+  let stepsHTML = '';
+  data.steps.forEach((step,si)=>{
+    const flagClass = step.flag==='always'?'flag-always':step.flag==='rare'?'flag-rare':'flag-if';
+    const flagText = step.flag==='always'?'ALWAYS ANALYZE':step.flag==='rare'?'RARE ISSUE':'ANALYZE IF FACTS PRESENT';
+    let analysisHTML = step.analysis.map(a=>`
+      <div class="analysis-item">
+        <div class="analysis-label">${escHtml(a.label)}</div>
+        <div class="analysis-text">${escHtml(a.text)}</div>
+      </div>`).join('');
+
+    stepsHTML += `
+      <div class="attack-step">
+        <div class="attack-step-header" onclick="toggleStep(this)">
+          <div class="step-number">${si+1}</div>
+          <div class="step-issue">
+            <p class="step-issue-name">${escHtml(step.issue)}<span class="step-flag ${flagClass}">${flagText}</span></p>
+            <p class="step-issue-trigger"><strong>Trigger:</strong> ${escHtml(step.trigger)}</p>
+          </div>
+          <span class="step-toggle">▾</span>
+        </div>
+        <div class="attack-step-body">
+          <div class="rule-box">
+            <div class="rule-box-label">Rule / Black Letter Law</div>
+            <div class="rule-box-text">${escHtml(step.rule)}</div>
+          </div>
+          <div class="analysis-grid" style="margin-top:.75rem">${analysisHTML}</div>
+        </div>
+      </div>`;
+  });
+
+  panel.innerHTML = `
+    <div class="course-header-block">
+      <div class="course-title-row">
+        <h2 class="course-main-title">${data.title}</h2>
+      </div>
+      <p class="course-sub">${data.subtitle}</p>
+      <div class="course-meta">
+        ${data.meta.map(m=>`<span class="meta-chip">${m}</span>`).join('')}
+      </div>
+    </div>
+    <div class="attack-intro">${data.intro}</div>
+    <div class="course-actions">
+      <button class="expand-btn" onclick="expandAll('${id}')">Expand All</button>
+      <button class="expand-btn" onclick="collapseAll('${id}')">Collapse All</button>
+      <button class="action-btn" onclick="printSheet('${id}')">🖨 Print / Save PDF</button>
+      <a href="course-outlines.html#${id}" class="action-btn" style="text-decoration:none;display:inline-block">📋 View Full Outline</a>
+      <span class="steps-count">${data.steps.length} issue-spotting steps</span>
+    </div>
+    ${stepsHTML}
+  `;
+  panelsEl.appendChild(panel);
+});
+
+function switchCourse(id, btn){
+  document.querySelectorAll('.course-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.course-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleStep(header){
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.toggle('open');
+  header.classList.toggle('open', isOpen);
+}
+
+function expandAll(id){
+  const panel = document.getElementById('panel-'+id);
+  panel.querySelectorAll('.attack-step-body').forEach(b=>b.classList.add('open'));
+  panel.querySelectorAll('.attack-step-header').forEach(h=>h.classList.add('open'));
+}
+
+function collapseAll(id){
+  const panel = document.getElementById('panel-'+id);
+  panel.querySelectorAll('.attack-step-body').forEach(b=>b.classList.remove('open'));
+  panel.querySelectorAll('.attack-step-header').forEach(h=>h.classList.remove('open'));
+}
+
+function printSheet(id){
+  expandAll(id);
+  window.print();
+}
+
+function escHtml(str){
+  if(!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>

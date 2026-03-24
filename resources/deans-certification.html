@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dean's Certification Request Template | IvyAmbition</title>
+  <meta name="description" content="Professional dean's certification request letter templates for law school transfer applicants. Generate a customized letter in seconds." />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .dc-layout { display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start; }
+    @media(max-width:900px){ .dc-layout { grid-template-columns:1fr; } }
+    .dc-sidebar { background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;position:sticky;top:80px; }
+    .dc-sidebar h3 { font-family:'Playfair Display',serif;font-size:1.05rem;color:#0d1b2a;margin:0 0 1rem; }
+    .field-group { margin-bottom:1rem; }
+    .field-label { display:block;font-size:.78rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem; }
+    .field-input { width:100%;padding:.5rem .7rem;border:1px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;color:#334155;box-sizing:border-box;transition:border-color .15s; }
+    .field-input:focus { outline:none;border-color:#c9a84c; }
+    .field-select { width:100%;padding:.5rem .7rem;border:1px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit;background:#fff;color:#334155;cursor:pointer;box-sizing:border-box; }
+    .field-select:focus { outline:none;border-color:#c9a84c; }
+    .generate-btn { width:100%;padding:.7rem;background:#0d1b2a;color:#c9a84c;border:none;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:.5rem;transition:background .15s; }
+    .generate-btn:hover { background:#1a2e47; }
+    .template-tabs { display:flex;gap:0;border-bottom:2px solid #e2e8f0;margin-bottom:1.5rem; }
+    .template-tab { padding:.55rem 1rem;font-size:.83rem;font-weight:600;color:#64748b;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:color .15s;margin-bottom:-2px; }
+    .template-tab.active { color:#0d1b2a;border-bottom-color:#c9a84c; }
+    .template-panel { display:none; }
+    .template-panel.active { display:block; }
+    .letter-preview { background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:2rem 2.5rem;font-family:Georgia,serif;font-size:.9rem;line-height:1.9;color:#1a1a1a;position:relative; }
+    @media(max-width:600px){ .letter-preview { padding:1.25rem; } }
+    .letter-preview p { margin:0 0 1rem; }
+    .letter-preview .letter-date { margin-bottom:1.5rem; }
+    .letter-preview .letter-address { margin-bottom:1.5rem; }
+    .letter-preview .letter-salutation { margin-bottom:1rem; }
+    .letter-preview .letter-body p { text-indent:1.5rem; }
+    .letter-preview .letter-closing { margin-top:1.5rem; }
+    .letter-preview .letter-sig { margin-top:2rem; }
+    .placeholder { color:#c9a84c;font-weight:700; }
+    .letter-actions { display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap; }
+    .letter-action-btn { padding:.5rem 1rem;border:1px solid #e2e8f0;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;background:#fff;color:#334155;transition:background .15s; }
+    .letter-action-btn:hover { background:#f8fafc; }
+    .letter-action-btn.primary { background:#0d1b2a;color:#c9a84c;border-color:#0d1b2a; }
+    .letter-action-btn.primary:hover { background:#1a2e47; }
+    .copy-toast { position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#0d1b2a;color:#fff;padding:.65rem 1.5rem;border-radius:8px;font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .3s;z-index:1000; }
+    .copy-toast.show { opacity:1; }
+    .tips-box { background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:1rem 1.25rem;font-size:.84rem;color:#166534;line-height:1.6;margin-bottom:1.25rem; }
+    .tips-box strong { color:#14532d; }
+    .tips-box ul { margin:.5rem 0 0 1rem;padding:0; }
+    .tips-box li { margin-bottom:.35rem; }
+    .what-is-box { background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem; }
+    .what-is-box h4 { font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 .5rem; }
+    .what-is-box p { font-size:.84rem;color:#64748b;line-height:1.6;margin:0 0 .5rem; }
+    .what-is-box p:last-child { margin:0; }
+    .dc-preview-area { flex:1; }
+    .section-label { font-size:.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin:0 0 .75rem; }
+    .email-subject-box { background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.65rem 1rem;font-size:.83rem;color:#334155;margin-bottom:1rem; }
+    .email-subject-label { font-size:.73rem;font-weight:700;color:#94a3b8;margin-bottom:.25rem; }
+    .multi-school-note { background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:#92400e;margin-bottom:1.25rem; }
+  </style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Ivy<span>Ambition</span></a>
+    <ul class="nav-links">
+      <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a></li>
+      <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+      <li><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a></li>
+      <li><a href="./index.html">Free Tools</a></li>
+      <li><a href="../tabs/transfer/landing-pages/v1.html#book-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../tabs/undergraduate/landing-pages/v1.html">Undergrad</a><a href="../tabs/law-school/landing-pages/v1.html">Law School</a><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a><a href="./index.html">Free Tools</a><a href="../tabs/transfer/landing-pages/v1.html#book-call">Book a Call</a>
+  </div>
+</nav>
+
+<section class="tool-hero">
+  <div class="container tool-hero-content">
+    <div class="tool-breadcrumb"><a href="../tabs/transfer/landing-pages/v1.html">Transfer</a> &rsaquo; <a href="./index.html">Free Tools</a> &rsaquo; Dean's Certification</div>
+    <p class="tool-eyebrow">Free Tool &middot; Application Templates</p>
+    <h1>Dean's Certification Request Templates</h1>
+    <p class="tool-hero-sub">Generate a professional request letter to your law school's dean or registrar asking for the dean's certification required by transfer schools.</p>
+  </div>
+</section>
+
+<div class="tool-body">
+  <div class="container">
+    <div class="dc-layout">
+
+      <!-- SIDEBAR: Generator Form -->
+      <div class="dc-sidebar">
+        <h3>Generate Your Letter</h3>
+
+        <div class="field-group">
+          <label class="field-label">Your Full Name</label>
+          <input type="text" class="field-input" id="studentName" placeholder="Jane Smith" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Your Student ID</label>
+          <input type="text" class="field-input" id="studentId" placeholder="123456789" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Your Class Year</label>
+          <select class="field-select" id="classYear">
+            <option value="1L">1L (Rising 2L, transferring after 1L year)</option>
+            <option value="2L">2L (Transferring after 2L year)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Current Law School</label>
+          <input type="text" class="field-input" id="currentSchool" placeholder="University of ABC School of Law" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Dean / Registrar Name</label>
+          <input type="text" class="field-input" id="deanName" placeholder="Dean Sarah Johnson" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Target Transfer School(s)</label>
+          <input type="text" class="field-input" id="targetSchool" placeholder="Yale Law School, Harvard Law School" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Application Deadline</label>
+          <input type="text" class="field-input" id="appDeadline" placeholder="July 15, 2025" />
+        </div>
+        <div class="field-group">
+          <label class="field-label">Letter Template Style</label>
+          <select class="field-select" id="letterStyle">
+            <option value="formal">Formal (Recommended)</option>
+            <option value="email">Email Format</option>
+          </select>
+        </div>
+        <button class="generate-btn" onclick="generateLetter()">Generate Letter →</button>
+      </div>
+
+      <!-- MAIN: Preview + Tips -->
+      <div class="dc-preview-area">
+
+        <div class="what-is-box">
+          <h4>What is a Dean's Certification?</h4>
+          <p>A dean's certification (also called a "dean's letter" or "good standing letter") is a formal document from your current law school's dean of students, dean of academics, or registrar's office that certifies:</p>
+          <p>✓ Your enrollment status and expected graduation date<br>✓ Your academic good standing<br>✓ Any academic discipline or honor code issues (or the absence thereof)<br>✓ Your class rank or GPA (some versions)<br>✓ Your anticipated completion of required 1L coursework</p>
+          <p><strong>Most T14 schools require this document</strong> as part of the transfer application. Request it 4–6 weeks before your earliest deadline.</p>
+        </div>
+
+        <div class="tips-box">
+          <strong>Timing Tips:</strong>
+          <ul>
+            <li>Request your dean's cert <strong>4–6 weeks before</strong> your earliest deadline</li>
+            <li>If applying to multiple schools, request <strong>one general version</strong> or specify all target schools</li>
+            <li>Some schools charge $15–$50 per certification letter — budget accordingly</li>
+            <li>Follow up politely after 2 weeks if you haven't heard back</li>
+            <li>Ask if the school sends it directly to transfer schools or gives it to you to submit</li>
+          </ul>
+        </div>
+
+        <div class="multi-school-note">
+          <strong>Applying to multiple schools?</strong> You can request one letter that lists all your target schools, or ask if your school can issue a general "To Whom It May Concern" version you can submit to all schools.
+        </div>
+
+        <!-- Template Tabs -->
+        <div class="template-tabs">
+          <button class="template-tab active" onclick="switchTab('formal', this)">Formal Letter</button>
+          <button class="template-tab" onclick="switchTab('email', this)">Email Request</button>
+          <button class="template-tab" onclick="switchTab('followup', this)">Follow-Up Email</button>
+        </div>
+
+        <!-- Formal Letter Panel -->
+        <div class="template-panel active" id="panel-formal">
+          <div class="letter-actions">
+            <button class="letter-action-btn primary" onclick="copyLetter('formal')">📋 Copy Letter</button>
+            <button class="letter-action-btn" onclick="printLetter()">🖨 Print</button>
+          </div>
+          <div class="letter-preview" id="preview-formal">
+            <p class="letter-date" id="f-date">[Today's Date]</p>
+            <div class="letter-address">
+              <p id="f-dean">[Dean's Name / Registrar]</p>
+              <p id="f-school">[Your Law School Name]</p>
+              <p>[Office of Student Affairs / Registrar's Office]</p>
+            </div>
+            <p class="letter-salutation" id="f-salutation">Dear [Dean's Name],</p>
+            <div class="letter-body">
+              <p id="f-p1">I am writing to respectfully request a Dean's Certification letter in connection with my application to transfer to <span class="placeholder" id="f-target">[Target School(s)]</span>. My application deadline is <span class="placeholder" id="f-deadline">[Deadline Date]</span>, and I would be grateful if the letter could be completed by <span class="placeholder" id="f-deadline2">[Two Weeks Before Deadline]</span> to allow time for submission.</p>
+              <p id="f-p2">I am currently enrolled at <span class="placeholder" id="f-current">[Current Law School]</span> as a <span class="placeholder" id="f-class">[1L / 2L]</span> student (Student ID: <span class="placeholder" id="f-id">[Student ID]</span>). I am in good academic and disciplinary standing, and I am committed to completing all required coursework for the current academic year.</p>
+              <p>The certification letter typically includes: (1) confirmation of current enrollment and academic standing; (2) anticipated completion of required 1L coursework; (3) confirmation of no pending academic discipline or honor code violations; and (4) class rank or GPA information if available and permitted by school policy.</p>
+              <p>Please let me know if your office requires any forms, fees, or additional information to process this request. I am happy to provide whatever is needed and would be glad to stop by your office at your convenience.</p>
+              <p>Thank you sincerely for your time and assistance. I greatly appreciate the support of [Current School] as I pursue this opportunity.</p>
+            </div>
+            <div class="letter-closing">
+              <p>Respectfully,</p>
+              <div class="letter-sig">
+                <p id="f-sig">[Your Full Name]</p>
+                <p id="f-id-sig">[Student ID: XXXXXXX]</p>
+                <p id="f-email">[your.email@lawschool.edu]</p>
+                <p id="f-phone">[Phone Number]</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Panel -->
+        <div class="template-panel" id="panel-email">
+          <div class="email-subject-box">
+            <div class="email-subject-label">Subject Line:</div>
+            <span id="email-subject">Dean's Certification Request — [Your Name] — Transfer Application</span>
+          </div>
+          <div class="letter-actions">
+            <button class="letter-action-btn primary" onclick="copyLetter('email')">📋 Copy Email</button>
+          </div>
+          <div class="letter-preview" id="preview-email">
+            <p>Dear <span id="e-dean">[Dean's Name / To Whom It May Concern]</span>,</p>
+            <p>My name is <span class="placeholder" id="e-name">[Your Name]</span> (Student ID: <span class="placeholder" id="e-id">[Student ID]</span>), and I am a <span class="placeholder" id="e-class">[1L / 2L]</span> student at <span class="placeholder" id="e-school">[Current Law School]</span>. I am writing to request a Dean's Certification letter in support of my transfer application to <span class="placeholder" id="e-target">[Target School(s)]</span>.</p>
+            <p>My application deadline is <span class="placeholder" id="e-deadline">[Deadline Date]</span>. I would greatly appreciate having the certification completed by <span class="placeholder" id="e-deadline2">[Two Weeks Before Deadline]</span> to allow time for submission.</p>
+            <p>The Dean's Certification should confirm my: (1) current enrollment and good standing, (2) anticipated completion of required 1L coursework, (3) absence of pending academic or honor code violations, and (4) GPA/class rank if your office is authorized to disclose this information.</p>
+            <p>Please let me know if you need any additional forms, a processing fee, or other information. I am available to meet at your convenience or respond to any questions by email or phone.</p>
+            <p>Thank you very much for your time and assistance.</p>
+            <p>Best regards,<br><span class="placeholder" id="e-sig">[Your Full Name]</span><br><span id="e-email2">[your.email@lawschool.edu]</span><br><span id="e-phone2">[Phone Number]</span></p>
+          </div>
+        </div>
+
+        <!-- Follow-Up Panel -->
+        <div class="template-panel" id="panel-followup">
+          <div class="email-subject-box">
+            <div class="email-subject-label">Subject Line:</div>
+            <span id="fu-subject">Follow-Up: Dean's Certification Request — [Your Name]</span>
+          </div>
+          <div class="letter-actions">
+            <button class="letter-action-btn primary" onclick="copyLetter('followup')">📋 Copy Email</button>
+          </div>
+          <div class="letter-preview" id="preview-followup">
+            <p>Dear <span id="fu-dean">[Dean's Name]</span>,</p>
+            <p>I hope this message finds you well. I am following up on my Dean's Certification request submitted on <span class="placeholder">[Date of Original Request]</span>. My name is <span class="placeholder" id="fu-name">[Your Name]</span> (Student ID: <span class="placeholder" id="fu-id">[Student ID]</span>).</p>
+            <p>My earliest transfer application deadline is <span class="placeholder" id="fu-deadline">[Deadline Date]</span>, and I want to ensure the certification is submitted on time. I completely understand that your office handles many requests, and I sincerely appreciate your time.</p>
+            <p>Please do not hesitate to reach out if you need any additional information from me or if there is anything I can do to facilitate the process. I would be happy to stop by your office at a time that is convenient for you.</p>
+            <p>Thank you again for your assistance.</p>
+            <p>Best regards,<br><span class="placeholder" id="fu-sig">[Your Full Name]</span><br><span id="fu-email">[your.email@lawschool.edu]</span><br><span id="fu-phone">[Phone Number]</span></p>
+          </div>
+        </div>
+
+        <!-- FAQs -->
+        <div style="margin-top:2rem;">
+          <h3 style="font-family:'Playfair Display',serif;color:#0d1b2a;margin:0 0 1rem;">Frequently Asked Questions</h3>
+          <div id="faqContainer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="copy-toast" id="copyToast">✓ Copied to clipboard!</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><a href="../index.html" class="logo">Ivy<span>Ambition</span></a><p>Elite law school transfer consulting.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h5>Transfer Tools</h5><ul>
+        <li><a href="./transfer-predictor.html">Transfer Predictor</a></li>
+        <li><a href="./transfer-policies.html">Transfer Policies</a></li>
+        <li><a href="./transfer-stats.html">Transfer Stats</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>1L Resources</h5><ul>
+        <li><a href="./course-outlines.html">Course Outlines</a></li>
+        <li><a href="./attack-sheets.html">Attack Sheets</a></li>
+        <li><a href="./gpa-calculator.html">GPA Calculator</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2025 IvyAmbition.</p></div></div>
+</footer>
+
+<script>
+const FAQS = [
+  { q: "Who exactly should I send the request to?", a: "Typically, send your request to the Dean of Students, Associate Dean for Academic Affairs, or the Registrar's Office — whoever your school designates to handle transfer certifications. Check your school's website or email the general admissions office to ask." },
+  { q: "How long does processing take?", a: "Most law school offices take 1–3 weeks to process certification requests. Some offices charge a fee ($15–$50) and require completion of a formal request form. Always request 4–6 weeks before your earliest deadline." },
+  { q: "Can one letter be used for all my transfer applications?", a: "Many schools accept a general letter addressed 'To Whom It May Concern' or listing multiple target schools. However, some transfer portals require the school to submit the certification directly — in that case, you may need separate submissions per school." },
+  { q: "What if my school won't provide my class rank?", a: "Some schools have grade non-disclosure policies. In that case, the dean's letter will confirm GPA (if permitted) or simply state that your grades are not disclosed. Transfer schools understand this — just note in your application that your school has a non-disclosure policy." },
+  { q: "Is the dean's certification the same as a letter of recommendation?", a: "No. A dean's certification is an official administrative document confirming your standing — it is not a personal recommendation. It comes from an administrative office, not a professor. You still need separate letters of recommendation from faculty." },
+  { q: "What if I have a pending academic issue?", a: "If you have a pending honor code violation, academic probation, or other issue, the dean must disclose this. You should address it proactively in an addendum to your transfer application rather than hoping it goes unnoticed." }
+];
+
+const faqContainer = document.getElementById('faqContainer');
+FAQS.forEach((faq,i)=>{
+  const el = document.createElement('div');
+  el.style.cssText = 'border:1px solid #e2e8f0;border-radius:10px;margin-bottom:.75rem;overflow:hidden;';
+  el.innerHTML = `
+    <div onclick="toggleFaq(this)" style="padding:.85rem 1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#f8fafc;">
+      <span style="font-size:.88rem;font-weight:600;color:#0d1b2a;">${faq.q}</span>
+      <span style="font-size:.75rem;color:#94a3b8;transition:transform .2s;">▾</span>
+    </div>
+    <div style="display:none;padding:.75rem 1rem;font-size:.84rem;color:#64748b;line-height:1.7;border-top:1px solid #f1f5f9;">${faq.a}</div>
+  `;
+  faqContainer.appendChild(el);
+});
+
+function toggleFaq(header){
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('span:last-child');
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function switchTab(id, btn){
+  document.querySelectorAll('.template-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.template-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+function generateLetter(){
+  const name = document.getElementById('studentName').value || '[Your Full Name]';
+  const id = document.getElementById('studentId').value || '[Student ID]';
+  const classYear = document.getElementById('classYear').value;
+  const school = document.getElementById('currentSchool').value || '[Current Law School]';
+  const dean = document.getElementById('deanName').value || '[Dean\'s Name]';
+  const target = document.getElementById('targetSchool').value || '[Target School(s)]';
+  const deadline = document.getElementById('appDeadline').value || '[Deadline Date]';
+
+  // Estimate two weeks before deadline
+  let deadline2 = '[Two Weeks Before Deadline]';
+  if(deadline && deadline.includes(',')){
+    try{
+      const d = new Date(deadline);
+      d.setDate(d.getDate()-14);
+      deadline2 = d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    }catch(e){}
+  }
+
+  const today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+  // Update formal letter
+  document.getElementById('f-date').textContent = today;
+  document.getElementById('f-dean').textContent = dean;
+  document.getElementById('f-school').textContent = school;
+  document.getElementById('f-salutation').textContent = 'Dear '+dean+',';
+  document.getElementById('f-target').textContent = target;
+  document.getElementById('f-deadline').textContent = deadline;
+  document.getElementById('f-deadline2').textContent = deadline2;
+  document.getElementById('f-current').textContent = school;
+  document.getElementById('f-class').textContent = classYear;
+  document.getElementById('f-id').textContent = id;
+  document.getElementById('f-sig').textContent = name;
+  document.getElementById('f-id-sig').textContent = 'Student ID: '+id;
+
+  // Update email letter
+  document.getElementById('e-dean').textContent = dean;
+  document.getElementById('e-name').textContent = name;
+  document.getElementById('e-id').textContent = id;
+  document.getElementById('e-class').textContent = classYear;
+  document.getElementById('e-school').textContent = school;
+  document.getElementById('e-target').textContent = target;
+  document.getElementById('e-deadline').textContent = deadline;
+  document.getElementById('e-deadline2').textContent = deadline2;
+  document.getElementById('e-sig').textContent = name;
+  document.getElementById('email-subject').textContent = 'Dean\'s Certification Request — '+name+' — Transfer Application';
+
+  // Update follow-up
+  document.getElementById('fu-dean').textContent = dean;
+  document.getElementById('fu-name').textContent = name;
+  document.getElementById('fu-id').textContent = id;
+  document.getElementById('fu-deadline').textContent = deadline;
+  document.getElementById('fu-sig').textContent = name;
+  document.getElementById('fu-subject').textContent = 'Follow-Up: Dean\'s Certification Request — '+name;
+}
+
+function copyLetter(panel){
+  const el = document.getElementById('preview-'+panel);
+  const text = el ? el.innerText : '';
+  navigator.clipboard.writeText(text).then(()=>{
+    const toast = document.getElementById('copyToast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2500);
+  }).catch(()=>{
+    const range = document.createRange();
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    const toast = document.getElementById('copyToast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2500);
+  });
+}
+
+function printLetter(){
+  window.print();
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+</script>
+</body>
+</html>

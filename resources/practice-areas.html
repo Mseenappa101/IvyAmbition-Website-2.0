@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal Practice Area Guide & Quiz | IvyAmbition</title>
+  <meta name="description" content="Explore 10 legal practice areas with career paths, salaries, top schools, and lifestyle info. Take our quiz to discover which practice area fits you best." />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../tools.css" />
+  <style>
+    /* ── Tab Nav ── */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: .75rem 1.75rem;
+      font-family: Inter, sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      color: #64748b;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+      margin-bottom: -2px;
+    }
+    .tab-btn.active {
+      color: #0d1b2a;
+      border-bottom-color: #c9a84c;
+    }
+    .tab-btn:hover:not(.active) { color: #0d1b2a; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Practice Area Cards ── */
+    .pa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .pa-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .pa-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.10); transform: translateY(-2px); }
+    .pa-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .pa-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .pa-card-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #0d1b2a;
+      margin: 0 0 .2rem;
+    }
+    .pa-salary-badge {
+      font-size: .75rem;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: .15rem .5rem;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    .pa-card-body { padding: 1rem 1.5rem; }
+    .pa-overview {
+      font-size: .9rem;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .pa-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+    .pa-meta-item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: .5rem .75rem;
+    }
+    .pa-meta-label {
+      font-size: .7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #94a3b8;
+      margin-bottom: .1rem;
+    }
+    .pa-meta-value { font-size: .85rem; font-weight: 600; color: #0d1b2a; }
+    .pa-expand-btn {
+      width: 100%;
+      padding: .6rem;
+      background: none;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      color: #0d1b2a;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .pa-expand-btn:hover { background: #f8fafc; }
+    .pa-expanded {
+      display: none;
+      margin-top: 1rem;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 1rem;
+    }
+    .pa-expanded.open { display: block; }
+    .pa-section-title {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #94a3b8;
+      margin: .75rem 0 .3rem;
+    }
+    .pa-section-title:first-child { margin-top: 0; }
+    .pa-section-text { font-size: .85rem; color: #475569; line-height: 1.6; }
+    .pa-schools-list {
+      display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .35rem;
+    }
+    .pa-school-tag {
+      font-size: .75rem;
+      padding: .2rem .6rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .lifestyle-bar {
+      display: flex; align-items: center; gap: .5rem; margin: .25rem 0;
+    }
+    .lifestyle-label { font-size: .8rem; color: #64748b; width: 100px; flex-shrink: 0; }
+    .lifestyle-track { flex: 1; height: 6px; background: #e2e8f0; border-radius: 3px; }
+    .lifestyle-fill { height: 100%; border-radius: 3px; }
+
+    /* ── Quiz ── */
+    .quiz-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .quiz-intro {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .quiz-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #0d1b2a;
+      margin-bottom: .5rem;
+    }
+    .quiz-intro p { color: #64748b; max-width: 500px; margin: 0 auto 1.25rem; }
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .quiz-progress-bar {
+      flex: 1; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;
+    }
+    .quiz-progress-fill { height: 100%; background: #c9a84c; border-radius: 3px; transition: width .3s; }
+    .quiz-progress-text { font-size: .85rem; color: #64748b; font-weight: 600; white-space: nowrap; }
+    .quiz-question {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+      display: none;
+    }
+    .quiz-question.active { display: block; }
+    .quiz-q-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #0d1b2a;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+    .quiz-options { display: flex; flex-direction: column; gap: .65rem; }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .85rem 1.1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+    .quiz-option:hover { border-color: #c9a84c; background: #fffbeb; }
+    .quiz-option.selected { border-color: #c9a84c; background: #fffbeb; }
+    .quiz-option input[type="radio"] { accent-color: #c9a84c; }
+    .quiz-option-text { font-size: .9rem; color: #334155; }
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+    .quiz-btn {
+      padding: .65rem 1.75rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .15s, opacity .15s;
+    }
+    .quiz-btn-back { background: #f1f5f9; color: #0d1b2a; }
+    .quiz-btn-back:hover { background: #e2e8f0; }
+    .quiz-btn-next { background: #0d1b2a; color: #fff; }
+    .quiz-btn-next:hover { background: #1e2f43; }
+    .quiz-btn-next:disabled { opacity: .4; cursor: not-allowed; }
+    .quiz-btn-submit { background: #c9a84c; color: #fff; }
+    .quiz-btn-submit:hover { background: #b8963a; }
+
+    /* ── Quiz Results ── */
+    .quiz-results { display: none; }
+    .quiz-results.active { display: block; }
+    .results-top-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    @media(max-width:600px){ .results-top-two { grid-template-columns: 1fr; } }
+    .result-area-card {
+      background: #fff;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .result-area-card.secondary { border-color: #e2e8f0; }
+    .result-rank {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #c9a84c;
+      margin-bottom: .3rem;
+    }
+    .result-area-card.secondary .result-rank { color: #94a3b8; }
+    .result-area-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #0d1b2a;
+      margin-bottom: .5rem;
+    }
+    .result-why { font-size: .88rem; color: #475569; line-height: 1.6; }
+    .dimension-chart { margin-bottom: 2rem; }
+    .dimension-chart h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: #0d1b2a;
+      margin-bottom: 1rem;
+    }
+    .dim-row {
+      display: flex; align-items: center; gap: .75rem; margin-bottom: .6rem;
+    }
+    .dim-name { font-size: .85rem; color: #334155; width: 130px; flex-shrink: 0; font-weight: 600; }
+    .dim-track { flex: 1; height: 8px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
+    .dim-fill { height: 100%; border-radius: 4px; background: #c9a84c; }
+    .dim-score { font-size: .8rem; color: #64748b; width: 30px; text-align: right; }
+    .quiz-restart-btn {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: .65rem 2rem;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      color: #0d1b2a;
+    }
+    .quiz-restart-btn:hover { background: #e2e8f0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">IvyAmbition</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li>
+      <li class="nav-dropdown">
+        <a href="../tabs/law-school/landing-pages/v1.html" class="nav-dropbtn">Law School &#9660;</a>
+        <ul class="nav-dropdown-content">
+          <li><a href="../tabs/law-school/landing-pages/v1.html#programs">Programs</a></li>
+          <li><a href="./index.html">Free Tools</a></li>
+          <li><a href="../tabs/law-school/landing-pages/v1.html#testimonials">Testimonials</a></li>
+        </ul>
+      </li>
+      <li><a href="../tabs/law-school/landing-pages/v1.html">About</a></li>
+      <li><a href="../tabs/law-school/landing-pages/v1.html#book-call" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <ul>
+    <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li>
+    <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+    <li><a href="./index.html">Free Law Tools</a></li>
+    <li><a href="../tabs/law-school/landing-pages/v1.html">About</a></li>
+    <li><a href="../tabs/law-school/landing-pages/v1.html#book-call">Get Started</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="tool-hero">
+  <div class="tool-breadcrumb">
+    <a href="../tabs/law-school/landing-pages/v1.html">Law School</a> &rsaquo;
+    <a href="./index.html">Free Tools</a> &rsaquo;
+    Practice Area Guide
+  </div>
+  <p class="tool-eyebrow">Free Tool</p>
+  <h1>Legal Practice Area Guide &amp; Quiz</h1>
+  <p class="tool-hero-sub">Explore 10 major practice areas — career paths, day-in-life, salaries, and top schools. Then take our 12-question quiz to discover which specialty fits you best.</p>
+</section>
+
+<!-- MAIN -->
+<main class="tool-main" style="max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem;">
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('guide',this)">Practice Area Guide</button>
+    <button class="tab-btn" onclick="switchTab('quiz',this)">Find My Practice Area</button>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TAB 1 — PRACTICE AREA GUIDE
+  ══════════════════════════════════ -->
+  <div id="tab-guide" class="tab-panel active">
+    <p style="color:#64748b;margin-bottom:1.5rem;font-size:.95rem;">Click <strong>Explore More</strong> on any card to see day-in-life details, lifestyle ratings, and top feeder schools.</p>
+    <div class="pa-grid" id="paGrid"></div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TAB 2 — QUIZ
+  ══════════════════════════════════ -->
+  <div id="tab-quiz" class="tab-panel">
+    <div class="quiz-wrapper">
+
+      <!-- Intro -->
+      <div class="quiz-intro" id="quizIntro">
+        <h2>What Type of Lawyer Will You Be?</h2>
+        <p>Answer 12 questions about your work style, values, and interests. We'll map your answers across 6 dimensions and reveal your top 2 practice areas.</p>
+        <button class="calc-submit" onclick="startQuiz()">Start the Quiz &rarr;</button>
+      </div>
+
+      <!-- Progress -->
+      <div class="quiz-progress" id="quizProgress" style="display:none">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <span class="quiz-progress-text" id="progressText">1 / 12</span>
+      </div>
+
+      <!-- Questions container -->
+      <div id="quizQuestions"></div>
+
+      <!-- Results -->
+      <div class="quiz-results" id="quizResults">
+        <div class="results-top-two" id="topTwoCards"></div>
+        <div class="dimension-chart">
+          <h3>Your 6-Dimension Profile</h3>
+          <div id="dimChart"></div>
+        </div>
+        <button class="quiz-restart-btn" onclick="restartQuiz()">Retake Quiz</button>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>IvyAmbition</h4>
+      <p>Elite admissions consulting for law school and college.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Law Tools</h4>
+      <ul>
+        <li><a href="./law-predictor.html">Admissions Predictor</a></li>
+        <li><a href="./splitter-finder.html">Splitter Finder</a></li>
+        <li><a href="./lsat-improvement.html">LSAT Study Plan</a></li>
+        <li><a href="./lsat-retake.html">LSAT Retake Tool</a></li>
+        <li><a href="./law-debt.html">Debt Calculator</a></li>
+        <li><a href="./biglaw-pi.html">BigLaw vs PI</a></li>
+        <li><a href="./law-scholarship-estimator.html">Scholarship Estimator</a></li>
+        <li><a href="./practice-areas.html">Practice Area Guide</a></li>
+        <li><a href="./legal-markets.html">Legal Markets</a></li>
+        <li><a href="./scholarship-negotiation.html">Scholarship Negotiation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="../tabs/law-school/landing-pages/v1.html">About</a></li>
+        <li><a href="../tabs/law-school/landing-pages/v1.html#book-call">Contact</a></li>
+        <li><a href="../tabs/undergraduate/landing-pages/v1.html">Undergraduate</a></li>
+        <li><a href="../tabs/law-school/landing-pages/v1.html">Law School</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 IvyAmbition. All rights reserved. | <a href="../legal/privacy-policy.html">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════
+
+const PRACTICE_AREAS = [
+  {
+    id: 'corporate',
+    name: 'Corporate / M&A',
+    icon: '🏢',
+    iconBg: '#eff6ff',
+    salary: '$215K–$400K+',
+    salaryColor: '#059669',
+    overview: 'Advise companies on mergers, acquisitions, private equity, and capital markets transactions. The engine of BigLaw, involving high-stakes deals that reshape industries.',
+    dayInLife: 'Reviewing 200-page purchase agreements at midnight, negotiating final reps and warranties, coordinating closing checklists, and presenting deal structures to C-suite executives. Deal closings bring intense sprints followed by relative quiet.',
+    topSchools: ['Harvard', 'NYU', 'Columbia', 'Penn', 'Chicago', 'Yale'],
+    careerPath: 'Associate (BigLaw) → Senior Associate → Counsel → Partner. Many exit to in-house M&A roles at Fortune 500 companies or move to private equity funds (as a principal).',
+    lifestyle: { hours: 85, travel: 40, prestige: 95, work_life: 20, intellectual: 75, client_contact: 60 },
+    strengths: ['High earnings', 'Deal complexity', 'Exit to PE/in-house', 'Networking with executives'],
+    challenges: ['Extreme hours', 'Deadline pressure', 'Little courtroom work', 'Partner track uncertainty'],
+    certReq: 'No specific cert beyond bar, but CFA or MBA can help for finance-heavy roles.',
+    dimensions: { dealMaking: 5, advocacy: 1, technical: 3, counseling: 2, socialImpact: 1, prestige: 5 }
+  },
+  {
+    id: 'litigation',
+    name: 'Litigation',
+    icon: '⚖️',
+    iconBg: '#fff7ed',
+    salary: '$215K–$350K',
+    salaryColor: '#059669',
+    overview: 'Represent clients in civil and commercial disputes — from pre-litigation strategy through trial and appeal. Involves depositions, motions, and courtroom advocacy.',
+    dayInLife: 'Drafting briefs, defending depositions, preparing witnesses for trial, arguing motions before judges, and managing discovery. Trial stretches mean 100+ hour weeks; off-trial periods are more balanced.',
+    topSchools: ['Harvard', 'Yale', 'Columbia', 'Virginia', 'Georgetown', 'Michigan'],
+    careerPath: 'Associate → Senior Associate (3-7 yrs of deposition/trial experience) → Counsel/Partner. Many go government (DOJ, US Attorney) for trial experience then return to private practice.',
+    lifestyle: { hours: 75, travel: 50, prestige: 85, work_life: 35, intellectual: 85, client_contact: 70 },
+    strengths: ['Courtroom advocacy', 'Intellectual rigor', 'Oral argument', 'Varied subject matter'],
+    challenges: ['Unpredictable schedules', 'High adversarial stress', 'Long case timelines', 'Trial prep pressure'],
+    certReq: 'Trial advocacy programs (NITA) valuable. Judicial clerkship is the gold standard entry.',
+    dimensions: { dealMaking: 1, advocacy: 5, technical: 3, counseling: 3, socialImpact: 3, prestige: 4 }
+  },
+  {
+    id: 'ip',
+    name: 'Intellectual Property',
+    icon: '💡',
+    iconBg: '#f0fdf4',
+    salary: '$180K–$380K',
+    salaryColor: '#059669',
+    overview: 'Protect and enforce patents, trademarks, copyrights, and trade secrets. Patent attorneys must pass the USPTO Patent Bar and typically hold a technical degree.',
+    dayInLife: 'Drafting patent claims, responding to office actions, conducting freedom-to-operate analyses, litigating patent disputes in federal court or ITC, and advising on tech licensing deals.',
+    topSchools: ['Berkeley', 'Stanford', 'George Washington', 'Chicago', 'NYU', 'Texas'],
+    careerPath: 'Patent Agent (pre-JD) → Associate → Senior Associate (patent prosecution or litigation) → Partner or IP Counsel at a tech company.',
+    lifestyle: { hours: 65, travel: 25, prestige: 70, work_life: 55, intellectual: 90, client_contact: 60 },
+    strengths: ['Technical leverage', 'High demand in tech', 'Niche expertise premium', 'In-house roles at Apple/Google'],
+    challenges: ['Patent bar requirement', 'Technical background needed', 'Can be document-heavy', 'Fast-evolving law'],
+    certReq: 'USPTO Patent Bar required for patent prosecution. Technical BS/MS degree (EE, CS, bio, chem) strongly preferred.',
+    dimensions: { dealMaking: 2, advocacy: 3, technical: 5, counseling: 2, socialImpact: 2, prestige: 3 }
+  },
+  {
+    id: 'criminal',
+    name: 'Criminal Law',
+    icon: '🔍',
+    iconBg: '#fef2f2',
+    salary: '$55K–$175K',
+    salaryColor: '#d97706',
+    overview: 'Prosecute or defend individuals accused of crimes. Public defenders and DAs start at government salary; white-collar criminal defense at BigLaw pays top dollar.',
+    dayInLife: 'Client interviews, plea negotiations, motion hearings, jury selection, cross-examination, and sentencing advocacy. Prosecutors manage large caseloads; white-collar defense involves intensive document review.',
+    topSchools: ['Harvard', 'Yale', 'Columbia', 'Penn', 'Georgetown', 'Fordham'],
+    careerPath: 'DA/Public Defender → Senior ADA or Supervising PD → Private White-Collar Defense (major pay jump). Federal prosecutors (AUSA) command the highest prestige.',
+    lifestyle: { hours: 60, travel: 30, prestige: 65, work_life: 45, intellectual: 80, client_contact: 90 },
+    strengths: ['Immediate trial experience', 'Client impact', 'Courtroom advocacy', 'Mission-driven (public sector)'],
+    challenges: ['Low public-sector pay', 'Heavy caseloads (PD)', 'Emotional burden', 'Client instability'],
+    certReq: 'No special cert; clerkship helpful. Moot court and mock trial in law school are essential.',
+    dimensions: { dealMaking: 0, advocacy: 5, technical: 2, counseling: 4, socialImpact: 4, prestige: 3 }
+  },
+  {
+    id: 'family',
+    name: 'Family Law',
+    icon: '👨‍👩‍👧',
+    iconBg: '#fdf4ff',
+    salary: '$75K–$200K',
+    salaryColor: '#d97706',
+    overview: 'Handle divorce, child custody, adoption, prenuptial agreements, and domestic violence matters. High-net-worth family law practices can be very lucrative.',
+    dayInLife: 'Mediating custody disputes, negotiating property division, arguing before family court judges, drafting parenting plans, and advising clients through emotionally charged decisions.',
+    topSchools: ['Fordham', 'Loyola', 'DePaul', 'Hofstra', 'Georgetown', 'Boston'],
+    careerPath: 'Associate at family law boutique or general practice → Senior Associate → Founding own practice. HNWI divorce specialists build reputation over 10-15 years.',
+    lifestyle: { hours: 55, travel: 10, prestige: 45, work_life: 60, intellectual: 55, client_contact: 95 },
+    strengths: ['Direct client impact', 'Local practice flexibility', 'Work-life balance options', 'Entrepreneurship opportunity'],
+    challenges: ['Emotional exhaustion', 'Moderate pay ceiling', 'High-conflict clients', 'Limited BigLaw pathway'],
+    certReq: 'State certification as Family Law Specialist available in many states; mediator training valuable.',
+    dimensions: { dealMaking: 1, advocacy: 3, technical: 1, counseling: 5, socialImpact: 3, prestige: 2 }
+  },
+  {
+    id: 'realestate',
+    name: 'Real Estate',
+    icon: '🏗️',
+    iconBg: '#f0fdf4',
+    salary: '$140K–$320K',
+    salaryColor: '#059669',
+    overview: 'Advise on property transactions, development, financing, leasing, and zoning. Transactional real estate at large firms involves complex commercial deals; land use focuses on government approvals.',
+    dayInLife: 'Reviewing title reports, negotiating purchase and sale agreements, structuring joint ventures, advising on REIT compliance, and attending closings for commercial acquisitions and financings.',
+    topSchools: ['NYU', 'Fordham', 'Penn', 'Columbia', 'Georgetown', 'UCLA'],
+    careerPath: 'Associate at law firm → Senior Associate → Partner or in-house at developer/REIT. Land use attorneys often transition to government planning roles.',
+    lifestyle: { hours: 65, travel: 20, prestige: 60, work_life: 55, intellectual: 65, client_contact: 65 },
+    strengths: ['Cyclical demand (good market)', 'Tangible deal results', 'In-house opportunities', 'Partnership track'],
+    challenges: ['Market sensitivity (boom-bust)', 'Moderate intellectual variety', 'Less portable than corporate', 'Local expertise required'],
+    certReq: 'No specific cert; understanding of UCC, title insurance, and REIT tax rules essential.',
+    dimensions: { dealMaking: 4, advocacy: 1, technical: 3, counseling: 2, socialImpact: 1, prestige: 3 }
+  },
+  {
+    id: 'tax',
+    name: 'Tax Law',
+    icon: '📊',
+    iconBg: '#fff7ed',
+    salary: '$160K–$380K',
+    salaryColor: '#059669',
+    overview: 'Advise individuals, corporations, and nonprofits on federal and state tax implications of transactions, restructurings, and planning. One of the most intellectually demanding specialties.',
+    dayInLife: 'Analyzing IRC provisions, structuring tax-efficient M&A deals, advising on REIT or partnership tax, responding to IRS audits, and writing tax opinions. Significant overlap with M&A and private equity.',
+    topSchools: ['NYU (LLM)', 'Georgetown', 'Harvard', 'Penn', 'Chicago', 'NYU'],
+    careerPath: 'Associate → Senior Associate → Tax Partner (extremely lucrative niche). Many get NYU Tax LLM after JD. IRS Chief Counsel provides government alternative.',
+    lifestyle: { hours: 70, travel: 15, prestige: 75, work_life: 50, intellectual: 95, client_contact: 50 },
+    strengths: ['Premium billing rates', 'Evergreen expertise', 'LLM opens doors', 'Highly portable skills'],
+    challenges: ['Extremely complex', 'Constant law changes', 'Less direct client work', 'Tax season crunch'],
+    certReq: 'NYU or Georgetown Tax LLM highly recommended; CPA can help but not required.',
+    dimensions: { dealMaking: 2, advocacy: 1, technical: 5, counseling: 3, socialImpact: 1, prestige: 4 }
+  },
+  {
+    id: 'international',
+    name: 'International Law',
+    icon: '🌍',
+    iconBg: '#eff6ff',
+    salary: '$140K–$300K',
+    salaryColor: '#059669',
+    overview: 'Work on cross-border transactions, international arbitration, trade law, sanctions compliance, and diplomatic treaties. Requires foreign language skills and cultural fluency.',
+    dayInLife: 'Advising on FCPA/AML compliance for multinational deals, representing clients in ICC arbitration, analyzing export controls, and structuring offshore financing arrangements.',
+    topSchools: ['NYU', 'Georgetown', 'Harvard', 'American', 'Columbia', 'Yale'],
+    careerPath: 'Associate at international firm → Senior Associate → Partner or State Dept/WTO career. International arbitration practitioners often become independent arbitrators.',
+    lifestyle: { hours: 70, travel: 60, prestige: 70, work_life: 45, intellectual: 85, client_contact: 65 },
+    strengths: ['Global network', 'Language premium', 'Arbitration independence', 'Diverse client base'],
+    challenges: ['Niche market size', 'High travel demands', 'Competitive entry', 'Political sensitivity'],
+    certReq: 'LLM in International Law or an LLM from a foreign institution; foreign bar exam helpful.',
+    dimensions: { dealMaking: 3, advocacy: 3, technical: 3, counseling: 2, socialImpact: 3, prestige: 3 }
+  },
+  {
+    id: 'environmental',
+    name: 'Environmental Law',
+    icon: '🌿',
+    iconBg: '#f0fdf4',
+    salary: '$80K–$250K',
+    salaryColor: '#d97706',
+    overview: 'Navigate EPA regulations, climate policy, environmental litigation, and permitting for energy projects. Growing rapidly with climate legislation and ESG corporate priorities.',
+    dayInLife: 'Drafting environmental impact statements, advising on Superfund liability, litigating against EPA or defending clients in enforcement actions, and counseling energy companies on clean energy credits.',
+    topSchools: ['Vermont', 'Lewis & Clark', 'Tulane', 'UCLA', 'Georgetown', 'NYU'],
+    careerPath: 'EPA/DOJ environmental attorney or NGO litigator → private firm environmental practice. Clean energy boom creating in-house demand at solar, wind, and battery companies.',
+    lifestyle: { hours: 60, travel: 35, prestige: 60, work_life: 60, intellectual: 80, client_contact: 60 },
+    strengths: ['Mission alignment', 'Growing field', 'Science intersection', 'Regulatory complexity'],
+    challenges: ['Pay gap vs. corporate', 'Political headwinds', 'Niche market', 'NGO funding uncertainty'],
+    certReq: 'Environmental science background helpful; specialized LLM programs at Vermont and Tulane.',
+    dimensions: { dealMaking: 1, advocacy: 4, technical: 4, counseling: 2, socialImpact: 5, prestige: 2 }
+  },
+  {
+    id: 'publicinterest',
+    name: 'Public Interest',
+    icon: '🤝',
+    iconBg: '#fdf4ff',
+    salary: '$55K–$100K',
+    salaryColor: '#d97706',
+    overview: 'Represent underserved populations — immigrants, tenants, civil rights plaintiffs, prisoners — at nonprofits, legal aid organizations, and government agencies. LRAP programs at top schools make this financially viable.',
+    dayInLife: 'Client intake, housing court hearings, immigration asylum appeals, civil rights class action briefing, community outreach, and policy advocacy. Immediate and tangible client impact from day one.',
+    topSchools: ['Yale', 'Harvard', 'NYU', 'Georgetown', 'Columbia', 'Michigan'],
+    careerPath: 'Staff attorney at nonprofit or legal aid → Senior Counsel → Director/Managing Attorney. Policy track leads to DOJ, HHS, or legislative staff. PSLF forgives loans after 10 years.',
+    lifestyle: { hours: 55, travel: 20, prestige: 60, work_life: 70, intellectual: 75, client_contact: 95 },
+    strengths: ['Deep client impact', 'Mission-driven culture', 'Work-life balance', 'LRAP + PSLF loan relief'],
+    challenges: ['Low base salary', 'Resource constraints', 'Emotional toll', 'Funding volatility'],
+    certReq: 'No specific cert; pro bono during law school essential. Fellowships (Equal Justice Works, Skadden) open doors.',
+    dimensions: { dealMaking: 0, advocacy: 4, technical: 2, counseling: 5, socialImpact: 5, prestige: 2 }
+  }
+];
+
+// ══════════════════════════════════════════════
+// QUIZ DATA
+// ══════════════════════════════════════════════
+
+// Dimensions: dealMaking, advocacy, technical, counseling, socialImpact, prestige
+const QUIZ_QUESTIONS = [
+  {
+    q: "When you picture a great day at work, you're most energized by:",
+    options: [
+      { text: "Closing a huge transaction that reshapes an industry", dims: { dealMaking: 3, prestige: 2 } },
+      { text: "Standing up in court and winning an argument", dims: { advocacy: 3, prestige: 1 } },
+      { text: "Solving a complex technical puzzle in the code or the code of the law", dims: { technical: 3 } },
+      { text: "Making a real difference in a client's life or community", dims: { counseling: 2, socialImpact: 2 } }
+    ]
+  },
+  {
+    q: "Which subject would you most enjoy becoming a deep expert in?",
+    options: [
+      { text: "Finance, economics, and capital markets", dims: { dealMaking: 3, technical: 1 } },
+      { text: "Constitutional rights, civil procedure, and evidence", dims: { advocacy: 3 } },
+      { text: "Tax code, patents, or environmental regulations", dims: { technical: 3 } },
+      { text: "Family dynamics, immigration policy, or criminal justice", dims: { counseling: 2, socialImpact: 2 } }
+    ]
+  },
+  {
+    q: "Your ideal work environment looks like:",
+    options: [
+      { text: "A sleek BigLaw office in a major financial center", dims: { prestige: 3, dealMaking: 1 } },
+      { text: "A courtroom or deposition suite, surrounded by advocates", dims: { advocacy: 3 } },
+      { text: "A research-intensive setting deep in documents and analysis", dims: { technical: 3 } },
+      { text: "A nonprofit office close to the communities you serve", dims: { socialImpact: 3, counseling: 1 } }
+    ]
+  },
+  {
+    q: "When you face a tough negotiation, your instinct is to:",
+    options: [
+      { text: "Find creative deal structures that satisfy both sides", dims: { dealMaking: 3 } },
+      { text: "Hold firm on principle and use leverage strategically", dims: { advocacy: 2, prestige: 1 } },
+      { text: "Dig into the technical details others miss", dims: { technical: 3 } },
+      { text: "Build rapport and find the human common ground", dims: { counseling: 3 } }
+    ]
+  },
+  {
+    q: "Which statement best describes your relationship with risk and reward?",
+    options: [
+      { text: "I want high pay even if it means extreme hours and pressure", dims: { prestige: 3, dealMaking: 1 } },
+      { text: "I value public recognition for winning hard cases", dims: { advocacy: 2, prestige: 2 } },
+      { text: "I'd rather be the indispensable technical expert than the loudest voice", dims: { technical: 3 } },
+      { text: "A lower salary is worth it if I'm helping people who need it", dims: { socialImpact: 3, counseling: 1 } }
+    ]
+  },
+  {
+    q: "Which type of client interaction appeals most to you?",
+    options: [
+      { text: "Advising CFOs and PE partners on billion-dollar deals", dims: { dealMaking: 3, prestige: 1 } },
+      { text: "Representing plaintiffs or defendants in high-stakes disputes", dims: { advocacy: 3 } },
+      { text: "Consulting with engineers, scientists, or tax directors on technical issues", dims: { technical: 3 } },
+      { text: "Working one-on-one with individuals in vulnerable situations", dims: { counseling: 3, socialImpact: 1 } }
+    ]
+  },
+  {
+    q: "How do you feel about courtrooms and oral argument?",
+    options: [
+      { text: "That's the whole reason I'm going to law school — I was born to argue", dims: { advocacy: 4 } },
+      { text: "I can do it, but I prefer transactional work and negotiations", dims: { dealMaking: 2 } },
+      { text: "I'd rather be the expert behind the scenes than the face in court", dims: { technical: 3 } },
+      { text: "I'm comfortable with it if it helps my clients, but it's not my focus", dims: { counseling: 2, socialImpact: 1 } }
+    ]
+  },
+  {
+    q: "What motivates you most deeply about a career in law?",
+    options: [
+      { text: "The financial rewards and access to elite business circles", dims: { prestige: 3, dealMaking: 1 } },
+      { text: "The intellectual challenge of mastering complex arguments", dims: { advocacy: 2, technical: 1 } },
+      { text: "Becoming the indispensable technical expert in a specialized field", dims: { technical: 3 } },
+      { text: "Using law as a tool for justice and social change", dims: { socialImpact: 3, counseling: 1 } }
+    ]
+  },
+  {
+    q: "Which law school activity most excites you?",
+    options: [
+      { text: "Business law review and deal simulations", dims: { dealMaking: 3 } },
+      { text: "Moot court, mock trial, and appellate advocacy competitions", dims: { advocacy: 3 } },
+      { text: "Law review note on a technical statutory question", dims: { technical: 3 } },
+      { text: "Clinic work representing real clients in community", dims: { counseling: 2, socialImpact: 2 } }
+    ]
+  },
+  {
+    q: "How important is work-life balance to you?",
+    options: [
+      { text: "I'm willing to sacrifice it for the next 10 years to build wealth and prestige", dims: { prestige: 3, dealMaking: 1 } },
+      { text: "I can handle demanding stretches during trials but want down time between", dims: { advocacy: 2 } },
+      { text: "I'd prefer consistent hours with clear-cut technical work", dims: { technical: 2, counseling: 1 } },
+      { text: "Balance is essential — I want to show up fully for clients AND my own life", dims: { socialImpact: 2, counseling: 2 } }
+    ]
+  },
+  {
+    q: "Which professional accomplishment would make you most proud?",
+    options: [
+      { text: "Lead counsel on a landmark M&A transaction or IPO", dims: { dealMaking: 3, prestige: 2 } },
+      { text: "Win a high-profile trial at the Supreme Court or federal circuit", dims: { advocacy: 4 } },
+      { text: "Become the country's leading expert on a technical area of law", dims: { technical: 3, prestige: 1 } },
+      { text: "Win asylum for 100 refugees or get an innocent person exonerated", dims: { socialImpact: 4, counseling: 1 } }
+    ]
+  },
+  {
+    q: "Which real-world story makes you say 'I want to do that'?",
+    options: [
+      { text: "The team of lawyers who structured the Microsoft–Activision merger", dims: { dealMaking: 4, prestige: 1 } },
+      { text: "The ACLU attorney who argued a landmark free speech case before SCOTUS", dims: { advocacy: 3, socialImpact: 2 } },
+      { text: "The patent attorney who protected an inventor's life-changing technology", dims: { technical: 3, prestige: 1 } },
+      { text: "The public defender who overturned a wrongful conviction through DNA evidence", dims: { socialImpact: 3, counseling: 2 } }
+    ]
+  }
+];
+
+// Dimension → practice area weights
+const DIM_WEIGHTS = {
+  corporate:      { dealMaking: 5, advocacy: 1, technical: 3, counseling: 2, socialImpact: 1, prestige: 5 },
+  litigation:     { dealMaking: 1, advocacy: 5, technical: 3, counseling: 3, socialImpact: 3, prestige: 4 },
+  ip:             { dealMaking: 2, advocacy: 3, technical: 5, counseling: 2, socialImpact: 2, prestige: 3 },
+  criminal:       { dealMaking: 0, advocacy: 5, technical: 2, counseling: 4, socialImpact: 4, prestige: 3 },
+  family:         { dealMaking: 1, advocacy: 3, technical: 1, counseling: 5, socialImpact: 3, prestige: 2 },
+  realestate:     { dealMaking: 4, advocacy: 1, technical: 3, counseling: 2, socialImpact: 1, prestige: 3 },
+  tax:            { dealMaking: 2, advocacy: 1, technical: 5, counseling: 3, socialImpact: 1, prestige: 4 },
+  international:  { dealMaking: 3, advocacy: 3, technical: 3, counseling: 2, socialImpact: 3, prestige: 3 },
+  environmental:  { dealMaking: 1, advocacy: 4, technical: 4, counseling: 2, socialImpact: 5, prestige: 2 },
+  publicinterest: { dealMaking: 0, advocacy: 4, technical: 2, counseling: 5, socialImpact: 5, prestige: 2 }
+};
+
+const DIM_LABELS = {
+  dealMaking:  'Deal-Making',
+  advocacy:    'Advocacy',
+  technical:   'Technical',
+  counseling:  'Counseling',
+  socialImpact:'Social Impact',
+  prestige:    'Prestige Drive'
+};
+
+const DIM_COLORS = {
+  dealMaking:  '#3b82f6',
+  advocacy:    '#ef4444',
+  technical:   '#8b5cf6',
+  counseling:  '#f59e0b',
+  socialImpact:'#10b981',
+  prestige:    '#c9a84c'
+};
+
+// ══════════════════════════════════════════════
+// GUIDE TAB
+// ══════════════════════════════════════════════
+
+function buildGuide() {
+  const grid = document.getElementById('paGrid');
+  grid.innerHTML = PRACTICE_AREAS.map(pa => {
+    const lifeRows = [
+      { label: 'Weekly Hours', val: pa.lifestyle.hours, max: 100, color: pa.lifestyle.hours > 75 ? '#ef4444' : pa.lifestyle.hours > 60 ? '#f59e0b' : '#10b981' },
+      { label: 'Travel', val: pa.lifestyle.travel, max: 100, color: '#3b82f6' },
+      { label: 'Prestige', val: pa.lifestyle.prestige, max: 100, color: '#c9a84c' },
+      { label: 'Work-Life Bal', val: pa.lifestyle.work_life, max: 100, color: '#10b981' },
+      { label: 'Intellectual', val: pa.lifestyle.intellectual, max: 100, color: '#8b5cf6' },
+      { label: 'Client Contact', val: pa.lifestyle.client_contact, max: 100, color: '#f59e0b' }
+    ];
+    return `
+<div class="pa-card">
+  <div class="pa-card-header">
+    <div class="pa-icon" style="background:${pa.iconBg}">${pa.icon}</div>
+    <div>
+      <h3>${pa.name}</h3>
+      <span class="pa-salary-badge">${pa.salary}</span>
+    </div>
+  </div>
+  <div class="pa-card-body">
+    <p class="pa-overview">${pa.overview}</p>
+    <div class="pa-meta-grid">
+      <div class="pa-meta-item">
+        <div class="pa-meta-label">Top Employer</div>
+        <div class="pa-meta-value">${pa.id === 'publicinterest' || pa.id === 'criminal' || pa.id === 'environmental' ? 'Gov/Nonprofit' : 'BigLaw / In-House'}</div>
+      </div>
+      <div class="pa-meta-item">
+        <div class="pa-meta-label">Avg Hours/Wk</div>
+        <div class="pa-meta-value">${pa.lifestyle.hours}</div>
+      </div>
+    </div>
+    <button class="pa-expand-btn" onclick="toggleExpand('${pa.id}',this)">Explore More ▾</button>
+    <div class="pa-expanded" id="expand-${pa.id}">
+      <div class="pa-section-title">Day in the Life</div>
+      <p class="pa-section-text">${pa.dayInLife}</p>
+      <div class="pa-section-title">Career Path</div>
+      <p class="pa-section-text">${pa.careerPath}</p>
+      <div class="pa-section-title">Certifications / Credentials</div>
+      <p class="pa-section-text">${pa.certReq}</p>
+      <div class="pa-section-title">Top Feeder Schools</div>
+      <div class="pa-schools-list">${pa.topSchools.map(s => `<span class="pa-school-tag">${s}</span>`).join('')}</div>
+      <div class="pa-section-title" style="margin-top:1rem">Lifestyle Ratings</div>
+      ${lifeRows.map(r => `
+        <div class="lifestyle-bar">
+          <span class="lifestyle-label">${r.label}</span>
+          <div class="lifestyle-track"><div class="lifestyle-fill" style="width:${r.val}%;background:${r.color}"></div></div>
+          <span style="font-size:.75rem;color:#64748b;width:30px;text-align:right">${r.val}</span>
+        </div>`).join('')}
+      <div class="pa-section-title" style="margin-top:1rem">Strengths</div>
+      <p class="pa-section-text">${pa.strengths.map(s => '✓ ' + s).join(' &nbsp;·&nbsp; ')}</p>
+      <div class="pa-section-title">Challenges</div>
+      <p class="pa-section-text">${pa.challenges.map(c => '⚠ ' + c).join(' &nbsp;·&nbsp; ')}</p>
+    </div>
+  </div>
+</div>`;
+  }).join('');
+}
+
+function toggleExpand(id, btn) {
+  const el = document.getElementById('expand-' + id);
+  const open = el.classList.toggle('open');
+  btn.textContent = open ? 'Show Less ▴' : 'Explore More ▾';
+}
+
+// ══════════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════════
+
+let quizStarted = false;
+let currentQ = 0;
+const answers = new Array(QUIZ_QUESTIONS.length).fill(null);
+
+function startQuiz() {
+  document.getElementById('quizIntro').style.display = 'none';
+  document.getElementById('quizProgress').style.display = 'flex';
+  buildQuestions();
+  quizStarted = true;
+  showQuestion(0);
+}
+
+function buildQuestions() {
+  const container = document.getElementById('quizQuestions');
+  container.innerHTML = QUIZ_QUESTIONS.map((q, qi) => `
+<div class="quiz-question" id="q-${qi}">
+  <div class="quiz-q-text">${qi + 1}. ${q.q}</div>
+  <div class="quiz-options">
+    ${q.options.map((opt, oi) => `
+    <label class="quiz-option" id="opt-${qi}-${oi}">
+      <input type="radio" name="q${qi}" value="${oi}" onchange="selectAnswer(${qi},${oi})" />
+      <span class="quiz-option-text">${opt.text}</span>
+    </label>`).join('')}
+  </div>
+  <div class="quiz-nav">
+    <button class="quiz-btn quiz-btn-back" onclick="goBack(${qi})" ${qi === 0 ? 'style="visibility:hidden"' : ''}>← Back</button>
+    ${qi < QUIZ_QUESTIONS.length - 1
+      ? `<button class="quiz-btn quiz-btn-next" id="next-${qi}" onclick="goNext(${qi})" disabled>Next →</button>`
+      : `<button class="quiz-btn quiz-btn-submit" id="next-${qi}" onclick="submitQuiz()" disabled>See My Results →</button>`
+    }
+  </div>
+</div>`).join('');
+}
+
+function selectAnswer(qi, oi) {
+  answers[qi] = oi;
+  // Highlight selected
+  QUIZ_QUESTIONS[qi].options.forEach((_, i) => {
+    document.getElementById(`opt-${qi}-${i}`).classList.toggle('selected', i === oi);
+  });
+  document.getElementById(`next-${qi}`).disabled = false;
+}
+
+function showQuestion(qi) {
+  document.querySelectorAll('.quiz-question').forEach(el => el.classList.remove('active'));
+  document.getElementById(`q-${qi}`).classList.add('active');
+  currentQ = qi;
+  // Progress
+  const pct = Math.round((qi / QUIZ_QUESTIONS.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${qi + 1} / ${QUIZ_QUESTIONS.length}`;
+}
+
+function goNext(qi) { if (answers[qi] !== null) showQuestion(qi + 1); }
+function goBack(qi) { if (qi > 0) showQuestion(qi - 1); }
+
+function submitQuiz() {
+  // Tally dimension scores
+  const dims = { dealMaking: 0, advocacy: 0, technical: 0, counseling: 0, socialImpact: 0, prestige: 0 };
+  QUIZ_QUESTIONS.forEach((q, qi) => {
+    const ans = answers[qi];
+    if (ans !== null) {
+      const d = q.options[ans].dims;
+      Object.keys(d).forEach(k => { if (dims[k] !== undefined) dims[k] += d[k]; });
+    }
+  });
+
+  // Score each practice area
+  const MAX_DIM = 12; // rough max per dimension across 12 questions
+  const scores = PRACTICE_AREAS.map(pa => {
+    const w = DIM_WEIGHTS[pa.id];
+    let score = 0;
+    Object.keys(dims).forEach(d => {
+      score += (dims[d] / MAX_DIM) * (w[d] || 0);
+    });
+    return { pa, score };
+  }).sort((a, b) => b.score - a.score);
+
+  showResults(dims, scores);
+}
+
+function showResults(dims, scores) {
+  document.querySelectorAll('.quiz-question').forEach(el => el.classList.remove('active'));
+  document.getElementById('quizProgress').style.display = 'none';
+
+  const top2 = scores.slice(0, 2);
+  const resultsEl = document.getElementById('quizResults');
+
+  // Top 2 cards
+  const topTwoEl = document.getElementById('topTwoCards');
+  topTwoEl.innerHTML = top2.map((s, i) => `
+<div class="result-area-card ${i === 1 ? 'secondary' : ''}">
+  <div class="result-rank">${i === 0 ? '✦ Best Match' : '◆ Runner-Up'}</div>
+  <div class="result-area-name">${s.pa.icon} ${s.pa.name}</div>
+  <p class="result-why">${getWhyText(s.pa, dims)}</p>
+  <div style="margin-top:.75rem">
+    <span class="pa-salary-badge" style="font-size:.75rem">${s.pa.salary}</span>
+  </div>
+</div>`).join('');
+
+  // Dimension chart
+  const maxDimScore = Math.max(...Object.values(dims), 1);
+  const chartEl = document.getElementById('dimChart');
+  chartEl.innerHTML = Object.keys(dims).map(d => `
+<div class="dim-row">
+  <span class="dim-name">${DIM_LABELS[d]}</span>
+  <div class="dim-track">
+    <div class="dim-fill" style="width:${Math.round((dims[d] / maxDimScore) * 100)}%;background:${DIM_COLORS[d]}"></div>
+  </div>
+  <span class="dim-score">${dims[d]}</span>
+</div>`).join('');
+
+  resultsEl.classList.add('active');
+
+  // Update progress bar to 100%
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '12 / 12';
+  document.getElementById('quizProgress').style.display = 'flex';
+}
+
+function getWhyText(pa, dims) {
+  const dominantDim = Object.keys(dims).sort((a, b) => dims[b] - dims[a])[0];
+  const w = DIM_WEIGHTS[pa.id];
+  const whyMap = {
+    dealMaking:  `Your strong deal-making orientation aligns with ${pa.name}, which centers on high-stakes transactions and negotiations.`,
+    advocacy:    `Your advocacy drive makes ${pa.name} a natural fit — this specialty rewards those who argue boldly and think on their feet.`,
+    technical:   `Your appetite for technical depth is matched by ${pa.name}, one of law's most analytically demanding specialties.`,
+    counseling:  `Your counseling instinct shines in ${pa.name}, where deep client relationships and empathy are central to success.`,
+    socialImpact:`Your commitment to social impact aligns with ${pa.name}, where your work creates tangible change for real people.`,
+    prestige:    `Your prestige orientation fits ${pa.name}, which offers elite access, recognition, and top-tier compensation.`
+  };
+  return whyMap[dominantDim] || `Your profile across multiple dimensions aligns well with ${pa.name}.`;
+}
+
+function restartQuiz() {
+  for (let i = 0; i < answers.length; i++) answers[i] = null;
+  document.getElementById('quizResults').classList.remove('active');
+  document.getElementById('quizIntro').style.display = 'block';
+  document.getElementById('quizProgress').style.display = 'none';
+  document.getElementById('quizQuestions').innerHTML = '';
+  quizStarted = false;
+}
+
+// ══════════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════════
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── NAV ──
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navMobileMenu').classList.toggle('open');
+});
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('nav-scrolled', window.scrollY > 40);
+});
+
+// ── INIT ──
+buildGuide();
+</script>
+</body>
+</html>

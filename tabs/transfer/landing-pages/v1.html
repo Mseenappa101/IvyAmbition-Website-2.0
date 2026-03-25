@@ -874,13 +874,17 @@
     window._leadVertical = 'transfer';
 
     // Send to Brevo via API
+    console.log('[IvyAmbition] Sending subscribe request…', { email, name, vertical: 'transfer' });
     try {
-      await fetch('/api/subscribe', {
+      const res = await fetch('https://ivyambition-website-sigma.vercel.app/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name, vertical: 'transfer' }),
       });
-    } catch(e) { console.error('Subscribe error:', e); }
+      const data = await res.json();
+      console.log('[IvyAmbition] Subscribe response:', res.status, data);
+      if (!res.ok) alert('Subscribe failed: ' + (data.error || res.status));
+    } catch(e) { console.error('Subscribe error:', e); alert('Subscribe request failed: ' + e.message); }
 
     document.getElementById('gateForm').style.display = 'none';
     document.querySelector('.gate-box p.section-sub').textContent = 'Perfect — scroll down to pick your time.';
@@ -906,8 +910,9 @@
     };
 
     // Send intake answers to Brevo via API
+    console.log('[IvyAmbition] Sending intake request…', { email: window._leadEmail, answers });
     try {
-      await fetch('/api/intake', {
+      const res = await fetch('https://ivyambition-website-sigma.vercel.app/api/intake', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -917,7 +922,10 @@
           answers,
         }),
       });
-    } catch(e) { console.error('Intake error:', e); }
+      const data = await res.json();
+      console.log('[IvyAmbition] Intake response:', res.status, data);
+      if (!res.ok) alert('Intake failed: ' + (data.error || res.status));
+    } catch(e) { console.error('Intake error:', e); alert('Intake request failed: ' + e.message); }
 
     document.getElementById('intake-section').classList.remove('visible');
     const ty = document.getElementById('thankyou-section');

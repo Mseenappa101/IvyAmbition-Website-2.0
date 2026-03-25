@@ -753,7 +753,8 @@
     </div>
     <div style="text-align:center;margin-top:32px;">
       <p style="color:rgba(255,255,255,0.45);font-size:14px;margin-bottom:16px;">Already selected your time? Click below to continue.</p>
-      <button class="btn-gold" onclick="showIntake()">I've Booked My Call — Continue →</button>
+      <button class="btn-gold" onclick="showIntake()" style="margin-bottom:10px;">I've Booked My Call — Continue →</button>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:8px;">Takes 2 minutes — helps us skip the small talk and come prepared with a plan specific to your child's situation.</p>
     </div>
   </div>
 </section>
@@ -860,13 +861,28 @@
     document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
   }
 
-  function handleGateSubmit() {
+  async function handleGateSubmit() {
     const email = document.getElementById('gateEmail').value.trim();
     const name = document.getElementById('gateName').value.trim();
     if (!email || !name) { alert('Please enter your name and email to continue.'); return; }
     if (!/\S+@\S+\.\S+/.test(email)) { alert('Please enter a valid email address.'); return; }
+
+    // Store for intake form use later
+    window._leadEmail = email;
+    window._leadName = name;
+    window._leadVertical = 'law-school';
+
+    // Send to Brevo via API
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name, vertical: 'law-school' }),
+      });
+    } catch(e) { console.error('Subscribe error:', e); }
+
     document.getElementById('gateForm').style.display = 'none';
-    document.querySelector('.gate-box p.section-sub').textContent = 'Perfect — scroll down to select your time.';
+    document.querySelector('.gate-box p.section-sub').textContent = 'Perfect — scroll down to pick your time.';
     const cal = document.getElementById('calendly-section');
     cal.classList.add('visible');
     setTimeout(() => cal.scrollIntoView({ behavior: 'smooth' }), 300);
@@ -878,7 +894,30 @@
     setTimeout(() => intake.scrollIntoView({ behavior: 'smooth' }), 200);
   }
 
-  function handleIntakeSubmit() {
+  async function handleIntakeSubmit() {
+    // Collect all intake form answers
+    const answers = {
+      application_cycle: document.querySelector('#intakeForm select')?.value || '',
+      lsat_score: document.querySelector('#intakeForm input[placeholder*="172"]')?.value || '',
+      gpa: document.querySelectorAll('#intakeForm select')[1]?.value || '',
+      target_schools: document.querySelector('#intakeForm input[placeholder*="Columbia"]')?.value || '',
+      biggest_concern: document.querySelector('#intakeForm textarea')?.value || '',
+    };
+
+    // Send intake answers to Brevo via API
+    try {
+      await fetch('/api/intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: window._leadEmail || '',
+          name: window._leadName || '',
+          vertical: window._leadVertical || 'law-school',
+          answers,
+        }),
+      });
+    } catch(e) { console.error('Intake error:', e); }
+
     document.getElementById('intake-section').classList.remove('visible');
     const ty = document.getElementById('thankyou-section');
     ty.classList.add('visible');

@@ -1,42 +1,58 @@
+// ============================================================
+// FILE: api/intake.js
+// PURPOSE: Handles intake form submission after Calendly booking
+// FLOW: Receive form answers → update Brevo contact with answers → send Email #2
+// ENV VARS USED: BREVO_API_KEY, BREVO_SENDER_EMAIL, BREVO_SENDER_NAME
+// ============================================================
+
+import { updateContactInBrevo, sendBrevoEmail } from './_brevo.js';
+import { getEmail2 } from './_emails.js';
+
 export default async function handler(req, res) {
-  console.log('[IvyAmbition] Intake received');
+  // Allow CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  // Fire Airtable API call — await it so we can log the result, but always return 200
-  if (req.method === 'POST' && req.body) {
-    const { email, who_speaking_with, parent_name, student_name, location, who, grade, gpa, schools, timeline, financial_aid } = req.body;
+  const { email, name, vertical, answers } = req.body;
 
-    try {
-      const airtableRes = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Consulting%20Leads`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.AIRTABLE_TOKEN}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          fields: {
-            'Lead Name': '',
-            'Timestamp': new Date().toISOString().split('T')[0],
-            'Email': email,
-            'Who Speaking With': who_speaking_with,
-            'Parent Name': parent_name || '',
-            'Student Name': student_name || '',
-            'Location': location,
-            'Grade': grade,
-            'GPA': gpa,
-            'Target Schools': schools || '',
-            'Timeline': timeline,
-            'Financial Aid': financial_aid
-          }
-        })
-      });
-
-      const airtableBody = await airtableRes.text();
-      console.log('[IvyAmbition] Airtable response status:', airtableRes.status);
-      console.log('[IvyAmbition] Airtable response body:', airtableBody);
-    } catch (err) {
-      console.error('[IvyAmbition] Airtable API error:', err.message);
-    }
+  // Validate required fields
+  if (!email || !name || !vertical || !answers) {
+    return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  return res.status(200).json({ success: true });
+  const firstName = name.split(' ')[0];
+
+  // ── BREVO ATTRIBUTE MAPPING ──────────────────────────────
+  // These map intake form answers to Brevo contact attributes
+  // To add a new field: add it to the answers object on the frontend
+  // and add the mapping here
+  const brevoAttributes = {
+    INTAKE_SUBMITTED_DATE: new Date().toISOString(),
+    INTAKE_VERTICAL: vertical,
+    ...Object.fromEntries(
+      Object.entries(answers).map(([key, value]) => [
+        `INTAKE_${key.toUpperCase().replace(/\s+/g, '_')}`,
+        value,
+      ])
+    ),
+  };
+  // ── END ATTRIBUTE MAPPING ────────────────────────────────
+
+  try {
+    // Step 1: Update the contact in Brevo with intake form answers
+    await updateContactInBrevo({ email, attributes: brevoAttributes });
+
+    // Step 2: Send Email #2 — confirmation + prep instructions
+    const { subject, html } = getEmail2({ firstName, vertical });
+    await sendBrevoEmail({ toEmail: email, toName: firstName, subject, htmlContent: html });
+
+    return res.status(200).json({ success: true });
+
+  } catch (error) {
+    console.error('[intake] Error:', error.message);
+    return res.status(500).json({ error: 'Something went wrong. Please try again.' });
+  }
 }

@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true });
 
   } catch (error) {
-    console.error('[subscribe] Error:', error.message);
-    return res.status(500).json({ error: 'Something went wrong. Please try again.' });
+    console.error('[subscribe] Error:', error.message, error.stack);
+    return res.status(500).json({ error: error.message, stack: error.stack });
   }
 }

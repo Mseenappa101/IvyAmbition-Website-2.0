@@ -9,16 +9,17 @@
 // Edit these values if your Brevo setup changes
 const BREVO_BASE_URL = 'https://api.brevo.com/v3';
 
-const LIST_IDS = {
-  undergraduate: parseInt(process.env.BREVO_LIST_UNDERGRADUATE),
-  'law-school':  parseInt(process.env.BREVO_LIST_LAWSCHOOL),
-  transfer:      parseInt(process.env.BREVO_LIST_TRANSFER),
-};
 // ── END CONFIGURATION ───────────────────────────────────────
 
 
 // Adds or updates a contact in Brevo and assigns them to the correct list
 export async function addContactToBrevo({ email, firstName, vertical, extraAttributes = {} }) {
+  // Read list IDs at call time so env vars are available
+  const LIST_IDS = {
+    undergraduate: parseInt(process.env.BREVO_LIST_UNDERGRADUATE),
+    'law-school':  parseInt(process.env.BREVO_LIST_LAWSCHOOL),
+    transfer:      parseInt(process.env.BREVO_LIST_TRANSFER),
+  };
   const listId = LIST_IDS[vertical];
   if (!listId) throw new Error(`Unknown vertical: ${vertical}`);
 

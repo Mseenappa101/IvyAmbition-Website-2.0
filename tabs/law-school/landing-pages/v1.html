@@ -439,57 +439,6 @@
       background: white;
     }
 
-    /* ── INTAKE ── */
-    #intake-section {
-      display: none;
-      background: linear-gradient(160deg, #0d1b2a, #060d17);
-      padding: 80px 24px;
-    }
-    #intake-section.visible { display: block; }
-    .intake-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
-    .intake-form { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; text-align: left; }
-    .intake-label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .intake-input, .intake-select, .intake-textarea {
-      width: 100%;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px;
-      color: var(--white);
-      font-size: 15px;
-      font-family: var(--font-sans);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .intake-input::placeholder, .intake-textarea::placeholder { color: rgba(255,255,255,0.3); }
-    .intake-input:focus, .intake-select:focus, .intake-textarea:focus { border-color: rgba(201,168,76,0.5); }
-    .intake-select option { background: #0d1b2a; color: var(--white); }
-    .intake-textarea { min-height: 100px; resize: vertical; }
-    .intake-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .intake-submit {
-      width: 100%;
-      padding: 18px;
-      background: var(--gold);
-      color: var(--navy-dark);
-      font-size: 1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: var(--font-sans);
-      margin-top: 8px;
-      transition: background 0.2s;
-    }
-    .intake-submit:hover { background: var(--gold-light); }
-
     /* ── THANK YOU ── */
     #thankyou-section {
       display: none;
@@ -569,7 +518,7 @@
     @media (max-width: 768px) {
       .pathos-inner { grid-template-columns: 1fr; gap: 48px; }
       .pain-grid { grid-template-columns: 1fr; }
-      .intake-row { grid-template-columns: 1fr; }
+
       .hero-proof { gap: 24px; }
       .proof-divider { display: none; }
     }
@@ -747,64 +696,13 @@
   <div class="calendly-wrap">
     <span class="section-eyebrow">Select Your Time</span>
     <h2 class="section-headline" style="color:var(--white);">Pick a Time That Works for You</h2>
-    <p class="section-sub" style="margin-top:12px;">Choose any available slot below. After you book, you'll receive a confirmation and a short intake form to help us prepare for your session.</p>
+    <p class="section-sub" style="margin-top:12px;">Choose any available slot below. Fill out the short questions on the booking page so we can come prepared for your call.</p>
     <div class="calendly-embed">
       <div class="calendly-inline-widget" data-url="https://calendly.com/d/ctmv-k59-8g6/ivyambition-free-consultation-with-founders?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:280px;height:700px;"></div>
     </div>
     <div style="text-align:center;margin-top:32px;">
       <p style="color:rgba(255,255,255,0.45);font-size:14px;margin-bottom:16px;">Already selected your time? Click below to continue.</p>
-      <button class="btn-gold" onclick="showIntake()" style="margin-bottom:10px;">I've Booked My Call — Continue →</button>
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:8px;">Takes 2 minutes — helps us skip the small talk and come prepared with a plan specific to your child's situation.</p>
-    </div>
-  </div>
-</section>
-
-<!-- INTAKE -->
-<section id="intake-section">
-  <div class="intake-wrap">
-    <span class="section-eyebrow">Almost Done</span>
-    <h2 class="section-headline" style="color:var(--white);">Tell Us About Your Application</h2>
-    <p class="section-sub" style="margin-top:12px;">Two minutes. This helps us come to the call with a specific plan for your exact situation — not a generic overview.</p>
-    <div class="intake-form" id="intakeForm">
-      <div class="intake-row">
-        <div>
-          <label class="intake-label">Your Name</label>
-          <input type="text" class="intake-input" placeholder="First name" />
-        </div>
-        <div>
-          <label class="intake-label">Application Cycle</label>
-          <select class="intake-select">
-            <option value="">Select cycle</option>
-            <option>2025–2026 (applying now)</option>
-            <option>2026–2027 (applying next year)</option>
-            <option>Still planning / exploring</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label class="intake-label">LSAT Score (highest)</label>
-        <input type="text" class="intake-input" placeholder="e.g. 172 — or 'not yet taken'" />
-      </div>
-      <div>
-        <label class="intake-label">Undergraduate GPA</label>
-        <select class="intake-select">
-          <option value="">Select GPA range</option>
-          <option>3.9+</option>
-          <option>3.7 – 3.89</option>
-          <option>3.5 – 3.69</option>
-          <option>3.3 – 3.49</option>
-          <option>Below 3.3</option>
-        </select>
-      </div>
-      <div>
-        <label class="intake-label">Target Schools (top 3)</label>
-        <input type="text" class="intake-input" placeholder="e.g. Columbia, NYU, Georgetown" />
-      </div>
-      <div>
-        <label class="intake-label">Biggest Challenge or Concern</label>
-        <textarea class="intake-textarea" placeholder="e.g. Low GPA one semester, multiple LSAT attempts, non-traditional background — or just tell us where you feel stuck"></textarea>
-      </div>
-      <button class="intake-submit" onclick="handleIntakeSubmit()">Submit & See Confirmation →</button>
+      <button class="btn-gold" onclick="showThankYou()">I've Booked My Call — Continue →</button>
     </div>
   </div>
 </section>
@@ -847,6 +745,7 @@
 
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
+  // ── TICKER ──
   const schools = ['Columbia Law','Yale Law','Harvard Law','Stanford Law','University of Chicago Law','NYU Law','Penn Law','University of Michigan Law','Duke Law','Northwestern Law','Georgetown Law','Cornell Law','Vanderbilt Law','Wash U Law'];
   const track = document.getElementById('ticker');
   [...schools,...schools].forEach(s => {
@@ -856,84 +755,75 @@
     track.appendChild(item);
   });
 
+  // ── SCROLL TO GATE ──
   function scrollToGate(e) {
     e.preventDefault();
     document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
   }
 
+  // ── EMAIL GATE SUBMIT ──
+  // Captures email, adds to Brevo list, sends Email #1, shows Calendly
   async function handleGateSubmit() {
     const email = document.getElementById('gateEmail').value.trim();
     const name = document.getElementById('gateName').value.trim();
     if (!email || !name) { alert('Please enter your name and email to continue.'); return; }
     if (!/\S+@\S+\.\S+/.test(email)) { alert('Please enter a valid email address.'); return; }
 
-    // Store for intake form use later
+    // Store for thank you page use
     window._leadEmail = email;
     window._leadName = name;
     window._leadVertical = 'law-school';
 
-    // Send to Brevo via API
-    console.log('[IvyAmbition] Sending subscribe request…', { email, name, vertical: 'law-school' });
+    // Send to Brevo — adds contact to Law School list and fires Email #1
     try {
       const res = await fetch('https://www.ivyambition.com/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name, vertical: 'law-school' }),
       });
-      const data = await res.json();
-      console.log('[IvyAmbition] Subscribe response:', res.status, data);
-      if (!res.ok) alert('Subscribe failed: ' + (data.error || res.status));
-    } catch(e) { console.error('Subscribe error:', e); alert('Subscribe request failed: ' + e.message); }
+      if (!res.ok) console.error('Subscribe failed:', await res.text());
+    } catch(e) {
+      console.error('Subscribe error:', e);
+    }
 
+    // Show Calendly regardless of API result so user flow is never blocked
     document.getElementById('gateForm').style.display = 'none';
-    document.querySelector('.gate-box p.section-sub').textContent = 'Perfect — scroll down to pick your time.';
+    document.querySelector('.gate-box p.section-sub').textContent = 'Perfect — pick a time below. Fill out the short questions on the booking page so we can come prepared.';
     const cal = document.getElementById('calendly-section');
     cal.classList.add('visible');
     setTimeout(() => cal.scrollIntoView({ behavior: 'smooth' }), 300);
   }
 
-  function showIntake() {
-    const intake = document.getElementById('intake-section');
-    intake.classList.add('visible');
-    setTimeout(() => intake.scrollIntoView({ behavior: 'smooth' }), 200);
-  }
-
-  async function handleIntakeSubmit() {
-    // Collect all intake form answers
-    const answers = {
-      application_cycle: document.querySelector('#intakeForm select')?.value || '',
-      lsat_score: document.querySelector('#intakeForm input[placeholder*="172"]')?.value || '',
-      gpa: document.querySelectorAll('#intakeForm select')[1]?.value || '',
-      target_schools: document.querySelector('#intakeForm input[placeholder*="Columbia"]')?.value || '',
-      biggest_concern: document.querySelector('#intakeForm textarea')?.value || '',
-    };
-
-    // Send intake answers to Brevo via API
-    console.log('[IvyAmbition] Sending intake request…', { email: window._leadEmail, answers });
+  // ── SHOW THANK YOU ──
+  // Called when user clicks "I've Booked My Call"
+  // Fires Email #2 via Brevo and shows thank you page
+  async function showThankYou() {
+    // Send Email #2 via Brevo
     try {
-      const res = await fetch('https://www.ivyambition.com/api/intake', {
+      await fetch('https://www.ivyambition.com/api/booked', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: window._leadEmail || '',
           name: window._leadName || '',
           vertical: window._leadVertical || 'law-school',
-          answers,
         }),
       });
-      const data = await res.json();
-      console.log('[IvyAmbition] Intake response:', res.status, data);
-      if (!res.ok) alert('Intake failed: ' + (data.error || res.status));
-    } catch(e) { console.error('Intake error:', e); alert('Intake request failed: ' + e.message); }
+    } catch(e) {
+      console.error('Booked email error:', e);
+    }
 
-    document.getElementById('intake-section').classList.remove('visible');
     const ty = document.getElementById('thankyou-section');
     ty.classList.add('visible');
     setTimeout(() => ty.scrollIntoView({ behavior: 'smooth' }), 200);
   }
 
+  // ── CALENDLY AUTO-DETECT ──
+  // If Calendly fires its booking event, automatically advance to thank you
   window.addEventListener('message', function(e) {
-    if (e.data.event && e.data.event === 'calendly.event_scheduled') { showIntake(); }
+    if (e.data.event && e.data.event === 'calendly.event_scheduled') {
+      showThankYou();
+    }
   });
 </script>
 

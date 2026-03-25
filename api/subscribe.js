@@ -38,6 +38,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('[subscribe] Error:', error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: 'Something went wrong. Please try again.' });
   }
 }

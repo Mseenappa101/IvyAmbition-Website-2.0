@@ -887,7 +887,7 @@
     // Send to Brevo via API
     console.log('[IvyAmbition] Sending subscribe request…', { email, name, vertical: 'undergraduate' });
     try {
-      const res = await fetch('https://ivyambition.com/api/subscribe', {
+      const res = await fetch('https://www.ivyambition.com/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name, vertical: 'undergraduate' }),
@@ -925,7 +925,7 @@
     // Send intake answers to Brevo via API
     console.log('[IvyAmbition] Sending intake request…', { email: window._leadEmail, answers });
     try {
-      const res = await fetch('https://ivyambition.com/api/intake', {
+      const res = await fetch('https://www.ivyambition.com/api/intake', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

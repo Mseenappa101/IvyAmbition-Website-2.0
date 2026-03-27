@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Call is Tomorrow | IvyAmbition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy-dark: #060d17; --gold: #c9a84c; --gold-light: #e2c97e;
+      --white: #ffffff; --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--navy-dark); color: var(--white); min-height: 100vh; }
+    .nav { background: rgba(6,13,23,0.97); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 24px; height: 68px; display: flex; align-items: center; }
+    .logo { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--white); text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .hero { max-width: 760px; margin: 0 auto; padding: 80px 24px 60px; text-align: center; }
+    .eyebrow { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); padding: 8px 20px; border-radius: 100px; margin-bottom: 28px; }
+    h1 { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 16px; }
+    .subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 560px; margin: 0 auto 48px; }
+    .video-wrap { background: #0a1628; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,168,76,0.2); margin: 0 auto 56px; max-width: 640px; box-shadow: 0 24px 80px rgba(0,0,0,0.5); }
+    .video-wrap video { width: 100%; display: block; }
+    .prep-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 16px; padding: 36px 40px; max-width: 640px; margin: 0 auto 48px; text-align: left; }
+    .prep-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 20px; }
+    .prep-item { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 14px; }
+    .prep-item:last-child { margin-bottom: 0; }
+    .prep-arrow { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+    .closing { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; color: rgba(255,255,255,0.5); text-align: center; padding-bottom: 60px; }
+    .footer { background: #030810; padding: 28px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--white); text-decoration: none; }
+    .footer-logo span { color: var(--gold); }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="logo">Ivy<span>Ambition</span></a>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Transfer Law School · Pre-Call Message</div>
+  <h1>Your Call is Tomorrow.<br>We're Ready for You.</h1>
+  <p class="subtitle">Before we connect, take 2 minutes to watch this message from Michael — and come prepared with the three things listed below.</p>
+</div>
+
+<div style="max-width:640px;margin:0 auto;padding:0 24px;">
+  <div class="video-wrap">
+    <video controls playsinline>
+      <source src="../assets/videos/precall-law-transfer.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="prep-box">
+    <div class="prep-title">Come prepared with these three things:</div>
+    <div class="prep-item">
+      <span class="prep-arrow">→</span>
+      <span>Your current 1L GPA and class rank — approximate is fine if exact numbers aren't available yet</span>
+    </div>
+    <div class="prep-item">
+      <span class="prep-arrow">→</span>
+      <span>The 2–3 schools you most want to transfer into and why</span>
+    </div>
+    <div class="prep-item">
+      <span class="prep-arrow">→</span>
+      <span>Your single biggest question about the transfer process — that's where we'll start the call</span>
+    </div>
+  </div>
+
+  <p class="closing">We'll see you on the call. Come with questions — we'll come with a plan.</p>
+</div>
+
+<footer class="footer">
+  <a href="/" class="footer-logo">Ivy<span>Ambition</span></a>
+  <p class="footer-note">© 2025 IvyAmbition. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

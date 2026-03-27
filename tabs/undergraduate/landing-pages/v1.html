@@ -465,38 +465,18 @@
       margin: 0 auto 28px;
     }
     .thankyou-video-wrap {
-      max-width: 360px;
+      max-width: 480px;
       margin: 40px auto 0;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
-      border: 1px solid rgba(201,168,76,0.2);
-      aspect-ratio: 9/16;
+      border: 1px solid rgba(201,168,76,0.25);
       background: #0a1628;
+      box-shadow: 0 4px 30px rgba(201,168,76,0.08), 0 0 0 1px rgba(201,168,76,0.06);
     }
-    .video-placeholder {
+    .thankyou-video-wrap video {
       width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(145deg, #0d1b2a, #1a2f47);
-      color: rgba(255,255,255,0.4);
-      font-size: 14px;
-      gap: 12px;
-      padding: 24px;
-      text-align: center;
-      min-height: 400px;
-    }
-    .video-placeholder-icon {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
+      display: block;
+      border-radius: 18px;
     }
 
     /* ── FOOTER ── */
@@ -723,7 +703,7 @@
     <h2 class="section-headline" style="color:var(--white);margin-bottom:16px;">Your Strategy Call Is Confirmed.</h2>
     <p class="section-sub">Check your email for the calendar confirmation. We'll see you on the call — come with questions, and we'll come with a plan.</p>
     <div class="thankyou-video-wrap">
-      <video controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px;">
+      <video controls playsinline>
         <source src="../../../assets/videos/thankyou-undergrad.mp4" type="video/mp4" />
       </video>
     </div>

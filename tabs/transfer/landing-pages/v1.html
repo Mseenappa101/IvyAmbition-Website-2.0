@@ -474,6 +474,61 @@
       border-radius: 18px;
     }
 
+    /* ── REVIEWS ── */
+    .reviews-section {
+      background: var(--cream);
+      padding: 100px 24px;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 48px auto 0;
+    }
+    .review-card {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .review-stars {
+      display: flex;
+      gap: 4px;
+    }
+    .review-star {
+      color: var(--gold);
+      font-size: 16px;
+    }
+    .review-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      flex: 1;
+      font-style: italic;
+    }
+    .review-author {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .review-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .review-detail {
+      font-size: 12px;
+      color: rgba(0,0,0,0.35);
+      letter-spacing: 0.03em;
+    }
+    /* ── END REVIEWS ── */
+
     /* ── FOOTER ── */
     .footer {
       background: #030810;
@@ -716,6 +771,52 @@
 </section>
 
 <!-- FOOTER -->
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div style="text-align:center;">
+    <span class="section-eyebrow" style="color:var(--navy);opacity:0.5;">What Transfer Students Are Saying</span>
+    <h2 class="section-headline" style="color:var(--navy);max-width:560px;margin:0 auto 16px;">Real Results from Real 1Ls</h2>
+    <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:520px;margin:0 auto;">Every student we work with gets our full attention. Here's what 1Ls have said about working with IvyAmbition on their transfer.</p>
+  </div>
+  <div class="reviews-grid">
+
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <p class="review-body">"Michael is the only person I found who had actually done what I was trying to do. He didn't give me generic advice — he told me exactly how he approached his own transfer and helped me build my strategy around what actually works."</p>
+      <div class="review-author">
+        <span class="review-name">Successful transfer student</span>
+        <span class="review-detail">Law School Transfer · T-14 Admit</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <p class="review-body">"The 1L academic strategy sessions were worth every penny before applications even opened. I finished in the top 8% of my class and transferred into a school that completely changed my career trajectory."</p>
+      <div class="review-author">
+        <span class="review-name">Successful transfer student</span>
+        <span class="review-detail">Law School Transfer · Top 10% 1L</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <p class="review-body">"I had no idea the transfer personal statement was so different from a 0L essay. Michael completely reframed how I was thinking about it and the final version was something I was genuinely proud of."</p>
+      <div class="review-author">
+        <span class="review-name">Successful transfer student</span>
+        <span class="review-detail">Law School Transfer · T-14 Admit</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END REVIEWS -->
+
 <footer class="footer">
   <a href="../../../index.html" class="footer-logo">Ivy<span>Ambition</span></a>
   <p class="footer-note">Elite law school transfer admissions consulting. © 2025 IvyAmbition. All rights reserved.</p>

@@ -532,6 +532,86 @@
       color: rgba(0,0,0,0.35);
       letter-spacing: 0.03em;
     }
+    .review-form-wrap {
+      max-width: 640px;
+      margin: 56px auto 0;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      padding: 36px 40px;
+    }
+    .review-form-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .review-form-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .review-form-row > * { flex: 1; }
+    .review-form-wrap input,
+    .review-form-wrap textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--navy);
+      background: #fafafa;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .review-form-wrap input:focus,
+    .review-form-wrap textarea:focus {
+      border-color: var(--gold);
+    }
+    .review-form-wrap textarea {
+      min-height: 120px;
+      resize: vertical;
+      margin-bottom: 16px;
+    }
+    .star-rating {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .star-rating span {
+      font-size: 28px;
+      color: rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .star-rating span.active { color: var(--gold); }
+    .review-submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--gold);
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .review-submit-btn:hover { background: var(--gold-light); }
+    .review-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .review-form-msg {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 12px;
+      color: var(--gold);
+      display: none;
+    }
     /* ── END REVIEWS ── */
 
     /* ── FOOTER ── */
@@ -818,6 +898,20 @@
     </div>
 
   </div>
+
+  <div class="review-form-wrap">
+    <div class="review-form-title">Share Your Experience</div>
+    <div class="star-rating" id="starRating">
+      <span data-value="1">★</span><span data-value="2">★</span><span data-value="3">★</span><span data-value="4">★</span><span data-value="5">★</span>
+    </div>
+    <div class="review-form-row">
+      <input type="text" id="reviewName" placeholder="Your name" />
+    </div>
+    <textarea id="reviewText" placeholder="Tell us about your experience working with IvyAmbition..."></textarea>
+    <button class="review-submit-btn" id="reviewSubmitBtn" onclick="submitReview()">Submit Review</button>
+    <p class="review-form-msg" id="reviewMsg"></p>
+  </div>
+
 </section>
 <!-- END REVIEWS -->
 
@@ -912,6 +1006,68 @@
       showThankYou();
     }
   });
+
+  // ── REVIEW FORM ──
+  let selectedRating = 0;
+  document.querySelectorAll('#starRating span').forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.dataset.value);
+      document.querySelectorAll('#starRating span').forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating);
+      });
+    });
+    star.addEventListener('mouseenter', () => {
+      const val = parseInt(star.dataset.value);
+      document.querySelectorAll('#starRating span').forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= val);
+      });
+    });
+    star.addEventListener('mouseleave', () => {
+      document.querySelectorAll('#starRating span').forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating);
+      });
+    });
+  });
+
+  async function submitReview() {
+    const name = document.getElementById('reviewName').value.trim();
+    const review = document.getElementById('reviewText').value.trim();
+    const msg = document.getElementById('reviewMsg');
+    const btn = document.getElementById('reviewSubmitBtn');
+
+    if (!name || !review || !selectedRating) {
+      msg.style.display = 'block';
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Please fill in your name, select a rating, and write a review.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    try {
+      const res = await fetch('https://www.ivyambition.com/api/review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, vertical: 'undergraduate', rating: selectedRating, review })
+      });
+      if (!res.ok) throw new Error();
+      msg.style.display = 'block';
+      msg.style.color = '#c9a84c';
+      msg.textContent = 'Thank you for your review! It has been submitted successfully.';
+      document.getElementById('reviewName').value = '';
+      document.getElementById('reviewText').value = '';
+      selectedRating = 0;
+      document.querySelectorAll('#starRating span').forEach(s => s.classList.remove('active'));
+      btn.textContent = 'Submitted!';
+    } catch {
+      msg.style.display = 'block';
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Something went wrong. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Submit Review';
+    }
+  }
 </script>
 
 </body>
